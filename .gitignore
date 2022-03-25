@@ -1,0 +1,5 @@
+*~
+.tags
+dist/
+docs/css.css
+node_modules

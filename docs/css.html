@@ -1,0 +1,724 @@
+<html>
+	<head>
+		<title>Paragon CSS Framework</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css.css">
+	</head>
+	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="pgn-sans pgn-density-relaxed">
+		<header class="pgn-container">
+			<h1 style="display:inline-block">Paragon CSS Framework</h1>
+		</header>
+		<main class="pgn-container">
+
+
+			<section>
+				<section>
+					<h2>Introduction</h2>
+					<p>
+					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be
+					minuscule, restricted to pure CSS, without sacrificing esthetics which contribute to usability.  It strays from
+					the extreme simplicity of the flat layered "paper" trend, in favor of more classic visual cues enhanced to use
+					modern browser capabilities.
+					</p>
+					<p>
+					Almost all classes begin with the prefix <code>pgn-</code> to prevent collisions with other frameworks.  For
+					brevity, there is no prefix for attribute classes like <code>is-<em>something</em></code>,
+					<code>has-<em>something</em></code> and <code>size-<em>something</em></code>.  Truly independent features like
+					messages have their own custom HTML tag names, like <code class="html-tag">pgn-message</code> instead of being
+					set up as a class to be applied on a <code class="html-tag">div</code> or a <code class="html-tag">span</code>
+					</p>
+					<p>
+					Compiled CSS files are located in <code>dist/</code>.  You may use <code>paragon.css</code> to get the entire
+					framework at once, or just some of the individual files described below.  Be sure to import
+					<code>core.css</code> first in order to avoid priority side-effects.
+					</p>
+				</section>
+				<section>
+					<h3>Efficient</h3>
+					<p>
+					The entire framework (<code>paragon.css</code>) is smaller than a typical company logo image:
+					</p>
+					<table id="pgn-sizes" class="pgn-table pgn-2d pgn-horizontal pgn-density-relaxed">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Size</th>
+								<th>Gzipped</th>
+								<th>Brotli</th>
+							</tr>
+						</thead>
+						<tbody>
+<!-- BEGIN SIZES -->
+<tr><th>vpweb.css</th><td>18.7KB</td><td>4.7KB</td><td>4.0KB</td></tr>
+<tr><th>core.css</th><td>2.8KB</td><td>1.2KB</td><td>1.0KB</td></tr>
+<tr><th>forms.css</th><td>6.6KB</td><td>1.7KB</td><td>1.4KB</td></tr>
+<tr><th>grid.css</th><td>2.3KB</td><td>0.4KB</td><td>0.4KB</td></tr>
+<tr><th>layout.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
+<tr><th>messages.css</th><td>1.4KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>tables.css</th><td>1.8KB</td><td>0.6KB</td><td>0.5KB</td></tr>
+<tr><th>tabs.css</th><td>1.4KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>transitions.css</th><td>0.4KB</td><td>0.3KB</td><td>0.2KB</td></tr>
+<!-- END SIZES -->
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h3>Browser Support</h3>
+					<p>
+					We aim to be compatible with "long term support" versions
+					since most of our users are in corporate environments.
+					</p>
+					<dl>
+						<dt>Chrome</dt><dd>63 (2017)</dd>
+						<dt>Safari</dt><dd>11 (2017)</dd>
+						<dt>Edge</dt><dd>14 (2016)</dd>
+						<dt>Firefox</dt><dd>52 (2017)</dd>
+						<dt>Opera</dt><dd>50 (2018, based on Chromium 63)</dd>
+					</dl>
+				</section>
+				<section>
+					<h3>TODO</h3>
+					<p>
+					This is an early work-in-progress framework. Below are my ramblings so I don't forget anything. ;-)
+					</p>
+					<ul>
+						<li>Forms/Tables: error/warning/highlight/disabled states</li>
+						<li>Forms: better :checked transitions for checkbox/radio</li>
+						<li>Forms: too fat for what they are, maybe no SVG (inject it PROPERLY in JS add-on instead)?</li>
+						<li>Tables: horizontal without outside borders, maybe not even TH grey, "simple"</li>
+						<li>Tables: make a no-wrap column type, with and without truncation</li>
+						<li>Tables: guaranteed smallest cell: width:1px no-wrap</li>
+						<li>Messages: maybe just use an icon font instead of the reverse-video hackery?</li>
+						<li>Tabs: the experience is still far from production-quality...</li>
+						<li>Tooltips: hover option, still?</li>
+					</ul>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Core <code>core.css</code></h2>
+				<p>
+				Minimal, non-opinionated reset to help normalize output across browsers.
+				</p>
+				<section>
+					<h3>Typography</h3>
+					<dl>
+						<dt><code>.pgn-mono</code></dt>
+						<dd>System and user-preferred monospace font families (automatically applied to <code class="html-tag">code</code>, <code class="html-tag">kbd</code>, <code class="html-tag">pre</code>, <code class="html-tag">samp</code>)</dd>
+
+						<dt><code>.pgn-sans</code></dt>
+						<dd>System and user-preferred sans-serif font families (automatically applied to <code>.pgn-form</code> buttons and inputs)</dd>
+
+						<dt><code>.pgn-serif</code></dt>
+						<dd>System and user-preferred serif font families</dd>
+					</dl>
+				</section>
+				<section>
+					<h3>Density</h3>
+					<p>
+					Three classes are recognized by various modules as indicative of spacing to use between items.  The least
+					relaxed has the highest priority.  For example, grids recognize them as padding:
+					</p>
+					<div class="pgn-grid pgn-density-seamless">
+						<div class="pgn-24-8"><code class="box">.pgn-density-seamless</code></div>
+						<div class="pgn-24-8"><code class="box">.pgn-density-seamless</code></div>
+						<div class="pgn-24-8"><code class="box">.pgn-density-seamless</code></div>
+					</div>
+					<div class="pgn-grid pgn-density-spaced">
+						<div class="pgn-24-8"><code class="box">.pgn-density-spaced</code></div>
+						<div class="pgn-24-8"><code class="box">.pgn-density-spaced</code></div>
+						<div class="pgn-24-8"><code class="box">.pgn-density-spaced</code></div>
+					</div>
+					<div class="pgn-grid pgn-density-relaxed">
+						<div class="pgn-24-8"><code class="box">.pgn-density-relaxed</code></div>
+						<div class="pgn-24-8"><code class="box">.pgn-density-relaxed</code></div>
+						<div class="pgn-24-8"><code class="box">.pgn-density-relaxed</code></div>
+					</div>
+				</section>
+
+
+			</section>
+
+
+			<section>
+				<h2>Layout <code>layout.css</code></h2>
+				<section>
+					<h3>Responsive</h3>
+					<p>
+					Certain classes restrict which devices can see an element, by viewport width or display type.  Note that the
+					names "mobile", "tablet" and "desktop" are used as nicknames for the three responsive size ranges, not as true
+					device identification.  CSS media queries also use a "device pixel ratio" to define their own meaning for "px",
+					so those are not actual pixels.
+					</p>
+					<dl>
+						<dt>Mobile:</dt>
+						<dd>Up to 767px, <code>.pgn-mobile-only</code>, <code>.pgn-tablet-down</code></dd>
+
+						<dt>Tablet:</dt>
+						<DD>From 768px to 991px, <code>.pgn-tablet-only</code>, <code>.pgn-tablet-up</code>, <code>.pgn-tablet-down</code></dd>
+
+						<dt>Desktop:</dt>
+						<dd>From 992px up, <code>.pgn-tablet-up</code>, <code>.pgn-desktop-only</code></dd>
+
+						<dt>Print:</dt>
+						<dd><code>.pgn-print-only</code>, <code>.pgn-screen-only</code> (non-screen is considered "print")</dd>
+					</dl>
+				</section>
+				<section>
+					<h3>Block <code>.pgn-block</code></h3>
+					<p>
+					Makes any element (including buttons) a block and full width.
+					</p>
+				</section>
+				<section>
+					<h3>Generic Container <code>.pgn-container</code></h3>
+					<p>
+					The <code>.pgn-container</code> class has side margins dictated by <code>.pgn-density-*</code> (self or
+					immediate parent) and limited width on large viewports.
+					</p>
+				</section>
+				<section>
+					<h3>Layouts <code>.pgn-l-*</code></h3>
+					<p>
+					Applicable to any container block, including <code class="html-tag">body</code>.
+					</p>
+					<dl>
+
+						<dt><code>.pgn-l-3</code></dt>
+						<dd>
+						3 children, stacked vertically. The middle child expands as necessary to make sure that the third child is
+						always no higher than the bottom of the viewport.  Typical header-main-footer layout.
+						</dd>
+
+					</dl>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Grid <code>grid.css</code></h2>
+				<p>
+				Two bases (10 and 24) were chosen for their versatility: areas can be divided by
+				2, 3, 4, 5, 6, 8, 10, 12 and 24.
+				</p>
+				<p>
+				Rows are <code>.pgn-row-10</code> or <code>.pgn-row-24</code> according to whether you want the row to be divided in
+				10<sup>ths</sup> or 24<sup>ths</sup>.  Columns are <code>.pgn-col-X</code> where <code>X</code> is the multiple
+				width.  Rows wrap, so you only need to use multiple row blocks for splitting incomplete lines.
+				</p>
+				<p>
+				</p>
+				<p>
+				An <code>&lt;img&gt;</code> directly inside a <code>.pgn-col-*</code> or wrapped in just an <code
+				class="html-tag">a</code> automatically gets full width.
+				</p>
+				<p>
+				<strong>Caution:</strong> while <code>.pgn-col-*</code> spacing is sensitive to <code>.pgn-density-*</code> given to
+				its parent row or that row's parent, it also causes a small negative margin on the left and right ends of rows.
+				Therefore, using a page-wide row with non-seamless density will cause horizontal scrolling.  As long as a row's
+				container has at least as much spacing, it is not an issue.  (i.e. A seamless or spaced row fits inside a page-wide
+				relaxed or spaced container.)
+				</p>
+				<section>
+					<h3>Grid of 10<sup>ths</sup> <code>.pgn-10-*</code></h3>
+					<div class="grid-demo pgn-grid pgn-density-seamless pgn-mono">
+						<div class="pgn-10-1"><div>.pgn-10-1</div></div>
+						<div class="pgn-10-9"><div>.pgn-10-9</div></div>
+						<div class="pgn-10-2"><div>.pgn-10-2</div></div>
+						<div class="pgn-10-8"><div>.pgn-10-8</div></div>
+						<div class="pgn-10-3"><div>.pgn-10-3</div></div>
+						<div class="pgn-10-7"><div>.pgn-10-7</div></div>
+						<div class="pgn-10-4"><div>.pgn-10-4</div></div>
+						<div class="pgn-10-6"><div>.pgn-10-6</div></div>
+						<div class="pgn-10-5"><div>.pgn-10-5</div></div>
+						<div class="pgn-10-5"><div>.pgn-10-5</div></div>
+						<div class="pgn-10-10"><div>.pgn-10-10</div></div>
+					</div>
+				</section>
+				<section>
+					<h3>Grid of 24<sup>ths</sup> <code>.pgn-24-*</code></h3>
+					<div class="grid-demo pgn-grid pgn-density-seamless pgn-mono">
+						<div class="pgn-24-1"><div>.pgn-24-1</div></div>
+						<div class="pgn-24-23"><div>.pgn-24-23</div></div>
+						<div class="pgn-24-2"><div>.pgn-24-2</div></div>
+						<div class="pgn-24-22"><div>.pgn-24-22</div></div>
+						<div class="pgn-24-3"><div>.pgn-24-3</div></div>
+						<div class="pgn-24-21"><div>.pgn-24-21</div></div>
+						<div class="pgn-24-4"><div>.pgn-24-4</div></div>
+						<div class="pgn-24-20"><div>.pgn-24-20</div></div>
+						<div class="pgn-24-5"><div>.pgn-24-5</div></div>
+						<div class="pgn-24-19"><div>.pgn-24-19</div></div>
+						<div class="pgn-24-6"><div>.pgn-24-6</div></div>
+						<div class="pgn-24-18"><div>.pgn-24-18</div></div>
+						<div class="pgn-24-7"><div>.pgn-24-7</div></div>
+						<div class="pgn-24-17"><div>.pgn-24-17</div></div>
+						<div class="pgn-24-8"><div>.pgn-24-8</div></div>
+						<div class="pgn-24-16"><div>.pgn-24-16</div></div>
+						<div class="pgn-24-9"><div>.pgn-24-9</div></div>
+						<div class="pgn-24-15"><div>.pgn-24-15</div></div>
+						<div class="pgn-24-10"><div>.pgn-24-10</div></div>
+						<div class="pgn-24-14"><div>.pgn-24-14</div></div>
+						<div class="pgn-24-11"><div>.pgn-24-11</div></div>
+						<div class="pgn-24-13"><div>.pgn-24-13</div></div>
+						<div class="pgn-24-12"><div>.pgn-24-12</div></div>
+						<div class="pgn-24-12"><div>.pgn-24-12</div></div>
+						<div class="pgn-24-24"><div>.pgn-24-24</div></div>
+					</div>
+				</section>
+
+
+				<section>
+					<h3>Responsive</h3>
+					<dl>
+						<dt><code>.pgn-doubling .pgn-col-*</code></dt>
+						<dd>
+						Makes grid cells double in relative width when stepping down from "desktop" to "tablet" size, and double
+						again down to "mobile" size. (i.e. A 1/12<sup>th</sup> cell would become 1/6<sup>th</sup> wide in "tablet"
+						viewports and 1/3<sup>rd</sup> wide in "mobile" viewports.)
+						</dd>
+
+						<dt><code>.pgn-stacking .pgn-col-*</code></dt>
+						<dd>
+						Makes grid cells go full-width for "tablet" and "mobile" sizes.
+						</dd>
+					</dl>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Forms <code>forms.css</code></h2>
+				<p>
+				Note that buttons and input widgets with <code>:focus</code> get a <code>z-index</code> of 1000 or 1001 in addition
+				to the halo.  Note also that margins between some elements is affected by <code>form.pgn-density-*</code>.
+				</p>
+				<section>
+					<h3>Fields <code>label.pgn-field .pgn-label + input|select|textarea</code></h3>
+					<p>
+					In addition to text areas, typical input types compatible with this class are: <code>email</code>,
+					<code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly
+					<code>search</code>.
+					Fields expand to fill their container's width, which is handy in grids.
+					We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top
+						aligned labels</a> for their clarity.
+					</p>
+					<form class="pgn-form pgn-row-10 pgn-density-spaced pgn-doubling">
+						<div class="pgn-col-3">
+							<label class="pgn-field">
+								<span class="pgn-label">Normal</span>
+								<input type="text" name="it001" value="User Input Here">
+							</label>
+						</div>
+						<div class="pgn-col-5">
+							<label class="pgn-field">
+								<span class="pgn-label">Disabled</span>
+								<input type="text" name="it002" disabled value="User Input Here">
+							</label>
+						</div>
+						<div class="pgn-col-2">
+							<label class="pgn-field">
+								<span class="pgn-label">TODO:icon</span>
+								<input type="text" name="it003" value="User Input Here">
+							</label>
+						</div>
+						<div class="pgn-col-3">
+							<label class="pgn-field">
+								<span class="pgn-label">Textarea</span>
+								<textarea name="ta">123, Main St.
+Test City, ZZ
+H0H 0H0</textarea>
+							</label>
+						</div>
+						<div class="pgn-col-3">
+							<label class="pgn-field">
+								<span class="pgn-label">Select</span>
+								<select name="sel1">
+									<optgroup label="Group One">
+										<option value="1">Option 1</option>
+										<option value="2">Option 2</option>
+										<option value="3">Option 3</option>
+									</optgroup>
+									<optgroup label="Group Two">
+										<option value="4">Option 4</option>
+										<option value="5">Option 5</option>
+										<option value="6">Option 6</option>
+									</optgroup>
+								</select>
+							</label>
+						</div>
+						<div class="pgn-col-3">
+							<label class="pgn-field">
+								<span class="pgn-label">Combobox</span>
+								<datalist id="dl1">
+									<option value="user001@example.com" label="User One"></option>
+									<option value="user002@example.com" label="User Two"></option>
+									<option value="user003@example.com" label="User Three"></option>
+									<option value="user004@example.com" label="User Four"></option>
+									<option value="user005@example.com" label="User Five"></option>
+									<option value="user006@example.com" label="User Six"></option>
+								</datalist>
+								<input type="text" name="cbx1" list="dl1">
+							</label>
+						</div>
+					</form>
+				</section>
+				<section>
+					<h3>Field sets</h3>
+					<p>TODO</p>
+				</section>
+				<section>
+					<h3>Checkboxes <code>label input[type=checkbox] + .pgn-label</code></h3>
+					<form class="pgn-form pgn-row-24 pgn-doubling pgn-density-spaced">
+						<label class="pgn-col-6">
+							<input type="checkbox" name="cb" value="1" checked>
+							<span class="pgn-label">Something long wraps on label's width</span>
+						</label>
+						<label class="pgn-col-6">
+							<input type="checkbox" name="cb" value="1" disabled checked>
+							<span class="pgn-label">Disabled</span>
+						</label>
+						<label class="pgn-col-6" style="font-size:75%">
+							<input type="checkbox" name="cb" value="1" checked>
+							<span class="pgn-label">Adapts to label's font size</span>
+						</label>
+						<label class="pgn-col-6" style="background-color:orange;color:white;">
+							<input type="checkbox" name="cb" value="1" checked>
+							<span class="pgn-label">Ignores label colors</span>
+						</label>
+					</form>
+				</section>
+				<section>
+					<h3>Radio selections <code>label input[type=radio] + .pgn-label</code></h3>
+					<p>
+					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack
+					vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than
+					5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when
+					presenting a form's initial state.
+					</p>
+					<form class="pgn-form pgn-row-24 pgn-doubling pgn-density-spaced">
+						<label class="pgn-col-4">
+							<input type="radio" name="rd" value="1" checked>
+							<span class="pgn-label">First choice</span>
+						</label>
+						<label class="pgn-col-4">
+							<input type="radio" name="rd" value="2">
+							<span class="pgn-label">Second choice</span>
+						</label>
+						<label class="pgn-col-4">
+							<input type="radio" name="rd" value="3" disabled>
+							<span class="pgn-label">Disabled</span>
+						</label>
+						<label class="pgn-col-4" style="background-color:orange;color:white;font-size:75%;">
+							<input type="radio" name="rd" value="2">
+							<span class="pgn-label">Ignores label colors</span>
+						</label>
+					</form>
+				</section>
+				<section>
+					<h3>Buttons <code>.pgn-form button, .pgn-button</code></h3>
+					<form class="pgn-form">
+						<button onclick="return false;">Normal</button>
+						<a class="pgn-button" onclick="return false;">Anchor</a>
+						<button onclick="return false;" class="is-active">:active, .is-active</button>
+						<button onclick="return false;" disabled>:disabled</button>
+						<button onclick="return false;" class="is-secondary">.is-secondary</button>
+					</form>
+					<h3>Icon Buttons <code>.pgn-icon-button</code></h3>
+					<p>
+					Unlike other form styles, icon buttons have fixed sizes based on touch display ability and their priority.
+					Normal by default, they may have <code>.is-secondary</code> or <code>.is-priority</code>.
+					On touch devices, these three sizes are 11mm, 15mm and 19mm.
+					</p>
+					<form class="pgn-form">
+							<button onclick="return false;" class="pgn-icon-button" title="Normal">M</button>
+							<button onclick="return false;" class="pgn-icon-button" disabled title=":disabled">M</button>
+							<button onclick="return false;" class="pgn-icon-button is-secondary" title=".is-secondary">M</button>
+							<button onclick="return false;" class="pgn-icon-button is-priority" title=".is-priority">M</button>
+						</dl>
+					</form>
+					<h3>Button groups <code>.pgn-group button, .pgn-group .pgn-button</code></h3>
+					<form class="pgn-form">
+						<div class="pgn-group">
+							<button onclick="return false;">First</button>
+							<button onclick="return false;">Middle</button>
+							<button onclick="return false;" disabled>Disabled</button>
+							<button onclick="return false;" class="is-active">Active</button>
+							<button onclick="return false;">Last</button>
+						</div>
+					</form>
+					<h3>Theming</h3>
+					<p>
+					Normal buttons automatically adapt to any background/foreground colors and font sizes set on their elements, as
+					well as their parent background color.  Icon buttons adapt to font size and their parent background color.
+					</p>
+					<form class="pgn-form">
+						<button onclick="return false;" style="background-color:red; color:white; font-size: 16pt;">White on red, 16pt</button>
+						<button onclick="return false;" style="background-color:white; color:black;">Black on white</button>
+						<button onclick="return false;" style="background-color:blue; color:white; font-size: 9pt;">White on blue, 9pt</button>
+						<span style="display: inline-block; background-color: orange; padding: 0.1em;">
+							<button onclick="return false;">Normal</button>
+							<button onclick="return false;" class="is-secondary">.is-secondary</button>
+							<button onclick="return false;" class="pgn-icon-button" title="Normal">M</button>
+							<a href="#" onclick="return false;" class="pgn-icon-button is-active" title=":active, .is-active">M</a>
+							<button onclick="return false;" class="pgn-icon-button" disabled style="font-size: 16pt;" title=":disabled, 16pt">M</button>
+							<button onclick="return false;" class="pgn-icon-button is-secondary" style="font-size: 9pt;" title=".is-secondary, 9pt">M</button>
+						</span>
+					</form>
+				</section>
+				<section>
+					<h3>Responsive</h3>
+					<p>
+					For touch devices, all buttons have a minimum width and height of 11mm regardless of font size.
+					</p>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Tables <code>tables.css</code></h2>
+				<p>
+				Tables with <code>.pgn-table</code> are styled.
+				</p>
+				<div class="pgn-row-10 pgn-doubling">
+					<div class="pgn-col-5">
+						<table class="pgn-table pgn-density-spaced pgn-horizontal pgn-striped">
+							<thead>
+								<tr><th>First</th><th>Second</th><th>Third</th><th>Fourth</th></tr>
+							</thead>
+							<tbody class="pgn-center-3">
+								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="pgn-col-5">
+						<table class="pgn-table pgn-density-spaced pgn-gridded pgn-2d">
+							<thead>
+								<tr><th></th><th>Second</th><th>Third</th><th>Fourth</th></tr>
+							</thead>
+							<tbody class="pgn-center-3">
+								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<section>
+					<h3>Options</h3>
+					<dl>
+
+						<dt>table.pgn-2d</dt>
+						<dd>
+						First column is a heading for each row, so hide first column of <code class="html-tag">thead</code> and
+						<code class="html-tag">tfoot</code>.
+						</dd>
+
+						<dt>table.pgn-horizontal</dt>
+						<dd>
+						Horizontal borders only.
+						</dd>
+
+						<dt>table.pgn-gridded</dt>
+						<dd>
+						Horizontal and vertical borders.
+						</dd>
+
+						<dt>table.pgn-striped</dt>
+						<dd>
+						Highlights every even row in the <code class="html-tag">tbody</code>.
+						</dd>
+
+						<dt>table.pgn-stacking</dt>
+						<dd>
+						Cells grow to full width on mobile (portrait) screens. No border between cells, just between rows.
+						</dd>
+
+						<dt>table.pgn-stick-vertical</dt>
+						<dd>
+						<code class="html-tag">thead</code> and <code class="html-tag">tfoot</code> (all <code
+							class="html-tag">th</code>) remain in viewport while the table is, except for IE11.
+						</dd>
+
+						<dt>table.pgn-stick-horizontal</dt>
+						<dd>
+						Left-most column (a <code class="html-tag">th</code>) is considered a header and remains in viewport while
+						the table is, except for IE11.
+						</dd>
+
+						<dt>tbody.pgn-center-*</dt>
+						<dd>
+						Center text in all rows, column <code>*</code>, maximum: 12.  (i.e. <code>.pgn-center-2</code> centers cells
+						in column 2.)
+						</dd>
+
+						<dt>th.is-numeric, td.is-numeric</dt>
+						<dd>
+						Right-justified cell.
+						</dd>
+
+						<dt>table.pgn-density-*</dt>
+						<dd>
+						Tables respond to density with padding and font size.
+						</dd>
+
+					</dl>
+				</section>
+			</section>
+			</section>
+
+
+			<section>
+				<h2>Messages <code>messages.css</code></h2>
+				<section>
+					<h3>Notice <code class="html-tag">pgn-notice</code></h3>
+					<p>A notice with a state automatically gets a color and a dot. No need to insert a dot manually.</p>
+					<pgn-notice class="is-error">This notice has <code>.is-error</code>.</pgn-notice>
+					<pgn-notice class="is-warning">This notice has <code>.is-warning</code>.</pgn-notice>
+					<pgn-notice class="is-ok">This notice has <code>.is-ok</code>.</pgn-notice>
+					<pgn-notice _char="?">This notice has no state, but it does have <code>_char="?"</code> to override the default "i".</pgn-notice>
+				</section>
+				<section>
+					<h3>Message <code class="html-tag">pgn-message</code></h3>
+					<pgn-message class="is-error">This message has class <code>.is-error</code>.</pgn-message>
+					<pgn-message class="is-warning">This message has class <code>.is-warning</code>.</pgn-message>
+					<pgn-message class="is-ok">This message has class <code>.is-ok</code>.</pgn-message>
+					<pgn-message _char="?">This message has no state, but it does have <code>_char="?"</code>. This text is long for the purpose of seeing wrapping in action. Wrapping requires a lot of text on wide screen desktop monitors. ;-)</pgn-message>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Tabs <code>tabs.css</code></h2>
+				<section>
+					<h3>Accordion <code>.pgn-accordion</code></h3>
+					<p>
+					A block which contains a series of the sequence: radio or checkbox, label, <code class="html-tag">div</code>.
+					Spacing between labels, and between labels and their content is dictated by optional density classes on the main
+					block.
+					</p>
+					<div class="pgn-accordion pgn-density-spaced">
+						<input type="radio" name="_acc1" id="_acc1_1"><label for="_acc1_1">First expandable item. Click here to test.</label>
+						<div>
+							<p>This is the content of the first expandable item.</p>
+						</div>
+						<input type="radio" name="_acc1" id="_acc1_2"><label for="_acc1_2">Second expandable item. Click here to test.</label>
+						<div>
+							<p>This is the content of the Second expandable item.</p>
+							<p>The content area expands as necessary.</p>
+						</div>
+						<input type="radio" name="_acc1" id="_acc1_3"><label for="_acc1_3">Third expandable item. Click here to test.</label>
+						<div>
+							<p>This is the content of the Third expandable item.</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Tabs <code>.pgn-tabs</code></h3>
+					<p>
+					A block which contains a series of radio inputs followed by their respective labels, then exactly as many <code
+						class="html-tag">div</code> as there were labels.  Spacing between tabs and their content is dictated by
+					optional density classes on the main block.
+					</p>
+					<div class="pgn-tabs pgn-density-spaced">
+						<input type="radio" id="_tabs1_1" name="_tabs1" checked><label for="_tabs1_1">Tab 1</label>
+						<input type="radio" id="_tabs1_2" name="_tabs1"><label for="_tabs1_2">Tab 2</label>
+						<input type="radio" id="_tabs1_3" name="_tabs1"><label for="_tabs1_3">Tab 3</label>
+						<div>
+							<p>This is tab 1.</p>
+						</div>
+						<div>
+							<p>This is tab 2.</p>
+							<p>It is taller than the others to demonstrate how height is dynamic.</p>
+						</div>
+						<div>
+							<p>This is tab 3.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Tooltips <code>tooltips.scss</code></h2>
+				<p>
+				For uniformity with touch devices, our tooltips are touch/click activated.  This requires adding the
+				<code>ontouchstart</code> attribute to <code class="html-tag">body</code> and adding <code>tabindex="0"</code> to
+				non-clickable elements like <code class="html-tag">span</code>.
+				</p>
+				<p>
+				To evade their trigger or parent element's width, tooltips don't break on white space.  Keep this in mind for
+				placement to avoid overflowing the viewport.  For element tooltips, you may insert manual breaks as desired.
+				</p>
+				<section>
+					<h3>Attribute <code>[pgn-tooltip]</code></h3>
+					<p>
+					To give any element (except inputs) a clickable tooltip, the plain text content of the tooltip need simply be
+					supplied in a <code>pgn-tooltip=""</code> attribute.  Optional accompanying boolean attributes
+					<code>pgn-tooltip-below</code> and <code>pgn-tooltip-right</code> affect alignment and position.
+					</p>
+					<p><span tabindex="0" pgn-tooltip="This is an example tooltip.">Click this sentence for example.</span></p>
+				</section>
+				<section>
+					<h3>Element <code class="html-tag">pgn-tooltip</code></h3>
+					<p>
+					To deal with inputs and to use inline HTML in a tooltip, use <code class="html-tag">pgn-tooltip</code> which
+					must immediately follow a focusable element such as <code class="html-tag">input</code>, and both need to be
+					inside a <code>position:relative</code> block.  For our forms, this is easily achieved with a field (an input
+					inside its label).  Optional boolean attributes <code>_below</code> and <code>_right</code> affect alignment and
+					position.
+					</p>
+					<form class="pgn-form">
+						<label class="pgn-field">
+							<span class="pgn-label">Activate this field to see help</span>
+							<input type="text" name="tt1">
+							<pgn-tooltip _below>Tooltips are a great mobile-friendly way to include<br>additional help with form fields.</pgn-tooltip>
+						</label>
+					</form>
+				</section>
+			</section>
+
+
+			<section>
+				<h2>Transitions <code>transitions.css</code></h2>
+				<p>
+				To guarantee that no browsers "flash" transitions on load, some rules depend on a parent having the "loaded" class.
+				To use them, add the <code>loaded</code> class to <code class="html-tag">body</code> after the first paint is likely
+				over. In some browsers, a simple "onload" is insufficient, thus:
+				</p>
+				<blockquote><code>
+&lt;body onload="setTimeout(function(){document.body.classList.add('loaded')})"&gt;
+				</code></blockquote>
+				<section>
+					<h3>Generic</h3>
+					<dl>
+
+						<dt><code>.loaded, .loaded *</code></dt>
+						<dd>
+						Subtle fade for <code>color</code>, <code>background-color</code> and <code>opacity</code>.
+						</dd>
+
+						<dt><code>.pgn-go-hidden</code>, <code>.pgn-go-visible</code></dt>
+						<dd>
+						Fade in/out of <code>opacity</code>.  Only useful in scripts because they are mutually exclusive.
+						</dd>
+
+						<dt>TODO</dt>
+						<dd>
+						Slide in/out from one of the 4 sides
+						</dd>
+					</dl>
+				</section>
+			</section>
+
+
+		</main>
+	</body>
+</html>

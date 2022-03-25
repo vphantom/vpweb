@@ -1,0 +1,45 @@
+@import "_lib.scss";
+
+$duration: 300ms;
+$duration-slow: 500ms;
+$delay: 0.05s;
+
+.loaded,
+.loaded * {
+	transition: color $duration $delay, background-color $duration $delay,
+		opacity $duration-slow;
+}
+
+[class*="pgn-go-"] {
+	animation-iteration-count: 1;
+	animation-duration: $duration;
+	animation-timing-function: ease;
+	animation-fill-mode: both;
+	backface-visibility: hidden;
+}
+
+.pgn-go-hidden {
+	animation-name: fade-out;
+}
+
+.pgn-go-visible {
+	animation-name: fade-in;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

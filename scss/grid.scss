@@ -1,0 +1,87 @@
+@import "_lib.scss";
+
+.pgn-grid {
+	display: flex;
+	flex-flow: row wrap;
+	--pgn-padding: $padding-seamless;
+}
+
+.pgn-density-relaxed.pgn-grid {
+	margin: -$padding-relaxed;
+	--pgn-padding: $padding-relaxed;
+}
+
+.pgn-density-spaced.pgn-grid {
+	margin: -$padding-spaced;
+	--pgn-padding: $padding-spaced;
+}
+
+.pgn-grid > * {
+	vertical-align: top;
+	// flex-grow: 1;
+	flex-basis: calc((40rem - 100%) * 999);
+}
+
+.pgn-density-relaxed.pgn-grid > * {
+	margin: $padding-relaxed;
+}
+
+.pgn-density-spaced.pgn-grid > * {
+	margin: $padding-spaced;
+}
+
+.pgn-grid > img,
+.pgn-grid > a > img {
+	width: 100%;
+}
+
+@include newgrid-xx(10);
+@include newgrid-xx(24);
+
+/*
+[class*="pgn-row-"] {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: flex-start;
+}
+
+[class*="pgn-col-"] {
+	display: inline-block;
+	vertical-align: top;
+	// flex-grow: 1;
+}
+
+[class*="pgn-col-"] > img,
+[class*="pgn-col-"] > a > img {
+	width: 100%;
+}
+
+.pgn-density-relaxed[class*="pgn-row-"],
+.pgn-density-relaxed > [class*="pgn-row-"] {
+	margin-left: -$padding-relaxed;
+	margin-right: -$padding-relaxed;
+}
+.pgn-density-spaced[class*="pgn-row-"],
+.pgn-density-spaced > [class*="pgn-row-"] {
+	margin-left: -$padding-spaced;
+	margin-right: -$padding-spaced;
+}
+
+.pgn-density-relaxed > [class*="pgn-col-"],
+.pgn-density-relaxed > [class*="pgn-row-"] > [class*="pgn-col-"] {
+	padding: $padding-relaxed;
+}
+.pgn-density-spaced > [class*="pgn-col-"],
+.pgn-density-spaced > [class*="pgn-row-"] > [class*="pgn-col-"] {
+	padding: $padding-spaced;
+}
+
+@include media-tablet-down {
+	.pgn-stacking [class*="pgn-col-"] {
+		width: 100%;
+	}
+}
+*/

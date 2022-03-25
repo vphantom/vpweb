@@ -1,0 +1,38 @@
+{
+  "name": "vpweb",
+  "version": "0.0.1",
+  "description": "Vanilla+: minimalistic web interface development library",
+  "type": "module",
+  "exports": {
+    "./stdlib": "./js/stdlib.js",
+    "./browser": "./js/browser.js"
+  },
+  "author": "Stéphane Lavergne <lis@imars.com> (https://github.com/vphantom)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vphantom/vpweb.git"
+  },
+  "bugs": "https://github.com/vphantom/vpweb/issues",
+  "homepage": "https://github.com/vphantom/vpweb",
+  "files": [
+    "LICENSE.txt",
+    "README.md",
+    "dist/*",
+    "docs/*.html",
+    "docs/*.css",
+    "js/*.js",
+    "scss/*.scss",
+    "scss/icons/*.svg"
+  ],
+  "devDependencies": {
+    "cssnano": "^5.1.5",
+    "postcss-advanced-variables": "^3.0.1",
+    "postcss-assets": "^6.0.0",
+    "postcss-cli": "^9.1.0",
+    "postcss-combine-media-query": "^1.0.0",
+    "postcss-import": "^14.1.0",
+    "postcss-scss": "^4.0.3",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}

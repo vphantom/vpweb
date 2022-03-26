@@ -45,14 +45,9 @@ H.prev = n => n.previousElementSibling;
 H.next = n => n.nextElementSibling;
 H.fragment = alias(dp.createDocumentFragment);
 H.on = alias(ep.addEventListener);
-H.get_id = alias(dp.getElementById);
-H.get_first = alias(dp.querySelector);
 H.set = set_a;
 H.get = alias(ep.getAttribute);
 H.unset = alias(ep.removeAttribute);
-H.all = alias(ep.querySelectorAll);
-H.all_class = alias(ep.getElementsByClassName);
-H.all_tag = alias(ep.getElementsByTagName);
 H.prepend = alias(np.prependChild);
 H.append = append;
 
@@ -71,13 +66,28 @@ function ready(f) {
 		: f();
 }
 
-// addEventListener() "once" only in Edge 16+
+// NOTE: addEventListener() "once" only in Edge 16+
 function once(n, e, f) {
 	function handler(ev) {
 		f(ev);
 		n.removeEventListener(e, handler);
 	}
 	H.on(n, e, handler);
+}
+
+function parse_selector(sel) {
+	return sel.match(/^([#.]?)([^\s,]*)([\s,])?.*$/g);
+}
+
+function find(base, sel, as) {
+	as = as || parse_selector(sel);
+	if (!as[3]) {
+		if (as[1] === '#') return base.getElementById(as[2]);
+		if (as[1] === '.') return base.getElementsByClassName(as[2]);
+		return base.getElementsByTagName(as[2]);
+	} else {
+		return document.querySelectorAll(sel);
+	}
 }
 
 function watch_dom(f) {
@@ -93,35 +103,27 @@ function watch_dom(f) {
 	return mo;
 }
 
-function forall_class(cname, f) {
-	iter(H.all_class(H.root, cname), f);
-	return watch_dom(el => {
-		if (el.classList.contains(cname)) {
-			return f(el);
+function forall(base, sel, f) {
+	var as = parse_selector(sel);
+
+	iter(find(base, sel, as), f);
+
+	var check = el => el.matches(sel);
+	if (!as[3]) {
+		if (as[1] === '#') {
+			check = el => el.id === as[2];
+		} else if (as[1] === '.') {
+			check = el => el.classList.contains(as[2]);
+		} else {
+			check = el => el.tagName === as[2];
 		}
-		iter(H.all_class(el, cname), f);
+	}
+	return watch_dom(el => {
+		if (check(el)) return f(el);
+		iter(find(el, sel, as), f);
 	});
 }
 
-function forall_tag(tag, f) {
-	iter(H.all_tag(H.root, tag), f);
-	return watch_dom(el => {
-		if (el.tagName === tag) {
-			return f(el);
-		}
-		iter(H.all_tag(el, tag), f);
-	});
-}
+// NOTE: Fetch API only in Edge 14+
 
-// Caution: slower
-function forall(sel, f) {
-	iter(H.all(H.root, sel), f);
-	return watch_dom(el => {
-		if (el.matches(sel)) {
-			return f(el);
-		}
-		iter(H.all(el, sel), f);
-	});
-}
-
-export { H, ready, once, forall_class, forall_tag, forall };
+export { H, ready, once, find, forall };

@@ -13,7 +13,7 @@ import {
 	ready,
 	once,
 	$find,
-	$upfind,
+	$closest,
 	$all,
 	$forall,
 	xget,
@@ -24,7 +24,7 @@ ready(() => {
 	on(e, 'click', () => 0);
 	trigger($find($.root, 'body'), 'x');
 	once(e, 'e', () => 0);
-	$upfind(e, 'J');
+	$closest(e, 'J');
 	$all(e, 'K');
 	$forall(e, 'r', () => 0);
 	xget('data:,0');

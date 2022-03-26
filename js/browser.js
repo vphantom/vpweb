@@ -48,6 +48,9 @@ $.get = alias(ep.getAttribute);
 $.unset = alias(ep.removeAttribute);
 $.append = append;
 
+var $find = alias(ep.querySelector);
+var $all = alias(ep.querySelectorAll);
+
 // One-liners
 //
 
@@ -81,56 +84,22 @@ function once(n, e, f) {
 	on(n, e, handler);
 }
 
-function parse_selector(sel) {
-	return sel.match(/^([#.]?)([^\s,:.]+)([\s,:.])?.*$/);
-}
-
-function $all(base, sel, as) {
-	as = as || parse_selector(sel);
-	if (!as[3]) {
-		if (as[1] === '#') return [base.getElementById(as[2])];
-		if (as[1] === '.') return base.getElementsByClassName(as[2]);
-		return base.getElementsByTagName(as[2]);
-	} else {
-		return base.querySelectorAll(sel);
-	}
-}
-
-// NOTE: useless array wrapping for ById, tolerable
-var $find = (base, sel) => {
-	let res = $all(base, sel);
-	return res[0];
-};
-
-function el_matcher(as) {
-	let f = el => el.matches(as[0]);
-	if (!as[3]) {
-		if (as[1] === '#') f = el => el.id === as[2];
-		else if (as[1] === '.') f = el => el.classList.contains(as[2]);
-		else f = el => el.tagName.toUpperCase() === as[2].toUpperCase();
-	}
-	return f;
-}
-
-function $upfind(el, sel) {
-	let check = el_matcher(parse_selector(sel));
-	while (el && el.parentNode && !check(el)) el = el.parentNode;
+// NOTE: Element.closest() is only in Edge 15+
+function $closest(el, sel) {
+	while (el && el.parentNode && !el.matches(sel)) el = el.parentNode;
 	// NOTE: this checks the final node twice
-	return el && check(el) ? el : null;
+	return el && el.matches(sel) ? el : null;
 }
 
 function $forall(base, sel, f) {
-	let as = parse_selector(sel);
+	iter($all(base, sel), f);
 
-	iter($all(base, sel, as), f);
-
-	let check = el_matcher(as);
 	let mo = new MutationObserver(mutations => {
 		iter(mutations, m => {
 			iter(m.addedNodes, n => {
 				if (n.nodeType === Node.ELEMENT_NODE) {
-					if (check(n)) return f(n);
-					iter($all(n, sel, as), f);
+					if (n.matches(sel)) return f(n);
+					iter($all(n, sel), f);
 				}
 			});
 		});
@@ -210,7 +179,7 @@ export {
 	ready,
 	once,
 	$find,
-	$upfind,
+	$closest,
 	$all,
 	$forall,
 	xget,

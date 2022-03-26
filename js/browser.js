@@ -144,9 +144,10 @@ function $forall(base, sel, f) {
 // If body is an object, it is serialized to JSON and the content type is set
 // accordingly.
 //
-// Response type must be unset or one of "document", "json", "text".  Data is
-// returned to ok() outside of XHR because IE/Edge < 79 don't support
-// responseType "json".
+// Response type must be unset or one of "document", "json", "text" (default).
+// Data is returned to ok() outside of XHR because IE/Edge < 79 don't support
+// responseType "json".  If body is present and an object, defaults to "json"
+// instead of "text".
 //
 // Properties supported in the arguments object, all optional including the
 // object itself:
@@ -196,6 +197,7 @@ function xpost(url, body, res_type, args) {
 	let ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
 	if (typeof body === 'object') {
 		ctype = 'application/json';
+		res_type = res_type || 'json';
 		body = JSON.stringify(body);
 	}
 	ajax('POST', url, body, ctype, res_type, args);

@@ -75,8 +75,8 @@ function ready(f) {
 // NOTE: addEventListener() "once" only in Edge 16+
 function once(n, e, f) {
 	function handler(ev) {
-		f(ev);
 		n.removeEventListener(e, handler);
+		f(ev);
 	}
 	on(n, e, handler);
 }

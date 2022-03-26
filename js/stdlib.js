@@ -9,9 +9,9 @@ function iter(list, f) {
 
 // Generic mapper to Array
 function map(list, f) {
-	let a = [];
+	let a = new Array(list.length);
 	for (let i = 0, l_length = list.length; i < l_length; ++i) {
-		a.push(f(list[i]));
+		a[i] = f(list[i]);
 	}
 	return a;
 }

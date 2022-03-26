@@ -21,7 +21,7 @@ The minimalistic library aims to make "Vanilla JS" development more expressive w
 - Compatibility down to Microsoft Edge 12 (as of 2022)
 - Abstract away boilerplate and alias frequently used long-named symbols
 - Cooperate with tree-shaking bundlers
-- Tiny: stay under 4KB minified non-compressed
+- Tiny: stay under 4KB minified non-compressed (currently 2.9KB)
 
 Specifically avoided are:
 

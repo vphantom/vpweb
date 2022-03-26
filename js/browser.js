@@ -18,7 +18,7 @@ var set_a = alias(ep.setAttribute);
 var set_attr = (n, a) => iter(Object.keys(a), k => set_a(n, k, a[k]));
 
 // Main element creation function
-function H(tag, attrs, content) {
+function $(tag, attrs, content) {
 	let el = document.createElement(tag);
 
 	if (attrs !== undefined) set_attr(el, attrs);
@@ -32,26 +32,30 @@ function H(tag, attrs, content) {
 	return el;
 }
 
-// Property aliases
-H.root = document.documentElement;
+// Aliases
+//
+
+$.root = document.documentElement;
 // np.textContent
 // ??.innerHTML
 
-// Function aliases
-H.parent = n => n.parentElement;
-H.prev = n => n.previousElementSibling;
-H.next = n => n.nextElementSibling;
-H.fragment = alias(dp.createDocumentFragment);
-H.set = set_a;
-H.get = alias(ep.getAttribute);
-H.unset = alias(ep.removeAttribute);
-H.prepend = alias(np.prependChild);
-H.append = append;
+$.parent = n => n.parentElement;
+$.prev = n => n.previousElementSibling;
+$.next = n => n.nextElementSibling;
+$.fragment = alias(dp.createDocumentFragment);
+$.set = set_a;
+$.get = alias(ep.getAttribute);
+$.unset = alias(ep.removeAttribute);
+$.append = append;
 
-// One-liner functions
-H.empty = n => iter(n.children, c => n.removeChild(c));
-H.set_attr = set_attr;
-H.style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
+// One-liners
+//
+
+$.prepend = (p, c) =>
+	p.firstChild ? p.insertBefore(c, p.firstChild) : p.appendChild(c);
+$.empty = n => iter(n.children, c => n.removeChild(c));
+$.set_attr = set_attr;
+$.style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
 
 // TODO: show()/hide()/toggle() ?
 
@@ -64,7 +68,7 @@ var trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
 
 function ready(f) {
 	document.readyState === 'loading'
-		? H.on(document, 'DOMContentLoaded', f)
+		? on(document, 'DOMContentLoaded', f)
 		: f();
 }
 
@@ -74,49 +78,139 @@ function once(n, e, f) {
 		f(ev);
 		n.removeEventListener(e, handler);
 	}
-	H.on(n, e, handler);
+	on(n, e, handler);
 }
 
 function parse_selector(sel) {
-	return sel.match(/^([#.]?)([^\s,:.]+)([\s,:.])?.*$/g);
+	return sel.match(/^([#.]?)([^\s,:.]+)([\s,:.])?.*$/);
 }
 
-function find(base, sel, as) {
+function $all(base, sel, as) {
 	as = as || parse_selector(sel);
 	if (!as[3]) {
-		if (as[1] === '#') return base.getElementById(as[2]);
+		if (as[1] === '#') return [base.getElementById(as[2])];
 		if (as[1] === '.') return base.getElementsByClassName(as[2]);
 		return base.getElementsByTagName(as[2]);
 	} else {
-		return document.querySelectorAll(sel);
+		return base.querySelectorAll(sel);
 	}
 }
 
-function forall(base, sel, f) {
+// NOTE: useless array wrapping for ById, tolerable
+var $find = (base, sel) => {
+	let res = $all(base, sel);
+	return res[0];
+};
+
+function el_matcher(as) {
+	let f = el => el.matches(as[0]);
+	if (!as[3]) {
+		if (as[1] === '#') f = el => el.id === as[2];
+		else if (as[1] === '.') f = el => el.classList.contains(as[2]);
+		else f = el => el.tagName.toUpperCase() === as[2].toUpperCase();
+	}
+	return f;
+}
+
+function $upfind(el, sel) {
+	let check = el_matcher(parse_selector(sel));
+	while (el && el.parentNode && !check(el)) el = el.parentNode;
+	// NOTE: this checks the final node twice
+	return el && check(el) ? el : null;
+}
+
+function $forall(base, sel, f) {
 	let as = parse_selector(sel);
 
-	iter(find(base, sel, as), f);
+	iter($all(base, sel, as), f);
 
-	let check = el => el.matches(sel);
-	if (!as[3]) {
-		if (as[1] === '#') check = el => el.id === as[2];
-		else if (as[1] === '.') check = el => el.classList.contains(as[2]);
-		else check = el => el.tagName.toUpperCase === as[2].toUpperCase;
-	}
+	let check = el_matcher(as);
 	let mo = new MutationObserver(mutations => {
 		iter(mutations, m => {
 			iter(m.addedNodes, n => {
 				if (n.nodeType === Node.ELEMENT_NODE) {
 					if (check(n)) return f(n);
-					iter(find(n, sel, as), f);
+					iter($all(n, sel, as), f);
 				}
 			});
 		});
 	});
-	mo.observe(H.root, { childList: true, subtree: true });
+	mo.observe($.root, { childList: true, subtree: true });
 	return mo;
 }
 
 // NOTE: Fetch API only in Edge 14+
+//
+// If body is an object, it is serialized to JSON and the content type is set
+// accordingly.
+//
+// Response type must be unset or one of "document", "json", "text".  Data is
+// returned to ok() outside of XHR because IE/Edge < 79 don't support
+// responseType "json".
+//
+// Properties supported in the arguments object, all optional including the
+// object itself:
+// headers   Object with additional headers to add to request
+// username  HTTP Auth username
+// password  HTTP Auth password
+// ok        function(XHR, data)
+// error     function(XHR)
+//
+function ajax(method, url, body, ctype, res_type, args) {
+	let req = new XMLHttpRequest();
+	args = args || {};
+	let h = args.headers || {};
+	let done = false;
+	h['X-Requested-With'] = 'XMLHttpRequest';
+	if (ctype) h['Content-Type'] = ctype;
+	req.open(method, url, true, args.username || null, args.password || null);
+	if (res_type && res_type !== 'json') req.responseType = res_type;
+	iter(Object.keys(h), k => req.setRequestHeader(k, h[k]));
+	req.send(body);
 
-export { H, on, trigger, ready, once, find, forall };
+	req.onreadystatechange = function() {
+		if (req.readyState === 4 && !done) {
+			// NOTE: Some browsers fire twice
+			done = true;
+			if (req.status >= 200 && req.status < 300) {
+				if (args.ok) {
+					let data;
+					if (res_type === 'document') data = req.responseXML;
+					else if (res_type === 'json')
+						data = JSON.parse(req.responseText);
+					else data = req.responseText;
+					args.ok(req, data);
+				}
+			} else {
+				if (args.error) args.error(req);
+			}
+		}
+	};
+}
+
+function xget(url, res_type, args) {
+	ajax('GET', url, null, null, res_type, args);
+}
+
+function xpost(url, body, res_type, args) {
+	let ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
+	if (typeof body === 'object') {
+		ctype = 'application/json';
+		body = JSON.stringify(body);
+	}
+	ajax('POST', url, body, ctype, res_type, args);
+}
+
+export {
+	$,
+	on,
+	trigger,
+	ready,
+	once,
+	$find,
+	$upfind,
+	$all,
+	$forall,
+	xget,
+	xpost,
+};

@@ -6,9 +6,27 @@ iter([], i => console.log(i));
 map([], i => '<' + i + '>');
 fold([], 0, (a, i) => a + i);
 
-import { H, ready, once, forall } from './browser.js';
-once(document, 'e', () => undefined);
+import {
+	$,
+	on,
+	trigger,
+	ready,
+	once,
+	$find,
+	$upfind,
+	$all,
+	$forall,
+	xget,
+	xpost,
+} from './browser.js';
 ready(() => {
-	H('a');
-	forall('r', () => undefined);
+	var e = $('a');
+	on(e, 'click', () => 0);
+	trigger($find($.root, 'body'), 'x');
+	once(e, 'e', () => 0);
+	$upfind(e, 'J');
+	$all(e, 'K');
+	$forall(e, 'r', () => 0);
+	xget('data:,0');
+	xpost('data:,0', {});
 });

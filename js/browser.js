@@ -19,11 +19,9 @@ var set_attr = (n, a) => iter(Object.keys(a), k => set_a(n, k, a[k]));
 
 // Main element creation function
 function H(tag, attrs, content) {
-	var el = document.createElement(tag);
+	let el = document.createElement(tag);
 
-	if (attrs !== undefined) {
-		set_attr(el, attrs);
-	}
+	if (attrs !== undefined) set_attr(el, attrs);
 	if (content) {
 		if (typeof content === 'object') {
 			iter(content, c => append(el, c));
@@ -44,7 +42,6 @@ H.parent = n => n.parentElement;
 H.prev = n => n.previousElementSibling;
 H.next = n => n.nextElementSibling;
 H.fragment = alias(dp.createDocumentFragment);
-H.on = alias(ep.addEventListener);
 H.set = set_a;
 H.get = alias(ep.getAttribute);
 H.unset = alias(ep.removeAttribute);
@@ -55,12 +52,15 @@ H.append = append;
 H.empty = n => iter(n.children, c => n.removeChild(c));
 H.set_attr = set_attr;
 H.style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
-H.trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
 
 // TODO: show()/hide()/toggle() ?
 
-// Larger functions declared individually to allow them to be optimized away.
+// Larger and basics declared individually to allow them to be optimized away.
 //
+
+var on = alias(ep.addEventListener);
+
+var trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
 
 function ready(f) {
 	document.readyState === 'loading'
@@ -92,40 +92,31 @@ function find(base, sel, as) {
 	}
 }
 
-function watch_dom(f) {
-	var mo = new MutationObserver(mutations => {
-		iter(mutations, m => {
-			iter(m.addedNodes, n => n.nodeType === Node.ELEMENT_NODE && f(n));
-		});
-	});
-	mo.observe(H.root, {
-		childList: true,
-		subtree: true,
-	});
-	return mo;
-}
-
 function forall(base, sel, f) {
-	var as = parse_selector(sel);
+	let as = parse_selector(sel);
 
 	iter(find(base, sel, as), f);
 
-	var check = el => el.matches(sel);
+	let check = el => el.matches(sel);
 	if (!as[3]) {
-		if (as[1] === '#') {
-			check = el => el.id === as[2];
-		} else if (as[1] === '.') {
-			check = el => el.classList.contains(as[2]);
-		} else {
-			check = el => el.tagName.toUpperCase === as[2].toUpperCase;
-		}
+		if (as[1] === '#') check = el => el.id === as[2];
+		else if (as[1] === '.') check = el => el.classList.contains(as[2]);
+		else check = el => el.tagName.toUpperCase === as[2].toUpperCase;
 	}
-	return watch_dom(el => {
-		if (check(el)) return f(el);
-		iter(find(el, sel, as), f);
+	let mo = new MutationObserver(mutations => {
+		iter(mutations, m => {
+			iter(m.addedNodes, n => {
+				if (n.nodeType === Node.ELEMENT_NODE) {
+					if (check(n)) return f(n);
+					iter(find(n, sel, as), f);
+				}
+			});
+		});
 	});
+	mo.observe(H.root, { childList: true, subtree: true });
+	return mo;
 }
 
 // NOTE: Fetch API only in Edge 14+
 
-export { H, ready, once, find, forall };
+export { H, on, trigger, ready, once, find, forall };

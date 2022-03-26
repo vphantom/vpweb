@@ -2,15 +2,15 @@
 
 // Generic iterator
 function iter(list, f) {
-	for (var i = 0, l_length = list.length; i < l_length; ++i) {
+	for (let i = 0, l_length = list.length; i < l_length; ++i) {
 		f(list[i]);
 	}
 }
 
 // Generic mapper to Array
 function map(list, f) {
-	var a = [];
-	for (var i = 0, l_length = list.length; i < l_length; ++i) {
+	let a = [];
+	for (let i = 0, l_length = list.length; i < l_length; ++i) {
 		a.push(f(list[i]));
 	}
 	return a;
@@ -18,7 +18,7 @@ function map(list, f) {
 
 // Generic folder
 function fold(list, acc, f) {
-	for (var i = 0, l_length = list.length; i < l_length; ++i) {
+	for (let i = 0, l_length = list.length; i < l_length; ++i) {
 		acc = f(acc, list[i]);
 	}
 	return acc;

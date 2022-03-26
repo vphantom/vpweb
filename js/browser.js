@@ -57,6 +57,8 @@ H.set_attr = set_attr;
 H.style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
 H.trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
 
+// TODO: show()/hide()/toggle() ?
+
 // Larger functions declared individually to allow them to be optimized away.
 //
 
@@ -76,7 +78,7 @@ function once(n, e, f) {
 }
 
 function parse_selector(sel) {
-	return sel.match(/^([#.]?)([^\s,]*)([\s,])?.*$/g);
+	return sel.match(/^([#.]?)([^\s,:.]+)([\s,:.])?.*$/g);
 }
 
 function find(base, sel, as) {
@@ -115,7 +117,7 @@ function forall(base, sel, f) {
 		} else if (as[1] === '.') {
 			check = el => el.classList.contains(as[2]);
 		} else {
-			check = el => el.tagName === as[2];
+			check = el => el.tagName.toUpperCase === as[2].toUpperCase;
 		}
 	}
 	return watch_dom(el => {

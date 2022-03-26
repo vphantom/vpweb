@@ -112,15 +112,15 @@ h1 {
 	font-size: 2em;
 	margin: 0.67em 0;
 }
-.pgn-form button,
-.pgn-form input,
-.pgn-form textarea,
-.pgn-form select,
-.pgn-button,
-.pgn-sans {
+.vp-form button,
+.vp-form input,
+.vp-form textarea,
+.vp-form select,
+.vp-button,
+.vp-sans {
 	font-family: $font-sans;
 }
-.pgn-serif {
+.vp-serif {
 	font-family: $font-serif;
 }
 code,
@@ -130,9 +130,9 @@ samp {
 	font-family: $font-mono;
 	font-size: 1em;
 }
-.pgn-mono,
-.pgn-notice::before,
-.pgn-message::before,
+.vp-mono,
+.vp-notice::before,
+.vp-message::before,
 .is-numeric {
 	font-family: $font-mono;
 }
@@ -184,6 +184,6 @@ blockquote {
 
 /* Helpers */
 /* NOTE: Class is referred twice for specificity. */
-.pgn-none.pgn-none {
+.vp-none.vp-none {
 	display: none;
 }

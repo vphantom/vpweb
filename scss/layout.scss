@@ -1,71 +1,71 @@
 @import "_lib.scss";
 
 /* Layout 3: header, main (expands), footer, typically on <body> */
-.pgn-l-3 {
+.vp-l-3 {
 	display: flex;
 	flex-direction: column;
 }
-.pgn-l-3 > :nth-child(2) {
+.vp-l-3 > :nth-child(2) {
 	flex: 1;
 }
 
-.pgn-container {
+.vp-container {
 	display: block;
 	max-width: 100%;
 	width: auto;
 }
-.pgn-density-relaxed > .pgn-container,
-.pgn-density-relaxed.pgn-container {
+.vp-density-relaxed > .vp-container,
+.vp-density-relaxed.vp-container {
 	padding-left: $padding-relaxed;
 	padding-right: $padding-relaxed;
 }
-.pgn-density-spaced > .pgn-container,
-.pgn-density-spaced.pgn-container {
+.vp-density-spaced > .vp-container,
+.vp-density-spaced.vp-container {
 	padding-left: $padding-spaced;
 	padding-right: $padding-spaced;
 }
 
-.pgn-block {
+.vp-block {
 	display: block;
 	width: 100%;
 }
 
 /* Utilities */
-.pgn-center {
+.vp-center {
 	text-align: center;
 }
-.pgn-justify {
+.vp-justify {
 	text-align: justify;
 }
-.pgn-right {
+.vp-right {
 	text-align: right;
 }
 
 @include media-mobile-only {
-	.pgn-tablet-up,
-	.pgn-tablet-only,
-	.pgn-desktop-only {
+	.vp-tablet-up,
+	.vp-tablet-only,
+	.vp-desktop-only {
 		display: none;
 	}
 }
 
 @include media-tablet-only {
-	.pgn-mobile-only,
-	.pgn-desktop-only {
+	.vp-mobile-only,
+	.vp-desktop-only {
 		display: none;
 	}
 }
 
 @include media-desktop-only {
-	.pgn-mobile-only,
-	.pgn-tablet-only,
-	.pgn-tablet-down {
+	.vp-mobile-only,
+	.vp-tablet-only,
+	.vp-tablet-down {
 		display: none;
 	}
 }
 
 @include media-desktop-large {
-	.pgn-container {
+	.vp-container {
 		max-width: $width-text-max;
 		margin-left: auto;
 		margin-right: auto;
@@ -74,12 +74,12 @@
 
 /* Print (we generalize non-screen labeling as "print") */
 @media only screen {
-	.pgn-print-only {
+	.vp-print-only {
 		display: none;
 	}
 }
 @media not screen {
-	.pgn-screen-only {
+	.vp-screen-only {
 		display: none;
 	}
 }

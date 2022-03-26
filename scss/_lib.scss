@@ -107,8 +107,8 @@ $min-width: 320px;
 
 @mixin newgrid-xx($cols: 10) {
 	@for $i from 1 through $cols {
-		.pgn-#{$cols}-$i {
-			min-width: calc(($i * 100% / $cols) - (2 * var(--pgn-padding)));
+		.vp-#{$cols}-$i {
+			min-width: calc(($i * 100% / $cols) - (2 * var(--vp-padding)));
 		}
 	}
 }
@@ -116,20 +116,20 @@ $min-width: 320px;
 @mixin grid-xx($cols: 10, $cols_2: 4, $cols_4: 2) {
 	/* Widths */
 	@for $i from 1 through $cols {
-		.pgn-row-$cols > .pgn-col-$i {
+		.vp-row-$cols > .vp-col-$i {
 			width: calc($i * 100% / $cols);
 		}
 	}
 
 	@include media-mobile-only {
 		/* Quadruple desktop widths */
-		.pgn-doubling .pgn-row-$cols > [class*="pgn-col-"],
-		.pgn-doubling.pgn-row-$cols > [class*="pgn-col-"] {
+		.vp-doubling .vp-row-$cols > [class*="vp-col-"],
+		.vp-doubling.vp-row-$cols > [class*="vp-col-"] {
 			width: 100%;
 		}
 		@for $i from 1 through $cols_4 {
-			.pgn-doubling .pgn-row-$cols > .pgn-col-$i,
-			.pgn-doubling.pgn-row-$cols > .pgn-col-$i {
+			.vp-doubling .vp-row-$cols > .vp-col-$i,
+			.vp-doubling.vp-row-$cols > .vp-col-$i {
 				width: calc(4 * $i * 100% / $cols);
 			}
 		}
@@ -137,13 +137,13 @@ $min-width: 320px;
 
 	@include media-tablet-only {
 		/* Double desktop widths */
-		.pgn-doubling .pgn-row-$cols > [class*="pgn-col-"],
-		.pgn-doubling.pgn-row-$cols > [class*="pgn-col-"] {
+		.vp-doubling .vp-row-$cols > [class*="vp-col-"],
+		.vp-doubling.vp-row-$cols > [class*="vp-col-"] {
 			width: 100%;
 		}
 		@for $i from 1 through $cols_2 {
-			.pgn-doubling .pgn-row-$cols > .pgn-col-$i,
-			.pgn-doubling.pgn-row-$cols > .pgn-col-$i {
+			.vp-doubling .vp-row-$cols > .vp-col-$i,
+			.vp-doubling.vp-row-$cols > .vp-col-$i {
 				width: calc(2 * $i * 100% / $cols);
 			}
 		}

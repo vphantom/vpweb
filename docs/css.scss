@@ -1,4 +1,4 @@
-@import "fixme.scss";
+@import "vpweb.scss";
 
 h1,
 h2,
@@ -85,7 +85,7 @@ dd code {
 	content: "/>";
 }
 
-.pgn-icon-button {
+.vp-icon-button {
 	font-weight: bold;
 }
 
@@ -94,7 +94,7 @@ dd code {
 	border: 1px solid #333;
 }
 
-table#pgn-sizes tbody tr:first-child td {
+table#vp-sizes tbody tr:first-child td {
 	font-weight: bold;
 	background-color: rgba(127, 127, 127, 0.05);
 }

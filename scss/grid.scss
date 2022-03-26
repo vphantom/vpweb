@@ -1,37 +1,37 @@
 @import "_lib.scss";
 
-.pgn-grid {
+.vp-grid {
 	display: flex;
 	flex-flow: row wrap;
-	--pgn-padding: $padding-seamless;
+	--vp-padding: $padding-seamless;
 }
 
-.pgn-density-relaxed.pgn-grid {
+.vp-density-relaxed.vp-grid {
 	margin: -$padding-relaxed;
-	--pgn-padding: $padding-relaxed;
+	--vp-padding: $padding-relaxed;
 }
 
-.pgn-density-spaced.pgn-grid {
+.vp-density-spaced.vp-grid {
 	margin: -$padding-spaced;
-	--pgn-padding: $padding-spaced;
+	--vp-padding: $padding-spaced;
 }
 
-.pgn-grid > * {
+.vp-grid > * {
 	vertical-align: top;
 	// flex-grow: 1;
 	flex-basis: calc((40rem - 100%) * 999);
 }
 
-.pgn-density-relaxed.pgn-grid > * {
+.vp-density-relaxed.vp-grid > * {
 	margin: $padding-relaxed;
 }
 
-.pgn-density-spaced.pgn-grid > * {
+.vp-density-spaced.vp-grid > * {
 	margin: $padding-spaced;
 }
 
-.pgn-grid > img,
-.pgn-grid > a > img {
+.vp-grid > img,
+.vp-grid > a > img {
 	width: 100%;
 }
 
@@ -39,7 +39,7 @@
 @include newgrid-xx(24);
 
 /*
-[class*="pgn-row-"] {
+[class*="vp-row-"] {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -48,39 +48,39 @@
 	align-content: flex-start;
 }
 
-[class*="pgn-col-"] {
+[class*="vp-col-"] {
 	display: inline-block;
 	vertical-align: top;
 	// flex-grow: 1;
 }
 
-[class*="pgn-col-"] > img,
-[class*="pgn-col-"] > a > img {
+[class*="vp-col-"] > img,
+[class*="vp-col-"] > a > img {
 	width: 100%;
 }
 
-.pgn-density-relaxed[class*="pgn-row-"],
-.pgn-density-relaxed > [class*="pgn-row-"] {
+.vp-density-relaxed[class*="vp-row-"],
+.vp-density-relaxed > [class*="vp-row-"] {
 	margin-left: -$padding-relaxed;
 	margin-right: -$padding-relaxed;
 }
-.pgn-density-spaced[class*="pgn-row-"],
-.pgn-density-spaced > [class*="pgn-row-"] {
+.vp-density-spaced[class*="vp-row-"],
+.vp-density-spaced > [class*="vp-row-"] {
 	margin-left: -$padding-spaced;
 	margin-right: -$padding-spaced;
 }
 
-.pgn-density-relaxed > [class*="pgn-col-"],
-.pgn-density-relaxed > [class*="pgn-row-"] > [class*="pgn-col-"] {
+.vp-density-relaxed > [class*="vp-col-"],
+.vp-density-relaxed > [class*="vp-row-"] > [class*="vp-col-"] {
 	padding: $padding-relaxed;
 }
-.pgn-density-spaced > [class*="pgn-col-"],
-.pgn-density-spaced > [class*="pgn-row-"] > [class*="pgn-col-"] {
+.vp-density-spaced > [class*="vp-col-"],
+.vp-density-spaced > [class*="vp-row-"] > [class*="vp-col-"] {
 	padding: $padding-spaced;
 }
 
 @include media-tablet-down {
-	.pgn-stacking [class*="pgn-col-"] {
+	.vp-stacking [class*="vp-col-"] {
 		width: 100%;
 	}
 }

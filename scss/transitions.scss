@@ -10,7 +10,7 @@ $delay: 0.05s;
 		opacity $duration-slow;
 }
 
-[class*="pgn-go-"] {
+[class*="vp-go-"] {
 	animation-iteration-count: 1;
 	animation-duration: $duration;
 	animation-timing-function: ease;
@@ -18,11 +18,11 @@ $delay: 0.05s;
 	backface-visibility: hidden;
 }
 
-.pgn-go-hidden {
+.vp-go-hidden {
 	animation-name: fade-out;
 }
 
-.pgn-go-visible {
+.vp-go-visible {
 	animation-name: fade-in;
 }
 

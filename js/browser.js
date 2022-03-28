@@ -4,7 +4,6 @@
 import { iter } from './stdlib.js';
 
 var np = Node.prototype;
-var dp = Document.prototype;
 var ep = Element.prototype;
 var alias = f => Function.prototype.call.bind(f);
 
@@ -14,14 +13,14 @@ if (!ep.matches) {
 }
 
 var append = alias(np.appendChild);
-var set_a = alias(ep.setAttribute);
-var set_attr = (n, a) => iter(Object.keys(a), k => set_a(n, k, a[k]));
+var set = alias(ep.setAttribute);
+var set_attr = (n, a) => iter(Object.keys(a), k => set(n, k, a[k]));
 
 // Main element creation function
-function $(tag, attrs, content) {
+function h(tag, attrs, content) {
 	let el = document.createElement(tag);
 
-	if (attrs !== undefined) set_attr(el, attrs);
+	if (attrs) set_attr(el, attrs);
 	if (content) {
 		if (typeof content === 'object') {
 			iter(content, c => append(el, c));
@@ -35,44 +34,54 @@ function $(tag, attrs, content) {
 // Aliases
 //
 
-$.root = document.documentElement;
 // np.textContent
 // ??.innerHTML
 
-$.parent = n => n.parentElement;
-$.prev = n => n.previousElementSibling;
-$.next = n => n.nextElementSibling;
-$.fragment = alias(dp.createDocumentFragment);
-$.set = set_a;
-$.get = alias(ep.getAttribute);
-$.unset = alias(ep.removeAttribute);
-$.append = append;
-
-var $find = alias(ep.querySelector);
-var $all = alias(ep.querySelectorAll);
+var parent = n => n.parentElement;
+var prev = n => n.previousElementSibling;
+var next = n => n.nextElementSibling;
+var get = alias(ep.getAttribute);
+var unset = alias(ep.removeAttribute);
 
 // One-liners
 //
 
-$.prepend = (p, c) =>
+var fragment = () => document.createDocumentFragment();
+var prepend = (p, c) =>
 	p.firstChild ? p.insertBefore(c, p.firstChild) : p.appendChild(c);
-$.empty = n => iter(n.children, c => n.removeChild(c));
-$.set_attr = set_attr;
-$.style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
+var empty = n => iter(n.children, c => n.removeChild(c));
+var style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
 
 // TODO: show()/hide()/toggle() ?
 
 // Larger and basics declared individually to allow them to be optimized away.
 //
 
-var on = alias(ep.addEventListener);
+function find(n, sel) {
+	if (typeof n === 'string') {
+		sel = n;
+		n = document;
+	}
+	return n.querySelector(sel);
+}
 
-var trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
+function all(n, sel) {
+	if (typeof n === 'string') {
+		sel = n;
+		n = document;
+	}
+	return n.querySelectorAll(sel);
+}
 
-function ready(f) {
-	document.readyState === 'loading'
-		? on(document, 'DOMContentLoaded', f)
-		: f();
+// var on = alias(ep.addEventListener);
+function on(n, t, f, o) {
+	if (typeof n === 'string') {
+		o = f;
+		f = t;
+		t = n;
+		n = document;
+	}
+	return n.addEventListener(t, f, o);
 }
 
 // NOTE: addEventListener() "once" only in Edge 16+
@@ -84,27 +93,51 @@ function once(n, e, f) {
 	on(n, e, handler);
 }
 
-// NOTE: Element.closest() is only in Edge 15+
-function $closest(el, sel) {
-	while (el && el.parentNode && !el.matches(sel)) el = el.parentNode;
-	// NOTE: this checks the final node twice
-	return el && el.matches(sel) ? el : null;
+var trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
+
+function ready(f) {
+	document.readyState === 'loading'
+		? on(document, 'DOMContentLoaded', f)
+		: f();
 }
 
-function $forall(base, sel, f) {
-	iter($all(base, sel), f);
+// NOTE: Element.closest() is only in Edge 15+
+function closest(el, sel) {
+	while (el && el.parentNode && !el.matches(sel)) el = el.parentNode;
+	// NOTE: this checks the final node twice
+	return el && el.nodeType === Node.ELEMENT_NODE && el.matches(sel)
+		? el
+		: null;
+}
+
+function forall(base, sel, f) {
+	if (typeof base === 'string') {
+		f = sel;
+		sel = base;
+		base = document;
+	}
+	iter(all(base, sel), f);
+}
+
+function forever(base, sel, f) {
+	if (typeof base === 'string') {
+		f = sel;
+		sel = base;
+		base = document;
+	}
+	iter(all(base, sel), f);
 
 	let mo = new MutationObserver(mutations => {
 		iter(mutations, m => {
 			iter(m.addedNodes, n => {
 				if (n.nodeType === Node.ELEMENT_NODE) {
 					if (n.matches(sel)) return f(n);
-					iter($all(n, sel), f);
+					iter(all(n, sel), f);
 				}
 			});
 		});
 	});
-	mo.observe($.root, { childList: true, subtree: true });
+	mo.observe(document, { childList: true, subtree: true });
 	return mo;
 }
 
@@ -158,11 +191,11 @@ function ajax(method, url, body, ctype, res_type, args) {
 	};
 }
 
-function xget(url, res_type, args) {
+function fetch(url, res_type, args) {
 	ajax('GET', url, null, null, res_type, args);
 }
 
-function xpost(url, body, res_type, args) {
+function post(url, body, res_type, args) {
 	let ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
 	if (typeof body === 'object') {
 		ctype = 'application/json';
@@ -173,15 +206,28 @@ function xpost(url, body, res_type, args) {
 }
 
 export {
-	$,
+	all,
+	append,
+	closest,
+	empty,
+	fetch,
+	find,
+	forall,
+	forever,
+	fragment,
+	get,
+	h,
+	next,
 	on,
-	trigger,
-	ready,
 	once,
-	$find,
-	$closest,
-	$all,
-	$forall,
-	xget,
-	xpost,
+	parent,
+	post,
+	prepend,
+	prev,
+	ready,
+	set,
+	set_attr,
+	style,
+	trigger,
+	unset,
 };

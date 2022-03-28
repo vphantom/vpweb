@@ -1,6 +1,6 @@
 /* eslint-env browser */
 'use strict';
 
-import { init } from './promeneur.js';
+import { init } from './editeur.js';
 
 init();

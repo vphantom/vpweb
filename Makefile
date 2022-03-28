@@ -17,7 +17,7 @@ CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(wildcard js/*.js)
 
-JS_ASSETS := dist/test-size.min.js dist/daterange.min.js dist/promeneur.min.js
+JS_ASSETS := dist/test-size.min.js dist/daterange.min.js dist/editeur.min.js dist/promeneur.min.js
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS))
 
@@ -38,8 +38,8 @@ clean:
 	rm -fv dist/* docs/dist.css docs/*.map docs/*.gz docs/*.br
 
 watch:	dist
-	@echo "Watching scss/ for changes..."
-	+@while true; do $(FWAIT) $(CSS_SRC) ; nice make --no-print-directory dist; echo "Up to date."; done
+	@echo "Watching for changes..."
+	+@while true; do $(FWAIT) $(CSS_SRC) $(JS_SRC) ; nice make --no-print-directory dist; echo "Up to date."; done
 
 # Pessimistic by design: rebuilds all assets whenever any source changes.
 dist/%.css:	scss/%.scss $(CSS_SRC)
@@ -51,11 +51,14 @@ docs/css.css:	docs/css.scss $(CSS_SRC)
 dist/test-size.min.js:	$(JS_SRC)
 	$(ROLLUP) js/test-size.js --file $@ $(ROLLUP_OPTS)
 
-dist/daterange.min.js:	$(JS_SRC)
-	$(ROLLUP) js/daterange-standalone.js --file $@ $(ROLLUP_OPTS)
+dist/daterange.min.js:	js/daterange-init.js js/daterange.js js/browser.js js/stdlib.js
+	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/promeneur.min.js:	$(JS_SRC)
-	$(ROLLUP) js/promeneur-standalone.js --file $@ $(ROLLUP_OPTS)
+dist/editeur.min.js:	js/editeur-init.js js/editeur.js js/browser.js js/stdlib.js
+	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
+
+dist/promeneur.min.js:	js/promeneur-init.js js/promeneur.js js/browser.js js/stdlib.js
+	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 sizes:	$(CSS_ASSETS) $(GZIP_ASSETS) $(BROTLI_ASSETS)
 	@if [ -e docs/css.html~ ]; then echo "HTML backup file already exists."; exit 1; fi

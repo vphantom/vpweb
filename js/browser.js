@@ -3,7 +3,6 @@
 
 import { iter, iter_f } from './stdlib.js';
 
-var np = Node.prototype;
 var ep = Element.prototype;
 var alias = f => Function.prototype.call.bind(f);
 
@@ -12,50 +11,80 @@ if (!ep.matches) {
 		ep.matchesSelector || ep.msMatchesSelector || ep.webkitMatchesSelector;
 }
 
-var append = alias(np.appendChild);
-var set = alias(ep.setAttribute);
-var set_attr = (n, a) => iter(Object.keys(a), k => set(n, k, a[k]));
-
-// Main element creation function
-function h(tag, attrs, content) {
-	let el = document.createElement(tag);
-
-	if (attrs) set_attr(el, attrs);
-	if (content) {
-		if (typeof content === 'object') {
-			iter(content, c => append(el, c));
-		} else {
-			append(el, document.createTextNode(content));
-		}
-	}
-	return el;
-}
-
-// Aliases
-//
-
 // np.textContent
 // ??.innerHTML
-
+// show()/hide()/toggle() ?
+var get = alias(ep.getAttribute);
+var set = alias(ep.setAttribute);
+var unset = alias(ep.removeAttribute);
+var set_attr = (n, a) => iter(Object.keys(a), k => set(n, k, a[k]));
+var text = t => document.createTextNode(String(t));
 var parent = n => n.parentElement;
 var prev = n => n.previousElementSibling;
 var next = n => n.nextElementSibling;
-var get = alias(ep.getAttribute);
-var unset = alias(ep.removeAttribute);
-
-// One-liners
-//
-
-var fragment = () => document.createDocumentFragment();
-var prepend = (p, c) =>
-	p.firstChild ? p.insertBefore(c, p.firstChild) : p.appendChild(c);
 var empty = n => iter(n.children, c => n.removeChild(c));
 var style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
 
-// TODO: show()/hide()/toggle() ?
+function nodelist(l, acc) {
+	acc = acc || [];
+	iter(Array.isArray(l) ? l : [l], i => {
+		if (Array.isArray(i)) return nodelist(i, acc);
+		acc.push(typeof i === 'object' ? i : text(i));
+	});
+	return acc;
+}
 
-// Larger and basics declared individually to allow them to be optimized away.
-//
+function precede(o, nl) {
+	iter(nodelist(nl), n => o.parentElement.insertBefore(n, o));
+}
+
+function append(parent, cl) {
+	iter(nodelist(cl), c => parent.appendChild(c));
+}
+
+function prepend(p, cl) {
+	p.firstChild ? precede(p.firstChild, cl) : append(p, cl);
+}
+
+function fragment(cl) {
+	var frag = document.createDocumentFragment();
+	if (cl) iter(nodelist(cl), c => append(frag, c));
+	return frag;
+}
+
+function h(tag, attrs, content) {
+	let el = document.createElement(tag);
+	if (attrs) set_attr(el, attrs);
+	if (content) append(el, content);
+	return el;
+}
+
+var H = {};
+iter(
+	[
+		'a',
+		'br',
+		'dd',
+		'div',
+		'dl',
+		'dt',
+		'input',
+		'label',
+		'li',
+		'select',
+		'span',
+		'table',
+		'tbody',
+		'td',
+		'textarea',
+		'tfoot',
+		'th',
+		'thead',
+		'tr',
+		'ul',
+	],
+	tag => (H[tag] = h.bind(null, tag))
+);
 
 function find(n, sel) {
 	if (typeof n === 'string') return find(document, n);
@@ -188,6 +217,7 @@ function post(url, body, res_type, args) {
 }
 
 export {
+	H,
 	all,
 	append,
 	closest,
@@ -204,12 +234,14 @@ export {
 	once,
 	parent,
 	post,
+	precede,
 	prepend,
 	prev,
 	ready,
 	set,
 	set_attr,
 	style,
+	text,
 	trigger,
 	unset,
 };

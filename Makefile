@@ -17,7 +17,7 @@ CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(wildcard js/*.js)
 
-JS_ASSETS := dist/test-size.min.js dist/daterange.min.js dist/editeur.min.js dist/promeneur.min.js
+JS_ASSETS := dist/test-size.min.js dist/vpweb.min.js dist/daterange.min.js dist/editeur.min.js dist/promeneur.min.js
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS))
 
@@ -50,6 +50,9 @@ docs/css.css:	docs/css.scss $(CSS_SRC)
 
 dist/test-size.min.js:	$(JS_SRC)
 	$(ROLLUP) js/test-size.js --file $@ $(ROLLUP_OPTS)
+
+dist/vpweb.min.js:	js/vpweb.js $(JS_SRC)
+	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 dist/daterange.min.js:	js/daterange-init.js js/daterange.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)

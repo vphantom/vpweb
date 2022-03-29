@@ -27,4 +27,21 @@ function fold(list, acc, f) {
 	return acc;
 }
 
-export { iter, iter_f, map, fold };
+function cmp(a, b) {
+	return a == b ? 0 : a > b ? 1 : -1;
+}
+
+function cmp_f(f, a, b) {
+	var fa = f(a),
+		fb = f(b);
+	if (fa && !fb) return 1;
+	if (!fa && fb) return -1;
+	return 0;
+}
+
+// Missing from JS
+function isPlainObject(o) {
+	return Object.prototype.toString.call(o) === '[object Object]';
+}
+
+export { iter, iter_f, map, fold, cmp, cmp_f, isPlainObject };

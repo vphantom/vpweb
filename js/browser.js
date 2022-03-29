@@ -1,7 +1,7 @@
 /* eslint-env browser */
 'use strict';
 
-import { iter } from './stdlib.js';
+import { iter, iter_f } from './stdlib.js';
 
 var np = Node.prototype;
 var ep = Element.prototype;
@@ -58,34 +58,23 @@ var style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
 //
 
 function find(n, sel) {
-	if (typeof n === 'string') {
-		sel = n;
-		n = document;
-	}
+	if (typeof n === 'string') return find(document, n);
 	return n.querySelector(sel);
 }
 
 function all(n, sel) {
-	if (typeof n === 'string') {
-		sel = n;
-		n = document;
-	}
+	if (typeof n === 'string') return all(document, n);
 	return n.querySelectorAll(sel);
 }
 
-// var on = alias(ep.addEventListener);
 function on(n, t, f, o) {
-	if (typeof n === 'string') {
-		o = f;
-		f = t;
-		t = n;
-		n = document;
-	}
+	if (typeof n === 'string') return on(document, n, t, f);
 	return n.addEventListener(t, f, o);
 }
 
 // NOTE: addEventListener() "once" only in Edge 16+
 function once(n, e, f) {
+	if (typeof n === 'string') return once(document, n, e);
 	function handler(ev) {
 		n.removeEventListener(e, handler);
 		f(ev);
@@ -93,7 +82,10 @@ function once(n, e, f) {
 	on(n, e, handler);
 }
 
-var trigger = (e, n, d) => e.dispatchEvent(new CustomEvent(n, { detail: d }));
+function trigger(e, n, d) {
+	if (typeof e === 'string') return trigger(document, e, n);
+	return e.dispatchEvent(new CustomEvent(n, { detail: d }));
+}
 
 function ready(f) {
 	document.readyState === 'loading'
@@ -111,33 +103,23 @@ function closest(el, sel) {
 }
 
 function forall(base, sel, f) {
-	if (typeof base === 'string') {
-		f = sel;
-		sel = base;
-		base = document;
-	}
+	if (typeof base === 'string') return forall(document, base, sel);
 	iter(all(base, sel), f);
 }
 
 function forever(base, sel, f) {
-	if (typeof base === 'string') {
-		f = sel;
-		sel = base;
-		base = document;
-	}
+	if (typeof base === 'string') return forever(document, base, sel);
+
 	iter(all(base, sel), f);
 
-	let mo = new MutationObserver(mutations => {
-		iter(mutations, m => {
+	let mo = new MutationObserver(
+		iter_f(m => {
 			iter(m.addedNodes, n => {
-				if (n.nodeType === Node.ELEMENT_NODE) {
-					if (n.matches(sel)) return f(n);
-					iter(all(n, sel), f);
-				}
+				if (n.nodeType === Node.ELEMENT_NODE && n.matches(sel)) f(n);
 			});
-		});
-	});
-	mo.observe(document, { childList: true, subtree: true });
+		})
+	);
+	mo.observe(base, { childList: true, subtree: true });
 	return mo;
 }
 

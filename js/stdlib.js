@@ -7,6 +7,9 @@ function iter(list, f) {
 	}
 }
 
+// Create a function which will iterate f() on its list argument
+var iter_f = f => l => iter(l, f);
+
 // Generic mapper to Array
 function map(list, f) {
 	let a = new Array(list.length);
@@ -24,4 +27,4 @@ function fold(list, acc, f) {
 	return acc;
 }
 
-export { iter, map, fold };
+export { iter, iter_f, map, fold };

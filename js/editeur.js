@@ -8,7 +8,7 @@ const H = $.H('br', 'input', 'label', 'table', 'td', 'th', 'tr');
 
 /*
 
-<script type="application/json" vp-view | vp-edit vp-name="...">{...}</script>
+<script type="application/json" vp-view | vp-edit="name" >{...}</script>
 
 We need to add our component's DIV immediately before each such script.
 

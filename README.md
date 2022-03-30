@@ -5,13 +5,20 @@
 [![GitHub release](https://img.shields.io/github/release/vphantom/vpweb.svg?style=plastic)]()
 -->
 
-Vanilla+ is a minimalistic web interface development library: a basic CSS framework, a JS library and some web components.  No abstraction layers and only use the portions need without bloat from the rest.
+Vanilla+ is a minimalistic web interface development library.  It adds no abstraction layers and thus allows you to use only the portions you need without bloat from the rest.  It is divided in 3 main parts:
+
+* A basic CSS framework
+* A JS library
+* A collection of web components
+
+The components make use of the library and aim to be otherwise stand-alone, triggered by CSS classes, custom HTML attributes and tags.  Whenever possible, they are meant to be progressive enhancements.
+
 
 **CURRENTLY IN EARLY STAGE OF DEVELOPMENT!**
 
 ## CSS Framework
 
-FIXME
+See documentation in `docs/css.html`.
 
 ## Library
 
@@ -32,37 +39,59 @@ Specifically avoided are:
 
 Usage: `import { ... } from 'vpweb/stdlib';`
 
+TODO: JSDoc
+
 ### Browser
 
 Usage: `import { ... } from 'vpweb/browser';`
 
-## Components
+TODO: JSDoc
 
-The components make use of the library and aim to be otherwise stand-alone, triggered by CSS classes, custom HTML attributes and tags.  Whenever possible, they are meant to be progressive enhancements; for example `DateRange` upgrades a pair of standard date inputs which are fully functional if the component fails to load.
-
-### Promeneur
+## Promeneur
 
 I/O kernel for web sites.
 
-ES5: `import 'vpweb/promeneur';`
+**Usage:** `import 'vpweb/promeneur';`
 
-Self-contained script: `dist/promeneur.min.js`
+**Self-contained:** `<script src="dist/promeneur.min.js"></script>`
 
-* Similarly to [Instant Click](http://instantclick.io/), captures some events on links and buttons to load contents in the background, replacing the page upon receipt.  This tends to make pages more responsive.
+### Attribute `vp-fast`
 
-* Adds new form method `json-post` to post a JSON representation of form data to the server.
+* Anchors in a block with the `vp-fast` attribute or with the attribute directly are triggered on `mousedown` instead of the browser's `mouseup`, saving ~100ms.  Limited to anchors with `href` to avoid side effects from the `click` event triggering twice.
 
-* Adds new form method `callback` to pass the object representation of form data back to the form's `data-promeneur-callback` function instead of sending to a server.
+* Submit inputs/buttons with `vp-fast` attribute, or in forms with `vp-fast`, trigger on `mousedown`.  Limited to `[type=submit]` because of the double `click` triggering.
 
-* Adds `target` attribute to forms, which replace the selected DOM node's contents, instead of the whole page, with the response.
+### Form method `vp-json`, attribute `vp-target`
 
-### DateRange
+* When submitting, encodes form data as JSON, sent in a POST request with appropriate MIME type.
+
+* Names with `[]` suffix have that suffix stripped and are accumulated as arrays.  (Without the suffix, a name found multiple times would only encode one of the values.)
+
+* Elements with JS property `vpName` will not have their children crawled.  Instead, their `vpValue` property will be used: if it is a function, it will be called and its result stored, otherwise it will be used directly.
+
+* If `vp-target` is specified and found, its content will be replaced with the POST's response.  If the result is `<html>`, only the contents of its `<body>` will be used.  With invalid or no target, the current page's `<title>` and `<body>` will be replaced with the POST response's.
+
+## Editeur
+
+Viewer and optionally editor for arbitrary JSON blobs.
+
+**Usage:** `import 'vpweb/editeur';`
+
+**Self-contained:** `<script src="dist/editeur.min.js"></script>`
+
+Watches for `<script>` tags with `[type="application/json"]` and either `vp-view` or `vp-edit` attributes, to view or edit respectively.  Inserts a `<vp-editeur>` block immediately before each such script.
+
+In editor mode, the `vp-edit` attribute specifies the form variable name it represents.
+
+TODO: optional schema for I18N labels, select choices, etc.
+
+## DateRange
 
 Upgrades a pair of date selection inputs into a date range widget, complete with shortcuts to change by various increments (i.e. weekly, monthly, quarterly).
 
-Usage: `import 'vpweb/daterange';`
+**Usage:** `import 'vpweb/daterange';`
 
-Self-contained script: `dist/daterange.min.js`
+**Self-contained:** `<script src="dist/daterange.min.js"></script>`
 
 Wrap any pair of `<input type="date">` inside a `<div _daterange="true">` or a `<date-range>` block.  Any other mark-up inside that block will be removed.  The first input will be used as the beginning date, and the second input as the end date.
 

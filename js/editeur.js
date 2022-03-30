@@ -45,7 +45,7 @@ function convert(d, edit, label, keys) {
 				return $.fragment(
 					map(Object.keys(d).sort(), k => [
 						H.label({}, [convert(d[k], edit, k), ' ' + k]),
-						H.br(),
+						H.br()
 					])
 				);
 			} else {
@@ -70,7 +70,7 @@ function convert(d, edit, label, keys) {
 					{},
 					map(keys, k => H.th({}, k))
 				),
-				map(d, dd => convert(dd, edit, null, keys)),
+				map(d, dd => convert(dd, edit, null, keys))
 			]);
 			return table;
 		} else {
@@ -83,9 +83,9 @@ function convert(d, edit, label, keys) {
 			type: 'checkbox',
 			disabled: true,
 			name: label,
-			value: '1',
+			value: '1'
 		});
-		if (d) $.set(cb, 'checked', true);
+		if (d) $.set(cb, { checked: true });
 		return cb;
 	}
 

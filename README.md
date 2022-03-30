@@ -18,7 +18,7 @@ FIXME
 The minimalistic library aims to make "Vanilla JS" development more expressive without masking the native objects or impeding run-time performance.  More specifically:
 
 - 100% compatible with plain JS, every function is independently opt-in
-- Compatibility down to Microsoft Edge 12 (as of 2022)
+- Compatibility down to Chrome/Edge/Opera 80, Safari 12, Firefox 78
 - Abstract away boilerplate and alias frequently used long-named symbols
 - Cooperate with tree-shaking bundlers
 - Tiny: stay under 4KB minified non-compressed

@@ -57,11 +57,11 @@ function fast() {
 		'form[vp-fast] [type=submit], form [vp-fast][type=submit]',
 		el => {
 			$.on(el, 'mousedown', ev => {
-				var form = $.closest(ev.target, 'form');
+				var form = ev.target.closest('form');
 				if (!form || ev.button !== 0) return;
 				ev.target.click();
 				$.forall(form, 'button, input, select, textarea', e => {
-					$.set(e, 'disabled', 'disabled');
+					$.set(e, { disabled: true });
 				});
 			});
 		}

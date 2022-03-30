@@ -9,7 +9,6 @@ fold([], 0, (a, i) => a + i);
 import {
 	all,
 	append,
-	closest,
 	empty,
 	fetch,
 	find,
@@ -20,17 +19,15 @@ import {
 	h,
 	next,
 	on,
-	once,
 	parent,
 	post,
 	prepend,
 	prev,
 	ready,
 	set,
-	set_attr,
 	style,
 	trigger,
-	unset,
+	unset
 } from './browser.js';
 ready(() => {
 	var e = h('a');
@@ -38,7 +35,7 @@ ready(() => {
 	var t = h('span', null, 'This is text.');
 	append(e, t);
 	prepend(e, t);
-	set(e, 'x', 'x');
+	set(e, { x: 'x' });
 	var x = get(e, 'x');
 	var f = fragment();
 	unset(e, 'x');
@@ -46,12 +43,9 @@ ready(() => {
 	prev(x);
 	empty(e);
 	parent(e);
-	set_attr({}, {});
 	append(find('body'), e);
 	on(e, 'click', () => 0);
 	trigger(find('body'), 'x');
-	once(e, 'e', () => 0);
-	closest(e, 'J');
 	all(e, 'K');
 	forall(e, 'r', () => 0);
 	forever(e, 'r', () => 0);

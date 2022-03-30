@@ -1,6 +1,4 @@
-/* eslint-env browser */
+/* eslint-env es2016, browser */
 'use strict';
 
-import { all } from './promeneur.js';
-
-all();
+import './promeneur.js';

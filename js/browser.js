@@ -1,10 +1,9 @@
-/* eslint-env browser */
+/* eslint-env es2016, browser */
 'use strict';
 
-import { iter, iter_f } from './stdlib.js';
+import { alias, shifter, iter, iter_f, isPlainObject } from './stdlib.js';
 
-var ep = Element.prototype;
-var alias = f => Function.prototype.call.bind(f);
+const ep = Element.prototype;
 
 if (!ep.matches) {
 	ep.matches =
@@ -14,15 +13,15 @@ if (!ep.matches) {
 // np.textContent
 // ??.innerHTML
 // show()/hide()/toggle() ?
-var empty = n => iter(n.children, c => c.remove());
-var get = alias(ep.getAttribute);
-var next = n => n.nextElementSibling;
-var parent = n => n.parentElement;
-var prev = n => n.previousElementSibling;
-var set = (n, a) => iter(Object.keys(a), k => n.setAttribute(k, a[k]));
-var style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
-var text = t => document.createTextNode(String(t));
-var unset = alias(ep.removeAttribute);
+const empty = n => iter(n.children, c => c.remove());
+const get = alias(ep.getAttribute);
+const next = n => n.nextElementSibling;
+const parent = n => n.parentElement;
+const prev = n => n.previousElementSibling;
+const set = (n, a) => iter(Object.keys(a), k => n.setAttribute(k, a[k]));
+const style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
+const text = t => document.createTextNode(String(t));
+const unset = alias(ep.removeAttribute);
 
 function flatlist(l, acc) {
 	acc = acc || [];
@@ -45,45 +44,28 @@ function prepend(parent, cl) {
 	parent.prepend.apply(parent, flatlist(cl));
 }
 
-function fragment(cl) {
-	var frag = document.createDocumentFragment();
-	if (cl) append(frag, cl);
-	return frag;
-}
-
-function h(tag, attrs, content) {
-	let el = document.createElement(tag);
-	if (attrs) set(el, attrs);
-	if (content) append(el, content);
+// h(tag, [attrs], [content, [shadow]])
+function h() {
+	const shift = shifter(arguments);
+	const el = document.createElement(shift());
+	let arg;
+	if (!(arg = shift())) return el;
+	if (isPlainObject(arg)) {
+		set(el, arg);
+		if (!(arg = shift())) return el;
+	}
+	append(el, arg);
+	if (!(arg = shift())) return el;
+	append(el.attachShadow({ mode: 'open' }), arg);
 	return el;
 }
 
-var H = {};
-iter(
-	[
-		'a',
-		'br',
-		'dd',
-		'div',
-		'dl',
-		'dt',
-		'input',
-		'label',
-		'li',
-		'select',
-		'span',
-		'table',
-		'tbody',
-		'td',
-		'textarea',
-		'tfoot',
-		'th',
-		'thead',
-		'tr',
-		'ul'
-	],
-	tag => (H[tag] = h.bind(null, tag))
-);
+// Create an object with specified shortcuts to h()
+function H() {
+	const dict = {};
+	iter(arguments, tag => (dict[tag] = h.bind(null, tag)));
+	return dict;
+}
 
 function find(n, sel) {
 	if (typeof n === 'string') return find(document, n);
@@ -121,7 +103,7 @@ function forever(base, sel, f) {
 
 	iter(all(base, sel), f);
 
-	let mo = new MutationObserver(
+	const mo = new MutationObserver(
 		iter_f(m => {
 			iter(m.addedNodes, n => {
 				if (n.nodeType === Node.ELEMENT_NODE && n.matches(sel)) f(n);
@@ -147,9 +129,9 @@ function forever(base, sel, f) {
 // error     function(XHR)
 //
 function ajax(method, url, body, ctype, res_type, args) {
-	let req = new XMLHttpRequest();
+	const req = new XMLHttpRequest();
 	args = args || {};
-	let h = args.headers || {};
+	const h = args.headers || {};
 	let done = false;
 	h['X-Requested-With'] = 'XMLHttpRequest';
 	if (ctype) h['Content-Type'] = ctype;
@@ -194,7 +176,6 @@ export {
 	find,
 	forall,
 	forever,
-	fragment,
 	get,
 	h,
 	next,
@@ -209,5 +190,5 @@ export {
 	style,
 	text,
 	trigger,
-	unset
+	unset,
 };

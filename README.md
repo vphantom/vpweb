@@ -44,7 +44,7 @@ The components make use of the library and aim to be otherwise stand-alone, trig
 
 I/O kernel for web sites.
 
-ES5: `import * as Promeneur from 'vpweb/promeneur'; Promeneur.init();`
+ES5: `import 'vpweb/promeneur';`
 
 Self-contained script: `dist/promeneur.min.js`
 
@@ -60,7 +60,7 @@ Self-contained script: `dist/promeneur.min.js`
 
 Upgrades a pair of date selection inputs into a date range widget, complete with shortcuts to change by various increments (i.e. weekly, monthly, quarterly).
 
-Usage: `import * as Daterange from 'vpweb/daterange'; DateRange.init();`
+Usage: `import 'vpweb/daterange';`
 
 Self-contained script: `dist/daterange.min.js`
 

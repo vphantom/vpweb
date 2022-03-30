@@ -1,9 +1,10 @@
-/* eslint-env browser */
+/* eslint-env es2016, browser */
 'use strict';
 
 import { iter, map, cmp, cmp_f, isPlainObject } from './stdlib.js';
 import * as $ from './browser.js';
-var H = $.H;
+
+const H = $.H('br', 'input', 'label', 'table', 'td', 'th', 'tr');
 
 /*
 
@@ -21,38 +22,34 @@ TODO: make editable
 
 function convert(d, edit, label, keys) {
 	function do_object() {
-		var sort_keys = (a, b) =>
+		const sort_keys = (a, b) =>
 			cmp_f(Array.isArray, d[a], d[b]) ||
 			cmp_f(isPlainObject, d[a], d[b]) ||
 			cmp(a, b);
 
 		if (keys) {
 			return H.tr(
-				{},
 				map(keys, k => {
-					var td = H.td({}, convert(d[k], edit));
+					const td = H.td(convert(d[k], edit));
 					if (typeof d[k] === 'boolean')
 						$.style(td, { 'text-align': 'center' });
 					return td;
 				})
 			);
 		} else {
-			var is_checklist = true;
+			let is_checklist = true;
 			iter(Object.keys(d), k => {
 				if (typeof d[k] !== 'boolean') is_checklist = false;
 			});
 			if (is_checklist) {
-				return $.fragment(
-					map(Object.keys(d).sort(), k => [
-						H.label({}, [convert(d[k], edit, k), ' ' + k]),
-						H.br()
-					])
-				);
+				return map(Object.keys(d).sort(), k => [
+					H.label([convert(d[k], edit, k), ' ' + k]),
+					H.br(),
+				]);
 			} else {
 				return H.table(
-					{ class: 'vp-editeur' },
 					map(Object.keys(d).sort(sort_keys), k =>
-						H.tr({}, [H.th({}, k), H.td({}, convert(d[k], edit))])
+						H.tr([H.th(k), H.td(convert(d[k], edit))])
 					)
 				);
 			}
@@ -61,29 +58,26 @@ function convert(d, edit, label, keys) {
 
 	function do_array() {
 		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
-			var table = H.table({ class: 'vp-editeur' });
-			var keymap = {};
+			const table = H.table();
+			const keymap = {};
 			iter(d, dd => iter(Object.keys(dd), k => (keymap[k] = true)));
 			keys = Object.keys(keymap).sort();
 			$.append(table, [
-				H.tr(
-					{},
-					map(keys, k => H.th({}, k))
-				),
-				map(d, dd => convert(dd, edit, null, keys))
+				H.tr(map(keys, k => H.th(k))),
+				map(d, dd => convert(dd, edit, null, keys)),
 			]);
 			return table;
 		} else {
-			return $.fragment(map(d, dd => convert(dd, edit)));
+			return map(d, dd => convert(dd, edit));
 		}
 	}
 
 	function do_bool() {
-		var cb = H.input({
+		const cb = H.input({
 			type: 'checkbox',
 			disabled: true,
 			name: label,
-			value: '1'
+			value: '1',
 		});
 		if (d) $.set(cb, { checked: true });
 		return cb;
@@ -102,18 +96,16 @@ function convert(d, edit, label, keys) {
 	}
 }
 
-function init() {
-	function component(edit, el) {
-		$.precede(el, convert(JSON.parse(el.textContent), edit));
-	}
-	$.forever(
-		'script[type="application/json"][vp-view]',
-		component.bind(null, false)
-	);
-	$.forever(
-		'script[type="application/json"][vp-edit]',
-		component.bind(null, true)
-	);
+function component(edit, el) {
+	$.precede(el, $.h('vp-editeur', convert(JSON.parse(el.textContent), edit)));
 }
+$.forever(
+	'script[type="application/json"][vp-view]',
+	component.bind(null, false)
+);
+$.forever(
+	'script[type="application/json"][vp-edit]',
+	component.bind(null, true)
+);
 
-export { init };
+export {};

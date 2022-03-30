@@ -1,4 +1,4 @@
-/* eslint-env browser */
+/* eslint-env es2016, browser */
 'use strict';
 
 import { iter, map, fold } from './stdlib.js';
@@ -7,6 +7,7 @@ map([], i => '<' + i + '>');
 fold([], 0, (a, i) => a + i);
 
 import {
+	H,
 	all,
 	append,
 	empty,
@@ -14,7 +15,6 @@ import {
 	find,
 	forall,
 	forever,
-	fragment,
 	get,
 	h,
 	next,
@@ -27,17 +27,17 @@ import {
 	set,
 	style,
 	trigger,
-	unset
+	unset,
 } from './browser.js';
 ready(() => {
-	var e = h('a');
+	let e = h('a');
+	const X = H('span');
 	style(e, { 'background-color': 'black' });
-	var t = h('span', null, 'This is text.');
+	let t = X.span('This is text.');
 	append(e, t);
 	prepend(e, t);
 	set(e, { x: 'x' });
-	var x = get(e, 'x');
-	var f = fragment();
+	let x = get(e, 'x');
 	unset(e, 'x');
 	next(x);
 	prev(x);
@@ -53,8 +53,5 @@ ready(() => {
 	post('data:,0', {});
 });
 
-import * as Promeneur from './promeneur.js';
-Promeneur.all();
-
-import * as Editeur from './editeur.js';
-Editeur.init();
+import './promeneur.js';
+import './editeur.js';

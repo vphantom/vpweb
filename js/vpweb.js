@@ -1,8 +1,5 @@
-/* eslint-env browser */
+/* eslint-env es2016, browser */
 'use strict';
 
-import * as Promeneur from './promeneur.js';
-Promeneur.all();
-
-import * as Editeur from './editeur.js';
-Editeur.init();
+import './promeneur.js';
+import './editeur.js';

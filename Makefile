@@ -54,13 +54,13 @@ dist/test-size.min.js:	$(JS_SRC)
 dist/vpweb.min.js:	js/vpweb.js $(JS_SRC)
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/daterange.min.js:	js/daterange-init.js js/daterange.js js/browser.js js/stdlib.js
+dist/daterange.min.js:	js/daterange.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/editeur.min.js:	js/editeur-init.js js/editeur.js js/browser.js js/stdlib.js
+dist/editeur.min.js:	js/editeur.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/promeneur.min.js:	js/promeneur-init.js js/promeneur.js js/browser.js js/stdlib.js
+dist/promeneur.min.js:	js/promeneur.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 sizes:	$(CSS_ASSETS) $(GZIP_ASSETS) $(BROTLI_ASSETS)

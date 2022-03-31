@@ -53,5 +53,6 @@ ready(() => {
 	post('data:,0', {});
 });
 
-import './promeneur.js';
-import './editeur.js';
+import './vp-editeur.js';
+import './vp-fast.js';
+import './vp-forms.js';

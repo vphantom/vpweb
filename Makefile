@@ -17,7 +17,7 @@ CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(wildcard js/*.js)
 
-JS_ASSETS := dist/test-size.min.js dist/vpweb.min.js dist/daterange.min.js dist/editeur.min.js dist/promeneur.min.js
+JS_ASSETS := dist/test-size.min.js dist/vpweb.min.js dist/vp-editeur.min.js dist/vp-fast.min.js dist/vp-forms.min.js
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS))
 
@@ -54,13 +54,13 @@ dist/test-size.min.js:	$(JS_SRC)
 dist/vpweb.min.js:	js/vpweb.js $(JS_SRC)
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/daterange.min.js:	js/daterange.js js/browser.js js/stdlib.js
+dist/vp-editeur.min.js:	js/vp-editeur.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/editeur.min.js:	js/editeur.js js/browser.js js/stdlib.js
+dist/vp-fast.min.js:	js/vp-fast.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/promeneur.min.js:	js/promeneur.js js/browser.js js/stdlib.js
+dist/vp-forms.min.js:	js/vp-forms.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 sizes:	$(CSS_ASSETS) $(GZIP_ASSETS) $(BROTLI_ASSETS)

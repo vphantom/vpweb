@@ -8,7 +8,7 @@ const alias = f => Function.prototype.call.bind(f);
 // Generic iterator
 function iter(list, f) {
 	for (let i = 0, l_length = list.length; i < l_length; ++i) {
-		f(list[i]);
+		f(list[i], i);
 	}
 }
 
@@ -19,7 +19,7 @@ let iter_f = f => l => iter(l, f);
 function map(list, f) {
 	const a = new Array(list.length);
 	for (let i = 0, l_length = list.length; i < l_length; ++i) {
-		a[i] = f(list[i]);
+		a[i] = f(list[i], i);
 	}
 	return a;
 }
@@ -27,7 +27,7 @@ function map(list, f) {
 // Generic folder
 function fold(list, acc, f) {
 	for (let i = 0, l_length = list.length; i < l_length; ++i) {
-		acc = f(acc, list[i]);
+		acc = f(acc, list[i], i);
 	}
 	return acc;
 }

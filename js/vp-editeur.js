@@ -4,23 +4,11 @@
 import { iter, map, cmp, cmp_f, isPlainObject } from './stdlib.js';
 import * as $ from './browser.js';
 
-const H = $.H('br', 'input', 'label', 'table', 'td', 'th', 'tr');
+const H = $.H('br', 'input', 'label', 'style', 'table', 'td', 'th', 'tr');
 
-/*
+function convert(ref, idx, edit, label, keys) {
+	const d = idx !== null ? ref[idx] : ref;
 
-<script type="application/json" vp-view | vp-edit="name" >{...}</script>
-
-We need to add our component's DIV immediately before each such script.
-
-If we're editable, that DIV will get vpName and vpValue() properties for
-Promeneur to use at sumbit time.
-
-Read-only view is finished.
-TODO: make editable
-
-*/
-
-function convert(d, edit, label, keys) {
 	function do_object() {
 		const sort_keys = (a, b) =>
 			cmp_f(Array.isArray, d[a], d[b]) ||
@@ -30,7 +18,7 @@ function convert(d, edit, label, keys) {
 		if (keys) {
 			return H.tr(
 				map(keys, k => {
-					const td = H.td(convert(d[k], edit));
+					const td = H.td(convert(d, k, edit));
 					if (typeof d[k] === 'boolean')
 						$.style(td, { 'text-align': 'center' });
 					return td;
@@ -43,13 +31,13 @@ function convert(d, edit, label, keys) {
 			});
 			if (is_checklist) {
 				return map(Object.keys(d).sort(), k => [
-					H.label([convert(d[k], edit, k), ' ' + k]),
+					H.label([convert(d, k, edit, k), ' ' + k]),
 					H.br(),
 				]);
 			} else {
 				return H.table(
 					map(Object.keys(d).sort(sort_keys), k =>
-						H.tr([H.th(k), H.td(convert(d[k], edit))])
+						H.tr([H.th(k), H.td(convert(d, k, edit))])
 					)
 				);
 			}
@@ -64,22 +52,19 @@ function convert(d, edit, label, keys) {
 			keys = Object.keys(keymap).sort();
 			$.append(table, [
 				H.tr(map(keys, k => H.th(k))),
-				map(d, dd => convert(dd, edit, null, keys)),
+				map(d, (x, i) => convert(d, i, edit, null, keys)),
 			]);
 			return table;
 		} else {
-			return map(d, dd => convert(dd, edit));
+			return map(d, (x, i) => convert(d, i, edit));
 		}
 	}
 
 	function do_bool() {
-		const cb = H.input({
-			type: 'checkbox',
-			disabled: true,
-			name: label,
-			value: '1',
-		});
-		if (d) $.set(cb, { checked: true });
+		const cb = H.input({ type: 'checkbox' });
+		cb.checked = !!d;
+		if (edit) $.on(cb, 'change', () => (ref[idx] = cb.checked));
+		else $.set(cb, { disabled: true });
 		return cb;
 	}
 
@@ -92,12 +77,61 @@ function convert(d, edit, label, keys) {
 		case 'string':
 		case 'number':
 		case 'bigint':
-			return $.text(d + ' ');
+			if (edit) {
+				const input = H.input({
+					class: 'roger',
+					type: typeof d === 'string' ? 'text' : 'number',
+					value: d,
+				});
+				$.on(input, 'change', () => (ref[idx] = input.value));
+				return [input, $.h('br')];
+			} else {
+				return $.text(d + ' ');
+			}
 	}
 }
 
 function component(edit, el) {
-	$.precede(el, $.h('vp-editeur', convert(JSON.parse(el.textContent), edit)));
+	const data = JSON.parse(el.textContent);
+	const style = H.style(`
+table {
+	font-size: 0.875rem;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: none;
+}
+table.edit table {
+	margin: 0.5em;
+}
+th {
+	background-color: #f0f0f0;
+}
+th, td {
+	border: 1px solid #d0d0d0;
+	padding: 0.5em;
+	text-align: left;
+	white-space: nowrap;
+}
+.edit td {
+	padding: 0 !important;
+}
+.edit td:empty {
+	background-color: #f8f8f8;
+}
+input:not([type=checkbox]), select {
+	border: none;
+	width: 100%;
+	line-height: 2.33em;
+}
+	`);
+	const table = convert(data, null, edit);
+	const editeur = $.h('vp-editeur', [], [style, table]);
+	if (edit) {
+		table.classList.add('edit');
+		editeur.vpName = $.get(el, 'vp-edit');
+		editeur.vpValue = data;
+	}
+	$.precede(el, editeur);
 }
 $.forever(
 	'script[type="application/json"][vp-view]',

@@ -47,41 +47,85 @@ Usage: `import { ... } from 'vpweb/browser';`
 
 TODO: JSDoc
 
-## Promeneur
+## All Components
 
-I/O kernel for web sites.
+If you want to use the whole thing in one line:
 
-**Usage:** `import 'vpweb/promeneur';`
+```js
+// Option 1 (recommended): include in your build.
+// No configuration options
+import 'vpweb/vpweb';
+```
 
-**Self-contained:** `<script src="dist/promeneur.min.js"></script>`
+```html
+<!-- Option 2: load as stand-alone script -->
+<script src="dist/vpweb.min.js"></script>
+```
 
-### Attribute `vp-fast`
+## Fast Clicks
 
-* Anchors in a block with the `vp-fast` attribute or with the attribute directly are triggered on `mousedown` instead of the browser's `mouseup`, saving ~100ms.  Limited to anchors with `href` to avoid side effects from the `click` event triggering twice.
+Activate clicks on `mousedown` to save ~100ms in response times.
+
+```js
+// Option 1 (recommended): include in your build.
+// No configuration options
+import 'vpweb/vp-fast';
+```
+
+```html
+<!-- Option 2: load as stand-alone script -->
+<script src="dist/vp-fast.min.js"></script>
+```
+
+* Anchors in a block with the `vp-fast` attribute or with the attribute directly are triggered on `mousedown` instead of the browser's `mouseup`.  Limited to anchors with `href` to avoid side effects from the `click` event triggering twice.
 
 * Submit inputs/buttons with `vp-fast` attribute, or in forms with `vp-fast`, trigger on `mousedown`.  Limited to `[type=submit]` because of the double `click` triggering.
 
-### Form method `vp-json`, attribute `vp-target`
+## Forms
 
-* When submitting, encodes form data as JSON, sent in a POST request with appropriate MIME type.
+Submit forms as a JSON POST and replace part of the DOM with the response.
 
-* Names with `[]` suffix have that suffix stripped and are accumulated as arrays.  (Without the suffix, a name found multiple times would only encode one of the values.)
+```js
+// Option 1 (recommended): include in your build.
+// No configuration options
+import 'vpweb/vp-forms';
+```
 
-* Elements with JS property `vpName` will not have their children crawled.  Instead, their `vpValue` property will be used: if it is a function, it will be called and its result stored, otherwise it will be used directly.
+```html
+<!-- Option 2: load as stand-alone script -->
+<script src="dist/vp-forms.min.js"></script>
+```
 
-* If `vp-target` is specified and found, its content will be replaced with the POST's response.  If the result is `<html>`, only the contents of its `<body>` will be used.  With invalid or no target, the current page's `<title>` and `<body>` will be replaced with the POST response's.
+### JSON Encoding
+
+Activated by `<form method="vp-json">`
+
+Names with `[]` suffix have that suffix stripped and are accumulated as arrays.  Without the suffix, only one instance of each name is kept.
+
+Elements with properties `vpName` and `vpValue` are treated as inputs and their children are not inspected.  If `vpValue` is a function, it is called to get the value.  Since we're serializing to JSON, objects and arrays are allowed in addition to scalars.
+
+### Response Display
+
+Available only with JSON forms above, if `<form vp-target="selector">` is specified and found, its content will be replaced with the POST's response.  If the result is `<html>`, only the contents of its `<body>` will be used.  With invalid selector or without `vp-target`, the current page's `<title>` and `<body>` will be replaced with the POST response's.
 
 ## Editeur
 
 Viewer and optionally editor for arbitrary JSON blobs.
 
-**Usage:** `import 'vpweb/editeur';`
+```js
+// Option 1 (recommended): include in your build.
+// No configuration options
+import 'vpweb/vp-editeur';
+```
 
-**Self-contained:** `<script src="dist/editeur.min.js"></script>`
+```html
+<!-- Option 2: load as stand-alone script -->
+<script src="dist/vp-editeur.min.js"></script>
+```
 
-Watches for `<script>` tags with `[type="application/json"]` and either `vp-view` or `vp-edit` attributes, to view or edit respectively.  Inserts a `<vp-editeur>` block immediately before each such script.
+Watches for `<script>` tags with `[type="application/json"]` and either `vp-view` or `vp-edit` attributes, to view or edit respectively.  Inserts a `<vp-editeur>` before each such script.
 
-In editor mode, the `vp-edit` attribute specifies the form variable name it represents.
+In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` (the value of `vp-edit`) and `vpValue` (the data object).  The component uses a shadow DOM so its content do not affect forms directly.
 
 TODO: optional schema for I18N labels, select choices, etc.
 
@@ -89,9 +133,16 @@ TODO: optional schema for I18N labels, select choices, etc.
 
 Upgrades a pair of date selection inputs into a date range widget, complete with shortcuts to change by various increments (i.e. weekly, monthly, quarterly).
 
-**Usage:** `import 'vpweb/daterange';`
+```js
+// Option 1 (recommended): include in your build.
+// No configuration options
+import 'vpweb/vp-daterange';
+```
 
-**Self-contained:** `<script src="dist/daterange.min.js"></script>`
+```html
+<!-- Option 2: load as stand-alone script -->
+<script src="dist/vp-daterange.min.js"></script>
+```
 
 Wrap any pair of `<input type="date">` inside a `<div _daterange="true">` or a `<date-range>` block.  Any other mark-up inside that block will be removed.  The first input will be used as the beginning date, and the second input as the end date.
 

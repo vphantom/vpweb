@@ -157,10 +157,8 @@ function forever(base, sel, f) {
 // headers   Object with additional headers to add to request
 // username  HTTP Auth username
 // password  HTTP Auth password
-// ok        function(XHR)
-// error     function(XHR)
 //
-function ajax(method, url, body, ctype, res_type, args) {
+function ajax(method, url, body, ctype, res_type, args, ok, err) {
 	const req = new XMLHttpRequest();
 	args = args || {};
 	const h = args.headers || {};
@@ -177,26 +175,26 @@ function ajax(method, url, body, ctype, res_type, args) {
 			// NOTE: Some browsers fire twice
 			done = true;
 			if (req.status >= 200 && req.status < 300) {
-				if (args.ok) args.ok(req);
+				if (ok) ok(req);
 			} else {
-				if (args.error) args.error(req);
+				if (err) err(req);
 			}
 		}
 	};
 }
 
-function fetch(url, res_type, args) {
-	ajax('GET', url, null, null, res_type, args);
+function fetch(url, res_type, args, ok, err) {
+	ajax('GET', url, null, null, res_type, args, ok, err);
 }
 
-function post(url, body, res_type, args) {
+function post(url, body, res_type, args, ok, err) {
 	let ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
 	if (typeof body === 'object') {
 		ctype = 'application/json';
 		res_type = res_type || 'json';
 		body = JSON.stringify(body);
 	}
-	ajax('POST', url, body, ctype, res_type, args);
+	ajax('POST', url, body, ctype, res_type, args, ok, err);
 }
 
 export {

@@ -125,7 +125,12 @@ input:not([type=checkbox]), select {
 }
 	`);
 	const table = convert(data, null, edit);
-	const editeur = $.h('vp-editeur', [], [style, table]);
+	const editeur = $.h(
+		'vp-editeur',
+		{ 'vp-widget': true },
+		[],
+		[style, table]
+	);
 	if (edit) {
 		table.classList.add('edit');
 		editeur.vpName = $.get(el, 'vp-edit');

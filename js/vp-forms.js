@@ -1,38 +1,47 @@
 /* eslint-env es2016, browser */
 'use strict';
 
-// import * as $ from './browser.js';
+import { iter } from './stdlib.js';
+import * as $ from './browser.js';
 
-/*
+function submit(ev) {
+	const form = ev.target;
+	const target = $.find($.get(form, 'vp-target') || 'body') || $.find('body');
+	let data = {};
+	function gather(k, v, mm) {
+		if (!k) return;
+		const [, name, mult] = k.match(/^([^[\]]+)(\[\])?$/);
+		if (mm || mult) {
+			if (!data[name]) data[name] = [];
+			data[name].push(v);
+		} else {
+			data[name] = v;
+		}
+	}
+	$.forall(form, 'input, textarea', el => gather(el.name, el.value));
+	$.forall(form, 'select', el =>
+		iter(el.selectedOptions, opt => gather(el.name, opt.value, el.multiple))
+	);
+	$.forall(form, '[vp-widget]', wg => {
+		if (!(wg.vpName && wg.vpValue)) return;
+		if (typeof wg.vpValue === 'function') gather(wg.vpName, wg.vpValue());
+		else gather(wg.vpName, wg.vpValue);
+	});
 
-* form method="vp-json" will make a JSON POST from crawling the form's children manually:
-	 if has property vpName:
-		if has property vpValue:
-			formData[vpName] = (typeof(vpValue) === 'function') ? vpValue() : vpValue;
-		else:
-			if input/select/textarea:
-				if name ends with '[]' or select.multiple:
-					formData[name] = []  // accumulate values in an array
-				else:
-					formData[name] = value  // overwrite as a scalar
-			else:
-				recurse for each child
-	input/select/textarea outside of vpName-having elements collected
-		names with [] will have that stripped and be stored as lists
-		names without that found multiple times will be overwritten as found
-	CAREFUL: even vpName may end with '[]'
+	function display(xhr) {
+		if (!(xhr && xhr.response)) return;
+		const el = $.find(xhr.response, 'body') || xhr.response;
+		$.replace(
+			target,
+			el.tagName.toLowerCase() === 'body' ? el.children : el
+		);
+	}
 
-* form vp-target="selector"
-	if specified and found:
-		if result is <html/>, replace target with the result's <body/>
-		else the result is partial, replace the target with full result
-	else:
-		if result is <html/>, replace current title/body
-		else the result is partial, replace the current <form/> with it
-	Q. I guess we don't care whether the result is 2xx or not?
+	$.post(form.action, data, 'document', null, display, display);
+}
 
-*/
-
-// $.forever('form[method="vp-json"]');
+$.forever('form[method="vp-json"]', form =>
+	$.on(form, 'submit', submit, {}, { prevent: true, mute: 1000 })
+);
 
 export {};

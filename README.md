@@ -96,17 +96,23 @@ import 'vpweb/vp-forms';
 <script src="dist/vp-forms.min.js"></script>
 ```
 
+Notes:
+
+* Submitting the form ignores subsequent submissions within the next second to help avoid double clicks (from users or `vp-fast`).
+
+* Ignores the `formaction` attribute on submit buttons.
+
 ### JSON Encoding
 
 Activated by `<form method="vp-json">`
 
 Names with `[]` suffix have that suffix stripped and are accumulated as arrays.  Without the suffix, only one instance of each name is kept.
 
-Elements with properties `vpName` and `vpValue` are treated as inputs and their children are not inspected.  If `vpValue` is a function, it is called to get the value.  Since we're serializing to JSON, objects and arrays are allowed in addition to scalars.
+Elements with attribute `vp-widget` and properties `vpName` and `vpValue` are treated as inputs.  If `vpValue` is a function, it is called to get the value.  Since we're serializing to JSON, objects and arrays are allowed in addition to scalars.
 
 ### Response Display
 
-Available only with JSON forms above, if `<form vp-target="selector">` is specified and found, its content will be replaced with the POST's response.  If the result is `<html>`, only the contents of its `<body>` will be used.  With invalid selector or without `vp-target`, the current page's `<title>` and `<body>` will be replaced with the POST response's.
+Available only with JSON forms above, if `<form vp-target="selector">` is specified and found, its content will be replaced with the POST's response.  With invalid selector or without `vp-target` at all, the page body will be replaced.  If the result is `<html>`, only the contents of its `<body>` will be used.
 
 ## Editeur
 

@@ -13,7 +13,6 @@ if (!ep.matches) {
 // np.textContent
 // ??.innerHTML
 // show()/hide()/toggle() ?
-const empty = n => iter(n.children, c => c.remove());
 const get = alias(ep.getAttribute);
 const next = n => n.nextElementSibling;
 const parent = n => n.parentElement;
@@ -23,10 +22,18 @@ const style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
 const text = t => document.createTextNode(String(t));
 const unset = alias(ep.removeAttribute);
 
+function empty(n) {
+	while (n.firstChild) n.removeChild(n.firstChild);
+}
+
 function flatlist(l, acc) {
 	acc = acc || [];
-	iter(Array.isArray(l) ? l : [l], i => {
-		if (Array.isArray(i)) return flatlist(i, acc);
+	const is_iter = i =>
+		Array.isArray(i) ||
+		i instanceof NodeList ||
+		i instanceof HTMLCollection;
+	iter(is_iter(l) ? l : [l], i => {
+		if (is_iter(i)) return flatlist(i, acc);
 		acc.push(typeof i === 'object' ? i : text(i));
 	});
 	return acc;
@@ -38,6 +45,11 @@ function precede(o, nl) {
 
 function append(parent, cl) {
 	parent.append.apply(parent, flatlist(cl));
+}
+
+function replace(parent, cl) {
+	empty(parent);
+	append(parent, cl);
 }
 
 function prepend(parent, cl) {
@@ -206,6 +218,7 @@ export {
 	prepend,
 	prev,
 	ready,
+	replace,
 	set,
 	style,
 	text,

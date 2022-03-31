@@ -77,9 +77,29 @@ function all(n, sel) {
 	return n.querySelectorAll(sel);
 }
 
-function on(n, t, f, o) {
-	if (typeof n === 'string') return on(document, n, t, f);
-	return n.addEventListener(t, f, o);
+// Our options in the second object:
+// mute: ms to wait until we can be triggered again (default: 100)
+// prevent: set true to preventDefault on all triggers
+// stop: set true to stopPropagation on all triggers
+// stopi: set true to stopImmediatePropagation on all triggers
+function on(n, t, f, o, vpo) {
+	if (typeof n === 'string') return on(document, n, t, f, o);
+	vpo = vpo || {};
+	let timeout = null;
+	function handler(ev) {
+		if (vpo.prevent) ev.preventDefault();
+		if (vpo.stop) ev.stopPropagation();
+		if (vpo.stopi) ev.stopImmediatePropagation();
+		let newtimeout = setTimeout(() => (timeout = null), vpo.mute || 100);
+		if (timeout) {
+			clearTimeout(timeout);
+			timeout = newtimeout;
+			return;
+		}
+		timeout = newtimeout;
+		f(ev);
+	}
+	return n.addEventListener(t, handler, o);
 }
 
 function trigger(e, n, d) {

@@ -11,12 +11,8 @@ function submit(ev) {
 	function gather(k, v, mm) {
 		if (!k) return;
 		const [, name, mult] = k.match(/^([^[\]]+)(\[\])?$/);
-		if (mm || mult) {
-			if (!data[name]) data[name] = [];
-			data[name].push(v);
-		} else {
-			data[name] = v;
-		}
+		if (mm || mult) (data[name] || (data[name] = [])).push(v);
+		else data[name] = v;
 	}
 	$.forall(form, 'input, textarea', el => gather(el.name, el.value));
 	$.forall(form, 'select', el =>

@@ -64,7 +64,7 @@ import 'vpweb/vpweb';
 
 ## Fast Clicks
 
-Activate clicks on `mousedown` to save ~100ms in response times.
+Activate clicks on `mousedown` to save at least easily ~100ms in response times.
 
 ```js
 // Option 1 (recommended): include in your build.
@@ -129,9 +129,13 @@ import 'vpweb/vp-editeur';
 <script src="dist/vp-editeur.min.js"></script>
 ```
 
-Watches for `<script>` tags with `[type="application/json"]` and either `vp-view` or `vp-edit` attributes, to view or edit respectively.  Inserts a `<vp-editeur>` before each such script.
+Watches for `<script>` tags with `[type="application/json"]` and either just `vp-view` or both `vp-edit` and `vp-name` attributes, to view or edit respectively.  Inserts a `<vp-editeur>` before each such script.  Works for inline and `src` linked JSON data.  If `vp-view`/`vp-edit` contains a string which resolves to a loaded schema name, it will be used to enhance functionality.  (See below.)
 
-In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` (the value of `vp-edit`) and `vpValue` (the data object).  The component uses a shadow DOM so its content do not affect forms directly.
+In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` and `vpValue`.  The component uses a shadow DOM so its content do not affect forms directly.
+
+### Schema (optional)
+
+`<script>` tags with `[type="application/json"]` and `vp-schema` are loaded in the schema registry under the name specified by `vp-schema`.
 
 TODO: optional schema for I18N labels, select choices, etc.
 

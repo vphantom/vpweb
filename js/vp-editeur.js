@@ -6,7 +6,10 @@ import * as $ from './browser.js';
 
 const H = $.H('br', 'input', 'label', 'style', 'table', 'td', 'th', 'tr');
 
-function convert(ref, idx, edit, label, keys) {
+let registry = {};
+let pending = {};
+
+function convert(ref, idx, edit, schema, label, keys) {
 	const d = idx !== null ? ref[idx] : ref;
 
 	function do_object() {
@@ -18,7 +21,7 @@ function convert(ref, idx, edit, label, keys) {
 		if (keys) {
 			return H.tr(
 				map(keys, k => {
-					const td = H.td(convert(d, k, edit));
+					const td = H.td(convert(d, k, edit, schema));
 					if (typeof d[k] === 'boolean')
 						$.style(td, { 'text-align': 'center' });
 					return td;
@@ -31,13 +34,13 @@ function convert(ref, idx, edit, label, keys) {
 			});
 			if (is_checklist) {
 				return map(Object.keys(d).sort(), k => [
-					H.label([convert(d, k, edit, k), ' ' + k]),
+					H.label([convert(d, k, edit, schema, k), ' ' + k]),
 					H.br(),
 				]);
 			} else {
 				return H.table(
 					map(Object.keys(d).sort(sort_keys), k =>
-						H.tr([H.th(k), H.td(convert(d, k, edit))])
+						H.tr([H.th(k), H.td(convert(d, k, edit, schema))])
 					)
 				);
 			}
@@ -52,11 +55,11 @@ function convert(ref, idx, edit, label, keys) {
 			keys = Object.keys(keymap).sort();
 			$.append(table, [
 				H.tr(map(keys, k => H.th(k))),
-				map(d, (x, i) => convert(d, i, edit, null, keys)),
+				map(d, (x, i) => convert(d, i, edit, schema, null, keys)),
 			]);
 			return table;
 		} else {
-			return map(d, (x, i) => convert(d, i, edit));
+			return map(d, (x, i) => convert(d, i, edit, schema));
 		}
 	}
 
@@ -91,7 +94,7 @@ function convert(ref, idx, edit, label, keys) {
 	}
 }
 
-function component(edit, el, data) {
+function component(edit, el, data, schema) {
 	const style = H.style(`
 table {
 	font-size: 0.875rem;
@@ -123,7 +126,7 @@ input:not([type=checkbox]), select {
 	line-height: 2.33em;
 }
 	`);
-	const table = convert(data, null, edit);
+	const table = convert(data, null, edit, schema);
 	const editeur = $.h(
 		'vp-editeur',
 		{ 'vp-widget': true },
@@ -132,17 +135,34 @@ input:not([type=checkbox]), select {
 	);
 	if (edit) {
 		table.classList.add('edit');
-		editeur.vpName = $.get(el, 'vp-edit');
+		editeur.vpName = $.get(el, 'vp-name');
 		editeur.vpValue = data;
 	}
 	$.precede(el, editeur);
 }
 
-$.forever('script[type="application/json"][vp-view]', el =>
-	$.jsonscript(el, null, component.bind(null, false, el))
+function queue(edit, el, s, data) {
+	if (!s) component(edit, el, data);
+	if (registry[s]) component(edit, el, data, registry[s]);
+	else
+		(pending[s] || (pending[s] = [])).push(
+			component.bind(null, edit, el, data)
+		);
+}
+
+function register_schema(name, data) {
+	registry[name] = data;
+	if (pending[name]) iter(pending[name], f => f(data));
+}
+
+$.forever('script[type="application/json"][vp-schema]', el =>
+	$.jsonscript(el, null, s => register_schema($.get(el, 'vp-schema'), s))
 );
-$.forever('script[type="application/json"][vp-edit]', el =>
-	$.jsonscript(el, null, component.bind(null, true, el))
-);
+$.forever('script[type="application/json"][vp-view]', el => {
+	$.jsonscript(el, null, queue.bind(null, false, el, $.get(el, 'vp-view')));
+});
+$.forever('script[type="application/json"][vp-edit]', el => {
+	$.jsonscript(el, null, queue.bind(null, true, el, $.get(el, 'vp-edit')));
+});
 
 export {};

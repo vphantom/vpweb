@@ -91,8 +91,7 @@ function convert(ref, idx, edit, label, keys) {
 	}
 }
 
-function component(edit, el) {
-	const data = JSON.parse(el.textContent);
+function component(edit, el, data) {
 	const style = H.style(`
 table {
 	font-size: 0.875rem;
@@ -138,13 +137,12 @@ input:not([type=checkbox]), select {
 	}
 	$.precede(el, editeur);
 }
-$.forever(
-	'script[type="application/json"][vp-view]',
-	component.bind(null, false)
+
+$.forever('script[type="application/json"][vp-view]', el =>
+	$.jsonscript(el, null, component.bind(null, false, el))
 );
-$.forever(
-	'script[type="application/json"][vp-edit]',
-	component.bind(null, true)
+$.forever('script[type="application/json"][vp-edit]', el =>
+	$.jsonscript(el, null, component.bind(null, true, el))
 );
 
 export {};

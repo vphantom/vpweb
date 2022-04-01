@@ -187,6 +187,13 @@ function fetch(url, res_type, args, ok, err) {
 	ajax('GET', url, null, null, res_type, args, ok, err);
 }
 
+// ok(json)
+// err(xhr)
+function jsonscript(el, args, ok, err) {
+	if (el.src) fetch(el.src, 'json', null, xhr => ok(xhr.response), err);
+	else ok(JSON.parse(el.textContent));
+}
+
 function post(url, body, res_type, args, ok, err) {
 	let ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
 	if (typeof body === 'object') {
@@ -208,6 +215,7 @@ export {
 	forever,
 	get,
 	h,
+	jsonscript,
 	next,
 	on,
 	parent,

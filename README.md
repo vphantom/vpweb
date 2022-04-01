@@ -135,9 +135,10 @@ In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` an
 
 ### Schema (optional)
 
-`<script>` tags with `[type="application/json"]` and `vp-schema` are loaded in the schema registry under the name specified by `vp-schema`.
+`<script>` tags with `[type="application/json"]` and `vp-schema` are loaded in the schema registry under the name specified by `vp-schema`.  A schema is a JSON object with one key for each root-level key of the JSON data it overlays.  Each key is an object with the following possible keys:
 
-TODO: optional schema for I18N labels, select choices, etc.
+* **`label`** Localized string
+* **`__schema`** For objects or lists of objects, schema of the contained object(s)
 
 ## DateRange
 

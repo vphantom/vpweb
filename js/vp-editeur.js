@@ -12,6 +12,15 @@ let pending = {};
 function convert(ref, idx, edit, schema, label, keys) {
 	const d = idx !== null ? ref[idx] : ref;
 
+	function schema_label(k, s) {
+		s = s || schema;
+		return s && s[k] && s[k]['label'] ? s[k]['label'] : k;
+	}
+
+	function sub_schema(k) {
+		return schema && schema[k] ? schema[k]['__schema'] : null;
+	}
+
 	function do_object() {
 		const sort_keys = (a, b) =>
 			cmp_f(Array.isArray, d[a], d[b]) ||
@@ -21,7 +30,7 @@ function convert(ref, idx, edit, schema, label, keys) {
 		if (keys) {
 			return H.tr(
 				map(keys, k => {
-					const td = H.td(convert(d, k, edit, schema));
+					const td = H.td(convert(d, k, edit, sub_schema(k)));
 					if (typeof d[k] === 'boolean')
 						$.style(td, { 'text-align': 'center' });
 					return td;
@@ -34,13 +43,19 @@ function convert(ref, idx, edit, schema, label, keys) {
 			});
 			if (is_checklist) {
 				return map(Object.keys(d).sort(), k => [
-					H.label([convert(d, k, edit, schema, k), ' ' + k]),
+					H.label([
+						convert(d, k, edit, sub_schema(k), k),
+						' ' + schema_label(k),
+					]),
 					H.br(),
 				]);
 			} else {
 				return H.table(
 					map(Object.keys(d).sort(sort_keys), k =>
-						H.tr([H.th(k), H.td(convert(d, k, edit, schema))])
+						H.tr([
+							H.th(schema_label(k)),
+							H.td(convert(d, k, edit, sub_schema(k))),
+						])
 					)
 				);
 			}
@@ -51,15 +66,16 @@ function convert(ref, idx, edit, schema, label, keys) {
 		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
 			const table = H.table();
 			const keymap = {};
+			const localSchema = sub_schema(idx);
 			iter(d, dd => iter(Object.keys(dd), k => (keymap[k] = true)));
 			keys = Object.keys(keymap).sort();
 			$.append(table, [
-				H.tr(map(keys, k => H.th(k))),
-				map(d, (x, i) => convert(d, i, edit, schema, null, keys)),
+				H.tr(map(keys, k => H.th(schema_label(k, localSchema)))),
+				map(d, (x, i) => convert(d, i, edit, localSchema, null, keys)),
 			]);
 			return table;
 		} else {
-			return map(d, (x, i) => convert(d, i, edit, schema));
+			return map(d, (x, i) => convert(d, i, edit));
 		}
 	}
 
@@ -143,11 +159,13 @@ input:not([type=checkbox]), select {
 
 function queue(edit, el, s, data) {
 	if (!s) component(edit, el, data);
-	if (registry[s]) component(edit, el, data, registry[s]);
-	else
+	if (registry[s]) {
+		component(edit, el, data, registry[s]);
+	} else {
 		(pending[s] || (pending[s] = [])).push(
 			component.bind(null, edit, el, data)
 		);
+	}
 }
 
 function register_schema(name, data) {

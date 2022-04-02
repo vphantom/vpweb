@@ -6,6 +6,7 @@ POSTCSS := postcss
 GZIP    := gzip --rsyncable -f -k -n -9
 BROTLI  := brotli -f -k -n -Z
 
+# NOTE: -p 'terser={compress:{passes:3}}' yielded <0.5% change
 ROLLUP      := rollup
 ROLLUP_OPTS := --format iife --sourcemap --plugin terser
 

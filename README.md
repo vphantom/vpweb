@@ -7,12 +7,11 @@
 
 Vanilla+ is a minimalistic web interface development library.  It adds no abstraction layers and thus allows you to use only the portions you need without bloat from the rest.  It is divided in 3 main parts:
 
-* A basic CSS framework
+* A basic CSS library
 * A JS library
 * A collection of web components
 
-The components make use of the library and aim to be otherwise stand-alone, triggered by CSS classes, custom HTML attributes and tags.  Whenever possible, they are meant to be progressive enhancements.
-
+The components make use of the JS library and aim to be otherwise stand-alone.  Whenever possible, they are meant to be progressive enhancements.
 
 **CURRENTLY IN EARLY STAGE OF DEVELOPMENT!**
 
@@ -25,15 +24,16 @@ See documentation in `docs/css.html`.
 The minimalistic library aims to make "Vanilla JS" development more expressive without masking the native objects or impeding run-time performance.  More specifically:
 
 - 100% compatible with plain JS, every function is independently opt-in
-- Compatibility down to Chrome/Edge/Opera 80, Safari 12, Firefox 78
+- Compatibility down to Chrome/Edge/Opera 79, Safari 12, Firefox 78
 - Abstract away boilerplate and alias frequently used long-named symbols
 - Cooperate with tree-shaking bundlers
-- Tiny: stay under 4KB minified non-compressed
+- Tiny: stay under 4KB minified (not compressed)
 
 Specifically avoided are:
 
+- To wrap native objects (i.e. `HTMLElement`)
 - To alias or wrap the entire DOM API
-- Developer comforts which would incur run-time overhead (i.e. a `$()`)
+- Development-time comforts with run-time overhead (i.e. a universal `$()`)
 
 ### Stdlib
 

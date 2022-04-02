@@ -18,7 +18,7 @@ CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(wildcard js/*.js)
 
-JS_ASSETS := dist/test-size.min.js dist/vpweb.min.js dist/vp-editeur.min.js dist/vp-fast.min.js dist/vp-forms.min.js
+JS_ASSETS := dist/library-size.min.js dist/vpweb.min.js dist/vp-editeur.min.js dist/vp-fast.min.js dist/vp-forms.min.js
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS))
 
@@ -49,8 +49,8 @@ dist/%.css:	scss/%.scss $(CSS_SRC)
 docs/css.css:	docs/css.scss $(CSS_SRC)
 	$(POSTCSS) $< -o $@
 
-dist/test-size.min.js:	$(JS_SRC)
-	$(ROLLUP) js/test-size.js --file $@ $(ROLLUP_OPTS)
+dist/library-size.min.js:	$(JS_SRC)
+	$(ROLLUP) js/library-size.js --file $@ $(ROLLUP_OPTS)
 
 dist/vpweb.min.js:	js/vpweb.js $(JS_SRC)
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)

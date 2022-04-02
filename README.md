@@ -137,8 +137,37 @@ In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` an
 
 `<script>` tags with `[type="application/json"]` and `vp-schema` are loaded in the schema registry under the name specified by `vp-schema`.  A schema is a JSON object with one key for each root-level key of the JSON data it overlays.  Each key is an object with the following possible keys:
 
-* **`label`** Localized string
 * **`__schema`** For objects or lists of objects, schema of the contained object(s)
+* **`label`** Localized string, HTML allowed but not recommended
+* **`tooltip`** Localized string, HTML not allowed
+* **`combo`** Identifier of list to use as a `<input><datalist>` (see below)
+* **`repeatable`** This key should be a list, not a scalar/object (default: false)
+* **`type`** One of: `boolean`, `number`, `string`, `textarea` (default: string)
+
+Types are optional, but help in creating correct JSON objects from scratch and in specifying `textarea` instead of the default `string`.  Without a schema, existing strings containing newlines will automatically be presented as `textarea`.
+
+At the root level only, an additional `__lists` key may be set with an object defining various lists.  Each item is a value followed by its localized label.
+
+Example:
+
+```json
+{
+	"__lists": {
+		"list1": {
+			"val1": "Label One",
+			...
+		}
+	},
+	"key_one": {
+		"label": "First Key",
+		"tooltip": "This field contains something",
+		"combo": "list1"
+	},
+	...
+}
+```
+
+**Template feature:** loading JSON data `{}` and a schema will present an empty form ready to be filled.
 
 ## DateRange
 

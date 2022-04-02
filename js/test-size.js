@@ -1,8 +1,12 @@
 /* eslint-env es2016, browser */
 'use strict';
 
-import { iter, map, fold } from './stdlib.js';
-iter([], i => console.log(i));
+const logger = console.log;
+
+import { iter, iter_f, iter_obj, map, fold } from './stdlib.js';
+iter([], logger);
+iter_f(logger);
+iter_obj({}, logger);
 map([], i => '<' + i + '>');
 fold([], 0, (a, i) => a + i);
 
@@ -31,9 +35,9 @@ import {
 } from './browser.js';
 ready(() => {
 	let e = h('a');
-	const X = H('span');
-	style(e, { 'background-color': 'black' });
-	let t = X.span('This is text.');
+	const X = H('b');
+	style(e, { color: 'black' });
+	let t = X.span('T');
 	append(e, t);
 	prepend(e, t);
 	set(e, { x: 'x' });
@@ -43,16 +47,12 @@ ready(() => {
 	prev(x);
 	empty(e);
 	parent(e);
-	append(find('body'), e);
-	on(e, 'click', () => 0);
-	trigger(find('body'), 'x');
+	append(find('b'), e);
+	on(e, 'c', () => 0);
+	trigger(find('b'), 'x');
 	all(e, 'K');
 	forall(e, 'r', () => 0);
 	forever(e, 'r', () => 0);
 	fetch('data:,0');
 	post('data:,0', {});
 });
-
-import './vp-editeur.js';
-import './vp-fast.js';
-import './vp-forms.js';

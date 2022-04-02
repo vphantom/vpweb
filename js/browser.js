@@ -1,7 +1,14 @@
 /* eslint-env es2016, browser */
 'use strict';
 
-import { alias, shifter, iter, iter_f, isPlainObject } from './stdlib.js';
+import {
+	alias,
+	shifter,
+	iter,
+	iter_f,
+	iter_obj,
+	isPlainObject,
+} from './stdlib.js';
 
 const ep = Element.prototype;
 
@@ -17,8 +24,8 @@ const get = alias(ep.getAttribute);
 const next = n => n.nextElementSibling;
 const parent = n => n.parentElement;
 const prev = n => n.previousElementSibling;
-const set = (n, a) => iter(Object.keys(a), k => n.setAttribute(k, a[k]));
-const style = (e, o) => iter(Object.keys(o), k => e.style.setProperty(k, o[k]));
+const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
+const style = (e, o) => iter_obj(o, (k, v) => e.style.setProperty(k, v));
 const text = t => document.createTextNode(String(t));
 const unset = alias(ep.removeAttribute);
 
@@ -167,7 +174,7 @@ function ajax(method, url, body, ctype, res_type, args, ok, err) {
 	if (ctype) h['Content-Type'] = ctype;
 	req.open(method, url, true, args.username || null, args.password || null);
 	if (res_type) req.responseType = res_type;
-	iter(Object.keys(h), k => req.setRequestHeader(k, h[k]));
+	iter_obj(h, (k, v) => req.setRequestHeader(k, v));
 	req.send(body);
 
 	req.onreadystatechange = function() {

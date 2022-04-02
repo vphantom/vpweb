@@ -1,117 +1,35 @@
 /* eslint-env es2016, browser */
 'use strict';
 
-import { iter, map, cmp, cmp_f, isPlainObject } from './stdlib.js';
+import {
+	iter,
+	iter_obj,
+	map,
+	map_obj,
+	cmp,
+	cmp_f,
+	isPlainObject,
+} from './stdlib.js';
 import * as $ from './browser.js';
 
-const H = $.H('br', 'input', 'label', 'style', 'table', 'td', 'th', 'tr');
+const H = $.H(
+	'br',
+	'datalist',
+	'input',
+	'label',
+	'option',
+	'style',
+	'table',
+	'td',
+	'textarea',
+	'th',
+	'tr'
+);
 
 let registry = {};
 let pending = {};
 
-function convert(ref, idx, edit, schema, label, keys) {
-	const d = idx !== null ? ref[idx] : ref;
-
-	function schema_label(k, s) {
-		s = s || schema;
-		return s && s[k] && s[k]['label'] ? s[k]['label'] : k;
-	}
-
-	function sub_schema(k) {
-		return schema && schema[k] ? schema[k]['__schema'] : null;
-	}
-
-	function do_object() {
-		const sort_keys = (a, b) =>
-			cmp_f(Array.isArray, d[a], d[b]) ||
-			cmp_f(isPlainObject, d[a], d[b]) ||
-			cmp(a, b);
-
-		if (keys) {
-			return H.tr(
-				map(keys, k => {
-					const td = H.td(convert(d, k, edit, sub_schema(k)));
-					if (typeof d[k] === 'boolean')
-						$.style(td, { 'text-align': 'center' });
-					return td;
-				})
-			);
-		} else {
-			let is_checklist = true;
-			iter(Object.keys(d), k => {
-				if (typeof d[k] !== 'boolean') is_checklist = false;
-			});
-			if (is_checklist) {
-				return map(Object.keys(d).sort(), k => [
-					H.label([
-						convert(d, k, edit, sub_schema(k), k),
-						' ' + schema_label(k),
-					]),
-					H.br(),
-				]);
-			} else {
-				return H.table(
-					map(Object.keys(d).sort(sort_keys), k =>
-						H.tr([
-							H.th(schema_label(k)),
-							H.td(convert(d, k, edit, sub_schema(k))),
-						])
-					)
-				);
-			}
-		}
-	}
-
-	function do_array() {
-		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
-			const table = H.table();
-			const keymap = {};
-			const localSchema = sub_schema(idx);
-			iter(d, dd => iter(Object.keys(dd), k => (keymap[k] = true)));
-			keys = Object.keys(keymap).sort();
-			$.append(table, [
-				H.tr(map(keys, k => H.th(schema_label(k, localSchema)))),
-				map(d, (x, i) => convert(d, i, edit, localSchema, null, keys)),
-			]);
-			return table;
-		} else {
-			return map(d, (x, i) => convert(d, i, edit));
-		}
-	}
-
-	function do_bool() {
-		const cb = H.input({ type: 'checkbox' });
-		cb.checked = !!d;
-		if (edit) $.on(cb, 'change', () => (ref[idx] = cb.checked));
-		else $.set(cb, { disabled: true });
-		return cb;
-	}
-
-	switch (typeof d) {
-		case 'object':
-			if (Array.isArray(d)) return do_array();
-			else return do_object();
-		case 'boolean':
-			return do_bool();
-		case 'string':
-		case 'number':
-		case 'bigint':
-			if (edit) {
-				const input = H.input({
-					class: 'roger',
-					type: typeof d === 'string' ? 'text' : 'number',
-					value: d,
-				});
-				$.on(input, 'change', () => (ref[idx] = input.value));
-				return [input, $.h('br')];
-			} else {
-				return $.text(d + ' ');
-			}
-	}
-}
-
-function component(edit, el, data, schema) {
-	const style = H.style(`
+const style = H.style(`
 table {
 	font-size: 0.875rem;
 	border-collapse: collapse;
@@ -136,19 +54,136 @@ th, td {
 .edit td:empty {
 	background-color: #f8f8f8;
 }
-input:not([type=checkbox]), select {
+input:not([type=checkbox]), select, textarea {
 	border: none;
 	width: 100%;
 	line-height: 2.33em;
 }
 	`);
-	const table = convert(data, null, edit, schema);
-	const editeur = $.h(
-		'vp-editeur',
-		{ 'vp-widget': true },
-		[],
-		[style, table]
+
+function convert(ref, idx, conf, sch, label, keys) {
+	const d = idx !== null ? ref[idx] : ref;
+	const get_type = (k, s) => (s || sch || {})[k] || {};
+	const get_type_val = (n, k, s) => get_type(k, s)[n];
+	const sub_sch = k => (sch && sch[k] ? sch[k].__schema : null);
+
+	function do_object() {
+		const sort_keys = (a, b) =>
+			cmp_f(Array.isArray, d[a], d[b]) ||
+			cmp_f(isPlainObject, d[a], d[b]) ||
+			cmp(a, b);
+
+		sch = sub_sch(idx) || sch;
+
+		if (keys) {
+			return H.tr(
+				map(keys, k => {
+					const td = H.td(convert(d, k, conf, sch));
+					if ((get_type_val('type', k) || typeof d[k]) === 'boolean')
+						$.style(td, { 'text-align': 'center' });
+					return td;
+				})
+			);
+		} else {
+			// TODO: templates: true if all keys are typed boolean
+			let is_checklist = true;
+			iter_obj(d, (k, v) => {
+				if (typeof v !== 'boolean') is_checklist = false;
+			});
+			if (is_checklist) {
+				return map(Object.keys(d).sort(), k => [
+					H.label([
+						convert(d, k, conf, null, k),
+						' ' + (get_type_val('label', k) || k),
+					]),
+					H.br(),
+				]);
+			} else {
+				return H.table(
+					map(Object.keys(d).sort(sort_keys), k => {
+						const type = get_type(k);
+						return H.tr([
+							H.th({ title: type.tooltip || k }, type.label || k),
+							H.td(convert(d, k, conf, sch)),
+						]);
+					})
+				);
+			}
+		}
+	}
+
+	function do_array() {
+		sch = sub_sch(idx) || sch;
+		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
+			const table = H.table();
+			const keymap = {};
+			iter(d, dd => iter_obj(dd, k => (keymap[k] = true)));
+			keys = Object.keys(keymap).sort();
+			$.append(table, [
+				H.tr(map(keys, k => H.th(get_type_val('label', k) || k))),
+				map(d, (x, i) => convert(d, i, conf, sch, null, keys)),
+			]);
+			return table;
+		} else {
+			return map(d, (x, i) => convert(d, i, conf, sch));
+		}
+	}
+
+	function do_bool() {
+		const cb = H.input({ type: 'checkbox' });
+		cb.checked = !!d;
+		if (conf.edit) $.on(cb, 'change', () => (ref[idx] = cb.checked));
+		else $.set(cb, { disabled: true });
+		return cb;
+	}
+
+	function do_scalar(type) {
+		if (conf.edit) {
+			let input;
+			if (type.type === 'textarea' || (d && /\r|\n/.test(d))) {
+				input = H.textarea(d ? d : []);
+			} else {
+				input = H.input({ value: d ? d : '' });
+				if (type.type === 'number' || typeof d === 'number') {
+					$.set(input, { type: 'number' });
+				} else {
+					$.set(input, { type: 'text' });
+				}
+				if (type.combo) $.set(input, { list: type.combo });
+			}
+			$.on(input, 'change', () => (ref[idx] = input.value));
+			return [input, H.br()];
+		} else {
+			return $.text(
+				((type.combo &&
+					conf.__lists[type.combo] &&
+					conf.__lists[type.combo][d]) ||
+					d) + ' '
+			);
+		}
+	}
+
+	const type = idx && typeof idx !== 'number' ? get_type(idx) : {};
+	if (type.repeatable || Array.isArray(d)) return do_array();
+	else if (type.__schema || typeof d === 'object') return do_object();
+	else if ((type.type || typeof d) === 'boolean') return do_bool();
+	else return do_scalar(type);
+}
+
+function component(edit, el, data, schema) {
+	const content = [style];
+	if (!schema.__lists) schema.__lists = {};
+	iter_obj(schema.__lists, (n, l) =>
+		content.push(
+			H.datalist(
+				{ id: n },
+				map_obj(l, (v, t) => H.option({ value: v }, t))
+			)
+		)
 	);
+	const table = convert(data, null, { edit: edit, root: schema }, schema);
+	content.push(table);
+	const editeur = $.h('vp-editeur', { 'vp-widget': true }, [], content);
 	if (edit) {
 		table.classList.add('edit');
 		editeur.vpName = $.get(el, 'vp-name');

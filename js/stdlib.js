@@ -7,26 +7,46 @@ const alias = f => Function.prototype.call.bind(f);
 
 // Generic iterator
 function iter(list, f) {
-	for (let i = 0, l_length = list.length; i < l_length; ++i) {
+	for (let i = 0, len = list.length; i < len; ++i) {
 		f(list[i], i);
 	}
 }
 
 // Create a function which will iterate f() on its list argument
-let iter_f = f => l => iter(l, f);
+const iter_f = f => list => iter(list, f);
+
+// Iterate over object
+const iter_obj = (obj, f) => iter(Object.keys(obj), k => f(k, obj[k]));
+// function iter_obj(obj, f) {
+// 	const list = Object.keys(obj);
+// 	for (let i = 0, len = list.length; i < len; ++i) {
+// 		f(list[i], obj[list[i]]);
+// 	}
+// }
 
 // Generic mapper to Array
 function map(list, f) {
 	const a = new Array(list.length);
-	for (let i = 0, l_length = list.length; i < l_length; ++i) {
+	for (let i = 0, len = list.length; i < len; ++i) {
 		a[i] = f(list[i], i);
 	}
 	return a;
 }
 
+// Map object
+const map_obj = (obj, f) => map(Object.keys(obj), k => f(k, obj[k]));
+// function map_obj(obj, f) {
+// 	const list = Object.keys(obj);
+// 	const a = new Array(list.length);
+// 	for (let i = 0, len = list.length; i < len; ++i) {
+// 		a[i] = f(list[i], obj[list[i]]);
+// 	}
+// 	return a;
+// }
+
 // Generic folder
 function fold(list, acc, f) {
-	for (let i = 0, l_length = list.length; i < l_length; ++i) {
+	for (let i = 0, len = list.length; i < len; ++i) {
 		acc = f(acc, list[i], i);
 	}
 	return acc;
@@ -67,7 +87,9 @@ export {
 	isPlainObject,
 	iter,
 	iter_f,
+	iter_obj,
 	map,
+	map_obj,
 	shift,
 	shifter,
 };

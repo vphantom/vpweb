@@ -62,19 +62,23 @@ input:not([type=checkbox]), select, textarea {
 	`);
 
 function convert(ref, idx, conf, sch, label, keys) {
+	sch = (sch && sch[idx] ? sch[idx].__schema : null) || sch;
 	const d = idx !== null ? ref[idx] : ref;
 	const get_type = (k, s) => (s || sch || {})[k] || {};
 	const get_type_val = (n, k, s) => get_type(k, s)[n];
-	const sub_sch = k => (sch && sch[k] ? sch[k].__schema : null);
 
-	function do_object() {
-		const sort_keys = (a, b) =>
+	function sort_keys(a, b) {
+		const sa = sch && sch[a] && sch[a].sort;
+		const sb = sch && sch[b] && sch[b].sort;
+		return (
+			(sa || sb ? (sa && !sb ? -1 : !sa && sb ? 1 : cmp(sa, sb)) : 0) ||
 			cmp_f(Array.isArray, d[a], d[b]) ||
 			cmp_f(isPlainObject, d[a], d[b]) ||
-			cmp(a, b);
+			cmp(a, b)
+		);
+	}
 
-		sch = sub_sch(idx) || sch;
-
+	function do_object() {
 		if (keys) {
 			return H.tr(
 				map(keys, k => {
@@ -91,7 +95,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 				if (typeof v !== 'boolean') is_checklist = false;
 			});
 			if (is_checklist) {
-				return map(Object.keys(d).sort(), k => [
+				return map(Object.keys(d).sort(sort_keys), k => [
 					H.label([
 						convert(d, k, conf, null, k),
 						' ' + (get_type_val('label', k) || k),
@@ -113,12 +117,11 @@ function convert(ref, idx, conf, sch, label, keys) {
 	}
 
 	function do_array() {
-		sch = sub_sch(idx) || sch;
 		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
 			const table = H.table();
 			const keymap = {};
 			iter(d, dd => iter_obj(dd, k => (keymap[k] = true)));
-			keys = Object.keys(keymap).sort();
+			keys = Object.keys(keymap).sort(sort_keys);
 			$.append(table, [
 				H.tr(map(keys, k => H.th(get_type_val('label', k) || k))),
 				map(d, (x, i) => convert(d, i, conf, sch, null, keys)),

@@ -139,6 +139,7 @@ In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` an
 
 * **`__schema`** For objects or lists of objects, schema of the contained object(s)
 * **`label`** Localized string, HTML allowed but not recommended
+* **`sort`** Number or string to use as field sorting key. (default: scalars, objects, arrays)
 * **`tooltip`** Localized string, HTML not allowed
 * **`combo`** Identifier of list to use as a `<input><datalist>` (see below)
 * **`repeatable`** This key should be a list, not a scalar/object (default: false)
@@ -161,6 +162,7 @@ Example:
 	"key_one": {
 		"label": "First Key",
 		"tooltip": "This field contains something",
+		"sort": 23,
 		"combo": "list1"
 	},
 	...

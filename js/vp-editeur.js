@@ -117,6 +117,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 	}
 
 	function do_array() {
+		if (Array.isArray(d[0])) return [];
 		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
 			const table = H.table();
 			const keymap = {};

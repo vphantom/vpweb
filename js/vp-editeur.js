@@ -18,6 +18,7 @@ const H = $.H(
 	'input',
 	'label',
 	'option',
+	'pre',
 	'style',
 	'table',
 	'td',
@@ -55,19 +56,19 @@ th, td {
 	background-color: #f8f8f8;
 }
 input:not([type=checkbox]), select, textarea {
-	border: none;
+	border: 1px solid transparent;
 	width: 100%;
+}
+input:not([type=checkbox]), select {
 	line-height: 2.33em;
 }
 	`);
 
 function convert(ref, idx, conf, sch, label, keys) {
-	sch = (sch && sch[idx] ? sch[idx].__schema : null) || sch;
-	const d = idx !== null ? ref[idx] : ref;
 	const get_type = (k, s) => (s || sch || {})[k] || {};
 	const get_type_val = (n, k, s) => get_type(k, s)[n];
 
-	function sort_keys(a, b) {
+	const sort_keys = d => (a, b) => {
 		const sa = sch && sch[a] && sch[a].sort;
 		const sb = sch && sch[b] && sch[b].sort;
 		return (
@@ -76,35 +77,46 @@ function convert(ref, idx, conf, sch, label, keys) {
 			cmp_f(isPlainObject, d[a], d[b]) ||
 			cmp(a, b)
 		);
-	}
+	};
 
-	function do_object() {
+	function do_object(type, d) {
+		if (idx && !d) ref[idx] = d = {};
 		if (keys) {
 			return H.tr(
 				map(keys, k => {
-					const td = H.td(convert(d, k, conf, sch));
+					const inner =
+						(sch || {})[k] || typeof d[k] !== 'undefined'
+							? convert(d, k, conf, sch)
+							: undefined;
+					const td = H.td(inner);
 					if ((get_type_val('type', k) || typeof d[k]) === 'boolean')
 						$.style(td, { 'text-align': 'center' });
 					return td;
 				})
 			);
 		} else {
-			// TODO: templates: true if all keys are typed boolean
 			let is_checklist = true;
-			iter_obj(d, (k, v) => {
-				if (typeof v !== 'boolean') is_checklist = false;
-			});
+			if (sch) {
+				iter_obj(sch, (k, v) => {
+					if (v.type !== 'boolean') is_checklist = false;
+				});
+			} else {
+				iter_obj(d, (k, v) => {
+					if (typeof v !== 'boolean') is_checklist = false;
+				});
+			}
 			if (is_checklist) {
-				return map(Object.keys(d).sort(sort_keys), k => [
+				return map(Object.keys(sch || d).sort(sort_keys(d)), k => [
 					H.label([
-						convert(d, k, conf, null, k),
+						convert(d, k, conf, sch, k),
 						' ' + (get_type_val('label', k) || k),
 					]),
 					H.br(),
 				]);
 			} else {
 				return H.table(
-					map(Object.keys(d).sort(sort_keys), k => {
+					map(Object.keys(sch || d).sort(sort_keys(d)), k => {
+						if (/^__/.test(k)) return;
 						const type = get_type(k);
 						return H.tr([
 							H.th({ title: type.tooltip || k }, type.label || k),
@@ -116,13 +128,21 @@ function convert(ref, idx, conf, sch, label, keys) {
 		}
 	}
 
-	function do_array() {
-		if (Array.isArray(d[0])) return [];
-		if (d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0])) {
+	function do_array(type, d) {
+		if (idx && !d) ref[idx] = d = [];
+		if (Array.isArray(d[0])) return;
+		if (
+			type.__schema ||
+			(d.length > 0 && typeof d[0] === 'object' && !Array.isArray(d[0]))
+		) {
 			const table = H.table();
+
+			// Collect keys from schema and all rows, to be safe
 			const keymap = {};
-			iter(d, dd => iter_obj(dd, k => (keymap[k] = true)));
-			keys = Object.keys(keymap).sort(sort_keys);
+			const setk = k => (keymap[k] = true);
+			iter(Object.keys(sch || {}), setk);
+			iter(d, dd => iter_obj(dd, setk));
+			keys = Object.keys(keymap).sort(sort_keys(d));
 			$.append(table, [
 				H.tr(map(keys, k => H.th(get_type_val('label', k) || k))),
 				map(d, (x, i) => convert(d, i, conf, sch, null, keys)),
@@ -133,7 +153,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 		}
 	}
 
-	function do_bool() {
+	function do_bool(type, d) {
 		const cb = H.input({ type: 'checkbox' });
 		cb.checked = !!d;
 		if (conf.edit) $.on(cb, 'change', () => (ref[idx] = cb.checked));
@@ -141,51 +161,71 @@ function convert(ref, idx, conf, sch, label, keys) {
 		return cb;
 	}
 
-	function do_scalar(type) {
+	function do_scalar(type, d) {
 		if (conf.edit) {
+			const is_num = (type.type || typeof d) === 'number';
 			let input;
-			if (type.type === 'textarea' || (d && /\r|\n/.test(d))) {
-				input = H.textarea(d ? d : []);
+			if (
+				type.type === 'textarea' ||
+				(!type.type && d && /\r|\n/.test(d))
+			) {
+				input = H.textarea(d || undefined);
 			} else {
-				input = H.input({ value: d ? d : '' });
-				if (type.type === 'number' || typeof d === 'number') {
-					$.set(input, { type: 'number' });
-				} else {
-					$.set(input, { type: 'text' });
-				}
+				input = H.input({
+					type: is_num ? 'number' : 'text',
+					value: d ? d : '',
+				});
 				if (type.combo) $.set(input, { list: type.combo });
 			}
-			$.on(input, 'change', () => (ref[idx] = input.value));
+			$.on(
+				input,
+				'change',
+				() => (ref[idx] = is_num ? Number(input.value) : input.value)
+			);
 			return [input, H.br()];
 		} else {
-			return $.text(
-				((type.combo &&
-					conf.__lists[type.combo] &&
-					conf.__lists[type.combo][d]) ||
-					d) + ' '
-			);
+			if (d !== undefined) {
+				if (/\r|\n/.test(d)) {
+					return H.pre(d);
+				}
+				return $.text(
+					((type.combo &&
+						conf.root.__lists[type.combo] &&
+						conf.root.__lists[type.combo][d]) ||
+						d) + ' '
+				);
+			}
 		}
 	}
 
+	const d = idx !== null ? ref[idx] : ref;
 	const type = idx && typeof idx !== 'number' ? get_type(idx) : {};
-	if (type.repeatable || Array.isArray(d)) return do_array();
-	else if (type.__schema || typeof d === 'object') return do_object();
-	else if ((type.type || typeof d) === 'boolean') return do_bool();
-	else return do_scalar(type);
+	sch = (sch && sch[idx] ? sch[idx].__schema : null) || sch;
+	if (type.repeatable || Array.isArray(d)) return do_array(type, d);
+	else if (type.__schema || typeof d === 'object') return do_object(type, d);
+	else if ((type.type || typeof d) === 'boolean') return do_bool(type, d);
+	else return do_scalar(type, d);
 }
 
 function component(edit, el, data, schema) {
 	const content = [style];
-	if (!schema.__lists) schema.__lists = {};
-	iter_obj(schema.__lists, (n, l) =>
-		content.push(
-			H.datalist(
-				{ id: n },
-				map_obj(l, (v, t) => H.option({ value: v }, t))
+	if (schema) {
+		if (!schema.__lists) schema.__lists = {};
+		iter_obj(schema.__lists, (n, l) =>
+			content.push(
+				H.datalist(
+					{ id: n },
+					map_obj(l, (v, t) => H.option({ value: v }, t))
+				)
 			)
-		)
+		);
+	}
+	const table = convert(
+		data,
+		null,
+		{ edit: edit, root: schema || {} },
+		schema
 	);
-	const table = convert(data, null, { edit: edit, root: schema }, schema);
 	content.push(table);
 	const editeur = $.h('vp-editeur', { 'vp-widget': true }, [], content);
 	if (edit) {

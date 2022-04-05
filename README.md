@@ -129,23 +129,39 @@ import 'vpweb/vp-editeur';
 <script src="dist/vp-editeur.min.js"></script>
 ```
 
-Watches for `<script>` tags with `[type="application/json"]` and either just `vp-view` or both `vp-edit` and `vp-name` attributes, to view or edit respectively.  Inserts a `<vp-editeur>` before each such script.  Works for inline and `src` linked JSON data.  If `vp-view`/`vp-edit` contains a string which resolves to a loaded schema name, it will be used to enhance functionality.  (See below.)
+Example usage:
 
-In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` and `vpValue`.  The component uses a shadow DOM so its content do not affect forms directly.
+```html
+<form method="vp-json">
+	<vp-editeur
+		vp-schema="schema_name"
+		vp-data="data_name"
+		vp-name="form_field_name"
+	></vp-editeur>
+	<script type="application/json" vp-editeur-schema="schema_name"></script>
+	<script type="application/json" vp-editeur-data="data_name"></script>
+</form>
+```
 
-### Schema (optional)
+The optional JSON scripts may be inline or referenced with `src`, in which case they will be loaded asynchronously.  Without `vp-name` is read-only mode, in which case `<form>` is not necessary.  At least one of `vp-schema` or `vp-data` must be specified in order to display anything.  Attributes:
 
-`<script>` tags with `[type="application/json"]` and `vp-schema` are loaded in the schema registry under the name specified by `vp-schema`.  A schema is a JSON object with one key for each root-level key of the JSON data it overlays.  Each key is an object with the following possible keys:
+* **`vp-schema`** Name of schema definition to apply (optional)
+* **`vp-data`** Name of data content to use (optional)
+* **`vp-name`** Name of form field to represent (optional)
+
+In editor mode, the `<vp-editeur>` has Promeneur-friendly properties `vpName` and `vpValue`.  The component uses a shadow DOM so its content do not interfere with regular forms.
+
+### Schema
+
+Using a schema is useful to customize the display and to allow starting without data.  A schema is a JSON object with one key for each root-level key of the JSON data it overlays.  Each key is an object with the following possible keys, all optional:
 
 * **`__schema`** For objects or lists of objects, schema of the contained object(s)
-* **`label`** Localized string, HTML allowed but not recommended
-* **`sort`** Number or string to use as field sorting key. (default: scalars, objects, arrays)
-* **`tooltip`** Localized string, HTML not allowed
+* **`sort`** Number or string to use as field sorting key. (default: scalars, then objects, then arrays)
+* **`label`** Localized string, HTML allowed but not recommended (default: property key)
+* **`tooltip`** Localized string, HTML not allowed (default: property key)
 * **`combo`** Identifier of list to use as a `<input><datalist>` (see below)
 * **`repeatable`** This key should be a list, not a scalar/object (default: false)
-* **`type`** One of: `boolean`, `number`, `string`, `textarea` (default: string)
-
-Types are optional, but help in creating correct JSON objects from scratch and in specifying `textarea` instead of the default `string`.  Without a schema, existing strings containing newlines will automatically be presented as `textarea`.
+* **`type`** For scalars, one of: `boolean`, `number`, `string`, `textarea` (default: string)
 
 At the root level only, an additional `__lists` key may be set with an object defining various lists.  Each item is a value followed by its localized label.
 
@@ -168,8 +184,6 @@ Example:
 	...
 }
 ```
-
-**Template feature:** loading JSON data `{}` and a schema will present an empty form ready to be filled.
 
 ## DateRange
 

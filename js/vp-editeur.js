@@ -27,8 +27,9 @@ const H = $.H(
 	'tr'
 );
 
-let registry = {};
-let pending = {};
+let schemas = {};
+let datas = {};
+let pending = [];
 
 const style = H.style(`
 table {
@@ -85,7 +86,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 			return H.tr(
 				map(keys, k => {
 					const inner =
-						(sch || {})[k] || typeof d[k] !== 'undefined'
+						(sch || {})[k] || d[k] !== undefined
 							? convert(d, k, conf, sch)
 							: undefined;
 					const td = H.td(inner);
@@ -156,13 +157,13 @@ function convert(ref, idx, conf, sch, label, keys) {
 	function do_bool(type, d) {
 		const cb = H.input({ type: 'checkbox' });
 		cb.checked = !!d;
-		if (conf.edit) $.on(cb, 'change', () => (ref[idx] = cb.checked));
+		if (conf.e) $.on(cb, 'change', () => (ref[idx] = cb.checked));
 		else $.set(cb, { disabled: true });
 		return cb;
 	}
 
 	function do_scalar(type, d) {
-		if (conf.edit) {
+		if (conf.e) {
 			const is_num = (type.type || typeof d) === 'number';
 			let input;
 			if (
@@ -190,8 +191,8 @@ function convert(ref, idx, conf, sch, label, keys) {
 				}
 				return $.text(
 					((type.combo &&
-						conf.root.__lists[type.combo] &&
-						conf.root.__lists[type.combo][d]) ||
+						conf.s.__lists[type.combo] &&
+						conf.s.__lists[type.combo][d]) ||
 						d) + ' '
 				);
 			}
@@ -207,11 +208,11 @@ function convert(ref, idx, conf, sch, label, keys) {
 	else return do_scalar(type, d);
 }
 
-function component(edit, el, data, schema) {
+function launch(conf) {
 	const content = [style];
-	if (schema) {
-		if (!schema.__lists) schema.__lists = {};
-		iter_obj(schema.__lists, (n, l) =>
+	if (conf.s) {
+		if (!conf.s.__lists) conf.s.__lists = {};
+		iter_obj(conf.s.__lists, (n, l) =>
 			content.push(
 				H.datalist(
 					{ id: n },
@@ -220,46 +221,62 @@ function component(edit, el, data, schema) {
 			)
 		);
 	}
-	const table = convert(
-		data,
-		null,
-		{ edit: edit, root: schema || {} },
-		schema
-	);
+	const table = convert(conf.d, null, conf, conf.s);
+	if (!table || table.length < 1) return;
 	content.push(table);
-	const editeur = $.h('vp-editeur', { 'vp-widget': true }, [], content);
-	if (edit) {
+	if (conf.e) {
 		table.classList.add('edit');
-		editeur.vpName = $.get(el, 'vp-name');
-		editeur.vpValue = data;
+		$.set(conf.w, { 'vp-widget': true });
+		conf.w.vpName = conf.n;
+		conf.w.vpValue = conf.d;
 	}
-	$.precede(el, editeur);
+	$.append(conf.w.attachShadow({ mode: 'closed' }), content);
 }
 
-function queue(edit, el, s, data) {
-	if (!s) component(edit, el, data);
-	if (registry[s]) {
-		component(edit, el, data, registry[s]);
-	} else {
-		(pending[s] || (pending[s] = [])).push(
-			component.bind(null, edit, el, data)
-		);
+function launch_if_ready(conf, i) {
+	const sname = conf.sn;
+	const dname = conf.dn;
+	if ((sname ? schemas[sname] : true) && (dname ? datas[dname] : true)) {
+		conf.s = sname ? schemas[sname] : null;
+		conf.d = dname ? datas[dname] : {};
+		if (typeof i === 'number') pending[i] = undefined;
+		launch(conf);
+		return true;
 	}
+	return false;
 }
 
-function register_schema(name, data) {
+function register(type, data, el) {
+	const registry = type === 0 ? datas : schemas;
+	const name = $.get(
+		el,
+		type === 0 ? 'vp-editeur-data' : 'vp-editeur-schema'
+	);
 	registry[name] = data;
-	if (pending[name]) iter(pending[name], f => f(data));
+	iter(pending, launch_if_ready);
 }
 
-$.forever('script[type="application/json"][vp-schema]', el =>
-	$.jsonscript(el, null, s => register_schema($.get(el, 'vp-schema'), s))
+// Async load schemas
+$.forever('script[type$="/json"][vp-editeur-schema]', el =>
+	$.jsonscript(el, null, s => register(1, s, el))
 );
-$.forever('script[type="application/json"][vp-view]', el => {
-	$.jsonscript(el, null, queue.bind(null, false, el, $.get(el, 'vp-view')));
-});
-$.forever('script[type="application/json"][vp-edit]', el => {
-	$.jsonscript(el, null, queue.bind(null, true, el, $.get(el, 'vp-edit')));
+
+// Async load datas (sic)
+$.forever('script[type$="/json"][vp-editeur-data]', el =>
+	$.jsonscript(el, null, s => register(0, s, el))
+);
+
+// Queue up editors
+$.forever('vp-editeur', el => {
+	const name = $.get(el, 'vp-name');
+	let conf = {
+		w: el,
+		e: !!name,
+		sn: $.get(el, 'vp-schema') || null,
+		dn: $.get(el, 'vp-data') || null,
+		n: name || null,
+	};
+	if (!launch_if_ready(conf)) pending.push(conf);
 });
 
 export {};

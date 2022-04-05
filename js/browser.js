@@ -75,7 +75,7 @@ function h() {
 	}
 	append(el, arg);
 	if (!(arg = shift())) return el;
-	append(el.attachShadow({ mode: 'closed' }), arg);
+	append(el.attachShadow({ mode: 'open' }), arg);
 	return el;
 }
 

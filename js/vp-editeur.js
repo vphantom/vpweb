@@ -230,7 +230,7 @@ function launch(conf) {
 		conf.w.vpName = conf.n;
 		conf.w.vpValue = conf.d;
 	}
-	$.append(conf.w.attachShadow({ mode: 'closed' }), content);
+	$.append(conf.w.attachShadow({ mode: 'open' }), content);
 }
 
 function launch_if_ready(conf, i) {

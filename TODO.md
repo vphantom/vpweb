@@ -20,6 +20,14 @@ Evaluate if we can be an order of magnitude smaller than existing stand-alone op
 
 More or less a port/cleanup of the old Merino jQuery widget, which had some serious usability issues.
 
+### Fast Click
+
+- [ ] Figure out a way to avoid `click` triggering twice, so we could make it available to anything clickable.
+
+### Forms
+
+- [ ] Support the `formaction` attribute of clicked elements.
+
 ## CSS
 
 - [ ] https://caniuse.com/css-writing-mode

@@ -1,6 +1,10 @@
 ## Library
 
-Nothing pending.
+- [ ] JSDoc `stdlib.js`
+
+- [ ] JSDoc `browser.js`
+
+- [ ] Use `docblox2md` or whatever the de-facto standard is to generate Markdown documentation from JSDoc
 
 ## Components
 

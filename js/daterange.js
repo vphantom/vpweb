@@ -10,7 +10,7 @@ Upgrades a pair of date selection inputs into a date range widget, complete with
 ```js
 // Option 1 (recommended): include in your build.
 // No configuration options
-import 'vpweb/vp-daterange';
+import 'vpweb/daterange';
 ```
 
 ```html

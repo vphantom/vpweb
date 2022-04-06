@@ -18,7 +18,7 @@ CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(wildcard js/*.js)
 
-JS_ASSETS := dist/library-size.min.js dist/vpweb.min.js dist/vp-editeur.min.js dist/vp-fast.min.js dist/vp-forms.min.js
+JS_ASSETS := dist/library-size.min.js dist/vpweb.min.js dist/editeur.min.js dist/fast.min.js dist/forms.min.js
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS))
 
@@ -34,6 +34,8 @@ help:
 	@echo
 
 dist:	$(CSS_ASSETS) $(JS_ASSETS)
+	@ls -la dist/library-size.min.js
+	@rm -fr dist/library-size.*
 
 clean:
 	rm -fv dist/* docs/dist.css docs/*.map docs/*.gz docs/*.br
@@ -55,13 +57,13 @@ dist/library-size.min.js:	$(JS_SRC)
 dist/vpweb.min.js:	js/vpweb.js $(JS_SRC)
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/vp-editeur.min.js:	js/vp-editeur.js js/browser.js js/stdlib.js
+dist/editeur.min.js:	js/editeur.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/vp-fast.min.js:	js/vp-fast.js js/browser.js js/stdlib.js
+dist/fast.min.js:	js/fast.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
-dist/vp-forms.min.js:	js/vp-forms.js js/browser.js js/stdlib.js
+dist/forms.min.js:	js/forms.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 sizes:	$(CSS_ASSETS) $(GZIP_ASSETS) $(BROTLI_ASSETS)

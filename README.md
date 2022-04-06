@@ -1,9 +1,9 @@
 # Vanilla+
 
-<!--
+**WARNING: PROOF OF CONCEPT ONLY!**  An eventual version 1.0 is expected by 2023.  This is a back-burner project for me as of 2022.
+
 [![license](https://img.shields.io/github/license/vphantom/vpweb.svg?style=plastic)]()
 [![GitHub release](https://img.shields.io/github/release/vphantom/vpweb.svg?style=plastic)]()
--->
 
 Vanilla+ is a minimalistic web interface development library.  It adds no abstraction layers and thus allows you to use only the portions you need without bloat from the rest.  It is divided in 3 main parts:
 
@@ -73,7 +73,7 @@ Activate clicks on `mousedown` to save at least ~100ms in response times.
 ```js
 // Option 1 (recommended): include in your build.
 // No configuration options
-import 'vpweb/vp-fast';
+import 'vpweb/fast';
 ```
 
 ```html
@@ -92,7 +92,7 @@ Submit forms as a JSON POST and replace part of the DOM with the HTML response.
 ```js
 // Option 1 (recommended): include in your build.
 // No configuration options
-import 'vpweb/vp-forms';
+import 'vpweb/forms';
 ```
 
 ```html
@@ -127,7 +127,7 @@ Viewer and optionally editor for arbitrary JSON blobs.
 ```js
 // Option 1 (recommended): include in your build.
 // No configuration options
-import 'vpweb/vp-editeur';
+import 'vpweb/editeur';
 ```
 
 ```html
@@ -190,6 +190,10 @@ Example:
   ...
 }
 ```
+
+## ACKNOWLEDGEMENTS
+
+Graph X Design Inc. https://www.gxd.ca/ sponsored this project.
 
 ## LICENSE AND COPYRIGHT
 

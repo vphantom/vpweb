@@ -4,8 +4,12 @@
   "description": "Vanilla+: minimalistic web interface development library",
   "type": "module",
   "exports": {
+    "./browser": "./js/browser.js",
+    "./editeur": "./js/editeur.js",
+    "./fast": "./js/fast.js",
+    "./forms": "./js/forms.js",
     "./stdlib": "./js/stdlib.js",
-    "./browser": "./js/browser.js"
+    "./vpweb": "./js/vpweb.js"
   },
   "author": "Stéphane Lavergne <lis@imars.com> (https://github.com/vphantom)",
   "license": "MIT",

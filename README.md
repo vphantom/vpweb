@@ -78,7 +78,7 @@ import 'vpweb/fast';
 
 ```html
 <!-- Option 2: load as stand-alone script -->
-<script src="dist/vp-fast.min.js"></script>
+<script src="dist/fast.min.js"></script>
 ```
 
 * Anchors in a block with the `vp-fast` attribute or with the attribute directly are triggered on `mousedown` instead of the browser's `mouseup`.  Limited to anchors with `href` to avoid side effects from the `click` event triggering twice.
@@ -97,7 +97,7 @@ import 'vpweb/forms';
 
 ```html
 <!-- Option 2: load as stand-alone script -->
-<script src="dist/vp-forms.min.js"></script>
+<script src="dist/forms.min.js"></script>
 ```
 
 Notes:
@@ -132,7 +132,7 @@ import 'vpweb/editeur';
 
 ```html
 <!-- Option 2: load as stand-alone script -->
-<script src="dist/vp-editeur.min.js"></script>
+<script src="dist/editeur.min.js"></script>
 ```
 
 Example usage:

@@ -97,28 +97,31 @@ function all(n, sel) {
 }
 
 // Our options in the second object:
-// mute: ms to wait until we can be triggered again (default: 100)
+// mute: ms to wait until we can be triggered again (default: none)
 // prevent: set true to preventDefault on all triggers
 // stop: set true to stopPropagation on all triggers
 // stopi: set true to stopImmediatePropagation on all triggers
 function on(n, t, f, o, vpo) {
-	if (typeof n === 'string') return on(document, n, t, f, o);
+	if (typeof n === 'string' || Array.isArray(n))
+		return on(document, n, t, f, o);
 	vpo = vpo || {};
 	let timeout = null;
 	function handler(ev) {
 		if (vpo.prevent) ev.preventDefault();
 		if (vpo.stop) ev.stopPropagation();
 		if (vpo.stopi) ev.stopImmediatePropagation();
-		let newtimeout = setTimeout(() => (timeout = null), vpo.mute || 100);
-		if (timeout) {
-			clearTimeout(timeout);
+		if (vpo.mute) {
+			let newtimeout = setTimeout(() => (timeout = null), vpo.mute);
+			if (timeout) {
+				clearTimeout(timeout);
+				timeout = newtimeout;
+				return;
+			}
 			timeout = newtimeout;
-			return;
 		}
-		timeout = newtimeout;
 		f(ev);
 	}
-	return n.addEventListener(t, handler, o);
+	iter(Array.isArray(t) ? t : [t], tt => n.addEventListener(tt, handler, o));
 }
 
 function trigger(e, n, d) {

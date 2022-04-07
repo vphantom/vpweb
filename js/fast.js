@@ -13,10 +13,8 @@ import * as $ from './browser.js';
 $.forever(
 	'[vp-fast] a[href], a[href][vp-fast], form[vp-fast] [type=submit], form [type=submit][vp-fast]',
 	el => {
-		$.on(el, 'mousedown', ev => {
-			if (ev.button !== 0) return;
-			ev.target.click();
-		});
+		const fire = ev => (ev.button === 0 ? ev.target.click() : null);
+		$.on(el, 'mousedown', fire, null, { mute: 1000 });
 	}
 );
 

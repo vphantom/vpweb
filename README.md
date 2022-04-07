@@ -120,6 +120,12 @@ Activated by `<form vp-target="selector">`
 
 Available only with JSON forms above, if this selector is specified and found, its content will be replaced with the POST's response.  With invalid selector or without `vp-target` at all, the whole page's body will be replaced.  If the result is `<html>`, only the contents of its `<body>` will be used.
 
+### Inline inputs
+
+Activated by `<input is="vp-expanding">`
+
+Inputs of type `email`, `number`, `password`, `search`, `text` and `url` with this attribute shrink to a small minimum size (about 16px for regular fields and 32px for number fields).  As text is added/removed, their width is adjusted interactively.
+
 ## Editeur
 
 Viewer and optionally editor for arbitrary JSON blobs.

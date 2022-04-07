@@ -40,4 +40,19 @@ $.forever('form[method="vp-json"]', form =>
 	$.on(form, 'submit', submit, {}, { prevent: true, mute: 1000 })
 );
 
+// Auto-expanding inputs
+class Expanding extends HTMLInputElement {
+	connectedCallback() {
+		if (/^(email|number|password|search|text|url)$/.test(this.type)) {
+			const small = this.type === 'number' ? '32px' : '16px';
+			$.style(this, { width: small });
+			$.on(this, ['blur', 'change', 'input', 'keydown'], () => {
+				this.style.width = small;
+				this.style.width = `${this.scrollWidth + 10}px`;
+			});
+		}
+	}
+}
+customElements.define('vp-expanding', Expanding, { extends: 'input' });
+
 export {};

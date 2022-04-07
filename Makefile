@@ -1,14 +1,16 @@
 export PATH := ./node_modules/.bin/:$(PATH)
 
-FWAIT := inotifywait -qr -e close_write
-
-POSTCSS := postcss
-GZIP    := gzip --rsyncable -f -k -n -9
 BROTLI  := brotli -f -k -n -Z
+DOCBLOX2MD := docblox2md
+FWAIT := inotifywait -qr -e close_write
+GZIP    := gzip --rsyncable -f -k -n -9
+POSTCSS := postcss
+ROLLUP      := rollup
 
 # NOTE: -p 'terser={compress:{passes:3}}' yielded <0.5% change
-ROLLUP      := rollup
 ROLLUP_OPTS := --format iife --sourcemap --plugin terser
+
+DOCS := $(wildcard docs/*.md)
 
 CSS_SRC := $(sort $(wildcard scss/*.scss))
 
@@ -34,6 +36,7 @@ help:
 	@echo
 
 dist:	$(CSS_ASSETS) $(JS_ASSETS)
+	@$(DOCBLOX2MD) $(DOCS)
 	@ls -la dist/library-size.min.js
 	@rm -fr dist/library-size.*
 

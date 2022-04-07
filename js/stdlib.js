@@ -5,18 +5,42 @@ const ap = Array.prototype;
 
 const alias = f => Function.prototype.call.bind(f);
 
-// Generic iterator, skipping undefined items
+/**
+ * Generic iterator for anything indexable with a length.  Skips undefined
+ * items.
+ *
+ * @param {*} list What to iterate over
+ * @param {function(*,number):void} f Operation to perform on each item
+ *
+ */
 function iter(list, f) {
 	for (let i = 0, len = list.length; i < len; ++i) {
 		if (typeof list[i] !== 'undefined') f(list[i], i);
 	}
 }
 
-// Create a function which will iterate f() on its list argument
-const iter_f = f => list => iter(list, f);
+/**
+ * Create a function which will iterate on its list argument.
+ *
+ * @param {function(*,number):void} f Operation to perform on each item
+ *
+ * @return {function(*):void}
+ */
+function iter_f(f) {
+	return list => iter(list, f);
+}
 
 // Iterate over object
-const iter_obj = (obj, f) => iter(Object.keys(obj), k => f(k, obj[k]));
+
+/**
+ * Iterate over all keys of an object.
+ *
+ * @param {Object} obj What to iterate over
+ * @param {function(string,*):void} f Operation to perform on each key
+ */
+function iter_obj(obj, f) {
+	iter(Object.keys(obj), k => f(k, obj[k]));
+}
 
 // Generic mapper to Array, skipping undefined results
 function map(list, f) {

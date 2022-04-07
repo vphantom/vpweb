@@ -42,7 +42,7 @@ clean:
 
 watch:	dist
 	@echo "Watching for changes..."
-	+@while true; do $(FWAIT) $(CSS_SRC) $(JS_SRC) ; nice make --no-print-directory dist; echo "Up to date."; done
+	+@while true; do sleep 1 ; $(FWAIT) $(CSS_SRC) $(JS_SRC) ; nice make --no-print-directory dist; echo "Up to date."; done
 
 # Pessimistic by design: rebuilds all assets whenever any source changes.
 dist/%.css:	scss/%.scss $(CSS_SRC)

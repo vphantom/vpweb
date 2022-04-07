@@ -20,17 +20,72 @@ if (!ep.matches) {
 // np.textContent
 // ??.innerHTML
 // show()/hide()/toggle() ?
+
+/**
+ * Alias of `Element.prototype.getAttribute()`
+ */
 const get = alias(ep.getAttribute);
+
+/**
+ * Alias of `Node.nextElementSibling`
+ */
 const next = n => n.nextElementSibling;
+
+/**
+ * Alias of `Node.parentElement`
+ */
 const parent = n => n.parentElement;
+
+/**
+ * Alias of `Node.previousElementSibling`
+ */
 const prev = n => n.previousElementSibling;
-const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
-const style = (e, o) => iter_obj(o, (k, v) => e.style.setProperty(k, v));
-const text = t => document.createTextNode(String(t));
+
+/**
+ * Set multiple element attributes at once.  Wraps
+ * `Element.setAttribute()`.
+ *
+ * @param {Element} el    Element
+ * @param {Object}  attrs All attributes to set
+ */
+function set(el, attrs) {
+	iter_obj(attrs, (k, v) => el.setAttribute(k, v));
+}
+
+/**
+ * Set multiple style properties at once. Wraps
+ * `CSSStyleDeclaration.setProperty()`.
+ *
+ * @param {Element} el    Element
+ * @param {Object}  attrs All attributes to set
+ */
+function style(el, attrs) {
+	iter_obj(attrs, (k, v) => el.style.setProperty(k, v));
+}
+
+/**
+ * Create text node
+ *
+ * @param {string} str String
+ *
+ * @return {Text} Text node
+ */
+function text(str) {
+	document.createTextNode(String(str));
+}
+
+/**
+ * Alias of `Element.removeAttribute()`
+ */
 const unset = alias(ep.removeAttribute);
 
-function empty(n) {
-	while (n.firstChild) n.removeChild(n.firstChild);
+/**
+ * Remove all children of a node.
+ *
+ * @param {Node} node Node
+ */
+function empty(node) {
+	while (node.firstChild) node.removeChild(node.firstChild);
 }
 
 function flatlist(l, acc) {
@@ -46,24 +101,64 @@ function flatlist(l, acc) {
 	return acc;
 }
 
-function precede(o, nl) {
-	iter(flatlist(nl), n => o.parentElement.insertBefore(n, o));
+/**
+ * Insert node(s) before another.  Node arrays may contain sub-arrays which will
+ * be crawled recursively.
+ *
+ * @param {Node} orig Original
+ * @param {Node|Node[]|NodeList|HTMLCollection} add New node(s) to insert
+ */
+function precede(orig, add) {
+	iter(flatlist(add), n => orig.parentElement.insertBefore(n, orig));
 }
 
-function append(parent, cl) {
-	parent.append.apply(parent, flatlist(cl));
+/**
+ * Append node(s) after another.  Node arrays may contain sub-arrays which will
+ * be crawled recursively.
+ *
+ * @param {Node} parent Parent
+ * @param {Node|Node[]|NodeList|HTMLCollection} add Node(s) to insert
+ */
+function append(parent, add) {
+	parent.append.apply(parent, flatlist(add));
 }
 
-function replace(parent, cl) {
+/**
+ * Remove all children of a node and append others into it.  Shortcut to
+ * `empty()` and `append()`.
+ *
+ * @param {Node} parent Parent
+ * @param {Node|Node[]|NodeList|HTMLCollection} add Node(s) to insert
+ */
+function replace(parent, add) {
 	empty(parent);
-	append(parent, cl);
+	append(parent, add);
 }
 
+/**
+ * Prepend node(s) before another.  Node arrays may contain sub-arrays which
+ * will be crawled recursively.
+ *
+ * @param {Node} parent Parent
+ * @param {Node|Node[]|NodeList|HTMLCollection} add Node(s) to insert
+ */
 function prepend(parent, cl) {
 	parent.prepend.apply(parent, flatlist(cl));
 }
 
 // h(tag, [attrs], [content, [shadow]])
+
+/**
+ * Create an element.  Note that while `attrs` is fully optional, `children`
+ * must be specified in order to specify `shadow`.
+ *
+ * @param {string} tag Tag name (i.e. "div")
+ * @param {Object} [attrs] Attributes to set (uses `set()`)
+ * @param {string|Node|Node[]|NodeList|HTMLCollection} [children] Children to add
+ * @param {string|Node|Node[]|NodeList|HTMLCollection} [shadow] Children to add as a shadow DOM
+ *
+ * @return {Element} Element
+ */
 function h() {
 	const shift = shifter(arguments);
 	const el = document.createElement(shift());
@@ -80,30 +175,82 @@ function h() {
 }
 
 // Create an object with specified shortcuts to h()
+
+/**
+ * Create a module of element creators.  For example:
+ *
+ * `const H = Browser.H('div','span');`
+ *
+ * ...would return an object with `div()` and `span()` being aliases to `h()`
+ * with the first argument curried to their tag name.  Creating an empty element
+ * then becomes i.e. `H.div()`.
+ *
+ * @param {...string} tag Tag names
+ *
+ * @return {Object} Module
+ */
 function H() {
 	const dict = {};
 	iter(arguments, tag => (dict[tag] = h.bind(null, tag)));
 	return dict;
 }
 
-function find(n, sel) {
-	if (typeof n === 'string') return find(document, n);
-	return n.querySelector(sel);
+/**
+ * Wrapper for `querySelector()` which makes the subject optional.
+ *
+ * @param {Node}   [node] Node (default: `document`)
+ * @param {string} sel    Selector
+ *
+ * @return {Element|null} Result
+ */
+function find(node, sel) {
+	if (typeof node === 'string') return find(document, node);
+	return node.querySelector(sel);
 }
 
+/**
+ * Wrapper for `querySelectorAll()` which makes the subject optional.
+ *
+ * @param {Node}   [node] Node (default: `document`)
+ * @param {string} sel    Selector
+ *
+ * @return {NodeList} Results (static)
+ */
 function all(n, sel) {
 	if (typeof n === 'string') return all(document, n);
 	return n.querySelectorAll(sel);
 }
 
-// Our options in the second object:
-// mute: ms to wait until we can be triggered again (default: none)
-// prevent: set true to preventDefault on all triggers
-// stop: set true to stopPropagation on all triggers
-// stopi: set true to stopImmediatePropagation on all triggers
-function on(n, t, f, o, vpo) {
-	if (typeof n === 'string' || Array.isArray(n))
-		return on(document, n, t, f, o);
+/**
+ * Iterate over all matching elements.
+ *
+ * @param {Node}   [base] Node (default: `document`)
+ * @param {string} sel    Selector
+ * @param {function(Element):void} f Operation to perform
+ */
+function forall(base, sel, f) {
+	if (typeof base === 'string') return forall(document, base, sel);
+	iter(all(base, sel), f);
+}
+
+/**
+ * Add event listener.  Note that even though `opts` is optional, it must be
+ * specified in order to specify `vpo`.  Valid `vpo` parameters are:
+ *
+ *   - **mute**: ms to wait until we can be triggered again (debouncer)
+ *   - **prevent**: set true to `preventDefault()` automatically
+ *   - **stop**: set true to `stopPropagation()` automatically
+ *   - **stopi**: set true to `stopImmediatePropagation()` automatically
+ *
+ * @param {Node}                 [node]   Node (default: `document`)
+ * @param {string|string[]}      name     Name(s) of the event(s)
+ * @param {function(event):void} f        Operation to perform
+ * @param {Object}               [opts]   Options to pass to `addEventListener()`
+ * @param {Object}               [vpo] Additional options
+ */
+function on(node, name, f, opts, vpo) {
+	if (typeof node === 'string' || Array.isArray(node))
+		return on(document, node, name, f, opts);
 	vpo = vpo || {};
 	let timeout = null;
 	function handler(ev) {
@@ -121,25 +268,44 @@ function on(n, t, f, o, vpo) {
 		}
 		f(ev);
 	}
-	iter(Array.isArray(t) ? t : [t], tt => n.addEventListener(tt, handler, o));
+	iter(Array.isArray(name) ? name : [name], tt =>
+		node.addEventListener(tt, handler, opts)
+	);
 }
 
-function trigger(e, n, d) {
-	if (typeof e === 'string') return trigger(document, e, n);
-	return e.dispatchEvent(new CustomEvent(n, { detail: d }));
+/**
+ * Trigger an event using `dispatchEvent(customEvent())`.
+ *
+ * @param {Element} [el]     Element (default: `document`)
+ * @param {string}  name     Event name
+ * @param {*}       [detail] Details to pass to `CustomEvent()`
+ */
+function trigger(el, n, detail) {
+	if (typeof el === 'string') return trigger(document, el, n);
+	return el.dispatchEvent(new CustomEvent(n, { detail: detail }));
 }
 
+/**
+ * Delay execution until document is loaded, or now if it already is.
+ *
+ * @param {function():void} f Task to perform exactly once
+ */
 function ready(f) {
 	document.readyState === 'loading'
 		? on(document, 'DOMContentLoaded', f)
 		: f();
 }
 
-function forall(base, sel, f) {
-	if (typeof base === 'string') return forall(document, base, sel);
-	iter(all(base, sel), f);
-}
-
+/**
+ * Iterate over all matching elements now and in the future as they appear in
+ * the DOM.  Similar to `forall()` but adds a mutation observer.
+ *
+ * @param {Node}              [base] Base (default: `document`)
+ * @param {string}            sel    Selector
+ * @param {function(el):void} f      Operation to perform
+ *
+ * @return {MutationObserver} The observer which you may cancel later
+ */
 function forever(base, sel, f) {
 	if (typeof base === 'string') return forever(document, base, sel);
 
@@ -156,19 +322,23 @@ function forever(base, sel, f) {
 	return mo;
 }
 
-// If body is an object, it is serialized to JSON and the content type is set
-// accordingly.
-//
-// If body is present and an object, response type defaults to "json" instead of
-// "text".
-//
-// Properties supported in the arguments object, all optional including the
-// object itself:
-// headers   Object with additional headers to add to request
-// username  HTTP Auth username
-// password  HTTP Auth password
-//
-function ajax(method, url, body, ctype, res_type, args, ok, err) {
+/**
+ * Perform async HTTP request.  Valid `args` parameters are:
+ *
+ *   - **headers**: Object with additional HTTP headers to send
+ *   - **username**: HTTP Auth username
+ *   - **password**: HTTP Auth password
+ *
+ * @param {string} method  HTTP method (usually "GET" or "POST")
+ * @param {string} url     URL
+ * @param {string|Object} [body] Content
+ * @param {string} [ctype] Content-Type of `body`
+ * @param {string} [rtype] Type expected in response ("text", "json", "document")
+ * @param {Object} [args]  Additional options
+ * @param {function(XMLHttpRequest):void} [ok]  Callback on success
+ * @param {function(XMLHttpRequest):void} [err] Callback on failure
+ */
+function ajax(method, url, body, ctype, rtype, args, ok, err) {
 	const req = new XMLHttpRequest();
 	args = args || {};
 	const h = args.headers || {};
@@ -176,7 +346,7 @@ function ajax(method, url, body, ctype, res_type, args, ok, err) {
 	h['X-Requested-With'] = 'XMLHttpRequest';
 	if (ctype) h['Content-Type'] = ctype;
 	req.open(method, url, true, args.username || null, args.password || null);
-	if (res_type) req.responseType = res_type;
+	if (rtype) req.responseType = rtype;
 	iter_obj(h, (k, v) => req.setRequestHeader(k, v));
 	req.send(body);
 
@@ -193,24 +363,55 @@ function ajax(method, url, body, ctype, res_type, args, ok, err) {
 	};
 }
 
-function fetch(url, res_type, args, ok, err) {
-	ajax('GET', url, null, null, res_type, args, ok, err);
+/**
+ * Simple async HTTP "GET" request.  Wraps `ajax()`.
+ *
+ * @param {string} url     URL
+ * @param {string} [rtype] Type expected in response ("text", "json", "document")
+ * @param {Object} [args]  Additional options (see `ajax()`)
+ * @param {function(XMLHttpRequest):void} [ok]  Callback on success
+ * @param {function(XMLHttpRequest):void} [err] Callback on failure
+ */
+function fetch(url, rtype, args, ok, err) {
+	ajax('GET', url, null, null, rtype, args, ok, err);
 }
 
-function post(url, body, res_type, args, ok, err) {
+/**
+ * Simple async HTTP "POST" request.  Wraps `ajax()`.
+ *
+ * If `body` is present and an `Object`, it will be serialized as JSON, the
+ * content type will be set accordingly and the response type will default to
+ * "json" instead of "text".
+ *
+ * @param {string} url URL
+ * @param {string|Object} body Content
+ * @param {string} [rtype] Type expected in response ("text", "json", "document")
+ * @param {Object} [args]  Additional options (see `ajax()`)
+ * @param {function(XMLHttpRequest):void} [ok]  Callback on success
+ * @param {function(XMLHttpRequest):void} [err] Callback on failure
+ */
+function post(url, body, rtype, args, ok, err) {
 	let ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
 	if (typeof body === 'object') {
 		ctype = 'application/json';
-		res_type = res_type || 'json';
+		rtype = rtype || 'json';
 		body = JSON.stringify(body);
 	}
-	ajax('POST', url, body, ctype, res_type, args, ok, err);
+	ajax('POST', url, body, ctype, rtype, args, ok, err);
 }
 
-// ok(json)
-// err(xhr)
+/**
+ * Load a JSON resource asynchronously.  If the script has an `src` attribute,
+ * the URL is loaded and the result parsed as JSON.  Otherwise, the content of
+ * the script block is parsed as JSON.
+ *
+ * @param {Element} el     Script
+ * @param {Object}  [args] Additional options (see `ajax()`)
+ * @param {function(Object):void} [ok] Callback on success
+ * @param {function(XMLHttpRequest):void} [err] Callback on failure
+ */
 function jsonscript(el, args, ok, err) {
-	if (el.src) fetch(el.src, 'json', null, xhr => ok(xhr.response), err);
+	if (el.src) fetch(el.src, 'json', args, xhr => ok(xhr.response), err);
 	else ok(JSON.parse(el.textContent));
 }
 

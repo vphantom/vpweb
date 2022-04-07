@@ -88,11 +88,7 @@ function fold(list, acc, f) {
 /**
  * Shift operation for Array-like objects
  *
- * Alias of Array.prototype.shift(list)
- *
- * @param {Object} list Anything
- *
- * @return {*} The first element, if any
+ * Alias of `Array.prototype.shift()`
  */
 const shift = alias(ap.shift);
 

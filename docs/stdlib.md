@@ -80,14 +80,8 @@ Fold anything indexable with a length.
 
 Shift operation for Array-like objects 
 
-Alias of Array.prototype.shift(list) 
+Alias of `Array.prototype.shift()` 
 
-
-**Parameters:**
-
-* `list` — `Object` — Anything
-
-**Returns:** `*` — The first element, if any
 
 
 ## `const shifter`

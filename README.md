@@ -21,7 +21,7 @@ npm install vpweb
 
 ## CSS Framework
 
-See documentation in `docs/css.html`.
+Documentation: `docs/css.html`
 
 ## JS Library
 
@@ -43,13 +43,13 @@ Specifically avoided are:
 
 Usage: `import { ... } from 'vpweb/stdlib';`
 
-TODO: JSDoc
+Documentation: [docs/stdlib.md](docs/stdlib.md)
 
 ### Browser
 
 Usage: `import { ... } from 'vpweb/browser';`
 
-TODO: JSDoc
+Documentation: [docs/browser.md](docs/browser.md)
 
 ## All Components
 

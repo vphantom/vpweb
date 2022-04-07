@@ -7,7 +7,7 @@ import {
 	map,
 	map_obj,
 	cmp,
-	cmp_f,
+	cmp_bool,
 	isPlainObject,
 } from './stdlib.js';
 import * as $ from './browser.js';
@@ -74,8 +74,8 @@ function convert(ref, idx, conf, sch, label, keys) {
 		const sb = sch && sch[b] && sch[b].sort;
 		return (
 			(sa || sb ? (sa && !sb ? -1 : !sa && sb ? 1 : cmp(sa, sb)) : 0) ||
-			cmp_f(Array.isArray, d[a], d[b]) ||
-			cmp_f(isPlainObject, d[a], d[b]) ||
+			cmp_bool(Array.isArray, d[a], d[b]) ||
+			cmp_bool(isPlainObject, d[a], d[b]) ||
 			cmp(a, b)
 		);
 	};

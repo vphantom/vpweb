@@ -267,16 +267,19 @@ $.forever('script[type$="/json"][vp-editeur-data]', el =>
 );
 
 // Queue up editors
-$.forever('vp-editeur', el => {
-	const name = $.get(el, 'vp-name');
-	let conf = {
-		w: el,
-		e: !!name,
-		sn: $.get(el, 'vp-schema') || null,
-		dn: $.get(el, 'vp-data') || null,
-		n: name || null,
-	};
-	if (!launch_if_ready(conf)) pending.push(conf);
-});
+class Editeur extends HTMLElement {
+	connectedCallback() {
+		const name = $.get(this, 'vp-name');
+		const conf = {
+			w: this,
+			e: !!name,
+			sn: $.get(this, 'vp-schema') || null,
+			dn: $.get(this, 'vp-data') || null,
+			n: name || null,
+		};
+		if (!launch_if_ready(conf)) pending.push(conf);
+	}
+}
+customElements.define('vp-editeur', Editeur);
 
 export {};

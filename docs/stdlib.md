@@ -61,7 +61,7 @@ Map an object by key to an array.
 * `obj` — `Object` — What to iterate over
 * `f(key,value)` — `function(string,*):*` — Map a key to another value
 
-**Returns:** {Array}
+**Returns:** `Array` — All results of f()
 
 
 ## `function fold(list, acc, f)`
@@ -112,7 +112,7 @@ Compare two scalars, returning 1, 0 or -1 depending on whether A is greater than
 * `a` — `string|number`
 * `b` — `string|number`
 
-**Returns:** {number}
+**Returns:** `number` — Result
 
 
 ## `function cmp_bool(f, a, b)`
@@ -134,7 +134,7 @@ Tests whether something is a plain object (a.k.a. "object literal").
 
 * `o` — `*` — Anything
 
-**Returns:** {boolean}
+**Returns:** `boolean` — Result
 
 <!-- END DOC-COMMENT -->
 

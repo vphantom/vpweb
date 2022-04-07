@@ -65,7 +65,7 @@ function map(list, f) {
  * @param {Object} obj What to iterate over
  * @param {function(string,*):*} f(key,value) Map a key to another value
  *
- * @return {Array}
+ * @return {Array} All results of f()
  */
 function map_obj(obj, f) {
 	return map(Object.keys(obj), k => f(k, obj[k]));
@@ -112,7 +112,7 @@ const shifter = l => Function.prototype.call.bind(ap.shift, l);
  * @param {string|number} a
  * @param {string|number} b
  *
- * @return {number}
+ * @return {number} Result
  */
 function cmp(a, b) {
 	return a == b ? 0 : a > b ? 1 : -1;
@@ -124,7 +124,7 @@ function cmp(a, b) {
  *
  * @param {function(*):boolean} f Evaluator
  *
- * @result {number}
+ * @result {number} Result
  */
 function cmp_bool(f, a, b) {
 	const fa = f(a),
@@ -139,7 +139,7 @@ function cmp_bool(f, a, b) {
  *
  * @param {*} o Anything
  *
- * @return {boolean}
+ * @return {boolean} Result
  */
 function isPlainObject(o) {
 	if (!o) return false;

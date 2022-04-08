@@ -31,7 +31,7 @@
   ],
   "devDependencies": {
     "cssnano": "^5.1.5",
-    "docblox2md": "^0.7.1",
+    "docblox2md": "^0.7.2",
     "postcss-advanced-variables": "^3.0.1",
     "postcss-assets": "^6.0.0",
     "postcss-cli": "^9.1.0",

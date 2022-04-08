@@ -1,11 +1,3 @@
-## Library
-
-- [ ] JSDoc `stdlib.js`
-
-- [ ] JSDoc `browser.js`
-
-- [ ] Use `docblox2md` or whatever the de-facto standard is to generate Markdown documentation from JSDoc
-
 ## Components
 
 ### Editeur
@@ -33,6 +25,8 @@ More or less a port/cleanup of the old Merino jQuery widget, which had some seri
 - [ ] Support the `formaction` attribute of clicked elements.
 
 ## CSS
+
+Full refactor before going any further.  It's too heavy, the SVG-in-CSS choice has unpleasant drawbacks to re-evaluate, and relying on bits of JS for the more interactive components is now perfectly acceptable.
 
 - [ ] https://caniuse.com/css-writing-mode
 

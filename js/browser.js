@@ -48,9 +48,7 @@ const prev = n => n.previousElementSibling;
  * @param {Element} el    Element
  * @param {Object}  attrs All attributes to set
  */
-function set(el, attrs) {
-	iter_obj(attrs, (k, v) => el.setAttribute(k, v));
-}
+const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
 
 /**
  * Set multiple style properties at once. Wraps
@@ -59,9 +57,7 @@ function set(el, attrs) {
  * @param {Element} el    Element
  * @param {Object}  attrs All attributes to set
  */
-function style(el, attrs) {
-	iter_obj(attrs, (k, v) => el.style.setProperty(k, v));
-}
+const style = (e, o) => iter_obj(o, (k, v) => e.style.setProperty(k, v));
 
 /**
  * Create text node
@@ -70,9 +66,7 @@ function style(el, attrs) {
  *
  * @return {Text} Text node
  */
-function text(str) {
-	document.createTextNode(String(str));
-}
+const text = t => document.createTextNode(String(t));
 
 /**
  * Alias of `Element.removeAttribute()`

@@ -15,7 +15,7 @@ Iterator of anything indexable with a length.  Skips undefined items.
 * `f(item,i)` — `function(*,number):void` — Operation to perform
 
 
-## `function iter_f(f)`
+## `const iter_f`
 
 Create an iterator which will skip undefined items. 
 
@@ -27,7 +27,7 @@ Create an iterator which will skip undefined items.
 **Returns:** `function(*):void` — Function which will iterate over its argument
 
 
-## `function iter_obj(obj, f)`
+## `const iter_obj`
 
 Iterate over all keys of an object.  Does not filter. 
 
@@ -51,7 +51,7 @@ Filtering mapper of anything indexable with a length, skipping undefined items a
 **Returns:** `Array` — All non-undefined results of f()
 
 
-## `function map_obj(obj, f)`
+## `const map_obj`
 
 Map an object by key to an array. 
 
@@ -96,7 +96,7 @@ Create a function which will shift this array-like thing
 **Returns:** `function():*` — Function which will shift list at each call
 
 
-## `function cmp(a, b)`
+## `const cmp`
 
 Compare two scalars, returning 1, 0 or -1 depending on whether A is greater than, equal to or less than B. 
 

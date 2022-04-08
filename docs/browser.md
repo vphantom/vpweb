@@ -35,7 +35,7 @@ Alias of `Node.previousElementSibling`
 
 
 
-## `function set(el, attrs)`
+## `const set`
 
 Set multiple element attributes at once.  Wraps `Element.setAttribute()`. 
 
@@ -46,7 +46,7 @@ Set multiple element attributes at once.  Wraps `Element.setAttribute()`.
 * `attrs` — `Object` — All attributes to set
 
 
-## `function style(el, attrs)`
+## `const style`
 
 Set multiple style properties at once. Wraps `CSSStyleDeclaration.setProperty()`. 
 
@@ -57,7 +57,7 @@ Set multiple style properties at once. Wraps `CSSStyleDeclaration.setProperty()`
 * `attrs` — `Object` — All attributes to set
 
 
-## `function text(str)`
+## `const text`
 
 Create text node 
 

@@ -25,9 +25,7 @@ function iter(list, f) {
  *
  * @return {function(*):void} Function which will iterate over its argument
  */
-function iter_f(f) {
-	return list => iter(list, f);
-}
+const iter_f = f => list => iter(list, f);
 
 /**
  * Iterate over all keys of an object.  Does not filter.
@@ -35,9 +33,7 @@ function iter_f(f) {
  * @param {Object} obj What to iterate over
  * @param {function(string,*):void} f(key,value) Operation to perform on each key
  */
-function iter_obj(obj, f) {
-	iter(Object.keys(obj), k => f(k, obj[k]));
-}
+const iter_obj = (obj, f) => iter(Object.keys(obj), k => f(k, obj[k]));
 
 /**
  * Filtering mapper of anything indexable with a length, skipping undefined
@@ -67,9 +63,7 @@ function map(list, f) {
  *
  * @return {Array} All results of f()
  */
-function map_obj(obj, f) {
-	return map(Object.keys(obj), k => f(k, obj[k]));
-}
+const map_obj = (obj, f) => map(Object.keys(obj), k => f(k, obj[k]));
 
 /**
  * Fold anything indexable with a length.
@@ -110,9 +104,7 @@ const shifter = l => Function.prototype.call.bind(ap.shift, l);
  *
  * @return {number} Result
  */
-function cmp(a, b) {
-	return a == b ? 0 : a > b ? 1 : -1;
-}
+const cmp = (a, b) => (a == b ? 0 : a > b ? 1 : -1);
 
 /**
  * Compare two things with a callback, returning 1, 0 or -1 depending on whether

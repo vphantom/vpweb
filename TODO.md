@@ -4,11 +4,13 @@
 
 - [ ] Repeatable: add entries/rows via additional disabled entry until clicked
 
-- [ ] Repeatable: remove existing entries/rows (might need to mark for deletion instead of removing if there's an issue with array index?)
+- [ ] Repeatable: remove existing entries/rows (mark for deletion with `null`)
 
 - [ ] For select and select multiple, we'll wait until we have Select and then revisit "combo" for something more general.  (One or multiple, allow arbitrary or not.)  Single selects up to X items should be radio buttons, above should be a select, and multiple should be a `<vp-select>`.
 
 - [ ] When CSS table will be (re-)done, consider using it here.
+
+- [ ] Add an alternate "send changes only" edit mode.
 
 ### Select
 

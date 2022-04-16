@@ -2,23 +2,22 @@
 
 Add-on conveniences to make writing Vanilla JavaScript more expressive.
 
+Usage: `import { ... } from 'vpweb/stdlib';`
+
 <!-- BEGIN DOC-COMMENT H2 js/stdlib.js -->
 
 ## `function iter(list, f)`
 
-Iterator of anything indexable with a length.  Skips undefined items. 
-
+Iterator of anything indexable with a length.  Skips undefined items.
 
 **Parameters:**
 
 * `list` — `*` — What to iterate over
 * `f(item,i)` — `function(*,number):void` — Operation to perform
 
-
 ## `const iter_f`
 
-Create an iterator which will skip undefined items. 
-
+Create an iterator which will skip undefined items.
 
 **Parameters:**
 
@@ -26,22 +25,18 @@ Create an iterator which will skip undefined items.
 
 **Returns:** `function(*):void` — Function which will iterate over its argument
 
-
 ## `const iter_obj`
 
-Iterate over all keys of an object.  Does not filter. 
-
+Iterate over all keys of an object.  Does not filter.
 
 **Parameters:**
 
 * `obj` — `Object` — What to iterate over
 * `f(key,value)` — `function(string,*):void` — Operation to perform on each key
 
-
 ## `function map(list, f)`
 
-Filtering mapper of anything indexable with a length, skipping undefined items and undefined callback results. 
-
+Filtering mapper of anything indexable with a length, skipping undefined items and undefined callback results.
 
 **Parameters:**
 
@@ -50,11 +45,9 @@ Filtering mapper of anything indexable with a length, skipping undefined items a
 
 **Returns:** `Array` — All non-undefined results of f()
 
-
 ## `const map_obj`
 
-Map an object by key to an array. 
-
+Map an object by key to an array.
 
 **Parameters:**
 
@@ -63,11 +56,9 @@ Map an object by key to an array.
 
 **Returns:** `Array` — All results of f()
 
-
 ## `function fold(list, acc, f)`
 
-Fold anything indexable with a length. 
-
+Fold anything indexable with a length.
 
 **Parameters:**
 
@@ -75,19 +66,15 @@ Fold anything indexable with a length.
 * `acc` — `*` — Initial value for your accumulator
 * `f(acc,item,i)` — `function(*,*,number):*` — Update accumulator with new value
 
-
 ## `const shift`
 
-Shift operation for Array-like objects 
+Shift operation for Array-like objects
 
-Alias of `Array.prototype.shift()` 
-
-
+Alias of `Array.prototype.shift()`
 
 ## `const shifter`
 
-Create a function which will shift this array-like thing 
-
+Create a function which will shift this array-like thing
 
 **Parameters:**
 
@@ -95,11 +82,9 @@ Create a function which will shift this array-like thing
 
 **Returns:** `function():*` — Function which will shift list at each call
 
-
 ## `const cmp`
 
-Compare two scalars, returning 1, 0 or -1 depending on whether A is greater than, equal to or less than B. 
-
+Compare two scalars, returning 1, 0 or -1 depending on whether A is greater than, equal to or less than B.
 
 **Parameters:**
 
@@ -108,21 +93,17 @@ Compare two scalars, returning 1, 0 or -1 depending on whether A is greater than
 
 **Returns:** `number` — Result
 
-
 ## `function cmp_bool(f, a, b)`
 
-Compare two things with a callback, returning 1, 0 or -1 depending on whether f(a), both or f(b) are true. 
-
+Compare two things with a callback, returning 1, 0 or -1 depending on whether f(a), both or f(b) are true.
 
 **Parameters:**
 
 * `f` — `function(*):boolean` — Evaluator
 
-
 ## `function isPlainObject(o)`
 
-Tests whether something is a plain object (a.k.a. "object literal"). 
-
+Tests whether something is a plain object (a.k.a. "object literal").
 
 **Parameters:**
 

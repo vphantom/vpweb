@@ -22,7 +22,7 @@ if (!ep.matches) {
 // show()/hide()/toggle() ?
 
 /**
- * Alias of `Element.prototype.getAttribute()`
+ * Alias of `HTMLElement.prototype.getAttribute()`
  */
 const get = alias(ep.getAttribute);
 
@@ -43,10 +43,10 @@ const prev = n => n.previousElementSibling;
 
 /**
  * Set multiple element attributes at once.  Wraps
- * `Element.setAttribute()`.
+ * `HTMLElement.setAttribute()`.
  *
- * @param {Element} el    Element
- * @param {Object}  attrs All attributes to set
+ * @param {HTMLElement} el    Element
+ * @param {Object}      attrs All attributes to set
  */
 const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
 
@@ -54,8 +54,8 @@ const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
  * Set multiple style properties at once. Wraps
  * `CSSStyleDeclaration.setProperty()`.
  *
- * @param {Element} el    Element
- * @param {Object}  attrs All attributes to set
+ * @param {HTMLElement} el    Element
+ * @param {Object}      attrs All attributes to set
  */
 const style = (e, o) => iter_obj(o, (k, v) => e.style.setProperty(k, v));
 
@@ -69,7 +69,7 @@ const style = (e, o) => iter_obj(o, (k, v) => e.style.setProperty(k, v));
 const text = t => document.createTextNode(String(t));
 
 /**
- * Alias of `Element.removeAttribute()`
+ * Alias of `HTMLElement.removeAttribute()`
  */
 const unset = alias(ep.removeAttribute);
 
@@ -151,7 +151,7 @@ function prepend(parent, cl) {
  * @param {string|Node|Node[]|NodeList|HTMLCollection} [children] Children to add
  * @param {string|Node|Node[]|NodeList|HTMLCollection} [shadow] Children to add as a shadow DOM
  *
- * @return {Element} Element
+ * @return {HTMLElement} Element
  */
 function h() {
 	const shift = shifter(arguments);
@@ -195,7 +195,7 @@ function H() {
  * @param {Node}   [node] Node (default: `document`)
  * @param {string} sel    Selector
  *
- * @return {Element|null} Result
+ * @return {HTMLElement|null} Result
  */
 function find(node, sel) {
 	if (typeof node === 'string') return find(document, node);
@@ -220,7 +220,7 @@ function all(n, sel) {
  *
  * @param {Node}   [base] Node (default: `document`)
  * @param {string} sel    Selector
- * @param {function(Element):void} f Operation to perform
+ * @param {function(HTMLElement):void} f Operation to perform
  */
 function forall(base, sel, f) {
 	if (typeof base === 'string') return forall(document, base, sel);
@@ -270,9 +270,9 @@ function on(node, name, f, opts, vpo) {
 /**
  * Trigger an event using `dispatchEvent(customEvent())`.
  *
- * @param {Element} [el]     Element (default: `document`)
- * @param {string}  name     Event name
- * @param {*}       [detail] Details to pass to `CustomEvent()`
+ * @param {HTMLElement} [el]     Element (default: `document`)
+ * @param {string}      name     Event name
+ * @param {*}           [detail] Details to pass to `CustomEvent()`
  */
 function trigger(el, n, detail) {
 	if (typeof el === 'string') return trigger(document, el, n);
@@ -399,8 +399,8 @@ function post(url, body, rtype, args, ok, err) {
  * the URL is loaded and the result parsed as JSON.  Otherwise, the content of
  * the script block is parsed as JSON.
  *
- * @param {Element} el     Script
- * @param {Object}  [args] Additional options (see `ajax()`)
+ * @param {HTMLElement} el     Script
+ * @param {Object}      [args] Additional options (see `ajax()`)
  * @param {function(Object):void} [ok] Callback on success
  * @param {function(XMLHttpRequest):void} [err] Callback on failure
  */

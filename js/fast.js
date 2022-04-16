@@ -3,19 +3,22 @@
 
 import * as $ from './browser.js';
 
-// Trigger clicks on mousedown.
-// Saves ~100ms on desktops where clicks are triggered on mouseup.
 // Not interfering with touch devices as a precaution.
-// Click event is fired twice, so we're restricting the feature to cases which
-// should not suffer from it.
 // TODO: is there ANY way to cancel the browser's second click?
 
+/**
+ * Trigger clicks on mousedown events.  Click event is fired twice, so be
+ * careful when adding this behavior to new elements.
+ *
+ * @param {HTMLElement} el Element to monitor
+ */
+function preclick(el) {
+	const fire = ev => (ev.button === 0 ? ev.target.click() : null);
+	$.on(el, 'mousedown', fire, null, { mute: 1000 });
+}
 $.forever(
 	'[vp-fast] a[href], a[href][vp-fast], form[vp-fast] [type=submit], form [type=submit][vp-fast]',
-	el => {
-		const fire = ev => (ev.button === 0 ? ev.target.click() : null);
-		$.on(el, 'mousedown', fire, null, { mute: 1000 });
-	}
+	preclick
 );
 
-export {};
+export { preclick };

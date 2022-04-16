@@ -36,23 +36,44 @@ function submit(ev) {
 	$.post(form.action, data, 'document', null, display, display);
 }
 
-$.forever('form[method="vp-json"]', form =>
-	$.on(form, 'submit', submit, {}, { prevent: true, mute: 1000 })
-);
+/**
+ * Take over a form for JSON out, HTML in.
+ *
+ * @param {HTMLFormElement} form The form to take over
+ */
+function json(form) {
+	return $.on(form, 'submit', submit, {}, { prevent: true, mute: 1000 });
+}
+$.forever('form[method="vp-json"]', json);
 
-// Auto-expanding inputs
-class Expanding extends HTMLInputElement {
-	connectedCallback() {
-		if (/^(email|number|password|search|text|url)$/.test(this.type)) {
-			const small = this.type === 'number' ? '32px' : '16px';
-			$.style(this, { width: small });
-			$.on(this, ['blur', 'change', 'input', 'keydown'], () => {
-				this.style.width = small;
-				this.style.width = `${this.scrollWidth + 10}px`;
-			});
-		}
+/**
+ * Auto-expanding inputs.  Types `email`, `number`, `password`, `search`,
+ * `text`, `url` are supported.
+ *
+ * @param {HTMLInputElement} input The input to squeeze
+ */
+function expanding(input) {
+	if (/^(email|number|password|search|text|url)$/.test(input.type)) {
+		const small = input.type === 'number' ? '32px' : '16px';
+		$.style(input, { width: small });
+		$.on(input, ['blur', 'change', 'input', 'keydown'], () => {
+			input.style.width = small;
+			input.style.width = `${input.scrollWidth + 10}px`;
+		});
 	}
 }
-customElements.define('vp-expanding', Expanding, { extends: 'input' });
+$.forever('input[vp-expanding]', expanding);
 
-export {};
+/**
+ * Include field in form data once it will be modified.
+ *
+ * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} input Field
+ * @param {string} [name] Name to use (overrides `vp-name`)
+ */
+function ghost(input, name) {
+	name = name || $.get(input, 'vp-name');
+	return $.on(input, 'change', () => $.set(input, { name: name }));
+}
+$.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
+
+export { expanding, ghost, json };

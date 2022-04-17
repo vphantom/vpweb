@@ -1,6 +1,6 @@
 {
   "name": "vpweb",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Vanilla+: minimalistic web interface development library",
   "type": "module",
   "exports": {
@@ -21,13 +21,14 @@
   "homepage": "https://github.com/vphantom/vpweb",
   "files": [
     "LICENSE.txt",
+    "Makefile",
     "README.md",
     "dist/*",
     "docs/*.html",
     "docs/*.css",
     "js/*.js",
     "scss/*.scss",
-    "scss/icons/*.svg"
+    "scss/icons/check-white.svg"
   ],
   "devDependencies": {
     "cssnano": "^5.1.5",

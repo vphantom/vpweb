@@ -7,8 +7,8 @@ import * as $ from './browser.js';
 // TODO: is there ANY way to cancel the browser's second click?
 
 /**
- * Trigger clicks on mousedown events.  Click event is fired twice, so be
- * careful when adding this behavior to new elements.
+ * Manually make an element trigger clicks on mousedown events.  Click event is
+ * fired twice, so be careful when adding this behavior to new elements.
  *
  * @param {HTMLElement} el Element to monitor
  */

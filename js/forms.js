@@ -47,8 +47,8 @@ function json(form) {
 $.forever('form[method="vp-json"]', json);
 
 /**
- * Auto-expanding inputs.  Types `email`, `number`, `password`, `search`,
- * `text`, `url` are supported.
+ * Manually make auto-expanding inputs.  Types `email`, `number`, `password`,
+ * `search`, `text`, `url` are supported.
  *
  * @param {HTMLInputElement} input The input to squeeze
  */
@@ -65,7 +65,7 @@ function expanding(input) {
 $.forever('input[vp-expanding]', expanding);
 
 /**
- * Include field in form data once it will be modified.
+ * Manually make a field be included form data only once it will be modified.
  *
  * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} input Field
  * @param {string} [name] Name to use (overrides `vp-name`)

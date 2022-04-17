@@ -27,6 +27,8 @@ Example usage:
 </form>
 ```
 
+This is a custom element and is thus available inside shadow DOMs.
+
 The optional JSON scripts may be inline or referenced with `src`, in which case they will be loaded asynchronously.  Without `vp-name` is read-only mode, in which case `<form>` is not necessary.  At least one of `vp-schema` or `vp-data` must be specified in order to display anything.  Attributes:
 
 * **`vp-schema`** Name of schema definition to apply (optional)

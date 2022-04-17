@@ -1,6 +1,6 @@
 # Vanilla+
 
-**WARNING: PROOF OF CONCEPT ONLY!**  An eventual version 1.0 is expected by 2023.  This is a back-burner project for me as of 2022.
+**WARNING: CURRENTLY AT THE PROTOTYPE STAGE!**  An eventual version 1.0 is expected by 2023.  This is a back-burner project for me as of 2022.
 
 [![license](https://img.shields.io/github/license/vphantom/vpweb.svg?style=plastic)]()
 [![GitHub release](https://img.shields.io/github/release/vphantom/vpweb.svg?style=plastic)]()
@@ -57,6 +57,10 @@ import 'vpweb/vpweb';
 <!-- Option 2: load as stand-alone script -->
 <script src="dist/vpweb.min.js"></script>
 ```
+
+You may also use individual components, although if you use more than one as stand-alone scripts, there will be some redundancy.
+
+Note that components triggered by attributes or class names cannot self-activate inside shadow DOMs.  If you want to use Vanilla+ components inside those, you'll need to activate them manually (for example, with `fast.preclick(element)`).  See each component's documentation below for manual activation usage.
 
 ### [Editeur](docs/editeur.md)
 

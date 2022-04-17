@@ -57,7 +57,7 @@ Take over a form for JSON out, HTML in.
 
 ## `function expanding(input)`
 
-Auto-expanding inputs.  Types `email`, `number`, `password`, `search`, `text`, `url` are supported.
+Manually make auto-expanding inputs.  Types `email`, `number`, `password`, `search`, `text`, `url` are supported.
 
 **Parameters:**
 
@@ -65,7 +65,7 @@ Auto-expanding inputs.  Types `email`, `number`, `password`, `search`, `text`, `
 
 ## `function ghost(input, name)`
 
-Include field in form data once it will be modified.
+Manually make a field be included form data only once it will be modified.
 
 **Parameters:**
 

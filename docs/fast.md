@@ -21,7 +21,7 @@ import 'vpweb/fast';
 
 ## `function preclick(el)`
 
-Trigger clicks on mousedown events.  Click event is fired twice, so be careful when adding this behavior to new elements.
+Manually make an element trigger clicks on mousedown events.  Click event is fired twice, so be careful when adding this behavior to new elements.
 
 **Parameters:**
 

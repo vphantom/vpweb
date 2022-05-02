@@ -25,11 +25,16 @@ See [TODO](TODO.md) for details of what's coming up.
 npm install vpweb
 ```
 
-## CSS Framework
+## CSS FRAMEWORK
+
+Main objectives:
+
+- Responsive, but with desktop as a **first-class citizen**
+- Pure CSS wherever JS wouldn't significantly simplify
 
 Documentation: `docs/css.html`
 
-## JS Library
+## JS LIBRARY
 
 **Docs:** [Stdlib](docs/stdlib.md) | [Browser](docs/browser.md)
 
@@ -47,7 +52,7 @@ Specifically avoided are:
 - To alias or wrap the entire DOM API
 - Other development comforts which would cost run-time overhead (i.e. a universal `$()`)
 
-## Components
+## COMPONENTS
 
 **Docs:** [Editeur](docs/editeur.md) | [Fast Clicks](docs/fast.md) | [Forms](docs/forms.md)
 

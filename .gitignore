@@ -1,5 +1,7 @@
 *~
 .tags
+*.br
+*.gz
 *.map
 dist/
 docs/css.css

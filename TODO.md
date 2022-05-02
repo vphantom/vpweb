@@ -26,6 +26,8 @@ More or less a port/cleanup of the old Merino jQuery widget, which had some seri
 
 - [ ] Figure out a way to avoid `click` triggering twice, so we could make it available to anything clickable.
 
+- [ ] Scroll to top upon receipt if we swap the entire `<body>`
+
 ### Forms
 
 - [ ] Support the `formaction` attribute of clicked elements.
@@ -37,18 +39,8 @@ More or less a port/cleanup of the old Merino jQuery widget, which had some seri
 Full refactor before going any further.  It's too heavy, the SVG-in-CSS choice has unpleasant drawbacks to re-evaluate, and relying on bits of JS for the more interactive components is now perfectly acceptable.
 
 - [ ] We dropped MSIE 11 support. We can refactor to save space and use:
-    * CSS Variables
-	* calc()
 	* mix-blend-mode
 	* filter()
-
-- [ ] https://caniuse.com/css-writing-mode
-
-- [ ] https://caniuse.com/css-grid
-
-- [ ] https://developer.mozilla.org/en-US/docs/Web/CSS/@media/aspect-ratio
-
-- [ ] PureCSS vs PicoCSS philosophy
 
 - [ ] Labels inside inputs is battle-tested, but is it still the best mechanism for lists of identical inputs?  Do they happen enough that we should study this case?
 

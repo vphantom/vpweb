@@ -1,4 +1,4 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 /* Focus */
 
@@ -24,8 +24,7 @@
 /* Default margin */
 .vp-form button,
 .vp-button {
-	/* FIXME: should depend on density */
-	margin-bottom: $padding-spaced;
+	margin-bottom: var(--vp-pad);
 }
 
 /* Buttons */
@@ -39,21 +38,20 @@
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
-	text-shadow: 0 0 1px rgba($color-dim, 0.33);
+	text-shadow: 0 0 1px rgba(var(--vp-dim), 0.33);
 	cursor: pointer;
 	user-select: none;
 	border: none;
 	outline: none;
 	line-height: normal;
 	color: #000;
-	background-color: rgba($color-dim, 0.125);
+	background-color: rgba(var(--vp-dim), 0.125);
 }
 
 .vp-form button,
 .vp-button {
 	padding: 0.5em 1em;
-	/* FIXME: bottom should depend on density */
-	margin: 0 0.33em $padding-spaced 0;
+	margin: 0 0.33em var(--vp-pad) 0;
 	border-radius: $small-radius;
 	background-image: linear-gradient(
 		180deg,
@@ -150,8 +148,7 @@
 .vp-icon-button.vp-icon-button {
 	border-radius: 4em;
 	padding: 0.35em;
-	/* FIXME: bottom should depend on density */
-	margin: 0 0.5em $padding-spaced 0;
+	margin: 0 0.5em var(--vp-pad) 0;
 	width: 1.75em;
 	height: 1.75em;
 	background-image: none;
@@ -159,7 +156,7 @@
 	font-size: calc(11mm / 1.75);
 }
 .vp-icon-button.vp-icon-button.is-secondary {
-	background-color: rgba($color-dim, 0.125);
+	background-color: rgba(var(--vp-dim), 0.125);
 	box-shadow: none;
 	font-size: calc(8.5mm / 1.75);
 }
@@ -190,16 +187,16 @@ label.vp-field textarea {
 	display: block;
 	width: 100%;
 	outline: none;
-	border: 1px solid rgba($color-dim, 0.75);
+	border: 1px solid rgba(var(--vp-dim), 0.75);
 	border-radius: 0.2em;
 	padding: 1.75em 0.5em 0.5em 0.5em;
-	background-color: rgba($color-dim, 0.02);
+	background-color: rgba(var(--vp-dim), 0.02);
 }
 label.vp-field :disabled {
-	color: rgba($color-dim, 0.75);
+	color: rgba(var(--vp-dim), 0.75);
 	cursor: not-allowed;
 	cursor: no-drop;
-	background-color: rgba($color-dim, 0.125);
+	background-color: rgba(var(--vp-dim), 0.125);
 }
 label.vp-field .vp-label {
 	display: block;
@@ -215,7 +212,7 @@ label.vp-field textarea {
 	height: 6em;
 }
 
-[class*="vp-col-"] > .vp-field {
+[class*='vp-col-'] > .vp-field {
 	width: 100%;
 }
 
@@ -225,70 +222,67 @@ label.vp-field textarea {
 	vertical-align: top;
 }
 
-form.vp-density-spaced .vp-label {
-	margin-right: $padding-spaced;
-}
-form.vp-density-relaxed .vp-label,
-form.vp-density-relaxed button,
-form.vp-density-relaxed .vp-button {
-	margin-right: $padding-relaxed;
+.vp-label,
+.vp-form button,
+.vp-button {
+	margin-right: var(--vp-pad);
 }
 
 /* Checkbox, Radio */
-.vp-form label [type="checkbox"],
-.vp-form label [type="radio"] {
+.vp-form label [type='checkbox'],
+.vp-form label [type='radio'] {
 	position: absolute;
 	left: -9999px;
 }
 
-.vp-form label [type="checkbox"] + .vp-label,
-.vp-form label [type="radio"] + .vp-label {
+.vp-form label [type='checkbox'] + .vp-label,
+.vp-form label [type='radio'] + .vp-label {
 	display: block;
 	position: relative;
 	margin-left: 2em;
 }
 
-.vp-form label [type="checkbox"] + .vp-label::before,
-.vp-form label [type="radio"] + .vp-label::before,
-.vp-form label [type="radio"]:checked + .vp-label::after {
+.vp-form label [type='checkbox'] + .vp-label::before,
+.vp-form label [type='radio'] + .vp-label::before,
+.vp-form label [type='radio']:checked + .vp-label::after {
 	user-select: none;
 	display: block;
 	position: absolute;
 	left: -2em;
 	width: 1.33em;
 	height: 1.33em;
-	content: "";
+	content: '';
 }
-.vp-form label [type="checkbox"] + .vp-label::before,
-.vp-form label [type="radio"] + .vp-label::before {
+.vp-form label [type='checkbox'] + .vp-label::before,
+.vp-form label [type='radio'] + .vp-label::before {
 	border: 1px solid #333;
 	background-color: #fff;
 }
-.vp-form label [type="radio"] + .vp-label::after {
+.vp-form label [type='radio'] + .vp-label::after {
 	top: 0;
 	border-radius: 100rem;
 	background-color: #333;
 	transform: scale(0.45);
 }
 
-.vp-form label [type="checkbox"] + .vp-label::before {
+.vp-form label [type='checkbox'] + .vp-label::before {
 	border-radius: $tiny-radius;
 	background-size: cover;
 	padding: 0.1em;
 }
-.vp-form label [type="radio"] + .vp-label::before {
+.vp-form label [type='radio'] + .vp-label::before {
 	border-radius: 100rem;
 }
 
-.vp-form label [type="checkbox"]:checked + .vp-label::before {
+.vp-form label [type='checkbox']:checked + .vp-label::before {
 	background-color: #333;
-	background-image: inline("icons/check-white.svg");
+	background-image: inline('icons/check-white.svg');
 }
 
 .vp-form label :disabled + .vp-label {
 	color: #888;
 }
-.vp-form label [type="checkbox"]:disabled + .vp-label::before {
+.vp-form label [type='checkbox']:disabled + .vp-label::before {
 	background-color: #888;
 }
 .vp-form label :disabled + .vp-label::before {
@@ -317,7 +311,7 @@ form.vp-density-relaxed .vp-button {
 
 /* Responsive */
 
-@include media-touch {
+@include media-nomouse {
 	.vp-icon-button.vp-icon-button {
 		font-size: calc(15mm / 1.75);
 	}
@@ -331,12 +325,12 @@ form.vp-density-relaxed .vp-button {
 	.vp-label,
 	.vp-form button,
 	.vp-button,
-	.vp-form [type="submit"],
-	.vp-form [type="reset"],
-	.vp-form [type="button"],
-	.vp-form label [type="checkbox"] + .vp-label::before,
-	.vp-form label [type="radio"] + .vp-label::before,
-	.vp-form label [type="radio"]:checked + .vp-label::after {
+	.vp-form [type='submit'],
+	.vp-form [type='reset'],
+	.vp-form [type='button'],
+	.vp-form label [type='checkbox'] + .vp-label::before,
+	.vp-form label [type='radio'] + .vp-label::before,
+	.vp-form label [type='radio']:checked + .vp-label::after {
 		min-width: 15mm;
 		min-height: 15mm;
 	}
@@ -363,14 +357,14 @@ form.vp-density-relaxed .vp-button {
 		line-height: calc(19mm - 1em);
 	}
 
-	.vp-form label [type="checkbox"] + .vp-label::before,
-	.vp-form label [type="radio"] + .vp-label::before,
-	.vp-form label [type="radio"]:checked + .vp-label::after {
+	.vp-form label [type='checkbox'] + .vp-label::before,
+	.vp-form label [type='radio'] + .vp-label::before,
+	.vp-form label [type='radio']:checked + .vp-label::after {
 		border-width: 2px;
 		left: calc(-15mm - 1mm);
 	}
-	.vp-form label [type="checkbox"] + .vp-label,
-	.vp-form label [type="radio"] + .vp-label {
+	.vp-form label [type='checkbox'] + .vp-label,
+	.vp-form label [type='radio'] + .vp-label {
 		margin-left: calc(15mm + 1mm);
 	}
 }

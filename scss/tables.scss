@@ -1,4 +1,4 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 .vp-table {
 	position: relative;
@@ -6,7 +6,7 @@
 }
 
 .vp-table th {
-	background-color: rgba($color-dim, 0.2);
+	background-color: rgba(var(--vp-dim), 0.2);
 }
 
 table.vp-stick-vertical thead tr > th,
@@ -35,7 +35,7 @@ table.vp-stick-horizontal tfoot tr > th:first-child {
 }
 
 .vp-table.vp-striped tbody tr:nth-child(even) > td {
-	background-color: rgba($color-dim, 0.05);
+	background-color: rgba(var(--vp-dim), 0.05);
 }
 
 .vp-table tr > * {
@@ -43,10 +43,10 @@ table.vp-stick-horizontal tfoot tr > th:first-child {
 	vertical-align: top;
 }
 .vp-table.vp-horizontal tbody tr > * {
-	border-bottom: 1px solid rgba($color-dim, 0.33);
+	border-bottom: 1px solid rgba(var(--vp-dim), 0.33);
 }
 .vp-table.vp-gridded tr > * {
-	border: 1px solid rgba($color-dim, 0.33);
+	border: 1px solid rgba(var(--vp-dim), 0.33);
 }
 
 @for $i from 1 through 12 {
@@ -58,14 +58,8 @@ table.vp-stick-horizontal tfoot tr > th:first-child {
 .vp-table tr > .is-numeric {
 	text-align: right;
 }
-table.vp-density-relaxed tr > * {
-	padding: calc($padding-relaxed / 2) $padding-relaxed;
-}
-table.vp-density-spaced tr > * {
-	padding: calc($padding-spaced / 2) $padding-spaced;
-	font-size: 90%;
-}
-table.vp-density-seamless tr > * {
+.vp-table tr > * {
+	padding: calc(var(--vp-pad) / 2) var(--vp-pad);
 	font-size: 90%;
 }
 
@@ -79,7 +73,7 @@ table.vp-density-seamless tr > * {
 		width: 100%;
 	}
 	.vp-table.vp-stacking tbody tr {
-		border-bottom: 2px solid rgba($color-dim, 0.33);
+		border-bottom: 2px solid rgba(var(--vp-dim), 0.33);
 	}
 	.vp-table.vp-stacking.vp-stacking th,
 	.vp-table.vp-stacking.vp-stacking td {

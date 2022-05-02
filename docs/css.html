@@ -4,7 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
-	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp-sans vp-density-relaxed">
+	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp vp-sans vp-spaced">
 		<header class="vp-container">
 			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
 		</header>
@@ -15,22 +15,13 @@
 				<section>
 					<h2>Introduction</h2>
 					<p>
-					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be
-					minuscule, restricted to pure CSS, without sacrificing esthetics which contribute to usability.  It strays from
-					the extreme simplicity of the flat layered "paper" trend, in favor of more classic visual cues enhanced to use
-					modern browser capabilities.
+					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be as small as possible, with pure CSS solutions where possible, without sacrificing esthetics which contribute to usability.  It strays from the extreme simplicity of the flat layered "paper" trend in favor of more classic visual cues enhanced for modern browsers.
 					</p>
 					<p>
-					Almost all classes begin with the prefix <code>vp-</code> to prevent collisions with other frameworks.  For
-					brevity, there is no prefix for attribute classes like <code>is-<em>something</em></code>,
-					<code>has-<em>something</em></code> and <code>size-<em>something</em></code>.  Truly independent features like
-					messages have their own custom HTML tag names, like <code class="html-tag">vp-message</code> instead of being
-					set up as a class to be applied on a <code class="html-tag">div</code> or a <code class="html-tag">span</code>
+					Almost all classes and custom elements begin with the prefix <code>vp-</code> to prevent collisions with other frameworks.  For brevity, there is no prefix for attribute classes like <code>is-<em>something</em></code>, <code>has-<em>something</em></code> and <code>size-<em>something</em></code>.
 					</p>
 					<p>
-					Compiled CSS files are located in <code>dist/</code>.  You may use <code>vpweb.css</code> to get the entire
-					framework at once, or just some of the individual files described below.  Be sure to import
-					<code>core.css</code> first in order to avoid priority side-effects.
+					Compiled CSS files are located in <code>dist/</code>.  You may use <code>vpweb.css</code> to get the entire framework at once, or just some of the individual files described below.  Be sure to import <code>core.css</code> first in order to avoid priority side-effects.
 					</p>
 				</section>
 				<section>
@@ -38,7 +29,7 @@
 					<p>
 					The entire framework (<code>vpweb.css</code>) is smaller than a typical company logo image:
 					</p>
-					<table id="vp-sizes" class="vp-table vp-2d vp-horizontal vp-density-relaxed">
+					<table id="vp-sizes" class="vp-table vp-2d vp-horizontal vp-relaxed">
 						<thead>
 							<tr>
 								<th></th>
@@ -49,14 +40,13 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>18.7KB</td><td>4.7KB</td><td>4.0KB</td></tr>
-<tr><th>core.css</th><td>2.8KB</td><td>1.2KB</td><td>1.0KB</td></tr>
-<tr><th>forms.css</th><td>6.6KB</td><td>1.7KB</td><td>1.4KB</td></tr>
-<tr><th>grid.css</th><td>2.3KB</td><td>0.4KB</td><td>0.4KB</td></tr>
-<tr><th>layout.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
-<tr><th>messages.css</th><td>1.4KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>tables.css</th><td>1.8KB</td><td>0.6KB</td><td>0.5KB</td></tr>
-<tr><th>tabs.css</th><td>1.4KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>vpweb.css</th><td>16.7KB</td><td>4.5KB</td><td>3.9KB</td></tr>
+<tr><th>core.css</th><td>3.9KB</td><td>1.5KB</td><td>1.3KB</td></tr>
+<tr><th>forms.css</th><td>6.4KB</td><td>1.7KB</td><td>1.4KB</td></tr>
+<tr><th>grid.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
+<tr><th>messages.css</th><td>1.1KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>tables.css</th><td>1.6KB</td><td>0.6KB</td><td>0.4KB</td></tr>
+<tr><th>tabs.css</th><td>1.2KB</td><td>0.5KB</td><td>0.3KB</td></tr>
 <tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>transitions.css</th><td>0.4KB</td><td>0.3KB</td><td>0.2KB</td></tr>
 <!-- END SIZES -->
@@ -66,8 +56,7 @@
 				<section>
 					<h3>Browser Support</h3>
 					<p>
-					We aim to be compatible with "long term support" versions
-					since most of our users are in corporate environments.
+					We aim to be compatible with "long term support" versions since most of our users are in corporate environments.  This means that as of June 2022, we dropped support for all "legacy" versions of Microsoft Edge.
 					</p>
 					<dl>
 						<dt>Chrome/Edge/Opera</dt><dd>79 (2020)</dd>
@@ -116,49 +105,41 @@
 				<section>
 					<h3>Density</h3>
 					<p>
-					Three classes are recognized by various modules as indicative of spacing to use between items.  The least
-					relaxed has the highest priority.  For example, grids recognize them as padding:
+					Three classes are recognized by various modules (i.e. grid) as indicative of spacing to use between items.  The closest parent or self has priority.
 					</p>
-					<div class="vp-grid vp-density-seamless">
-						<div class="vp-24-8"><code class="box">.vp-density-seamless</code></div>
-						<div class="vp-24-8"><code class="box">.vp-density-seamless</code></div>
-						<div class="vp-24-8"><code class="box">.vp-density-seamless</code></div>
+					<div class="vp-seamless" vp-grid="12">
+						<div vp-cell="4"><code class="box">.vp-seamless</code></div>
+						<div vp-cell="4"><code class="box">.vp-seamless</code></div>
+						<div vp-cell="4"><code class="box">.vp-seamless</code></div>
 					</div>
-					<div class="vp-grid vp-density-spaced">
-						<div class="vp-24-8"><code class="box">.vp-density-spaced</code></div>
-						<div class="vp-24-8"><code class="box">.vp-density-spaced</code></div>
-						<div class="vp-24-8"><code class="box">.vp-density-spaced</code></div>
+					<div class="vp-spaced" vp-grid="12">
+						<div vp-cell="4"><code class="box">.vp-spaced</code></div>
+						<div vp-cell="4"><code class="box">.vp-spaced</code></div>
+						<div vp-cell="4"><code class="box">.vp-spaced</code></div>
 					</div>
-					<div class="vp-grid vp-density-relaxed">
-						<div class="vp-24-8"><code class="box">.vp-density-relaxed</code></div>
-						<div class="vp-24-8"><code class="box">.vp-density-relaxed</code></div>
-						<div class="vp-24-8"><code class="box">.vp-density-relaxed</code></div>
+					<div class="vp-relaxed" vp-grid="12">
+						<div vp-cell="4"><code class="box">.vp-relaxed</code></div>
+						<div vp-cell="4"><code class="box">.vp-relaxed</code></div>
+						<div vp-cell="4"><code class="box">.vp-relaxed</code></div>
 					</div>
 				</section>
-
-
-			</section>
-
-
-			<section>
-				<h2>Layout <code>layout.css</code></h2>
 				<section>
 					<h3>Responsive</h3>
 					<p>
-					Certain classes restrict which devices can see an element, by viewport width or display type.  Note that the
-					names "mobile", "tablet" and "desktop" are used as nicknames for the three responsive size ranges, not as true
-					device identification.  CSS media queries also use a "device pixel ratio" to define their own meaning for "px",
-					so those are not actual pixels.
+					Certain classes restrict which devices can see an element, by viewport width or display type.  Note that the names "mobile", "tablet" and "desktop" are used as nicknames for the three responsive size ranges, not as true device identification.  CSS media queries also use a "device pixel ratio" to define their own meaning for "px", so those are not actual pixels.
 					</p>
 					<dl>
 						<dt>Mobile:</dt>
 						<dd>Up to 767px, <code>.vp-mobile-only</code>, <code>.vp-tablet-down</code></dd>
 
 						<dt>Tablet:</dt>
-						<DD>From 768px to 991px, <code>.vp-tablet-only</code>, <code>.vp-tablet-up</code>, <code>.vp-tablet-down</code></dd>
+						<dd>From 768px to 991px, <code>.vp-tablet-only</code>, <code>.vp-tablet-up</code>, <code>.vp-tablet-down</code></dd>
 
 						<dt>Desktop:</dt>
 						<dd>From 992px up, <code>.vp-tablet-up</code>, <code>.vp-desktop-only</code></dd>
+
+						<dt>Pointer:</td>
+						<dd>With at least one fine pointer, <code>.vp-touch-only</code> is hidden. With no fine pointer, <code>.vp-mouse-only</code> is hidden</dd>
 
 						<dt>Print:</dt>
 						<dd><code>.vp-print-only</code>, <code>.vp-screen-only</code> (non-screen is considered "print")</dd>
@@ -173,21 +154,23 @@
 				<section>
 					<h3>Generic Container <code>.vp-container</code></h3>
 					<p>
-					The <code>.vp-container</code> class has side margins dictated by <code>.vp-density-*</code> (self or
-					immediate parent) and limited width on large viewports.
+					The <code>.vp-container</code> class has side margins dictated by density (self or immediate parent) and limited width on large viewports.
 					</p>
 				</section>
 				<section>
-					<h3>Layouts <code>.vp-l-*</code></h3>
+					<h3>Flex Layouts <code>.vp-vfull, .vp-hfull</code></h3>
 					<p>
-					Applicable to any container block, including <code class="html-tag">body</code>.
+					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density setting.
 					</p>
 					<dl>
 
-						<dt><code>.vp-l-3</code></dt>
+						<dt><code>.vp-vfull</code></dt>
 						<dd>
-						3 children, stacked vertically. The middle child expands as necessary to make sure that the third child is
-						always no higher than the bottom of the viewport.  Typical header-main-footer layout.
+						2 or 3 children, stacked vertically. The second child expands as necessary to make sure that the optional third child is always no higher than the bottom of the viewport.
+						</dd>
+						<dt><code>.vp-hfull</code></dt>
+						<dd>
+						Same behavior, but horizontal from left to right.
 						</dd>
 
 					</dl>
@@ -198,71 +181,50 @@
 			<section>
 				<h2>Grid <code>grid.css</code></h2>
 				<p>
-				Two bases (10 and 24) were chosen for their versatility: areas can be divided by
-				2, 3, 4, 5, 6, 8, 10, 12 and 24.
+				Three bases (8, 10, 12) were chosen for their versatility: areas can be divided by 2, 3, 4, 5, 6, 8, 10 and 12.
 				</p>
 				<p>
-				Rows are <code>.vp-row-10</code> or <code>.vp-row-24</code> according to whether you want the row to be divided in
-				10<sup>ths</sup> or 24<sup>ths</sup>.  Columns are <code>.vp-col-X</code> where <code>X</code> is the multiple
-				width.  Rows wrap, so you only need to use multiple row blocks for splitting incomplete lines.
+				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>8</code>, <code>10</code> or <code>12</code>.  Cells inside grids are elements with attribute <code>vp-cell="x"</code> where <code>x</code> is a number between <code>1</code> and <code>12</code>.  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
 				</p>
 				<p>
 				</p>
 				<p>
-				An <code>&lt;img&gt;</code> directly inside a <code>.vp-col-*</code> or wrapped in just an <code
-				class="html-tag">a</code> automatically gets full width.
+				An <code>&lt;img&gt;</code> directly inside a <code>[vp-grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
 				</p>
 				<p>
-				<strong>Caution:</strong> while <code>.vp-col-*</code> spacing is sensitive to <code>.vp-density-*</code> given to
-				its parent row or that row's parent, it also causes a small negative margin on the left and right ends of rows.
-				Therefore, using a page-wide row with non-seamless density will cause horizontal scrolling.  As long as a row's
-				container has at least as much spacing, it is not an issue.  (i.e. A seamless or spaced row fits inside a page-wide
-				relaxed or spaced container.)
+				<strong>Caution:</strong> while spacing is sensitive to density, it also causes a small negative margin on the left and right ends of rows.  Therefore, using a page-wide grid with non-seamless density will cause horizontal scrolling.  As long as a grid's container has at least as much spacing, it is not an issue.  (i.e. A seamless or spaced row fits inside a page-wide relaxed or spaced container.)
 				</p>
 				<section>
-					<h3>Grid of 10<sup>ths</sup> <code>.vp-10-*</code></h3>
-					<div class="grid-demo vp-grid vp-density-seamless vp-mono">
-						<div class="vp-10-1"><div>.vp-10-1</div></div>
-						<div class="vp-10-9"><div>.vp-10-9</div></div>
-						<div class="vp-10-2"><div>.vp-10-2</div></div>
-						<div class="vp-10-8"><div>.vp-10-8</div></div>
-						<div class="vp-10-3"><div>.vp-10-3</div></div>
-						<div class="vp-10-7"><div>.vp-10-7</div></div>
-						<div class="vp-10-4"><div>.vp-10-4</div></div>
-						<div class="vp-10-6"><div>.vp-10-6</div></div>
-						<div class="vp-10-5"><div>.vp-10-5</div></div>
-						<div class="vp-10-5"><div>.vp-10-5</div></div>
-						<div class="vp-10-10"><div>.vp-10-10</div></div>
+					<h3>Grid of 8<sup>ths</sup> <code>vp-grid="8"</code></h3>
+					<div class="grid-demo vp-seamless vp-mono" vp-grid="8">
+						<div vp-cell="1"><div>vp-cell="1"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
+						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
+						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="5"><div>vp-cell="5"</div></div>
+						<div vp-cell="4"><div>vp-cell="4"</div></div> <div vp-cell="4"><div>vp-cell="4"</div></div>
+						<div vp-cell="8"><div>vp-cell="8"</div></div>
 					</div>
 				</section>
 				<section>
-					<h3>Grid of 24<sup>ths</sup> <code>.vp-24-*</code></h3>
-					<div class="grid-demo vp-grid vp-density-seamless vp-mono">
-						<div class="vp-24-1"><div>.vp-24-1</div></div>
-						<div class="vp-24-23"><div>.vp-24-23</div></div>
-						<div class="vp-24-2"><div>.vp-24-2</div></div>
-						<div class="vp-24-22"><div>.vp-24-22</div></div>
-						<div class="vp-24-3"><div>.vp-24-3</div></div>
-						<div class="vp-24-21"><div>.vp-24-21</div></div>
-						<div class="vp-24-4"><div>.vp-24-4</div></div>
-						<div class="vp-24-20"><div>.vp-24-20</div></div>
-						<div class="vp-24-5"><div>.vp-24-5</div></div>
-						<div class="vp-24-19"><div>.vp-24-19</div></div>
-						<div class="vp-24-6"><div>.vp-24-6</div></div>
-						<div class="vp-24-18"><div>.vp-24-18</div></div>
-						<div class="vp-24-7"><div>.vp-24-7</div></div>
-						<div class="vp-24-17"><div>.vp-24-17</div></div>
-						<div class="vp-24-8"><div>.vp-24-8</div></div>
-						<div class="vp-24-16"><div>.vp-24-16</div></div>
-						<div class="vp-24-9"><div>.vp-24-9</div></div>
-						<div class="vp-24-15"><div>.vp-24-15</div></div>
-						<div class="vp-24-10"><div>.vp-24-10</div></div>
-						<div class="vp-24-14"><div>.vp-24-14</div></div>
-						<div class="vp-24-11"><div>.vp-24-11</div></div>
-						<div class="vp-24-13"><div>.vp-24-13</div></div>
-						<div class="vp-24-12"><div>.vp-24-12</div></div>
-						<div class="vp-24-12"><div>.vp-24-12</div></div>
-						<div class="vp-24-24"><div>.vp-24-24</div></div>
+					<h3>Grid of 10<sup>ths</sup> <code>vp-grid="10"</code></h3>
+					<div class="grid-demo vp-seamless vp-mono" vp-grid="10">
+						<div vp-cell="1"><div>1</div></div> <div vp-cell="9"><div>vp-cell="9"</div></div>
+						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="8"><div>vp-cell="8"</div></div>
+						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
+						<div vp-cell="4"><div>vp-cell="4"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
+						<div vp-cell="5"><div>vp-cell="5"</div></div> <div vp-cell="5"><div>vp-cell="5"</div></div>
+						<div vp-cell="10"><div>vp-cell="10"</div></div>
+					</div>
+				</section>
+				<section>
+					<h3>Grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h3>
+					<div class="grid-demo vp-seamless vp-mono" vp-grid="12">
+						<div vp-cell="1"><div>1</div></div> <div vp-cell="11"><div>vp-cell="11"</div></div>
+						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="10"><div>vp-cell="10"</div></div>
+						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="9"><div>vp-cell="9"</div></div>
+						<div vp-cell="4"><div>vp-cell="4"</div></div> <div vp-cell="8"><div>vp-cell="8"</div></div>
+						<div vp-cell="5"><div>vp-cell="5"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
+						<div vp-cell="6"><div>vp-cell="6"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
+						<div vp-cell="12"><div>vp-cell="12"</div></div>
 					</div>
 				</section>
 
@@ -270,14 +232,12 @@
 				<section>
 					<h3>Responsive</h3>
 					<dl>
-						<dt><code>.vp-doubling .vp-col-*</code></dt>
+						<dt><code>.vp-doubling [vp-cell]</code></dt>
 						<dd>
-						Makes grid cells double in relative width when stepping down from "desktop" to "tablet" size, and double
-						again down to "mobile" size. (i.e. A 1/12<sup>th</sup> cell would become 1/6<sup>th</sup> wide in "tablet"
-						viewports and 1/3<sup>rd</sup> wide in "mobile" viewports.)
+						Makes grid cells double in relative width when stepping down from "desktop" to "tablet" size, and double again down to "mobile" size. (i.e. A 1/12<sup>th</sup> cell would become 1/6<sup>th</sup> wide in "tablet" viewports and 1/3<sup>rd</sup> wide in "mobile" viewports.)
 						</dd>
 
-						<dt><code>.vp-stacking .vp-col-*</code></dt>
+						<dt><code>.vp-stacking [vp-cell]</code></dt>
 						<dd>
 						Makes grid cells go full-width for "tablet" and "mobile" sizes.
 						</dd>
@@ -289,20 +249,14 @@
 			<section>
 				<h2>Forms <code>forms.css</code></h2>
 				<p>
-				Note that buttons and input widgets with <code>:focus</code> get a <code>z-index</code> of 1000 or 1001 in addition
-				to the halo.  Note also that margins between some elements is affected by <code>form.vp-density-*</code>.
+				Note that buttons and input widgets with <code>:focus</code> get a <code>z-index</code> of 1000 or 1001 in addition to the halo.  Note also that margins between some elements is affected by the form's density.
 				</p>
 				<section>
 					<h3>Fields <code>label.vp-field .vp-label + input|select|textarea</code></h3>
 					<p>
-					In addition to text areas, typical input types compatible with this class are: <code>email</code>,
-					<code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly
-					<code>search</code>.
-					Fields expand to fill their container's width, which is handy in grids.
-					We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top
-						aligned labels</a> for their clarity.
+					In addition to text areas, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity.
 					</p>
-					<form class="vp-form vp-row-10 vp-density-spaced vp-doubling">
+					<form class="vp-form vp-row-10 vp-spaced vp-doubling">
 						<div class="vp-col-3">
 							<label class="vp-field">
 								<span class="vp-label">Normal</span>
@@ -324,7 +278,7 @@
 						<div class="vp-col-3">
 							<label class="vp-field">
 								<span class="vp-label">Textarea</span>
-								<textarea name="ta">123, Main St.
+<textarea name="ta">123, Main St.
 Test City, ZZ
 H0H 0H0</textarea>
 							</label>
@@ -368,7 +322,7 @@ H0H 0H0</textarea>
 				</section>
 				<section>
 					<h3>Checkboxes <code>label input[type=checkbox] + .vp-label</code></h3>
-					<form class="vp-form vp-row-24 vp-doubling vp-density-spaced">
+					<form class="vp-form vp-row-24 vp-doubling vp-spaced">
 						<label class="vp-col-6">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Something long wraps on label's width</span>
@@ -390,12 +344,9 @@ H0H 0H0</textarea>
 				<section>
 					<h3>Radio selections <code>label input[type=radio] + .vp-label</code></h3>
 					<p>
-					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack
-					vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than
-					5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when
-					presenting a form's initial state.
+					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than 5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when presenting a form's initial state.
 					</p>
-					<form class="vp-form vp-row-24 vp-doubling vp-density-spaced">
+					<form class="vp-form vp-row-24 vp-doubling vp-spaced">
 						<label class="vp-col-4">
 							<input type="radio" name="rd" value="1" checked>
 							<span class="vp-label">First choice</span>
@@ -425,9 +376,7 @@ H0H 0H0</textarea>
 					</form>
 					<h3>Icon Buttons <code>.vp-icon-button</code></h3>
 					<p>
-					Unlike other form styles, icon buttons have fixed sizes based on touch display ability and their priority.
-					Normal by default, they may have <code>.is-secondary</code> or <code>.is-priority</code>.
-					On touch devices, these three sizes are 11mm, 15mm and 19mm.
+					Unlike other form styles, icon buttons have fixed sizes based on touch display ability and their priority.  Normal by default, they may have <code>.is-secondary</code> or <code>.is-priority</code>.  On touch devices, these three sizes are 11mm, 15mm and 19mm.
 					</p>
 					<form class="vp-form">
 							<button onclick="return false;" class="vp-icon-button" title="Normal">M</button>
@@ -448,8 +397,7 @@ H0H 0H0</textarea>
 					</form>
 					<h3>Theming</h3>
 					<p>
-					Normal buttons automatically adapt to any background/foreground colors and font sizes set on their elements, as
-					well as their parent background color.  Icon buttons adapt to font size and their parent background color.
+					Normal buttons automatically adapt to any background/foreground colors and font sizes set on their elements, as well as their parent background color.  Icon buttons adapt to font size and their parent background color.
 					</p>
 					<form class="vp-form">
 						<button onclick="return false;" style="background-color:red; color:white; font-size: 16pt;">White on red, 16pt</button>
@@ -481,7 +429,7 @@ H0H 0H0</textarea>
 				</p>
 				<div class="vp-row-10 vp-doubling">
 					<div class="vp-col-5">
-						<table class="vp-table vp-density-spaced vp-horizontal vp-striped">
+						<table class="vp-table vp-spaced vp-horizontal vp-striped">
 							<thead>
 								<tr><th>First</th><th>Second</th><th>Third</th><th>Fourth</th></tr>
 							</thead>
@@ -495,7 +443,7 @@ H0H 0H0</textarea>
 						</table>
 					</div>
 					<div class="vp-col-5">
-						<table class="vp-table vp-density-spaced vp-gridded vp-2d">
+						<table class="vp-table vp-spaced vp-gridded vp-2d">
 							<thead>
 								<tr><th></th><th>Second</th><th>Third</th><th>Fourth</th></tr>
 							</thead>
@@ -541,20 +489,17 @@ H0H 0H0</textarea>
 
 						<dt>table.vp-stick-vertical</dt>
 						<dd>
-						<code class="html-tag">thead</code> and <code class="html-tag">tfoot</code> (all <code
-							class="html-tag">th</code>) remain in viewport while the table is, except for IE11.
+						<code class="html-tag">thead</code> and <code class="html-tag">tfoot</code> (all <code class="html-tag">th</code>) remain in viewport while the table is.
 						</dd>
 
 						<dt>table.vp-stick-horizontal</dt>
 						<dd>
-						Left-most column (a <code class="html-tag">th</code>) is considered a header and remains in viewport while
-						the table is, except for IE11.
+						Left-most column (a <code class="html-tag">th</code>) is considered a header and remains in viewport while the table is.
 						</dd>
 
 						<dt>tbody.vp-center-*</dt>
 						<dd>
-						Center text in all rows, column <code>*</code>, maximum: 12.  (i.e. <code>.vp-center-2</code> centers cells
-						in column 2.)
+						Center text in all rows, column <code>*</code>, maximum: 12.  (i.e. <code>.vp-center-2</code> centers cells in column 2.)
 						</dd>
 
 						<dt>th.is-numeric, td.is-numeric</dt>
@@ -562,7 +507,7 @@ H0H 0H0</textarea>
 						Right-justified cell.
 						</dd>
 
-						<dt>table.vp-density-*</dt>
+						<dt>table.vp-seamless, table.vp-spaced, table.vp-relaxed</dt>
 						<dd>
 						Tables respond to density with padding and font size.
 						</dd>
@@ -598,11 +543,9 @@ H0H 0H0</textarea>
 				<section>
 					<h3>Accordion <code>.vp-accordion</code></h3>
 					<p>
-					A block which contains a series of the sequence: radio or checkbox, label, <code class="html-tag">div</code>.
-					Spacing between labels, and between labels and their content is dictated by optional density classes on the main
-					block.
+					A block which contains a series of the sequence: radio or checkbox, label, <code class="html-tag">div</code>.  Spacing between labels, and between labels and their content is dictated by optional density classes on the main block.
 					</p>
-					<div class="vp-accordion vp-density-spaced">
+					<div class="vp-accordion vp-spaced">
 						<input type="radio" name="_acc1" id="_acc1_1"><label for="_acc1_1">First expandable item. Click here to test.</label>
 						<div>
 							<p>This is the content of the first expandable item.</p>
@@ -621,11 +564,9 @@ H0H 0H0</textarea>
 				<section>
 					<h3>Tabs <code>.vp-tabs</code></h3>
 					<p>
-					A block which contains a series of radio inputs followed by their respective labels, then exactly as many <code
-						class="html-tag">div</code> as there were labels.  Spacing between tabs and their content is dictated by
-					optional density classes on the main block.
+					A block which contains a series of radio inputs followed by their respective labels, then exactly as many <code class="html-tag">div</code> as there were labels.  Spacing between tabs and their content is dictated by optional density classes on the main block.
 					</p>
-					<div class="vp-tabs vp-density-spaced">
+					<div class="vp-tabs vp-spaced">
 						<input type="radio" id="_tabs1_1" name="_tabs1" checked><label for="_tabs1_1">Tab 1</label>
 						<input type="radio" id="_tabs1_2" name="_tabs1"><label for="_tabs1_2">Tab 2</label>
 						<input type="radio" id="_tabs1_3" name="_tabs1"><label for="_tabs1_3">Tab 3</label>
@@ -647,31 +588,22 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Tooltips <code>tooltips.scss</code></h2>
 				<p>
-				For uniformity with touch devices, our tooltips are touch/click activated.  This requires adding the
-				<code>ontouchstart</code> attribute to <code class="html-tag">body</code> and adding <code>tabindex="0"</code> to
-				non-clickable elements like <code class="html-tag">span</code>.
+				For uniformity with touch devices, our tooltips are touch/click activated.  This requires adding the <code>ontouchstart</code> attribute to <code class="html-tag">body</code> and adding <code>tabindex="0"</code> to non-clickable elements like <code class="html-tag">span</code>.
 				</p>
 				<p>
-				To evade their trigger or parent element's width, tooltips don't break on white space.  Keep this in mind for
-				placement to avoid overflowing the viewport.  For element tooltips, you may insert manual breaks as desired.
+				To evade their trigger or parent element's width, tooltips don't break on white space.  Keep this in mind for placement to avoid overflowing the viewport.  For element tooltips, you may insert manual breaks as desired.
 				</p>
 				<section>
 					<h3>Attribute <code>[vp-tooltip]</code></h3>
 					<p>
-					To give any element (except inputs) a clickable tooltip, the plain text content of the tooltip need simply be
-					supplied in a <code>vp-tooltip=""</code> attribute.  Optional accompanying boolean attributes
-					<code>vp-tooltip-below</code> and <code>vp-tooltip-right</code> affect alignment and position.
+					To give any element (except inputs) a clickable tooltip, the plain text content of the tooltip need simply be supplied in a <code>vp-tooltip=""</code> attribute.  Optional accompanying boolean attributes <code>vp-tooltip-below</code> and <code>vp-tooltip-right</code> affect alignment and position.
 					</p>
 					<p><span tabindex="0" vp-tooltip="This is an example tooltip.">Click this sentence for example.</span></p>
 				</section>
 				<section>
 					<h3>Element <code class="html-tag">vp-tooltip</code></h3>
 					<p>
-					To deal with inputs and to use inline HTML in a tooltip, use <code class="html-tag">vp-tooltip</code> which
-					must immediately follow a focusable element such as <code class="html-tag">input</code>, and both need to be
-					inside a <code>position:relative</code> block.  For our forms, this is easily achieved with a field (an input
-					inside its label).  Optional boolean attributes <code>_below</code> and <code>_right</code> affect alignment and
-					position.
+					To deal with inputs and to use inline HTML in a tooltip, use <code class="html-tag">vp-tooltip</code> which must immediately follow a focusable element such as <code class="html-tag">input</code>, and both need to be inside a <code>position:relative</code> block.  For our forms, this is easily achieved with a field (an input inside its label).  Optional boolean attributes <code>_below</code> and <code>_right</code> affect alignment and position.
 					</p>
 					<form class="vp-form">
 						<label class="vp-field">
@@ -687,9 +619,7 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Transitions <code>transitions.css</code></h2>
 				<p>
-				To guarantee that no browsers "flash" transitions on load, some rules depend on a parent having the "loaded" class.
-				To use them, add the <code>loaded</code> class to <code class="html-tag">body</code> after the first paint is likely
-				over. In some browsers, a simple "onload" is insufficient, thus:
+				To guarantee that no browsers "flash" transitions on load, some rules depend on a parent having the "loaded" class.  To use them, add the <code>loaded</code> class to <code class="html-tag">body</code> after the first paint is likely over. In some browsers, a simple "onload" is insufficient, thus:
 				</p>
 				<blockquote><code>
 &lt;body onload="setTimeout(function(){document.body.classList.add('loaded')})"&gt;

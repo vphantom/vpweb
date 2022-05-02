@@ -1,15 +1,14 @@
-@import "core.scss";
+@import 'core.scss';
 
-/* Layout & Grid */
-@import "layout.scss";
-@import "grid.scss";
+/* Grid */
+@import 'grid.scss';
 
 /* Components */
-@import "forms.scss";
-@import "messages.scss";
-@import "tables.scss";
-@import "tabs.scss";
-@import "tooltips.scss";
+@import 'forms.scss';
+@import 'messages.scss';
+@import 'tables.scss';
+@import 'tabs.scss';
+@import 'tooltips.scss';
 
 /* Transitions */
-@import "transitions.scss";
+@import 'transitions.scss';

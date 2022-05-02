@@ -1,18 +1,7 @@
 $width-text-max: 66rem;
-
 $small-radius: 0.2em;
 $tiny-radius: 0.125em;
-
-$padding-relaxed: 1.5rem;
-$padding-spaced: 0.75rem;
-$padding-seamless: 0rem;
-
 $paragraph-margin: 0.75em;
-
-$color-red: 187, 17, 17; // #b11
-$color-orange: 187, 102, 17; // #b61
-$color-green: 51, 136, 17; // #381
-$color-dim: 127, 127, 127; // #7f7f7f
 
 /* System UI font stacks
  *
@@ -26,20 +15,20 @@ $color-dim: 127, 127, 127; // #7f7f7f
  * implicit user preference.
  */
 
-$font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-	"Noto Color Emoji";
+$font-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+	'Noto Color Emoji';
 
-$font-mono: "Fira Code", "Hack", "Hasklig", "Monoid", "Source Code Pro",
-	"JetBrains Mono", "Cascadia Code", "SFMono-Regular", "SF Mono", Menlo,
-	Monaco, Inconsolata, "Fira Mono", "Roboto Mono", "Droid Sans Mono", Consolas,
-	"Liberation Mono", "Lucida Console", "Courier New", monospace, $font-emoji;
+$font-mono: 'Fira Code', 'Hack', 'Hasklig', 'Monoid', 'Source Code Pro',
+	'JetBrains Mono', 'Cascadia Code', 'SFMono-Regular', 'SF Mono', Menlo,
+	Monaco, Inconsolata, 'Fira Mono', 'Roboto Mono', 'Droid Sans Mono', Consolas,
+	'Liberation Mono', 'Lucida Console', 'Courier New', monospace, $font-emoji;
 
-$font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-	Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial,
+$font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+	Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
 	Helvetica, sans-serif, $font-emoji;
 
-$font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville",
-	"Times New Roman", "Droid Serif", Times, "Source Serif Pro", serif,
+$font-serif: 'Iowan Old Style', 'Apple Garamond', 'Baskerville',
+	'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif,
 	$font-emoji;
 
 /* NOTE: "px" in media queries is subject to a "device pixel ratio" for higher
@@ -50,15 +39,20 @@ $font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville",
  *  >=992px - Desktop
  * >=1200px - Large Desktop (occasionally useful)
  *
- * "Touch" is inferred as "tablet-down" or the presence of the CSS 4
- * "pointer:coarse" if the browser understands it.
+ * "Mouse" is if any pointer is fine.  "Nomouse" is the opposite.  This favors
+ * fine pointing devices if both are available.
  */
 
 $min-width: 320px;
 
-@mixin media-touch {
-	@media only screen and (max-width: 991px),
-		only screen and (pointer: coarse) {
+@mixin media-nomouse {
+	@media not (only screen and (any-pointer: fine)) {
+		@content;
+	}
+}
+
+@mixin media-mouse {
+	@media only screen and (any-pointer: fine) {
 		@content;
 	}
 }
@@ -102,50 +96,5 @@ $min-width: 320px;
 @mixin media-desktop-large {
 	@media only screen and (min-width: 1200px) {
 		@content;
-	}
-}
-
-@mixin newgrid-xx($cols: 10) {
-	@for $i from 1 through $cols {
-		.vp-#{$cols}-$i {
-			min-width: calc(($i * 100% / $cols) - (2 * var(--vp-padding)));
-		}
-	}
-}
-
-@mixin grid-xx($cols: 10, $cols_2: 4, $cols_4: 2) {
-	/* Widths */
-	@for $i from 1 through $cols {
-		.vp-row-$cols > .vp-col-$i {
-			width: calc($i * 100% / $cols);
-		}
-	}
-
-	@include media-mobile-only {
-		/* Quadruple desktop widths */
-		.vp-doubling .vp-row-$cols > [class*="vp-col-"],
-		.vp-doubling.vp-row-$cols > [class*="vp-col-"] {
-			width: 100%;
-		}
-		@for $i from 1 through $cols_4 {
-			.vp-doubling .vp-row-$cols > .vp-col-$i,
-			.vp-doubling.vp-row-$cols > .vp-col-$i {
-				width: calc(4 * $i * 100% / $cols);
-			}
-		}
-	}
-
-	@include media-tablet-only {
-		/* Double desktop widths */
-		.vp-doubling .vp-row-$cols > [class*="vp-col-"],
-		.vp-doubling.vp-row-$cols > [class*="vp-col-"] {
-			width: 100%;
-		}
-		@for $i from 1 through $cols_2 {
-			.vp-doubling .vp-row-$cols > .vp-col-$i,
-			.vp-doubling.vp-row-$cols > .vp-col-$i {
-				width: calc(2 * $i * 100% / $cols);
-			}
-		}
 	}
 }

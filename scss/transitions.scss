@@ -1,4 +1,4 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 $duration: 300ms;
 $duration-slow: 500ms;
@@ -10,7 +10,7 @@ $delay: 0.05s;
 		opacity $duration-slow;
 }
 
-[class*="vp-go-"] {
+[class*='vp-go-'] {
 	animation-iteration-count: 1;
 	animation-duration: $duration;
 	animation-timing-function: ease;

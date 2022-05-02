@@ -1,11 +1,30 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 /* Inspired by: Semantic UI v2 and Normalize.css without opinions nor obsolete browser support. */
+
+:root {
+	--vp-pad: 0rem;
+	--vp-red: 187, 17, 17; // #b11
+	--vp-orange: 187, 102, 17; // #b61
+	--vp-green: 51, 136, 17; // #381
+	--vp-dim: 127, 127, 127; // #7f7f7f
+	--vp-mono: $font-mono;
+	--vp-sans: $font-sans;
+	--vp-serif: $font-serif;
+}
+.vp-seamless {
+	--vp-pad: 0rem;
+}
+.vp-spaced {
+	--vp-pad: 0.75rem;
+}
+.vp-relaxed {
+	--vp-pad: 1.5rem;
+}
 
 *,
 *:before,
 *:after {
-	-webkit-box-sizing: inherit;
 	box-sizing: inherit;
 	margin: 0;
 	padding: 0;
@@ -16,20 +35,17 @@ body {
 	font-size: 12pt;
 }
 html {
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	line-height: 1.33;
-	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
-}
-label {
-	position: relative;
 }
 body {
 	min-width: $min-width;
 }
+label {
+	position: relative;
+}
 hr {
-	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
 	height: 0;
 	overflow: visible;
@@ -47,10 +63,10 @@ ol {
 }
 
 /* Forms */
-[type="text"],
-[type="email"],
-[type="search"],
-[type="password"] {
+[type='text'],
+[type='email'],
+[type='search'],
+[type='password'] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
@@ -66,40 +82,41 @@ select {
 	text-transform: none;
 }
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
 	-webkit-appearance: button;
 }
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
 	border-style: none;
 	padding: 0;
 }
 button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
 	outline: 1px dotted ButtonText;
 }
 fieldset {
+	// FIXME: why is this not affected by density choice?
 	padding: 0.35em 0.75em 0.625em;
 }
 progress {
 	vertical-align: baseline;
 }
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
 	height: auto;
 }
-[type="search"] {
+[type='search'] {
 	-webkit-appearance: textfield;
 	outline-offset: -2px;
 }
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
+[type='search']::-webkit-search-cancel-button,
+[type='search']::-webkit-search-decoration {
 	-webkit-appearance: none;
 }
 ::-webkit-file-upload-button {
@@ -112,29 +129,29 @@ h1 {
 	font-size: 2em;
 	margin: 0.67em 0;
 }
-.vp-form button,
-.vp-form input,
-.vp-form textarea,
-.vp-form select,
+.vp button,
+.vp input,
+.vp textarea,
+.vp select,
 .vp-button,
 .vp-sans {
-	font-family: $font-sans;
+	font-family: var(--vp-sans);
 }
 .vp-serif {
-	font-family: $font-serif;
+	font-family: var(--vp-serif);
 }
 code,
 kbd,
 pre,
 samp {
-	font-family: $font-mono;
+	font-family: var(--vp-mono);
 	font-size: 1em;
 }
 .vp-mono,
 .vp-notice::before,
 .vp-message::before,
 .is-numeric {
-	font-family: $font-mono;
+	font-family: var(--vp-mono);
 }
 a {
 	-webkit-text-decoration-skip: objects;
@@ -166,17 +183,6 @@ abbr[title] {
 	text-decoration: underline dotted;
 }
 
-/* Specific to Internet Explorer (no version mentioned) */
-svg:not(:root) {
-	overflow: hidden;
-}
-legend {
-	color: inherit;
-}
-template {
-	display: none;
-}
-
 p,
 blockquote {
 	margin-bottom: $paragraph-margin;
@@ -186,4 +192,95 @@ blockquote {
 /* NOTE: Class is referred twice for specificity. */
 .vp-none.vp-none {
 	display: none;
+}
+
+/* Horizontal and vertical 2-3 element layouts. */
+.vp-vfull,
+.vp-hfull {
+	display: flex;
+}
+.vp-vfull > :nth-child(2),
+.vp-hfull > :nth-child(2) {
+	flex: 1;
+}
+.vp-vfull {
+	flex-flow: column;
+}
+.vp-hfull {
+	flex-flow: row;
+}
+.vp-vfull > :not(:first-child) {
+	margin-top: var(--vp-pad);
+}
+.vp-hfull > :not(:first-child) {
+	margin-left: var(--vp-pad);
+}
+
+.vp-container {
+	display: block;
+	max-width: 100%;
+	width: auto;
+	padding-left: var(--vp-pad);
+	padding-right: var(--vp-pad);
+}
+
+.vp-block {
+	display: block;
+	width: 100%;
+}
+
+/* Media queries */
+
+@include media-mouse {
+	.vp-touch-only {
+		display: none;
+	}
+}
+@include media-nomouse {
+	.vp-mouse-only {
+		display: none;
+	}
+}
+
+@include media-mobile-only {
+	.vp-tablet-up,
+	.vp-tablet-only,
+	.vp-desktop-only {
+		display: none;
+	}
+}
+
+@include media-tablet-only {
+	.vp-mobile-only,
+	.vp-desktop-only {
+		display: none;
+	}
+}
+
+@include media-desktop-only {
+	.vp-mobile-only,
+	.vp-tablet-only,
+	.vp-tablet-down {
+		display: none;
+	}
+}
+
+@include media-desktop-large {
+	.vp-container {
+		max-width: $width-text-max;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* Print (we generalize non-screen labeling as "print") */
+@media only screen {
+	.vp-print-only {
+		display: none;
+	}
+}
+@media not screen {
+	.vp-screen-only {
+		display: none;
+	}
 }

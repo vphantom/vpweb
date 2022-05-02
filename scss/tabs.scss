@@ -1,4 +1,4 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 /* Accordions */
 
@@ -11,7 +11,7 @@
 	display: block;
 }
 .vp-accordion > label::before {
-	content: "\25ba";
+	content: '\25ba';
 	display: inline-block;
 	margin: 0 0.5em;
 	transition: transform 300ms; // FIXME: wrong file
@@ -30,6 +30,7 @@
 .vp-accordion > input,
 .vp-tabs > input {
 	display: none;
+	margin-bottom: var(--vp-pad);
 }
 .vp-tabs > div {
 	clear: both;
@@ -38,25 +39,17 @@
 	opacity: 0;
 	overflow: hidden;
 }
-.vp-accordion.vp-density-relaxed > label,
-.vp-tabs.vp-density-relaxed > label {
-	margin-bottom: $padding-relaxed;
-}
-.vp-accordion.vp-density-spaced > label,
-.vp-tabs.vp-density-spaced > label {
-	margin-bottom: $padding-spaced;
-}
 .vp-tabs > label {
 	display: inline-block;
 	user-select: none;
 	cursor: pointer;
 	float: left;
-	padding: $padding-spaced $padding-relaxed;
-	border-bottom: $tiny-radius solid rgba($color-dim, 0.15);
+	padding: var(--vp-pad) calc(2 * var(--vp-pad));
+	border-bottom: $tiny-radius solid rgba(var(--vp-dim), 0.15);
 }
 .vp-tabs > :checked + label {
-	background-color: rgba($color-dim, 0.15);
-	border-bottom-color: rgba($color-dim, 0.33);
+	background-color: rgba(var(--vp-dim), 0.15);
+	border-bottom-color: rgba(var(--vp-dim), 0.33);
 }
 @for $i from 1 through 8 {
 	.vp-tabs > :checked:nth-of-type($i) ~ div:nth-of-type($i) {

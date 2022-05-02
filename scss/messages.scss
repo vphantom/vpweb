@@ -1,8 +1,9 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 /* Custom tags need explicit display */
 vp-notice,
 vp-message {
+	--vp-col: var(--vp-dim);
 	display: block;
 	margin-bottom: $paragraph-margin;
 }
@@ -21,13 +22,13 @@ vp-message::before {
 	margin-left: 0.2em;
 	margin-right: 0.5em;
 	text-align: center;
-	background-color: rgba($color-dim, 0.5);
+	background-color: rgb(var(--vp-col));
 	color: white;
 	border-radius: 100rem;
 }
 vp-notice::before,
 vp-message::before {
-	content: "i";
+	content: 'i';
 }
 vp-notice[_char]::before,
 vp-message[_char]::before {
@@ -37,39 +38,36 @@ vp-notice.is-error::before,
 vp-notice.is-warning::before,
 vp-message.is-error::before,
 vp-message.is-warning::before {
-	content: "!";
+	content: '!';
 }
 
 .is-error {
-	color: rgb($color-red);
-}
-vp-notice.is-error::before,
-vp-message.is-error::before {
-	background-color: rgb($color-red);
+	--vp-col: var(--vp-red);
+	color: rgb(var(--vp-col));
 }
 
 .is-warning {
-	color: rgb($color-orange);
+	--vp-col: var(--vp-orange);
+	color: rgb(var(--vp-col));
 }
 vp-notice.is-warning::before,
 vp-message.is-warning::before {
-	background-color: rgb($color-orange);
 	border-radius: 0.5em;
 }
 
 .is-ok {
-	color: rgb($color-green);
+	--vp-col: var(--vp-green);
+	color: rgb(var(--vp-col));
 }
 vp-notice.is-ok::before,
 vp-message.is-ok::before {
-	background-color: rgb($color-green);
 	border-radius: 0.1em;
 }
 
 vp-message {
 	position: relative;
-	border: 1px solid rgba($color-dim, 0.2);
-	background-color: rgba($color-dim, 0.05);
+	border: 1px solid rgba(var(--vp-col), 0.2);
+	background-color: rgba(var(--vp-col), 0.05);
 	border-radius: $small-radius;
 	padding: 1em 1em 1em 3.75em;
 }
@@ -77,16 +75,4 @@ vp-message::before {
 	position: absolute;
 	top: 1em;
 	left: 1em;
-}
-vp-message.is-error {
-	border-color: rgba($color-red, 0.2);
-	background-color: rgba($color-red, 0.05);
-}
-vp-message.is-warning {
-	border-color: rgba($color-orange, 0.2);
-	background-color: rgba($color-orange, 0.05);
-}
-vp-message.is-ok {
-	border-color: rgba($color-green, 0.2);
-	background-color: rgba($color-green, 0.05);
 }

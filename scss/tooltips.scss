@@ -1,4 +1,4 @@
-@import "_lib.scss";
+@import '_lib.scss';
 
 /* Tooltips */
 
@@ -11,12 +11,12 @@ vp-tooltip,
 	position: absolute;
 	min-width: min-content;
 	max-width: $min-width;
-	border: 1px solid rgba($color-dim, 0.5);
+	border: 1px solid rgba(var(--vp-dim), 0.5);
 	background-color: white;
 	z-index: 1100;
 	padding: 0.75em;
 	border-radius: 0.2em;
-	box-shadow: 2px 2px 6px 2px rgba($color-dim, 0.3);
+	box-shadow: 2px 2px 6px 2px rgba(var(--vp-dim), 0.3);
 	white-space: nowrap;
 	// Align: left by default
 	left: 0;
@@ -44,11 +44,11 @@ vp-tooltip::before,
 [vp-tooltip]::after {
 	display: block;
 	position: absolute;
-	content: "";
+	content: '';
 	background-color: white;
 	width: 0.75em;
 	height: 0.75em;
-	box-shadow: 1px 1px 0 0px rgba($color-dim, 0.5);
+	box-shadow: 1px 1px 0 0px rgba(var(--vp-dim), 0.5);
 	// Align: left by default
 	right: auto;
 	left: 1em;

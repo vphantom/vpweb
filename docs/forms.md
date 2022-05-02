@@ -33,7 +33,7 @@ Activated with `<form vp-target="selector">`
 
 Available only with JSON forms above, if this selector is specified and found, its content will be replaced with the POST's response.  With invalid selector or without `vp-target` at all, the whole page's body will be replaced.  If the result is `<html>`, only the contents of its `<body>` will be used.
 
-### Inline inputs
+### Shrinking/expanding inputs
 
 Activated with `<input vp-expanding>` or `forms.expanding(element)`
 

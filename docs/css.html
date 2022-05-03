@@ -41,9 +41,9 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>16.6KB</td><td>4.5KB</td><td>3.9KB</td></tr>
+<tr><th>vpweb.css</th><td>16.5KB</td><td>4.5KB</td><td>3.9KB</td></tr>
 <tr><th>core.css</th><td>4.1KB</td><td>1.5KB</td><td>1.3KB</td></tr>
-<tr><th>forms.css</th><td>6.1KB</td><td>1.6KB</td><td>1.4KB</td></tr>
+<tr><th>forms.css</th><td>6.0KB</td><td>1.6KB</td><td>1.4KB</td></tr>
 <tr><th>grid.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
 <tr><th>messages.css</th><td>1.1KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>reset.css</th><td>0.2KB</td><td>0.2KB</td><td>0.1KB</td></tr>
@@ -185,19 +185,19 @@ html {
 					</p>
 				</section>
 				<section>
-					<h3>Flex Layouts <code>.vp-vfull, .vp-hfull</code></h3>
+					<h3>Flex Layouts <code>.vp-stack, .vp-shelf</code></h3>
 					<p>
-					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density setting.
+					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density.
 					</p>
 					<dl>
 
-						<dt><code>.vp-vfull</code></dt>
+						<dt><code>.vp-stack</code></dt>
 						<dd>
 						2 or 3 children, stacked vertically. The second child expands as necessary to make sure that the optional third child is always no higher than the bottom of the viewport.
 						</dd>
-						<dt><code>.vp-hfull</code></dt>
+						<dt><code>.vp-shelf</code></dt>
 						<dd>
-						Same behavior, but horizontal from left to right.  Set width using <code>min-width</code> to help with responsiveness.  <b>Responsive:</b> On tablets down, the third child goes below the other two at 100% width and on mobile, all three children become vertically stacked.
+						Same behavior, but horizontal from left to right.  Set width using <code>min-width</code> to help with responsiveness.  <b>Responsive:</b> On tablets down, the third child goes below the other two and on mobile all three children become vertically stacked.
 						</dd>
 
 					</dl>

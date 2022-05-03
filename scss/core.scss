@@ -3,14 +3,16 @@
 /* Inspired by: Semantic UI v2 and Normalize.css without opinions nor obsolete browser support. */
 
 :root {
+	--vp-mono: $font-mono;
+	--vp-sans: $font-sans;
+	--vp-serif: $font-serif;
+
 	--vp-pad: 0rem;
+
 	--vp-red: 187, 17, 17; // #b11
 	--vp-orange: 187, 102, 17; // #b61
 	--vp-green: 51, 136, 17; // #381
 	--vp-dim: 127, 127, 127; // #7f7f7f
-	--vp-mono: $font-mono;
-	--vp-sans: $font-sans;
-	--vp-serif: $font-serif;
 }
 .seamless {
 	--vp-pad: 0rem;
@@ -137,9 +139,6 @@ body.vp {
 .vp .numeric {
 	font-family: var(--vp-mono);
 }
-.vp a {
-	-webkit-text-decoration-skip: objects;
-}
 .vp b,
 .vp strong {
 	font-weight: bolder;
@@ -179,34 +178,34 @@ body.vp {
 }
 
 /* Horizontal and vertical 2-3 element layouts. */
-.vp-vfull,
-.vp-hfull {
+.vp-stack,
+.vp-shelf {
 	display: flex;
 }
-.vp-vfull > :nth-child(2),
-.vp-hfull > :nth-child(2) {
+.vp-stack > :nth-child(2),
+.vp-shelf > :nth-child(2) {
 	flex: 1;
 }
-.vp-vfull {
+.vp-stack {
 	flex-flow: column;
 }
-.vp-hfull {
+.vp-shelf {
 	flex-flow: row wrap;
 }
-.vp-vfull > :not(:first-child) {
+.vp-stack > :not(:first-child) {
 	margin-top: var(--vp-pad);
 }
-.vp-hfull > :not(:first-child) {
+.vp-shelf > :not(:first-child) {
 	margin-left: var(--vp-pad);
 }
 @include media-tablet-down {
-	.vp-hfull > :nth-child(3) {
+	.vp-shelf > :nth-child(3) {
 		flex-basis: 100%;
 		height: fit-content;
 	}
 }
 @include media-mobile-only {
-	.vp-hfull {
+	.vp-shelf {
 		display: block;
 	}
 }

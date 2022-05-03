@@ -41,15 +41,16 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>16.8KB</td><td>4.6KB</td><td>3.9KB</td></tr>
-<tr><th>core.css</th><td>4.0KB</td><td>1.5KB</td><td>1.3KB</td></tr>
+<tr><th>vpweb.css</th><td>17.0KB</td><td>4.5KB</td><td>3.9KB</td></tr>
+<tr><th>core.css</th><td>4.1KB</td><td>1.5KB</td><td>1.3KB</td></tr>
 <tr><th>forms.css</th><td>6.4KB</td><td>1.7KB</td><td>1.4KB</td></tr>
 <tr><th>grid.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
-<tr><th>messages.css</th><td>1.1KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>messages.css</th><td>1.2KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>reset.css</th><td>0.2KB</td><td>0.2KB</td><td>0.1KB</td></tr>
 <tr><th>tables.css</th><td>1.6KB</td><td>0.6KB</td><td>0.4KB</td></tr>
 <tr><th>tabs.css</th><td>1.2KB</td><td>0.5KB</td><td>0.3KB</td></tr>
 <tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>transitions.css</th><td>0.4KB</td><td>0.3KB</td><td>0.2KB</td></tr>
+<tr><th>transitions.css</th><td>0.5KB</td><td>0.3KB</td><td>0.2KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
 					</table>
@@ -64,6 +65,31 @@
 						<dt>Safari</dt><dd>12 (2019)</dd>
 						<dt>Firefox</dt><dd>78 (2020)</dd>
 					</dl>
+				</section>
+				<section>
+					<h3>Cooperation</h3>
+					<p>
+					Semantic CSS rules without a <code>vp-</code>prefix only apply when a parent has class <code>vp</code>. It is therefore easy to use Vanilla+ in only parts of a document.  The only rules which apply outside are in <code>reset.css</code>:
+					</p>
+					<blockquote><pre><code>
+*, *:before, *:after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	height: 100%;
+}
+html {
+	box-sizing: border-box;
+	line-height: 1.33;
+	-webkit-text-size-adjust: 100%;
+}
+</code></pre></blockquote>
+
+					<p>
+					If this interferes with your other CSS, you may use <code>vpweb-noreset.css</code> instead of <code>vpweb.css</code> but some borders, margins and paddings may be slightly off in some browsers.
+					</p>
 				</section>
 				<section>
 					<h3>TODO</h3>

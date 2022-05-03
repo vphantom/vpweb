@@ -212,7 +212,7 @@ label.vp-field textarea {
 	height: 6em;
 }
 
-[class*='vp-col-'] > .vp-field {
+[vp-cell] > .vp-field {
 	width: 100%;
 }
 

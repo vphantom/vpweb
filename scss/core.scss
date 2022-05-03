@@ -22,110 +22,94 @@
 	--vp-pad: 1.5rem;
 }
 
-*,
-*:before,
-*:after {
-	box-sizing: inherit;
-	margin: 0;
-	padding: 0;
-}
-html,
-body {
-	height: 100%;
+body.vp {
 	font-size: 12pt;
-}
-html {
-	box-sizing: border-box;
-	line-height: 1.33;
-	-webkit-text-size-adjust: 100%;
-}
-body {
 	min-width: $min-width;
 }
-label {
+.vp label {
 	position: relative;
 }
-hr {
+.vp hr {
 	box-sizing: content-box;
 	height: 0;
 	overflow: visible;
 }
-details,
-menu {
+.vp details,
+.vp menu {
 	display: block;
 }
-summary {
+.vp summary {
 	display: list-item;
 }
-ul,
-ol {
+.vp ul,
+.vp ol {
 	margin-left: 2em;
 }
 
 /* Forms */
-[type='text'],
-[type='email'],
-[type='search'],
-[type='password'] {
+.vp [type='text'],
+.vp [type='email'],
+.vp [type='search'],
+.vp [type='password'] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-button,
-input,
-optgroup,
-select,
-textarea {
+.vp button,
+.vp input,
+.vp optgroup,
+.vp select,
+.vp textarea {
 	font-size: 100%;
 }
-button,
-select {
+.vp button,
+.vp select {
 	text-transform: none;
 }
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+.vp button,
+.vp [type='button'],
+.vp [type='reset'],
+.vp [type='submit'] {
 	-webkit-appearance: button;
 }
-button::-moz-focus-inner,
-[type='button']::-moz-focus-inner,
-[type='reset']::-moz-focus-inner,
-[type='submit']::-moz-focus-inner {
+.vp button::-moz-focus-inner,
+.vp [type='button']::-moz-focus-inner,
+.vp [type='reset']::-moz-focus-inner,
+.vp [type='submit']::-moz-focus-inner {
 	border-style: none;
 	padding: 0;
 }
-button:-moz-focusring,
-[type='button']:-moz-focusring,
-[type='reset']:-moz-focusring,
-[type='submit']:-moz-focusring {
+.vp button:-moz-focusring,
+.vp [type='button']:-moz-focusring,
+.vp [type='reset']:-moz-focusring,
+.vp [type='submit']:-moz-focusring {
 	outline: 1px dotted ButtonText;
 }
-fieldset {
+.vp fieldset {
 	// FIXME: why is this not affected by density choice?
 	padding: 0.35em 0.75em 0.625em;
 }
-progress {
+.vp progress {
 	vertical-align: baseline;
 }
-[type='number']::-webkit-inner-spin-button,
-[type='number']::-webkit-outer-spin-button {
+.vp [type='number']::-webkit-inner-spin-button,
+.vp [type='number']::-webkit-outer-spin-button {
 	height: auto;
 }
-[type='search'] {
+.vp [type='search'] {
 	-webkit-appearance: textfield;
 	outline-offset: -2px;
 }
-[type='search']::-webkit-search-cancel-button,
-[type='search']::-webkit-search-decoration {
+.vp [type='search']::-webkit-search-cancel-button,
+.vp [type='search']::-webkit-search-decoration {
 	-webkit-appearance: none;
 }
-::-webkit-file-upload-button {
+.vp ::-webkit-file-upload-button {
 	-webkit-appearance: button;
 	font: inherit;
 }
 
 /* Typography */
-h1 {
+.vp h1 {
 	font-size: 2em;
 	margin: 0.67em 0;
 }
@@ -140,51 +124,51 @@ h1 {
 .vp-serif {
 	font-family: var(--vp-serif);
 }
-code,
-kbd,
-pre,
-samp {
+.vp code,
+.vp kbd,
+.vp pre,
+.vp samp {
 	font-family: var(--vp-mono);
 	font-size: 1em;
 }
 .vp-mono,
 .vp-notice::before,
 .vp-message::before,
-.is-numeric {
+.vp .is-numeric {
 	font-family: var(--vp-mono);
 }
-a {
+.vp a {
 	-webkit-text-decoration-skip: objects;
 }
-b,
-strong {
+.vp b,
+.vp strong {
 	font-weight: bolder;
 }
-small {
+.vp small {
 	font-size: 80%;
 }
-sub,
-sup {
+.vp sub,
+.vp sup {
 	font-size: 75%;
 	line-height: 0;
 	position: relative;
 	vertical-align: baseline;
 }
-sub {
+.vp sub {
 	bottom: -0.25em;
 }
-sup {
+.vp sup {
 	top: -0.5em;
 }
-abbr[title] {
+.vp abbr[title] {
 	border-bottom: none;
 	text-decoration: underline;
 	-webkit-text-decoration: underline dotted;
 	text-decoration: underline dotted;
 }
 
-p,
-blockquote {
+.vp p,
+.vp blockquote {
 	margin-bottom: $paragraph-margin;
 }
 

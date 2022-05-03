@@ -4,8 +4,8 @@ $duration: 300ms;
 $duration-slow: 500ms;
 $delay: 0.05s;
 
-.loaded,
-.loaded * {
+.vp .loaded,
+.vp.loaded * {
 	transition: color $duration $delay, background-color $duration $delay,
 		opacity $duration-slow;
 }
@@ -19,14 +19,14 @@ $delay: 0.05s;
 }
 
 .vp-go-hidden {
-	animation-name: fade-out;
+	animation-name: vp-fade-out;
 }
 
 .vp-go-visible {
-	animation-name: fade-in;
+	animation-name: vp-fade-in;
 }
 
-@keyframes fade-in {
+@keyframes vp-fade-in {
 	0% {
 		opacity: 0;
 	}
@@ -35,7 +35,7 @@ $delay: 0.05s;
 	}
 }
 
-@keyframes fade-out {
+@keyframes vp-fade-out {
 	0% {
 		opacity: 1;
 	}

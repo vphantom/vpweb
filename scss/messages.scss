@@ -41,12 +41,12 @@ vp-message.is-warning::before {
 	content: '!';
 }
 
-.is-error {
+.vp .is-error {
 	--vp-col: var(--vp-red);
 	color: rgb(var(--vp-col));
 }
 
-.is-warning {
+.vp .is-warning {
 	--vp-col: var(--vp-orange);
 	color: rgb(var(--vp-col));
 }
@@ -55,7 +55,7 @@ vp-message.is-warning::before {
 	border-radius: 0.5em;
 }
 
-.is-ok {
+.vp .is-ok {
 	--vp-col: var(--vp-green);
 	color: rgb(var(--vp-col));
 }

@@ -14,7 +14,7 @@ DOCS := $(wildcard docs/*.md)
 
 CSS_SRC := $(sort $(wildcard scss/*.scss))
 
-CSS_SIZABLE := $(addsuffix .css,vpweb $(filter-out vpweb,$(filter-out _lib,$(basename $(notdir $(CSS_SRC))))))
+CSS_SIZABLE := $(addsuffix .css,vpweb $(filter-out vpweb-noreset,$(filter-out vpweb,$(filter-out _lib,$(basename $(notdir $(CSS_SRC)))))))
 
 CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 

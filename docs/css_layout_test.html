@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vanilla+ CSS Layout Test</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css.css">
+	</head>
+	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp vp-sans Xp-spaced vp-vfull">
+		<header class="Xp-container" style="border: 2px dashed red;">
+			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
+		</header>
+		<main class="Xp-container vp-hfull" style="border: 2px dashed blue;">
+			<div style="min-width: 12em; border: 1px dotted green;">
+				<p>Left</p>
+			</div>
+			<div style="border: 1px dotted cyan;">
+				<div class="vp-container vp-spaced" style="border: 1px solid purple;">
+				<p>Main content area a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a.</p>
+				</div>
+			</div>
+			<div style="min-width: 12em; border: 1px dotted orange;">
+				<p>Right</p>
+			</div>
+		</main>
+		<footer class="Xp-container" style="border: 2px dashed black;">
+			<p>Footer!</p>
+		</footer>
+	</body>
+</html>

@@ -207,7 +207,7 @@ blockquote {
 	flex-flow: column;
 }
 .vp-hfull {
-	flex-flow: row;
+	flex-flow: row wrap;
 }
 .vp-vfull > :not(:first-child) {
 	margin-top: var(--vp-pad);
@@ -215,11 +215,21 @@ blockquote {
 .vp-hfull > :not(:first-child) {
 	margin-left: var(--vp-pad);
 }
+@include media-tablet-down {
+	.vp-hfull > :nth-child(3) {
+		flex-basis: 100%;
+		height: fit-content;
+	}
+}
+@include media-mobile-only {
+	.vp-hfull {
+		display: block;
+	}
+}
 
 .vp-container {
-	display: block;
+	width: 100%;
 	max-width: 100%;
-	width: auto;
 	padding-left: var(--vp-pad);
 	padding-right: var(--vp-pad);
 }

@@ -1,27 +1,27 @@
 @import '_lib.scss';
 
-.vp-table {
+.vp table {
 	position: relative;
 	border-collapse: collapse;
 }
 
-.vp-table th {
+.vp table th {
 	background-color: rgba(var(--vp-dim), 0.2);
 }
 
-table.vp-stick-vertical thead tr > th,
-table.vp-stick-vertical tfoot tr > th {
+.vp table.stick-vertical thead tr > th,
+.vp table.stick-vertical tfoot tr > th {
 	background-color: #ddd; /* sticky -> no alpha */
 	position: sticky;
 	top: -1px; /* Compensate vanishing border */
 	z-index: 10;
 	transition: none;
 }
-table.vp-stick-vertical tfoot tr > th {
+.vp table.stick-vertical tfoot tr > th {
 	bottom: -1px; /* Compensate vanishing border */
 }
 
-table.vp-stick-horizontal tr > th:first-child {
+.vp table.stick-horizontal tr > th:first-child {
 	background-color: #ddd; /* sticky -> no alpha */
 	position: sticky;
 	left: 0;
@@ -29,23 +29,23 @@ table.vp-stick-horizontal tr > th:first-child {
 	transition: none;
 }
 
-table.vp-stick-horizontal thead tr > th:first-child,
-table.vp-stick-horizontal tfoot tr > th:first-child {
+.vp table.stick-horizontal thead tr > th:first-child,
+.vp table.stick-horizontal tfoot tr > th:first-child {
 	z-index: 12;
 }
 
-.vp-table.vp-striped tbody tr:nth-child(even) > td {
+.vp table.striped tbody tr:nth-child(even) > td {
 	background-color: rgba(var(--vp-dim), 0.05);
 }
 
-.vp-table tr > * {
+.vp table tr > * {
 	text-align: left;
 	vertical-align: top;
 }
-.vp-table.vp-horizontal tbody tr > * {
+.vp table.horizontal tbody tr > * {
 	border-bottom: 1px solid rgba(var(--vp-dim), 0.33);
 }
-.vp-table.vp-gridded tr > * {
+.vp table.gridded tr > * {
 	border: 1px solid rgba(var(--vp-dim), 0.33);
 }
 
@@ -55,28 +55,28 @@ table.vp-stick-horizontal tfoot tr > th:first-child {
 	}
 }
 
-.vp-table tr > .is-numeric {
+.vp table tr > .numeric {
 	text-align: right;
 }
-.vp-table tr > * {
+.vp table tr > * {
 	padding: calc(var(--vp-pad) / 2) var(--vp-pad);
 	font-size: 90%;
 }
 
-.vp-table.vp-2d thead tr > *:first-child {
+.vp table.vp-2d thead tr > *:first-child {
 	border: none;
 	background: transparent;
 }
 
 @include media-mobile-only {
-	.vp-table.vp-stacking {
+	.vp table.stacking {
 		width: 100%;
 	}
-	.vp-table.vp-stacking tbody tr {
+	.vp table.stacking tbody tr {
 		border-bottom: 2px solid rgba(var(--vp-dim), 0.33);
 	}
-	.vp-table.vp-stacking.vp-stacking th,
-	.vp-table.vp-stacking.vp-stacking td {
+	.vp table.stacking.stacking th,
+	.vp table.stacking.stacking td {
 		width: auto;
 		display: block;
 		border: none;

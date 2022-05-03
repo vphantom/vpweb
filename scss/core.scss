@@ -12,13 +12,13 @@
 	--vp-sans: $font-sans;
 	--vp-serif: $font-serif;
 }
-.vp-seamless {
+.seamless {
 	--vp-pad: 0rem;
 }
-.vp-spaced {
+.spaced {
 	--vp-pad: 0.75rem;
 }
-.vp-relaxed {
+.relaxed {
 	--vp-pad: 1.5rem;
 }
 
@@ -134,7 +134,7 @@ body.vp {
 .vp-mono,
 .vp-notice::before,
 .vp-message::before,
-.vp .is-numeric {
+.vp .numeric {
 	font-family: var(--vp-mono);
 }
 .vp a {

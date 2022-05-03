@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
-	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp vp-sans vp-spaced">
+	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp vp-sans spaced">
 		<header class="vp-container">
 			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
 		</header>
@@ -19,7 +19,7 @@
 					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be as small as possible, with pure CSS solutions where possible, without sacrificing esthetics which contribute to usability.  It strays from the extreme simplicity of the flat layered "paper" trend in favor of more classic visual cues enhanced for modern browsers.
 					</p>
 					<p>
-					Almost all classes and custom elements begin with the prefix <code>vp-</code> to prevent collisions with other frameworks.  For brevity, there is no prefix for attribute classes like <code>is-<em>something</em></code>, <code>has-<em>something</em></code> and <code>size-<em>something</em></code>.
+					All classes and custom elements only take effect inside blocks with <code>vp</code> class to prevent collisions with other frameworks.  (See <em>Co&ouml;peration</em> below for a small caveat.)
 					</p>
 					<p>
 					Compiled CSS files are located in <code>dist/</code>.  You may use <code>vpweb.css</code> to get the entire framework at once, or just some of the individual files described below.  Be sure to import <code>core.css</code> first in order to avoid priority side-effects.
@@ -30,7 +30,7 @@
 					<p>
 					The entire framework (<code>vpweb.css</code>) is smaller than a typical company logo image:
 					</p>
-					<table id="vp-sizes" class="vp-table vp-2d vp-horizontal vp-relaxed">
+					<table id="vp-sizes" class="vp-2d horizontal relaxed">
 						<thead>
 							<tr>
 								<th></th>
@@ -41,11 +41,11 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>17.0KB</td><td>4.5KB</td><td>3.9KB</td></tr>
+<tr><th>vpweb.css</th><td>16.6KB</td><td>4.5KB</td><td>3.9KB</td></tr>
 <tr><th>core.css</th><td>4.1KB</td><td>1.5KB</td><td>1.3KB</td></tr>
-<tr><th>forms.css</th><td>6.4KB</td><td>1.7KB</td><td>1.4KB</td></tr>
+<tr><th>forms.css</th><td>6.1KB</td><td>1.6KB</td><td>1.4KB</td></tr>
 <tr><th>grid.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
-<tr><th>messages.css</th><td>1.2KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>messages.css</th><td>1.1KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>reset.css</th><td>0.2KB</td><td>0.2KB</td><td>0.1KB</td></tr>
 <tr><th>tables.css</th><td>1.6KB</td><td>0.6KB</td><td>0.4KB</td></tr>
 <tr><th>tabs.css</th><td>1.2KB</td><td>0.5KB</td><td>0.3KB</td></tr>
@@ -67,9 +67,9 @@
 					</dl>
 				</section>
 				<section>
-					<h3>Cooperation</h3>
+					<h3>Co&ouml;peration</h3>
 					<p>
-					Semantic CSS rules without a <code>vp-</code>prefix only apply when a parent has class <code>vp</code>. It is therefore easy to use Vanilla+ in only parts of a document.  The only rules which apply outside are in <code>reset.css</code>:
+					CSS classes without a <code>vp-</code> prefix only apply when a parent has class <code>vp</code>. It is therefore easy to use Vanilla+ in only parts of a document.  The only rules which apply outside are in <code>reset.css</code>:
 					</p>
 					<blockquote><pre><code>
 *, *:before, *:after {
@@ -123,7 +123,7 @@ html {
 						<dd>System and user-preferred monospace font families (automatically applied to <code class="html-tag">code</code>, <code class="html-tag">kbd</code>, <code class="html-tag">pre</code>, <code class="html-tag">samp</code>)</dd>
 
 						<dt><code>.vp-sans</code></dt>
-						<dd>System and user-preferred sans-serif font families (automatically applied to <code>.vp-form</code> buttons and inputs)</dd>
+						<dd>System and user-preferred sans-serif font families (automatically applied to buttons and inputs)</dd>
 
 						<dt><code>.vp-serif</code></dt>
 						<dd>System and user-preferred serif font families</dd>
@@ -134,20 +134,20 @@ html {
 					<p>
 					Three classes are recognized by various modules (i.e. grid) as indicative of spacing to use between items.  The closest parent or self has priority.
 					</p>
-					<div class="vp-seamless" vp-grid="12">
-						<div vp-cell="4"><code class="box">.vp-seamless</code></div>
-						<div vp-cell="4"><code class="box">.vp-seamless</code></div>
-						<div vp-cell="4"><code class="box">.vp-seamless</code></div>
+					<div class="seamless" vp-grid="12">
+						<div vp-cell="4"><code class="box">.seamless</code></div>
+						<div vp-cell="4"><code class="box">.seamless</code></div>
+						<div vp-cell="4"><code class="box">.seamless</code></div>
 					</div>
-					<div class="vp-spaced" vp-grid="12">
-						<div vp-cell="4"><code class="box">.vp-spaced</code></div>
-						<div vp-cell="4"><code class="box">.vp-spaced</code></div>
-						<div vp-cell="4"><code class="box">.vp-spaced</code></div>
+					<div class="spaced" vp-grid="12">
+						<div vp-cell="4"><code class="box">.spaced</code></div>
+						<div vp-cell="4"><code class="box">.spaced</code></div>
+						<div vp-cell="4"><code class="box">.spaced</code></div>
 					</div>
-					<div class="vp-relaxed" vp-grid="12">
-						<div vp-cell="4"><code class="box">.vp-relaxed</code></div>
-						<div vp-cell="4"><code class="box">.vp-relaxed</code></div>
-						<div vp-cell="4"><code class="box">.vp-relaxed</code></div>
+					<div class="relaxed" vp-grid="12">
+						<div vp-cell="4"><code class="box">.relaxed</code></div>
+						<div vp-cell="4"><code class="box">.relaxed</code></div>
+						<div vp-cell="4"><code class="box">.relaxed</code></div>
 					</div>
 				</section>
 				<section>
@@ -223,7 +223,7 @@ html {
 				</p>
 				<section>
 					<h3>Grid of 8<sup>ths</sup> <code>vp-grid="8"</code></h3>
-					<div class="grid-demo vp-seamless vp-mono" vp-grid="8">
+					<div class="grid-demo seamless vp-mono" vp-grid="8">
 						<div vp-cell="1"><div>vp-cell="1"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
 						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
 						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="5"><div>vp-cell="5"</div></div>
@@ -233,7 +233,7 @@ html {
 				</section>
 				<section>
 					<h3>Grid of 10<sup>ths</sup> <code>vp-grid="10"</code></h3>
-					<div class="grid-demo vp-seamless vp-mono" vp-grid="10">
+					<div class="grid-demo seamless vp-mono" vp-grid="10">
 						<div vp-cell="1"><div>1</div></div> <div vp-cell="9"><div>vp-cell="9"</div></div>
 						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="8"><div>vp-cell="8"</div></div>
 						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
@@ -244,7 +244,7 @@ html {
 				</section>
 				<section>
 					<h3>Grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h3>
-					<div class="grid-demo vp-seamless vp-mono" vp-grid="12">
+					<div class="grid-demo seamless vp-mono" vp-grid="12">
 						<div vp-cell="1"><div>1</div></div> <div vp-cell="11"><div>vp-cell="11"</div></div>
 						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="10"><div>vp-cell="10"</div></div>
 						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="9"><div>vp-cell="9"</div></div>
@@ -259,12 +259,12 @@ html {
 				<section>
 					<h3>Responsive</h3>
 					<dl>
-						<dt><code>.vp-doubling [vp-cell]</code></dt>
+						<dt><code>.doubling [vp-cell]</code></dt>
 						<dd>
 						Makes grid cells double in relative width when stepping down from "desktop" to "tablet" size, and double again down to "mobile" size. (i.e. A 1/12<sup>th</sup> cell would become 1/6<sup>th</sup> wide in "tablet" viewports and 1/3<sup>rd</sup> wide in "mobile" viewports.)
 						</dd>
 
-						<dt><code>.vp-stacking [vp-cell]</code></dt>
+						<dt><code>.stacking [vp-cell]</code></dt>
 						<dd>
 						Makes grid cells go full-width for "tablet" and "mobile" sizes.
 						</dd>
@@ -283,26 +283,26 @@ html {
 					<p>
 					In addition to text areas, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity.
 					</p>
-					<form class="vp-form vp-row-10 vp-spaced vp-doubling">
-						<div class="vp-col-3">
+					<form vp-grid="10" class="spaced doubling">
+						<div vp-cell="3">
 							<label class="vp-field">
 								<span class="vp-label">Normal</span>
 								<input type="text" name="it001" value="User Input Here">
 							</label>
 						</div>
-						<div class="vp-col-5">
+						<div vp-cell="5">
 							<label class="vp-field">
 								<span class="vp-label">Disabled</span>
 								<input type="text" name="it002" disabled value="User Input Here">
 							</label>
 						</div>
-						<div class="vp-col-2">
+						<div vp-cell="2">
 							<label class="vp-field">
 								<span class="vp-label">TODO:icon</span>
 								<input type="text" name="it003" value="User Input Here">
 							</label>
 						</div>
-						<div class="vp-col-3">
+						<div vp-cell="3">
 							<label class="vp-field">
 								<span class="vp-label">Textarea</span>
 <textarea name="ta">123, Main St.
@@ -310,7 +310,7 @@ Test City, ZZ
 H0H 0H0</textarea>
 							</label>
 						</div>
-						<div class="vp-col-3">
+						<div vp-cell="3">
 							<label class="vp-field">
 								<span class="vp-label">Select</span>
 								<select name="sel1">
@@ -327,7 +327,7 @@ H0H 0H0</textarea>
 								</select>
 							</label>
 						</div>
-						<div class="vp-col-3">
+						<div vp-cell="3">
 							<label class="vp-field">
 								<span class="vp-label">Combobox</span>
 								<datalist id="dl1">
@@ -349,20 +349,20 @@ H0H 0H0</textarea>
 				</section>
 				<section>
 					<h3>Checkboxes <code>label input[type=checkbox] + .vp-label</code></h3>
-					<form class="vp-form vp-row-24 vp-doubling vp-spaced">
-						<label class="vp-col-6">
+					<form vp-grid="12" class="doubling spaced">
+						<label vp-cell="3">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Something long wraps on label's width</span>
 						</label>
-						<label class="vp-col-6">
+						<label vp-cell="3">
 							<input type="checkbox" name="cb" value="1" disabled checked>
 							<span class="vp-label">Disabled</span>
 						</label>
-						<label class="vp-col-6" style="font-size:75%">
+						<label vp-cell="3" style="font-size:75%">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Adapts to label's font size</span>
 						</label>
-						<label class="vp-col-6" style="background-color:orange;color:white;">
+						<label vp-cell="3" style="background-color:orange;color:white;">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Ignores label colors</span>
 						</label>
@@ -373,52 +373,52 @@ H0H 0H0</textarea>
 					<p>
 					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than 5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when presenting a form's initial state.
 					</p>
-					<form class="vp-form vp-row-24 vp-doubling vp-spaced">
-						<label class="vp-col-4">
+					<form vp-grid="12" class="doubling spaced">
+						<label vp-cell="2">
 							<input type="radio" name="rd" value="1" checked>
 							<span class="vp-label">First choice</span>
 						</label>
-						<label class="vp-col-4">
+						<label vp-cell="2">
 							<input type="radio" name="rd" value="2">
 							<span class="vp-label">Second choice</span>
 						</label>
-						<label class="vp-col-4">
+						<label vp-cell="2">
 							<input type="radio" name="rd" value="3" disabled>
 							<span class="vp-label">Disabled</span>
 						</label>
-						<label class="vp-col-4" style="background-color:orange;color:white;font-size:75%;">
+						<label vp-cell="2" style="background-color:orange;color:white;font-size:75%;">
 							<input type="radio" name="rd" value="2">
 							<span class="vp-label">Ignores label colors</span>
 						</label>
 					</form>
 				</section>
 				<section>
-					<h3>Buttons <code>.vp-form button, .vp-button</code></h3>
-					<form class="vp-form">
+					<h3>Buttons <code>button, .vp-button</code></h3>
+					<form>
 						<button onclick="return false;">Normal</button>
 						<a class="vp-button" onclick="return false;">Anchor</a>
-						<button onclick="return false;" class="is-active">:active, .is-active</button>
+						<button onclick="return false;" class="active">:active, .active</button>
 						<button onclick="return false;" disabled>:disabled</button>
-						<button onclick="return false;" class="is-secondary">.is-secondary</button>
+						<button onclick="return false;" class="secondary">.secondary</button>
 					</form>
 					<h3>Icon Buttons <code>.vp-icon-button</code></h3>
 					<p>
-					Unlike other form styles, icon buttons have fixed sizes based on touch display ability and their priority.  Normal by default, they may have <code>.is-secondary</code> or <code>.is-priority</code>.  On touch devices, these three sizes are 11mm, 15mm and 19mm.
+					Unlike other form styles, icon buttons have fixed sizes based on touch display ability and their priority.  Normal by default, they may have <code>.secondary</code> or <code>.priority</code>.  On touch devices, these three sizes are 11mm, 15mm and 19mm.
 					</p>
-					<form class="vp-form">
+					<form>
 							<button onclick="return false;" class="vp-icon-button" title="Normal">M</button>
 							<button onclick="return false;" class="vp-icon-button" disabled title=":disabled">M</button>
-							<button onclick="return false;" class="vp-icon-button is-secondary" title=".is-secondary">M</button>
-							<button onclick="return false;" class="vp-icon-button is-priority" title=".is-priority">M</button>
+							<button onclick="return false;" class="vp-icon-button secondary" title=".secondary">M</button>
+							<button onclick="return false;" class="vp-icon-button priority" title=".priority">M</button>
 						</dl>
 					</form>
 					<h3>Button groups <code>.vp-group button, .vp-group .vp-button</code></h3>
-					<form class="vp-form">
+					<form>
 						<div class="vp-group">
 							<button onclick="return false;">First</button>
 							<button onclick="return false;">Middle</button>
 							<button onclick="return false;" disabled>Disabled</button>
-							<button onclick="return false;" class="is-active">Active</button>
+							<button onclick="return false;" class="active">Active</button>
 							<button onclick="return false;">Last</button>
 						</div>
 					</form>
@@ -426,17 +426,17 @@ H0H 0H0</textarea>
 					<p>
 					Normal buttons automatically adapt to any background/foreground colors and font sizes set on their elements, as well as their parent background color.  Icon buttons adapt to font size and their parent background color.
 					</p>
-					<form class="vp-form">
+					<form>
 						<button onclick="return false;" style="background-color:red; color:white; font-size: 16pt;">White on red, 16pt</button>
 						<button onclick="return false;" style="background-color:white; color:black;">Black on white</button>
 						<button onclick="return false;" style="background-color:blue; color:white; font-size: 9pt;">White on blue, 9pt</button>
 						<span style="display: inline-block; background-color: orange; padding: 0.1em;">
 							<button onclick="return false;">Normal</button>
-							<button onclick="return false;" class="is-secondary">.is-secondary</button>
+							<button onclick="return false;" class="secondary">.secondary</button>
 							<button onclick="return false;" class="vp-icon-button" title="Normal">M</button>
-							<a href="#" onclick="return false;" class="vp-icon-button is-active" title=":active, .is-active">M</a>
+							<a href="#" onclick="return false;" class="vp-icon-button active" title=":active, .active">M</a>
 							<button onclick="return false;" class="vp-icon-button" disabled style="font-size: 16pt;" title=":disabled, 16pt">M</button>
-							<button onclick="return false;" class="vp-icon-button is-secondary" style="font-size: 9pt;" title=".is-secondary, 9pt">M</button>
+							<button onclick="return false;" class="vp-icon-button secondary" style="font-size: 9pt;" title=".secondary, 9pt">M</button>
 						</span>
 					</form>
 				</section>
@@ -452,34 +452,34 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Tables <code>tables.css</code></h2>
 				<p>
-				Tables with <code>.vp-table</code> are styled.
+				Tables respond to density with padding and font size.
 				</p>
-				<div class="vp-row-10 vp-doubling">
-					<div class="vp-col-5">
-						<table class="vp-table vp-spaced vp-horizontal vp-striped">
+				<div vp-grid="10" class="doubling">
+					<div vp-cell="5">
+						<table class="spaced horizontal striped">
 							<thead>
 								<tr><th>First</th><th>Second</th><th>Third</th><th>Fourth</th></tr>
 							</thead>
 							<tbody class="vp-center-3">
-								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="vp-col-5">
-						<table class="vp-table vp-spaced vp-gridded vp-2d">
+					<div vp-cell="5">
+						<table class="vp-table spaced gridded vp-2d">
 							<thead>
 								<tr><th></th><th>Second</th><th>Third</th><th>Fourth</th></tr>
 							</thead>
 							<tbody class="vp-center-3">
-								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="is-numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
 							</tbody>
 						</table>
 					</div>
@@ -494,32 +494,32 @@ H0H 0H0</textarea>
 						<code class="html-tag">tfoot</code>.
 						</dd>
 
-						<dt>table.vp-horizontal</dt>
+						<dt>table.horizontal</dt>
 						<dd>
 						Horizontal borders only.
 						</dd>
 
-						<dt>table.vp-gridded</dt>
+						<dt>table.gridded</dt>
 						<dd>
 						Horizontal and vertical borders.
 						</dd>
 
-						<dt>table.vp-striped</dt>
+						<dt>table.striped</dt>
 						<dd>
 						Highlights every even row in the <code class="html-tag">tbody</code>.
 						</dd>
 
-						<dt>table.vp-stacking</dt>
+						<dt>table.stacking</dt>
 						<dd>
 						Cells grow to full width on mobile (portrait) screens. No border between cells, just between rows.
 						</dd>
 
-						<dt>table.vp-stick-vertical</dt>
+						<dt>table.stick-vertical</dt>
 						<dd>
 						<code class="html-tag">thead</code> and <code class="html-tag">tfoot</code> (all <code class="html-tag">th</code>) remain in viewport while the table is.
 						</dd>
 
-						<dt>table.vp-stick-horizontal</dt>
+						<dt>table.stick-horizontal</dt>
 						<dd>
 						Left-most column (a <code class="html-tag">th</code>) is considered a header and remains in viewport while the table is.
 						</dd>
@@ -529,14 +529,9 @@ H0H 0H0</textarea>
 						Center text in all rows, column <code>*</code>, maximum: 12.  (i.e. <code>.vp-center-2</code> centers cells in column 2.)
 						</dd>
 
-						<dt>th.is-numeric, td.is-numeric</dt>
+						<dt>th.numeric, td.numeric</dt>
 						<dd>
 						Right-justified cell.
-						</dd>
-
-						<dt>table.vp-seamless, table.vp-spaced, table.vp-relaxed</dt>
-						<dd>
-						Tables respond to density with padding and font size.
 						</dd>
 
 					</dl>
@@ -550,16 +545,16 @@ H0H 0H0</textarea>
 				<section>
 					<h3>Notice <code class="html-tag">vp-notice</code></h3>
 					<p>A notice with a state automatically gets a color and a dot. No need to insert a dot manually.</p>
-					<vp-notice class="is-error">This notice has <code>.is-error</code>.</vp-notice>
-					<vp-notice class="is-warning">This notice has <code>.is-warning</code>.</vp-notice>
-					<vp-notice class="is-ok">This notice has <code>.is-ok</code>.</vp-notice>
+					<vp-notice class="vp-error">This notice has <code>.vp-error</code>.</vp-notice>
+					<vp-notice class="vp-warning">This notice has <code>.vp-warning</code>.</vp-notice>
+					<vp-notice class="vp-ok">This notice has <code>.vp-ok</code>.</vp-notice>
 					<vp-notice _char="?">This notice has no state, but it does have <code>_char="?"</code> to override the default "i".</vp-notice>
 				</section>
 				<section>
 					<h3>Message <code class="html-tag">vp-message</code></h3>
-					<vp-message class="is-error">This message has class <code>.is-error</code>.</vp-message>
-					<vp-message class="is-warning">This message has class <code>.is-warning</code>.</vp-message>
-					<vp-message class="is-ok">This message has class <code>.is-ok</code>.</vp-message>
+					<vp-message class="vp-error">This message has class <code>.vp-error</code>.</vp-message>
+					<vp-message class="vp-warning">This message has class <code>.vp-warning</code>.</vp-message>
+					<vp-message class="vp-ok">This message has class <code>.vp-ok</code>.</vp-message>
 					<vp-message _char="?">This message has no state, but it does have <code>_char="?"</code>. This text is long for the purpose of seeing wrapping in action. Wrapping requires a lot of text on wide screen desktop monitors. ;-)</vp-message>
 				</section>
 			</section>
@@ -572,7 +567,7 @@ H0H 0H0</textarea>
 					<p>
 					A block which contains a series of the sequence: radio or checkbox, label, <code class="html-tag">div</code>.  Spacing between labels, and between labels and their content is dictated by optional density classes on the main block.
 					</p>
-					<div class="vp-accordion vp-spaced">
+					<div class="vp-accordion spaced">
 						<input type="radio" name="_acc1" id="_acc1_1"><label for="_acc1_1">First expandable item. Click here to test.</label>
 						<div>
 							<p>This is the content of the first expandable item.</p>
@@ -593,7 +588,7 @@ H0H 0H0</textarea>
 					<p>
 					A block which contains a series of radio inputs followed by their respective labels, then exactly as many <code class="html-tag">div</code> as there were labels.  Spacing between tabs and their content is dictated by optional density classes on the main block.
 					</p>
-					<div class="vp-tabs vp-spaced">
+					<div class="vp-tabs spaced">
 						<input type="radio" id="_tabs1_1" name="_tabs1" checked><label for="_tabs1_1">Tab 1</label>
 						<input type="radio" id="_tabs1_2" name="_tabs1"><label for="_tabs1_2">Tab 2</label>
 						<input type="radio" id="_tabs1_3" name="_tabs1"><label for="_tabs1_3">Tab 3</label>
@@ -632,7 +627,7 @@ H0H 0H0</textarea>
 					<p>
 					To deal with inputs and to use inline HTML in a tooltip, use <code class="html-tag">vp-tooltip</code> which must immediately follow a focusable element such as <code class="html-tag">input</code>, and both need to be inside a <code>position:relative</code> block.  For our forms, this is easily achieved with a field (an input inside its label).  Optional boolean attributes <code>_below</code> and <code>_right</code> affect alignment and position.
 					</p>
-					<form class="vp-form">
+					<form>
 						<label class="vp-field">
 							<span class="vp-label">Activate this field to see help</span>
 							<input type="text" name="tt1">

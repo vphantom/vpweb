@@ -34,33 +34,33 @@ vp-notice[_char]::before,
 vp-message[_char]::before {
 	content: attr(_char);
 }
-vp-notice.is-error::before,
-vp-notice.is-warning::before,
-vp-message.is-error::before,
-vp-message.is-warning::before {
+vp-notice.vp-error::before,
+vp-notice.vp-warning::before,
+vp-message.vp-error::before,
+vp-message.vp-warning::before {
 	content: '!';
 }
 
-.vp .is-error {
+.vp-error {
 	--vp-col: var(--vp-red);
 	color: rgb(var(--vp-col));
 }
 
-.vp .is-warning {
+.vp-warning {
 	--vp-col: var(--vp-orange);
 	color: rgb(var(--vp-col));
 }
-vp-notice.is-warning::before,
-vp-message.is-warning::before {
+vp-notice.vp-warning::before,
+vp-message.vp-warning::before {
 	border-radius: 0.5em;
 }
 
-.vp .is-ok {
+.vp-ok {
 	--vp-col: var(--vp-green);
 	color: rgb(var(--vp-col));
 }
-vp-notice.is-ok::before,
-vp-message.is-ok::before {
+vp-notice.vp-ok::before,
+vp-message.vp-ok::before {
 	border-radius: 0.1em;
 }
 

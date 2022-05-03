@@ -73,17 +73,17 @@
 }
 
 @include media-tablet-down {
-	.vp-stacking [vp-cell] {
+	.stacking [vp-cell] {
 		width: 100%;
 	}
 }
 @include media-tablet-only {
-	.vp-doubling [vp-cell] {
+	.doubling [vp-cell] {
 		min-width: min(100%, (2 * var(--vp-width)));
 	}
 }
 @include media-mobile-only {
-	.vp-doubling [vp-cell] {
+	.doubling [vp-cell] {
 		min-width: min(100%, (4 * var(--vp-width)));
 	}
 }

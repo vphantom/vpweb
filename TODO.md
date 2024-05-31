@@ -2,17 +2,19 @@
 
 ### Editeur
 
+- [ ] Add a 4th type "Bool" mapping to JSON boolean for Y/N fields
+
 - [ ] Repeatable: add entries/rows via additional disabled entry until clicked
 
 - [ ] Repeatable: remove existing entries/rows (mark for deletion with `null`)
 
-- [ ] For select and select multiple, we'll wait until we have Select and then revisit "combo" for something more general.  (One or multiple, allow arbitrary or not.)  Single selects up to X items should be radio buttons, above should be a select, and multiple should be a `<vp-select>`.
+- [ ] For select and select multiple, we'll wait until we have Selecteur and then revisit "combo" for something more general.  (One or multiple, allow arbitrary or not.)  Single selects up to X items should be radio buttons, above should be a select, and multiple should be a `<vp-select>`.
 
 - [ ] When CSS table will be (re-)done, consider using it here.
 
 - [ ] Add an alternate "send changes only" edit mode.
 
-### Select
+### Selecteur
 
 Evaluate if we can be an order of magnitude smaller than existing stand-alone options for our specific needs.
 
@@ -31,6 +33,7 @@ More or less a port/cleanup of the old Merino jQuery widget, which had some seri
 ### Forms
 
 - [ ] Support the `formaction` attribute of clicked elements.
+- [ ] Add an attribute which will make the initial load save an input's value, then on submit compare so that the variable is not sent unchanged. A numeric specialization could send the difference instead of the new value. (Helps multiple users editing the same thing without conflict and moves the burden of identifying changes to the client side. Delta should use a suffix or something so that non-JS users submitting the form won't distort data.)
 
 ## CSS
 

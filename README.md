@@ -15,7 +15,7 @@ The components make use of the JS library and aim to be otherwise stand-alone.  
 
 **WORKING PROTOTYPE** "It works for me." The APIs may still change significantly, bugs and browser incompatibilities may still abound.
 
-A stable version 1.0 is expected by 2023.
+A stable version 1.0 is expected by the end of 2024.
 
 See [TODO](TODO.md) for details of what's coming up.
 
@@ -29,8 +29,11 @@ npm install vpweb
 
 Main objectives:
 
-- Responsive, but with desktop as a **first-class citizen**
-- Pure CSS wherever JS wouldn't significantly simplify
+- Responsive, but with **desktop as a first-class citizen**
+- Nearly pure CSS, using JS only where it helps significantly
+- Usable as a package or as a set of SCSS include files
+- Unique selectors to minimize conflicts with other frameworks
+- Forego advanced concepts in favor of small size and high performance
 
 Documentation: `docs/css.html`
 
@@ -71,7 +74,7 @@ import 'vpweb/vpweb';
 
 You may also use individual components, although if you use more than one as stand-alone scripts, there will be some redundancy.
 
-Note that components triggered by attributes or class names cannot self-activate inside shadow DOMs.  If you want to use Vanilla+ components inside those, you'll need to activate them manually (for example, with `fast.preclick(element)`).  See each component's documentation below for manual activation usage.
+Note that components triggered by attributes or class names cannot self-activate inside shadow DOMs.  If you want to use Vanilla+ components inside those, you'll need to activate them manually (for example, with `fast.preclick(element)`).  See each component's documentation for manual activation usage.
 
 
 ## ACKNOWLEDGEMENTS
@@ -80,7 +83,7 @@ Graph X Design Inc. https://www.gxd.ca/ sponsored this project.
 
 ## LICENSE AND COPYRIGHT
 
-Copyright (c) 2019-2022 Stéphane Lavergne <https://github.com/vphantom>
+Copyright (c) 2019-2024 Stéphane Lavergne <https://github.com/vphantom>
 
 Distributed under the MIT (X11) License:
 http://www.opensource.org/licenses/mit-license.php

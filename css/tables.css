@@ -90,7 +90,7 @@ table:is(.vp, .vp *):not(.xvp, .xvp *) tr > * {
 	font-size: 90%;
 }
 
-table:is(.vp, .vp *):not(.xvp, .xvp *) .vp-2d thead tr > *:first-child {
+table:is(.vp, .vp *):not(.xvp, .xvp *).vp-2d thead tr > *:first-child {
 	border: none;
 	background: transparent;
 }

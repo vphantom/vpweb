@@ -208,30 +208,30 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 /* FIXME: borders seem to screw up sticky, scrolls by border thickness? */
 
-:is(.stack, .shelf):is(.vp, .vp *):not(.xvp, .xvp *) {
+.vp-stack, .vp-shelf {
 	display: flex;
 }
 /* prettier-ignore */
-:is(.stack, .shelf):is(.vp, .vp *):not(.xvp, .xvp *) > :nth-child(2) {
+:is(.vp-stack, .vp-shelf) > :nth-child(2) {
 	flex: 1;
 }
-:is(.stack, .shelf):is(.vp, .vp *):not(.xvp, .xvp *) {
+:is(.vp-stack, .vp-shelf) {
 	flex-flow: column;
 }
-.shelf:is(.vp, .vp *):not(.xvp, .xvp *) {
+.vp-shelf {
 	flex-flow: row wrap;
 }
-.stack:is(.vp, .vp *):not(.xvp, .xvp *) > :not(:first-child) {
+.vp-stack > :not(:first-child) {
 	margin-top: var(--vp-pad);
 }
-.shelf:is(.vp, .vp *):not(.xvp, .xvp *) > :not(:first-child) {
+.vp-shelf > :not(:first-child) {
 	margin-left: var(--vp-pad);
 }
 
 @media only screen and (min-width: 768px) {
 	/* Tablet-up */
 	/* prettier-ignore */
-	.shelf:is(.vp, .vp *):not(.xvp, .xvp *) > :first-child:nth-last-child(2) {
+	.vp-shelf > :first-child:nth-last-child(2) {
 		/* First of a duo */
 		min-width: 38.2%;
 	}
@@ -240,7 +240,7 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 @media only screen and (min-width: 768px) and (not (min-width: 992px)) {
 	/* Tablet */
 	/* prettier-ignore */
-	.shelf:is(.vp, .vp *):not(.xvp, .xvp *) > :first-child:nth-last-child(3) {
+	.vp-shelf > :first-child:nth-last-child(3) {
 		/* First of a trio */
 		min-width: 38.2%;
 	}
@@ -248,8 +248,8 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 @media only screen and (min-width: 992px) {
 	/* Desktop */
-	.shelf:is(.vp, .vp *):not(.xvp, .xvp *)
-		> :is(:first-child:nth-last-child(3), :nth-child(3)) {
+	/* prettier-ignore */
+	.vp-shelf > :is(:first-child:nth-last-child(3), :nth-child(3)) {
 		/* First and third of at least three */
 		min-width: 23.6%;
 	}
@@ -257,26 +257,26 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 @media only screen and (not (min-width: 992px)) {
 	/* Tablet-down */
-	.shelf:is(.vp, .vp *):not(.xvp, .xvp *) > :nth-child(3) {
+	.vp-shelf > :nth-child(3) {
 		flex-basis: 100%;
 		height: fit-content;
 	}
 }
 @media only screen and (not (min-width: 768px)) {
 	/* Mobile */
-	.shelf:is(.vp, .vp *):not(.xvp, .xvp *) {
+	.vp-shelf {
 		display: block;
 	}
 }
 
-.container:is(.vp, .vp *):not(.xvp, .xvp *) {
+.vp-container {
 	width: 100%;
 	max-width: 100%;
 	padding-left: var(--vp-pad);
 	padding-right: var(--vp-pad);
 }
 
-.block:is(.vp, .vp *):not(.xvp, .xvp *) {
+.vp-block {
 	display: block;
 	width: 100%;
 }
@@ -284,14 +284,14 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 /* Media queries */
 
 /* .mouse-only: display requires fine pointer */
-@media not (only screen and (any-pointer: fine)) {
+@media not screen, only screen and (not (any-pointer: fine)) {
 	.mouse-only:is(.vp, .vp *):not(.xvp, .xvp *) {
 		display: none;
 	}
 }
 
 /* .hover-only: display requires hovering pointer */
-@media not (only screen and (any-hover: hover)) {
+@media not screen, only screen and (not (any-hover: hover)) {
 	.hover-only:is(.vp, .vp *):not(.xvp, .xvp *) {
 		display: none;
 	}

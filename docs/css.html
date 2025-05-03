@@ -19,7 +19,7 @@
 					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be a progressive enhancement on plain HTML5, with CSS based improvements with occasional JS components where necessary.  It strays from the extreme simplicity of the flat layered "paper" trend in favor of more obvious classic visual cues enhanced for modern browsers.
 					</p>
 					<p>
-					All overrides, classes and custom elements only take effect inside <code>.vp</code> blocks to help reduce collisions with other frameworks. (See <em>Co&ouml;peration</em> below.)
+					All overrides, classes and custom element styling only take effect inside <code>.vp</code> blocks to help reduce collisions with other frameworks. (See <em>Co&ouml;peration</em> below.)
 					</p>
 					<p>
 					Compiled CSS files are located in <code>dist/</code>.  You may use <code>vpweb.css</code> to get the entire framework at once, or just some of the individual files described below.  Be sure to import <code>core.css</code> first in order to avoid priority side-effects.
@@ -41,14 +41,14 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>23.5KB</td><td>5.2KB</td><td>4.5KB</td></tr>
-<tr><th>core.css</th><td>5.5KB</td><td>1.6KB</td><td>1.4KB</td></tr>
-<tr><th>forms.css</th><td>9.2KB</td><td>2.2KB</td><td>1.8KB</td></tr>
+<tr><th>vpweb.css</th><td>22.1KB</td><td>5.1KB</td><td>4.5KB</td></tr>
+<tr><th>core.css</th><td>5.1KB</td><td>1.6KB</td><td>1.4KB</td></tr>
+<tr><th>forms.css</th><td>8.6KB</td><td>2.2KB</td><td>1.8KB</td></tr>
 <tr><th>grid.css</th><td>1.4KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>messages.css</th><td>1.4KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>tables.css</th><td>2.8KB</td><td>0.7KB</td><td>0.5KB</td></tr>
-<tr><th>tabs.css</th><td>1.6KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>tooltips.css</th><td>1.6KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>tabs.css</th><td>1.3KB</td><td>0.5KB</td><td>0.3KB</td></tr>
+<tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>transitions.css</th><td>0.7KB</td><td>0.3KB</td><td>0.3KB</td></tr>
 <!-- END SIZES -->
 <!-- BEGIN JSIZES -->
@@ -74,7 +74,7 @@
 				<section>
 					<h3>Co&ouml;peration</h3>
 					<p>
-					No special behavior should leak outside of <code>.vp</code> blocks (which may be <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code> or just small fragments of your pages).  You may also disable any section or specific elements with <code>.xvp</code>.  We achieve this flexibility by systematically selecting our subjects with the pattern: <code>selector:is(.vp, .vp *):not(.xvp, .xvp *)</code>.
+					No special behavior should leak outside of <code>.vp</code> blocks (which may be <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code> or just small fragments of your pages).  You may also disable any section or specific elements with <code>.xvp</code>.  We achieve this flexibility by systematically selecting our subjects with the pattern: <code>selector:is(.vp, .vp *):not(.xvp, .xvp *)</code>.  Note that elements and classes with an explicit <code>vp-</code> prefix may retain their functionality despite <code>.xvp</code> because they are implicitly unique.
 					</p>
 				</section>
 				<section>
@@ -172,13 +172,13 @@
 					</dl>
 				</section>
 				<section>
-					<h3>Block <code>.block</code></h3>
+					<h3>Block <code>.vp-block</code></h3>
 					<p>
 					Makes any element (including buttons) a block and full width.
 					</p>
 				</section>
 				<section>
-					<h3>Generic Container <code>.container</code></h3>
+					<h3>Generic Container <code>.vp-container</code></h3>
 					<p>
 					Adds side margins dictated by density (self or immediate parent) and limits width on large viewports.
 					</p>
@@ -202,18 +202,18 @@
 					</dl>
 				</section>
 				<section>
-					<h3>Flex Layouts <code>.stack, .shelf</code></h3>
+					<h3>Flex Layouts <code>.vp-stack, .vp-shelf</code></h3>
 					<p>
 					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density.
 					<B>FIXME</B>: maybe no padding/margin/borders and let users use <code>content</code> if they want current density padding inside it?
 					</p>
 					<dl>
 
-						<dt><code>.stack</code></dt>
+						<dt><code>.vp-stack</code></dt>
 						<dd>
 						2 or 3 immediate children are stacked vertically. The second child expands as necessary to make sure that the optional third child is always no higher than the bottom of the viewport.
 						</dd>
-						<dt><code>.shelf</code></dt>
+						<dt><code>.vp-shelf</code></dt>
 						<dd>
 						Same behavior, but horizontal from left to right.  Set width using <code>min-width</code> to help with responsiveness.  Two-column shelves have a Fibonacci-derived default ratio of (38.2%,61.8%), three-column shelves have (23.6%,52.8%,23.6%).  <b>Responsive:</b> On tablets down, the third child goes below the other two and on mobile all three children become vertically stacked.
 						</dd>
@@ -221,9 +221,9 @@
 					</dl>
 					<p>Examples:</p>
 					<div _grid="8">
-						<div _cols="2" class="stack" style="width: 12em; height: 8em; overflow-y: scroll;">
+						<div _cols="2" class="vp-stack" style="width: 12em; height: 8em; overflow-y: scroll;">
 							<div class="box">header</div>
-							<div class="shelf">
+							<div class="vp-shelf">
 								<div class="box">left</div>
 								<div class="box">
 									<p>main</p>
@@ -231,9 +231,9 @@
 							</div>
 							<div class="box">footer</div>
 						</div>
-						<div _cols="2" class="stack" style="width: 12em; height: 8em; overflow-y: scroll;">
+						<div _cols="2" class="vp-stack" style="width: 12em; height: 8em; overflow-y: scroll;">
 							<div class="box">header</div>
-							<div class="shelf">
+							<div class="vp-shelf">
 								<div class="box">left</div>
 								<div class="box">
 									<p>main</p>
@@ -247,9 +247,9 @@
 							</div>
 							<div class="box">footer</div>
 						</div>
-						<div _cols="2" class="stack" style="width: 12em; height: 8em; overflow-y: scroll;">
+						<div _cols="2" class="vp-stack" style="width: 12em; height: 8em; overflow-y: scroll;">
 							<div class="sticky box" style="background:#fff; top:0; left:0;">header (sticky)</div>
-							<div class="shelf">
+							<div class="vp-shelf">
 								<div class="box">left</div>
 								<div class="box">
 									<p>main</p>

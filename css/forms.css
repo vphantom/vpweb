@@ -157,11 +157,11 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 
 /* Button/input groups */
 
-.vp-group:not(.xvp, .xvp *) {
+.vp-group {
 	white-space: nowrap;
 	display: flex;
 }
-.vp-group:not(.xvp, .xvp *) > input {
+.vp-group > input {
 	margin: 0 0.5em var(--vp-pad) 0;
 	outline: none;
 	/* border: 1px solid rgba(var(--vp-dim), 0.75); */
@@ -170,24 +170,24 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 	background-color: rgba(var(--vp-dim), 0.02);
 	/* box-shadow: var(--vp-btn-sh); */
 }
-.vp-group:not(.xvp, .xvp *) > :is(button, .vp-button, input) {
+.vp-group > :is(button, .vp-button, input) {
 	margin-right: 0 !important;
 	border-radius: 0;
 }
-.vp-group:not(.xvp, .xvp *) > input {
+.vp-group > input {
 	border-left-width: 0 !important;
 	border-right-width: 0 !important;
 }
-.vp-group:not(.xvp, .xvp *) > input:first-child {
+.vp-group > input:first-child {
 	border-left-width: 1px !important;
 }
-.vp-group:not(.xvp, .xvp *) > input:last-child {
+.vp-group > input:last-child {
 	border-right-width: 1px !important;
 }
-.vp-group:not(.xvp, .xvp *) > :is(button, .vp-button, input):first-child {
+.vp-group > :is(button, .vp-button, input):first-child {
 	border-radius: var(--vp-corner) 0 0 var(--vp-corner);
 }
-.vp-group:not(.xvp, .xvp *) > :is(button, .vp-button, input):last-child {
+.vp-group > :is(button, .vp-button, input):last-child {
 	border-radius: 0 var(--vp-corner) var(--vp-corner) 0;
 }
 
@@ -195,7 +195,7 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 
 /* NOTE: Class is referred twice for specificity. */
 
-.vp-icon-button.vp-icon-button:not(.xvp, .xvp *) {
+.vp-icon-button.vp-icon-button {
 	border-radius: 4em;
 	padding: 0.35em;
 	margin: 0 0.5em var(--vp-pad) 0;
@@ -205,23 +205,23 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 	box-shadow: none;
 	font-size: calc(11mm / 1.75);
 }
-.vp-icon-button.vp-icon-button.secondary:not(.xvp, .xvp *) {
+.vp-icon-button.vp-icon-button.secondary {
 	background-color: rgba(var(--vp-dim), 0.125);
 	box-shadow: none;
 	font-size: calc(8.5mm / 1.75);
 }
-.vp-icon-button.vp-icon-button.priority:not(.xvp, .xvp *) {
+.vp-icon-button.vp-icon-button.priority {
 	font-size: calc(13.5mm / 1.75);
 }
-.vp-icon-button.vp-icon-button:not(.xvp, .xvp *):hover {
+.vp-icon-button.vp-icon-button:hover {
 	background-image: none;
 }
-.vp-icon-button.vp-icon-button:not(.xvp, .xvp *):active,
-.vp-icon-button.vp-icon-button.secondary:not(.xvp, .xvp *):active {
+.vp-icon-button.vp-icon-button:active,
+.vp-icon-button.vp-icon-button.secondary:active {
 	background-image: none;
 	box-shadow: var(--vp-btn-sha);
 }
-.vp-icon-button.vp-icon-button:not(.xvp, .xvp *):disabled {
+.vp-icon-button.vp-icon-button:disabled {
 	background-image: none;
 	box-shadow: none;
 }
@@ -234,7 +234,7 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
  * Or do we want to be explicit?
  */
 
-label[vp-field]:not(.xvp, .xvp *) :is(input, select, textarea), .vp-group:not(.xvp, .xvp *) > input {
+label[vp-field] :is(input, select, textarea), .vp-group > input {
 	outline: none;
 	border: 1px solid rgba(var(--vp-dim), 0.75);
 	border-radius: var(--vp-corner);
@@ -242,17 +242,17 @@ label[vp-field]:not(.xvp, .xvp *) :is(input, select, textarea), .vp-group:not(.x
 	background-color: rgba(var(--vp-dim), 0.02);
 }
 
-label[vp-field]:not(.xvp, .xvp *) :is(input, select, textarea) {
+label[vp-field] :is(input, select, textarea) {
 	display: block;
 	width: 100%;
 	padding: 1.75em 0.5em 0.5em 0.5em;
 }
-label[vp-field]:not(.xvp, .xvp *) :disabled, .vp-group:not(.xvp, .xvp *) > input:disabled {
+label[vp-field] :disabled, .vp-group > input:disabled {
 	color: rgba(var(--vp-dim), 0.75);
 	cursor: not-allowed;
 	background-color: rgba(var(--vp-dim), 0.125);
 }
-label[vp-field]:not(.xvp, .xvp *):before {
+label[vp-field]:before {
 	content: attr(title);
 	display: block;
 	font-size: 80%;
@@ -263,30 +263,30 @@ label[vp-field]:not(.xvp, .xvp *):before {
 	padding: 0.625em;
 	border: 1px solid transparent;
 }
-label[vp-field]:not(.xvp, .xvp *) textarea {
+label[vp-field] textarea {
 	height: 6em;
 }
-label[vp-field]:not(.xvp, .xvp *) :is(.lead, .follow) {
+label[vp-field] :is(.lead, .follow) {
 	position: absolute;
 	text-align: center;
 	width: 1.5em;
 }
-label[vp-field]:not(.xvp, .xvp *) .lead {
+label[vp-field] .lead {
 	top: 1.75em;
 	left: 0.5em;
 }
-label[vp-field]:not(.xvp, .xvp *) .follow {
+label[vp-field] .follow {
 	top: 1.75em;
 	right: 0.5em;
 }
-label[vp-field]:not(.xvp, .xvp *) .lead ~ :is(input, select, textarea) {
+label[vp-field] .lead ~ :is(input, select, textarea) {
 	padding-left: 2.5em;
 }
-label[vp-field]:not(.xvp, .xvp *) .follow ~ :is(input, select, textarea) {
+label[vp-field] .follow ~ :is(input, select, textarea) {
 	padding-right: 2.5em;
 }
 
-[vp-cell] > [vp-field]:not(.xvp, .xvp *) {
+[vp-cell] > [vp-field] {
 	width: 100%;
 }
 
@@ -377,13 +377,13 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) [type='checkbox']:disabled + .vp-label::b
 
 /* No fine pointer: finger target sizes */
 @media not (only screen and (any-pointer: fine)) {
-	.vp-icon-button.vp-icon-button:not(.xvp, .xvp *) {
+	.vp-icon-button.vp-icon-button {
 		font-size: calc(15mm / 1.75);
 	}
-	.vp-icon-button.vp-icon-button.secondary:not(.xvp, .xvp *) {
+	.vp-icon-button.vp-icon-button.secondary {
 		font-size: calc(11mm / 1.75);
 	}
-	.vp-icon-button.vp-icon-button.priority:not(.xvp, .xvp *) {
+	.vp-icon-button.vp-icon-button.priority {
 		font-size: calc(19mm / 1.75);
 	}
 

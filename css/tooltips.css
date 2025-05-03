@@ -4,11 +4,11 @@
 
 /* Tooltips */
 
-[vp-tooltip]:not(.xvp, .xvp *) {
+[vp-tooltip] {
 	position: relative;
 }
-vp-tooltip:not(.xvp, .xvp *),
-[vp-tooltip]:not(.xvp, .xvp *)::before {
+vp-tooltip,
+[vp-tooltip]::before {
 	display: none;
 	position: absolute;
 	min-width: min-content;
@@ -28,22 +28,22 @@ vp-tooltip:not(.xvp, .xvp *),
 	margin-bottom: 0.75em;
 	top: auto;
 }
-vp-tooltip[_right]:not(.xvp, .xvp *),
-[vp-tooltip][vp-tooltip-right]:not(.xvp, .xvp *)::before {
+vp-tooltip[_right],
+[vp-tooltip][vp-tooltip-right]::before {
 	left: auto;
 	right: 0;
 }
-[vp-tooltip]:not(.xvp, .xvp *)::before {
+[vp-tooltip]::before {
 	content: attr(vp-tooltip);
 }
-vp-tooltip[_below]:not(.xvp, .xvp *),
-[vp-tooltip][vp-tooltip-below]:not(.xvp, .xvp *)::before {
+vp-tooltip[_below],
+[vp-tooltip][vp-tooltip-below]::before {
 	top: 100%;
 	margin-top: 0.75em;
 	bottom: auto;
 }
-vp-tooltip:not(.xvp, .xvp *)::before,
-[vp-tooltip]:not(.xvp, .xvp *)::after {
+vp-tooltip::before,
+[vp-tooltip]::after {
 	display: block;
 	position: absolute;
 	content: '';
@@ -60,33 +60,33 @@ vp-tooltip:not(.xvp, .xvp *)::before,
 	margin-bottom: -0.4em;
 	transform: rotate(45deg);
 }
-[vp-tooltip]:not(.xvp, .xvp *)::after {
+[vp-tooltip]::after {
 	display: none;
 	top: -1.2em;
 	bottom: auto;
 	z-index: 1101;
 }
-vp-tooltip[_below]:not(.xvp, .xvp *)::before {
+vp-tooltip[_below]::before {
 	top: 0;
 	bottom: auto;
 	margin-top: -0.4em;
 	transform: rotate(-135deg);
 }
-[vp-tooltip][vp-tooltip-below]:not(.xvp, .xvp *)::after {
+[vp-tooltip][vp-tooltip-below]::after {
 	top: auto;
 	bottom: -0.8em;
 	transform: rotate(-135deg);
 }
-vp-tooltip[_right]:not(.xvp, .xvp *)::before,
-[vp-tooltip][vp-tooltip-right]:not(.xvp, .xvp *)::after {
+vp-tooltip[_right]::before,
+[vp-tooltip][vp-tooltip-right]::after {
 	left: auto;
 	right: 1em;
 }
 
 /* Activation */
 
-:is(:active, :focus):not(.xvp, .xvp *) + vp-tooltip,
-[vp-tooltip]:is(:active, :focus):not(.xvp, .xvp *)::before,
-[vp-tooltip]:is(:active, :focus):not(.xvp, .xvp *)::after {
+:is(:active, :focus) + vp-tooltip,
+[vp-tooltip]:is(:active, :focus)::before,
+[vp-tooltip]:is(:active, :focus)::after {
 	display: block;
 }

@@ -2,13 +2,13 @@
 	--vp-span: 1;
 }
 
-.vp [_grid]:not(.xvp, .xvp *) {
+[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) {
 	display: flex;
 	flex-flow: row wrap;
 	margin: calc(-1 * var(--vp-pad));
 }
 
-.vp [_grid]:not(.xvp, .xvp *) > * {
+[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > * {
 	vertical-align: top;
 	/* flex-grow: 1; */
 	/* FIXME: WTF did I do this calc() for? */
@@ -17,8 +17,8 @@
 	margin: var(--vp-pad);
 }
 
-.vp [_grid]:not(.xvp, .xvp *) > img,
-.vp [_grid]:not(.xvp, .xvp *) > a > img {
+[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > img,
+[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > a > img {
 	width: 100%;
 }
 
@@ -89,7 +89,7 @@
 	--vp-span: 16;
 }
 
-.vp [_grid]:not(.xvp, .xvp *) > *:not(legend) {
+[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > *:not(legend) {
 	--vp-width: calc(
 		(var(--vp-span) * 100% / var(--vp-grid)) - (2 * var(--vp-pad))
 	);
@@ -101,19 +101,19 @@
 
 @media only screen and (not (min-width: 992px)) {
 	/* Tablet-down */
-	.vp [_grid].stacking:not(.xvp, .xvp *) > * {
+	[_grid].stacking:is(.vp, .vp *):not(.xvp, .xvp *) > * {
 		width: 100%;
 	}
 }
 @media only screen and (min-width: 768px) and (not (min-width: 992px)) {
 	/* Tablet */
-	.vp [_grid].doubling:not(.xvp, .xvp *) > * {
+	[_grid].doubling:is(.vp, .vp *):not(.xvp, .xvp *) > * {
 		min-width: min(100%, (2 * var(--vp-width)));
 	}
 }
 @media only screen and (not (min-width: 768px)) {
 	/* Mobile */
-	.vp [_grid].doubling:not(.xvp, .xvp *) > * {
+	[_grid].doubling:is(.vp, .vp *):not(.xvp, .xvp *) > * {
 		min-width: min(100%, (4 * var(--vp-width)));
 	}
 }

@@ -7,8 +7,7 @@
 /* FIXME: for opacity, could we make the disappearing one vanish during the
  * appearing one's pre-transition delay (second argument)?
  */
-.vp .loaded,
-.vp.loaded * {
+.loaded:is(.vp, .vp *):not(.xvp, .xvp *) * {
 	transition:
 		color var(--vp-trans),
 		background-color var(--vp-trans),
@@ -16,7 +15,7 @@
 		font-weight var(--vp-trans);
 }
 
-.vp [class*='go-'] {
+.loaded:is(.vp, .vp *):not(.xvp, .xvp *) [class*='go-'] {
 	animation-iteration-count: 1;
 	animation-duration: var(--vp-trans);
 	animation-timing-function: ease;
@@ -24,11 +23,11 @@
 	backface-visibility: hidden;
 }
 
-.vp .go-hidden {
+.loaded:is(.vp, .vp *):not(.xvp, .xvp *) .go-hidden {
 	animation-name: vp-fade-out;
 }
 
-.vp-go-visible {
+.loaded:is(.vp, .vp *):not(.xvp, .xvp *) .go-visible {
 	animation-name: vp-fade-in;
 }
 

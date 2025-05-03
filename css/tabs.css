@@ -2,24 +2,24 @@
 
 /* Accordions */
 
-.vp-accordion > div {
+.vp-accordion:not(.xvp, .xvp *) > div {
 	visibility: hidden;
 	height: 0;
 	opacity: 0;
 }
-.vp-accordion > label {
+.vp-accordion:not(.xvp, .xvp *) > label {
 	display: block;
 }
-.vp-accordion > label::before {
+.vp-accordion:not(.xvp, .xvp *) > label::before {
 	content: '\25ba';
 	display: inline-block;
 	margin: 0 0.5em;
 	transition: transform 300ms; /* FIXME: wrong file */
 }
-.vp-accordion > :checked + label::before {
+.vp-accordion:not(.xvp, .xvp *) > :checked + label::before {
 	transform: rotate(90deg);
 }
-.vp-accordion > :checked + label + div {
+.vp-accordion:not(.xvp, .xvp *) > :checked + label + div {
 	visibility: visible;
 	height: auto;
 	opacity: 1;
@@ -32,19 +32,19 @@
  * - Prescribe ARIA roles and properties
  */
 
-.vp-accordion > input,
-.vp-tabs > input {
+.vp-accordion:not(.xvp, .xvp *) > input,
+.vp-tabs:not(.xvp, .xvp *) > input {
 	display: none;
 	margin-bottom: var(--vp-pad);
 }
-.vp-tabs > div {
+.vp-tabs:not(.xvp, .xvp *) > div {
 	clear: both;
 	visibility: hidden;
 	height: 0;
 	opacity: 0;
 	overflow: hidden;
 }
-.vp-tabs > label {
+.vp-tabs:not(.xvp, .xvp *) > label {
 	display: inline-block;
 	user-select: none;
 	cursor: pointer;
@@ -52,20 +52,20 @@
 	padding: var(--vp-pad) calc(2 * var(--vp-pad));
 	border-bottom: 0.25em solid rgba(var(--vp-dim), 0.15);
 }
-.vp-tabs > :checked + label {
+.vp-tabs:not(.xvp, .xvp *) > :checked + label {
 	font-weight: bold;
 	padding: var(--vp-pad) calc(4 * var(--vp-pad));
 	background-color: rgba(var(--vp-dim), 0.15);
 	border-bottom-color: rgba(var(--vp-dim), 0.33);
 }
-.vp-tabs > :checked:nth-of-type(1) ~ div:nth-of-type(1),
-.vp-tabs > :checked:nth-of-type(2) ~ div:nth-of-type(2),
-.vp-tabs > :checked:nth-of-type(3) ~ div:nth-of-type(3),
-.vp-tabs > :checked:nth-of-type(4) ~ div:nth-of-type(4),
-.vp-tabs > :checked:nth-of-type(5) ~ div:nth-of-type(5),
-.vp-tabs > :checked:nth-of-type(6) ~ div:nth-of-type(6),
-.vp-tabs > :checked:nth-of-type(7) ~ div:nth-of-type(7),
-.vp-tabs > :checked:nth-of-type(8) ~ div:nth-of-type(8) {
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(1) ~ div:nth-of-type(1),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(2) ~ div:nth-of-type(2),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(3) ~ div:nth-of-type(3),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(4) ~ div:nth-of-type(4),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(5) ~ div:nth-of-type(5),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(6) ~ div:nth-of-type(6),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(7) ~ div:nth-of-type(7),
+.vp-tabs:not(.xvp, .xvp *) > :checked:nth-of-type(8) ~ div:nth-of-type(8) {
 	visibility: visible;
 	height: auto;
 	opacity: 1;

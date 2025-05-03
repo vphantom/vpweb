@@ -1,24 +1,25 @@
-.vp table:not(.xvp, .xvp *) {
+table:is(.vp, .vp *):not(.xvp, .xvp *) {
 	position: relative;
 	border-collapse: collapse;
 }
 
-.vp table:not(.xvp, .xvp *) th {
+th:is(.vp, .vp *):not(.xvp, .xvp *) {
 	background-color: rgba(var(--vp-dim), 0.2);
 }
 
-.vp table:not(.xvp, .xvp *).stick-vertical :is(thead, tfoot) tr > th {
+table.stick-vertical:is(.vp, .vp *):not(.xvp, .xvp *) :is(thead, tfoot) tr > th {
 	background-color: #ddd; /* sticky -> no alpha */
 	position: sticky;
 	top: -1px; /* Compensate vanishing border */
 	z-index: 10;
 	transition: none;
 }
-.vp table:not(.xvp, .xvp *).stick-vertical tfoot tr > th {
+
+table.stick-vertical:is(.vp, .vp *):not(.xvp, .xvp *) tfoot tr > th {
 	bottom: -1px; /* Compensate vanishing border */
 }
 
-.vp table:not(.xvp, .xvp *).stick-horizontal tr > th:first-child {
+table.stick-horizontal:is(.vp, .vp *):not(.xvp, .xvp *) tr > th:first-child {
 	background-color: #ddd; /* sticky -> no alpha */
 	position: sticky;
 	left: 0;
@@ -27,67 +28,69 @@
 }
 
 /* prettier-ignore */
-.vp table:not(.xvp, .xvp *).stick-horizontal :is(thead, tfoot) tr > th:first-child {
+table.stick-horizontal:is(.vp, .vp *):not(.xvp, .xvp *) :is(thead, tfoot) tr > th:first-child {
 	z-index: 12;
 }
 
-.vp table:not(.xvp, .xvp *).striped tbody tr:nth-child(even) > td {
+table.striped:is(.vp, .vp *):not(.xvp, .xvp *) tbody tr:nth-child(even) > td {
 	background-color: rgba(var(--vp-dim), 0.05);
 }
 
-.vp table:not(.xvp, .xvp *) tr > * {
+table:is(.vp, .vp *):not(.xvp, .xvp *) tr > * {
 	text-align: left;
 	vertical-align: top;
 }
-.vp table:not(.xvp, .xvp *).horizontal tbody tr > * {
+
+table.horizontal:is(.vp, .vp *):not(.xvp, .xvp *) tbody tr > * {
 	border-bottom: 0.5px solid rgba(var(--vp-dim), 0.33);
 }
-.vp table:not(.xvp, .xvp *).gridded tr > * {
+
+table.gridded:is(.vp, .vp *):not(.xvp, .xvp *) tr > * {
 	border: 0.5px solid rgba(var(--vp-dim), 0.33);
 }
 
-.vp .center-1 > * > :nth-child(1),
-.vp .center-2 > * > :nth-child(2),
-.vp .center-3 > * > :nth-child(3),
-.vp .center-4 > * > :nth-child(4),
-.vp .center-5 > * > :nth-child(5),
-.vp .center-6 > * > :nth-child(6),
-.vp .center-7 > * > :nth-child(7),
-.vp .center-8 > * > :nth-child(8),
-.vp .center-9 > * > :nth-child(9) {
+.vp:not(.xvp, .xvp *) .center-1 > * > :nth-child(1),
+.vp:not(.xvp, .xvp *) .center-2 > * > :nth-child(2),
+.vp:not(.xvp, .xvp *) .center-3 > * > :nth-child(3),
+.vp:not(.xvp, .xvp *) .center-4 > * > :nth-child(4),
+.vp:not(.xvp, .xvp *) .center-5 > * > :nth-child(5),
+.vp:not(.xvp, .xvp *) .center-6 > * > :nth-child(6),
+.vp:not(.xvp, .xvp *) .center-7 > * > :nth-child(7),
+.vp:not(.xvp, .xvp *) .center-8 > * > :nth-child(8),
+.vp:not(.xvp, .xvp *) .center-9 > * > :nth-child(9) {
 	text-align: center;
 }
 
-.vp .right-1 > * > :nth-child(1),
-.vp .right-2 > * > :nth-child(2),
-.vp .right-3 > * > :nth-child(3),
-.vp .right-4 > * > :nth-child(4),
-.vp .right-5 > * > :nth-child(5),
-.vp .right-6 > * > :nth-child(6),
-.vp .right-7 > * > :nth-child(7),
-.vp .right-8 > * > :nth-child(8),
-.vp .right-9 > * > :nth-child(9) {
+.vp:not(.xvp, .xvp *) .right-1 > * > :nth-child(1),
+.vp:not(.xvp, .xvp *) .right-2 > * > :nth-child(2),
+.vp:not(.xvp, .xvp *) .right-3 > * > :nth-child(3),
+.vp:not(.xvp, .xvp *) .right-4 > * > :nth-child(4),
+.vp:not(.xvp, .xvp *) .right-5 > * > :nth-child(5),
+.vp:not(.xvp, .xvp *) .right-6 > * > :nth-child(6),
+.vp:not(.xvp, .xvp *) .right-7 > * > :nth-child(7),
+.vp:not(.xvp, .xvp *) .right-8 > * > :nth-child(8),
+.vp:not(.xvp, .xvp *) .right-9 > * > :nth-child(9) {
 	text-align: right;
 }
 
-.vp .mono-1 * :nth-child(1),
-.vp .mono-2 * :nth-child(2),
-.vp .mono-3 * :nth-child(3),
-.vp .mono-4 * :nth-child(4),
-.vp .mono-5 * :nth-child(5),
-.vp .mono-6 * :nth-child(6),
-.vp .mono-7 * :nth-child(7),
-.vp .mono-8 * :nth-child(8),
-.vp .mono-9 * :nth-child(9) {
+.vp:not(.xvp, .xvp *) .mono-1 * :nth-child(1),
+.vp:not(.xvp, .xvp *) .mono-2 * :nth-child(2),
+.vp:not(.xvp, .xvp *) .mono-3 * :nth-child(3),
+.vp:not(.xvp, .xvp *) .mono-4 * :nth-child(4),
+.vp:not(.xvp, .xvp *) .mono-5 * :nth-child(5),
+.vp:not(.xvp, .xvp *) .mono-6 * :nth-child(6),
+.vp:not(.xvp, .xvp *) .mono-7 * :nth-child(7),
+.vp:not(.xvp, .xvp *) .mono-8 * :nth-child(8),
+.vp:not(.xvp, .xvp *) .mono-9 * :nth-child(9) {
 	font-family: var(--vp-mono);
 }
 
-.vp table:not(.xvp, .xvp *) tr > * {
+table:is(.vp, .vp *):not(.xvp, .xvp *) tr > * {
 	padding: calc(var(--vp-pad) / 2) var(--vp-pad);
 	font-size: 90%;
 }
 
-.vp table:not(.xvp, .xvp *).vp-2d thead tr > *:first-child {
+table:is(.vp, .vp *):not(.xvp, .xvp *) .vp-2d thead tr > *:first-child {
 	border: none;
 	background: transparent;
 }
@@ -96,13 +99,13 @@
  * doubling in some of our rules? */
 @media only screen and (not (min-width: 768px)) {
 	/* Mobile */
-	.vp table:not(.xvp, .xvp *).stacking {
+	table.stacking:is(.vp, .vp *):not(.xvp, .xvp *) {
 		width: 100%;
 	}
-	.vp table:not(.xvp, .xvp *).stacking tbody tr {
+	table.stacking:is(.vp, .vp *):not(.xvp, .xvp *) tbody tr {
 		border-bottom: 2px solid rgba(var(--vp-dim), 0.33);
 	}
-	.vp table:not(.xvp, .xvp *).stacking.stacking :is(th, td) {
+	table.stacking:is(.vp, .vp *):not(.xvp, .xvp *) :is(th, td) {
 		width: auto;
 		display: block;
 		border: none;

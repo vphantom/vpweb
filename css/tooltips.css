@@ -4,11 +4,11 @@
 
 /* Tooltips */
 
-[vp-tooltip] {
+[vp-tooltip]:not(.xvp, .xvp *) {
 	position: relative;
 }
-vp-tooltip,
-[vp-tooltip]::before {
+vp-tooltip:not(.xvp, .xvp *),
+[vp-tooltip]:not(.xvp, .xvp *)::before {
 	display: none;
 	position: absolute;
 	min-width: min-content;
@@ -28,22 +28,22 @@ vp-tooltip,
 	margin-bottom: 0.75em;
 	top: auto;
 }
-vp-tooltip[_right],
-[vp-tooltip][vp-tooltip-right]::before {
+vp-tooltip[_right]:not(.xvp, .xvp *),
+[vp-tooltip][vp-tooltip-right]:not(.xvp, .xvp *)::before {
 	left: auto;
 	right: 0;
 }
-[vp-tooltip]::before {
+[vp-tooltip]:not(.xvp, .xvp *)::before {
 	content: attr(vp-tooltip);
 }
-vp-tooltip[_below],
-[vp-tooltip][vp-tooltip-below]::before {
+vp-tooltip[_below]:not(.xvp, .xvp *),
+[vp-tooltip][vp-tooltip-below]:not(.xvp, .xvp *)::before {
 	top: 100%;
 	margin-top: 0.75em;
 	bottom: auto;
 }
-vp-tooltip::before,
-[vp-tooltip]::after {
+vp-tooltip:not(.xvp, .xvp *)::before,
+[vp-tooltip]:not(.xvp, .xvp *)::after {
 	display: block;
 	position: absolute;
 	content: '';
@@ -60,36 +60,33 @@ vp-tooltip::before,
 	margin-bottom: -0.4em;
 	transform: rotate(45deg);
 }
-[vp-tooltip]::after {
+[vp-tooltip]:not(.xvp, .xvp *)::after {
 	display: none;
 	top: -1.2em;
 	bottom: auto;
 	z-index: 1101;
 }
-vp-tooltip[_below]::before {
+vp-tooltip[_below]:not(.xvp, .xvp *)::before {
 	top: 0;
 	bottom: auto;
 	margin-top: -0.4em;
 	transform: rotate(-135deg);
 }
-[vp-tooltip][vp-tooltip-below]::after {
+[vp-tooltip][vp-tooltip-below]:not(.xvp, .xvp *)::after {
 	top: auto;
 	bottom: -0.8em;
 	transform: rotate(-135deg);
 }
-vp-tooltip[_right]::before,
-[vp-tooltip][vp-tooltip-right]::after {
+vp-tooltip[_right]:not(.xvp, .xvp *)::before,
+[vp-tooltip][vp-tooltip-right]:not(.xvp, .xvp *)::after {
 	left: auto;
 	right: 1em;
 }
 
 /* Activation */
 
-:active + vp-tooltip,
-:focus + vp-tooltip,
-[vp-tooltip]:active::before,
-[vp-tooltip]:focus::before,
-[vp-tooltip]:active::after,
-[vp-tooltip]:focus::after {
+:is(:active, :focus):not(.xvp, .xvp *) + vp-tooltip,
+[vp-tooltip]:is(:active, :focus):not(.xvp, .xvp *)::before,
+[vp-tooltip]:is(:active, :focus):not(.xvp, .xvp *)::after {
 	display: block;
 }

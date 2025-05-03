@@ -1,15 +1,9 @@
-@import '_lib.scss';
-
-/* Custom tags need explicit display */
-vp-notice,
-vp-message {
+.vp :is(.notice, .message):not(.xvp, .xvp *) {
 	--vp-col: var(--vp-dim);
-	display: block;
-	margin-bottom: $paragraph-margin;
+	margin-bottom: var(--vp-p-margin);
 }
 
-vp-notice::before,
-vp-message::before {
+.vp :is(.notice, .message):not(.xvp, .xvp *)::before {
 	font-style: normal;
 	font-weight: bold;
 	text-transform: none;
@@ -25,53 +19,44 @@ vp-message::before {
 	background-color: rgb(var(--vp-col));
 	color: white;
 	border-radius: 100rem;
-}
-vp-notice::before,
-vp-message::before {
 	content: 'i';
 }
-vp-notice[_char]::before,
-vp-message[_char]::before {
+.vp :is(.notice, .message):not(.xvp, .xvp *)[_char]::before {
 	content: attr(_char);
 }
-vp-notice.vp-error::before,
-vp-notice.vp-warning::before,
-vp-message.vp-error::before,
-vp-message.vp-warning::before {
+.vp :is(.notice, .message):is(.warning, .error):not(.xvp, .xvp *)::before {
 	content: '!';
 }
 
-.vp-error {
+.vp .error:not(.xvp, .xvp *) {
 	--vp-col: var(--vp-red);
 	color: rgb(var(--vp-col));
 }
 
-.vp-warning {
+.vp .warning:not(.xvp, .xvp *) {
 	--vp-col: var(--vp-orange);
 	color: rgb(var(--vp-col));
 }
-vp-notice.vp-warning::before,
-vp-message.vp-warning::before {
+.vp :is(.notice, .message):not(.vpx, .vpx *).warning::before {
 	border-radius: 0.5em;
 }
 
-.vp-ok {
+.vp .ok:not(.vpx, .vpx *) {
 	--vp-col: var(--vp-green);
 	color: rgb(var(--vp-col));
 }
-vp-notice.vp-ok::before,
-vp-message.vp-ok::before {
+.vp :is(.notice, .message).ok:not(.xvp, .xvp *)::before {
 	border-radius: 0.1em;
 }
 
-vp-message {
+.vp .message:not(.xvp, .xvp *) {
 	position: relative;
 	border: 1px solid rgba(var(--vp-col), 0.2);
 	background-color: rgba(var(--vp-col), 0.05);
-	border-radius: $small-radius;
+	border-radius: var(--vp-corner);
 	padding: 1em 1em 1em 3.75em;
 }
-vp-message::before {
+.vp .message:not(.xvp, .xvp *)::before {
 	position: absolute;
 	top: 1em;
 	left: 1em;

@@ -1,4 +1,4 @@
-@import '_lib.scss';
+/* FIXME: redo with some JS to help behavior */
 
 /* Accordions */
 
@@ -14,7 +14,7 @@
 	content: '\25ba';
 	display: inline-block;
 	margin: 0 0.5em;
-	transition: transform 300ms; // FIXME: wrong file
+	transition: transform 300ms; /* FIXME: wrong file */
 }
 .vp-accordion > :checked + label::before {
 	transform: rotate(90deg);
@@ -26,6 +26,11 @@
 }
 
 /* Tabs */
+
+/* TODO:
+ * - Confirm keyboard navigation
+ * - Prescribe ARIA roles and properties
+ */
 
 .vp-accordion > input,
 .vp-tabs > input {
@@ -45,17 +50,24 @@
 	cursor: pointer;
 	float: left;
 	padding: var(--vp-pad) calc(2 * var(--vp-pad));
-	border-bottom: $tiny-radius solid rgba(var(--vp-dim), 0.15);
+	border-bottom: 0.25em solid rgba(var(--vp-dim), 0.15);
 }
 .vp-tabs > :checked + label {
+	font-weight: bold;
+	padding: var(--vp-pad) calc(4 * var(--vp-pad));
 	background-color: rgba(var(--vp-dim), 0.15);
 	border-bottom-color: rgba(var(--vp-dim), 0.33);
 }
-@for $i from 1 through 8 {
-	.vp-tabs > :checked:nth-of-type($i) ~ div:nth-of-type($i) {
-		visibility: visible;
-		height: auto;
-		opacity: 1;
-		overflow: auto;
-	}
+.vp-tabs > :checked:nth-of-type(1) ~ div:nth-of-type(1),
+.vp-tabs > :checked:nth-of-type(2) ~ div:nth-of-type(2),
+.vp-tabs > :checked:nth-of-type(3) ~ div:nth-of-type(3),
+.vp-tabs > :checked:nth-of-type(4) ~ div:nth-of-type(4),
+.vp-tabs > :checked:nth-of-type(5) ~ div:nth-of-type(5),
+.vp-tabs > :checked:nth-of-type(6) ~ div:nth-of-type(6),
+.vp-tabs > :checked:nth-of-type(7) ~ div:nth-of-type(7),
+.vp-tabs > :checked:nth-of-type(8) ~ div:nth-of-type(8) {
+	visibility: visible;
+	height: auto;
+	opacity: 1;
+	overflow: auto;
 }

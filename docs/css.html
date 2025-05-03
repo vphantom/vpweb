@@ -5,21 +5,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
-	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp vp-sans spaced">
-		<header class="vp-container">
+	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp sans spaced">
+		<header class="container">
 			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
 		</header>
-		<main class="vp-container">
+		<main class="container">
 
 
 			<section>
 				<section>
 					<h2>Introduction</h2>
 					<p>
-					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be as small as possible, with pure CSS solutions where possible, without sacrificing esthetics which contribute to usability.  It strays from the extreme simplicity of the flat layered "paper" trend in favor of more classic visual cues enhanced for modern browsers.
+					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be a progressive enhancement on plain HTML5, with CSS based improvements with occasional JS components where necessary.  It strays from the extreme simplicity of the flat layered "paper" trend in favor of more obvious classic visual cues enhanced for modern browsers.
 					</p>
 					<p>
-					All classes and custom elements only take effect inside blocks with <code>vp</code> class to prevent collisions with other frameworks.  (See <em>Co&ouml;peration</em> below for a small caveat.)
+					All overrides, classes and custom elements only take effect inside <code>.vp</code> blocks to help reduce collisions with other frameworks. (See <em>Co&ouml;peration</em> below.)
 					</p>
 					<p>
 					Compiled CSS files are located in <code>dist/</code>.  You may use <code>vpweb.css</code> to get the entire framework at once, or just some of the individual files described below.  Be sure to import <code>core.css</code> first in order to avoid priority side-effects.
@@ -28,7 +28,7 @@
 				<section>
 					<h3>Efficient</h3>
 					<p>
-					The entire framework (<code>vpweb.css</code>) is smaller than a typical company logo image:
+					The entire framework is smaller than a typical company logo image.  See <code>vpweb.css</code> and <code>vpweb.min.js</code> with perhaps <code>forms.min.js</code>:
 					</p>
 					<table id="vp-sizes" class="vp-2d horizontal relaxed">
 						<thead>
@@ -41,54 +41,46 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>16.5KB</td><td>4.5KB</td><td>3.9KB</td></tr>
-<tr><th>core.css</th><td>4.1KB</td><td>1.5KB</td><td>1.3KB</td></tr>
-<tr><th>forms.css</th><td>6.0KB</td><td>1.6KB</td><td>1.4KB</td></tr>
-<tr><th>grid.css</th><td>1.0KB</td><td>0.4KB</td><td>0.3KB</td></tr>
-<tr><th>messages.css</th><td>1.1KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>reset.css</th><td>0.2KB</td><td>0.2KB</td><td>0.1KB</td></tr>
-<tr><th>tables.css</th><td>1.6KB</td><td>0.6KB</td><td>0.4KB</td></tr>
+<tr><th>vpweb.css</th><td>19.1KB</td><td>4.9KB</td><td>4.2KB</td></tr>
+<tr><th>core.css</th><td>4.4KB</td><td>1.4KB</td><td>1.2KB</td></tr>
+<tr><th>forms.css</th><td>7.1KB</td><td>2.0KB</td><td>1.7KB</td></tr>
+<tr><th>grid.css</th><td>1.3KB</td><td>0.4KB</td><td>0.4KB</td></tr>
+<tr><th>messages.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>tables.css</th><td>2.2KB</td><td>0.7KB</td><td>0.5KB</td></tr>
 <tr><th>tabs.css</th><td>1.2KB</td><td>0.5KB</td><td>0.3KB</td></tr>
 <tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>transitions.css</th><td>0.5KB</td><td>0.3KB</td><td>0.2KB</td></tr>
+<tr><th>transitions.css</th><td>0.6KB</td><td>0.3KB</td><td>0.3KB</td></tr>
 <!-- END SIZES -->
+<!-- BEGIN JSIZES -->
+<tr><th>dist/vpweb.min.js</th><td>7.7KB</td><td>3.4KB</td><td>3.0KB</td></tr>
+<tr><th>dist/editeur.min.js</th><td>6.1KB</td><td>2.8KB</td><td>2.4KB</td></tr>
+<tr><th>dist/fast.min.js</th><td>1.3KB</td><td>0.7KB</td><td>0.6KB</td></tr>
+<tr><th>dist/forms.min.js</th><td>3.4KB</td><td>1.7KB</td><td>1.4KB</td></tr>
+<!-- END JSIZES -->
 						</tbody>
 					</table>
 				</section>
 				<section>
 					<h3>Browser Support</h3>
 					<p>
-					We aim to be compatible with "long term support" versions since most of our users are in corporate environments.  This means that as of June 2022, we dropped support for all "legacy" versions of Microsoft Edge.
+					Currently compatible with <a href="https://webstatus.dev/?q=baseline_status%3Awidely">Baseline's "Widely available"</a> browser versions (30 months) which includes long term support versions as of 2025-01-01.  Some features from "Newly available" may be used, but only when they degrade gracefully (i.e. <code>content-visibility</code>).
 					</p>
 					<dl>
-						<dt>Chrome/Edge/Opera</dt><dd>79 (2020)</dd>
-						<dt>Safari</dt><dd>12 (2019)</dd>
-						<dt>Firefox</dt><dd>78 (2020)</dd>
+						<dt>Chrome/Edge/Opera</dt><dd>103 (2022-04-26)</dd>
+						<dt>Safari</dt><dd>16.4 (2023-03-27)</dd>
+						<dt>Firefox</dt><dd>101, ESR 91.10 (2022-05-31)</dd>
 					</dl>
 				</section>
 				<section>
 					<h3>Co&ouml;peration</h3>
 					<p>
-					CSS classes without a <code>vp-</code> prefix only apply when a parent has class <code>vp</code>. It is therefore easy to use Vanilla+ in only parts of a document.  The only rules which apply outside are in <code>reset.css</code>:
+					No special behavior should leak outside of <code>.vp</code> blocks (which may be <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code> or just small fragments of your pages).  You may also disable any section or specific elements with <code>.xvp</code>.
 					</p>
-					<blockquote><pre><code>
-*, *:before, *:after {
-	box-sizing: inherit;
-	margin: 0;
-	padding: 0;
-}
-html, body {
-	height: 100%;
-}
-html {
-	box-sizing: border-box;
-	line-height: 1.33;
-	-webkit-text-size-adjust: 100%;
-}
-</code></pre></blockquote>
-
+				</section>
+				<section>
+					<h3>Build Process</h3>
 					<p>
-					If this interferes with your other CSS, you may use <code>vpweb-noreset.css</code> instead of <code>vpweb.css</code> but some borders, margins and paddings may be slightly off in some browsers.
+					On the CSS side, you may reference the pre-built <code>vpweb.css</code> alone or <code>@import 'vpweb.css';</code> from your CSS sources.  You might even want to import only the bits you want such as <code>core.css</code> and <code>grid.css</code> to use our grid.
 					</p>
 				</section>
 				<section>
@@ -97,15 +89,19 @@ html {
 					This is an early work-in-progress framework. Below are my ramblings so I don't forget anything. ;-)
 					</p>
 					<ul>
-						<li>Forms/Tables: error/warning/highlight/disabled states</li>
-						<li>Forms: better :checked transitions for checkbox/radio</li>
-						<li>Forms: too fat for what they are, maybe no SVG (inject it PROPERLY in JS add-on instead)?</li>
+						<li>Refactor currently in progress to drop <code>vp-</code> prefix everywhere and to add <code>.xvp</code> support, while dropping SCSS dependency.</li>
+						<li>Forms/Tables: error/warning/highlight/disabled states with messages</li>
+						<li>Fieldsets: image our corpo edit page on mobile… a nightmare! Should every row become a section? How do you make those 50+ inputs manageable vertically? Fieldsets might suffice, each a full-width doubling grid. The border and title need improvement.  Maybe groups of fieldsets should be accordions with JS help (including closing current, opening next on TAB)? What about forms where it would make sense to have 2 or 3 fieldsets horizontally, each with columns inside? In a 12-world, that'd mean 2×6 or 3×4, then inside we make a 12-grid again but limit ourselves to multiples of 2 or 3 respectively. Should that be facilitated by the framework?</li>
 						<li>Tables: horizontal without outside borders, maybe not even TH grey, "simple"</li>
 						<li>Tables: make a no-wrap column type, with and without truncation</li>
 						<li>Tables: guaranteed smallest cell: width:1px no-wrap</li>
-						<li>Messages: maybe just use an icon font instead of the reverse-video hackery?</li>
-						<li>Tabs: the experience is still far from production-quality...</li>
+						<li>Tabs: redo in JS, make it possible to load content on demand</li>
+						<li>Make entire blocks collapsible tablet-down or mobile-only (i.e. the left column of a shelf with search criteria) — More speficially, perhaps a class could trigger the collapsing (manual open/close, default closed) when they become stacked, always open (no close widget) when wide enough. — That said since the vertical design might require a different layout, we might have two versions entirely…</li>
 						<li>Tooltips: hover option, still?</li>
+						<li>Figure out responsive main menu a-la SAP, intranet vs public. Maybe have the same top bar on all resolutions: logo left, name middle, hamburger + cart + user menus right. Maybe no hamburger on tablet-up, instead a second line, but it's tricky to make all those items fit on a single horizontal line. Also leave the footer part of the stack intact instead of bringing it in the hamburger on tablet-down.</li>
+						<li>For user menu and such, upper-right dot overlay perhaps with counter.</li>
+						<li>Anything from our product and cart pages which isn't already covered?</li>
+						<li>Integrate Fontello to remove the hard-coded SVG images.  They are from Fontello anyway (except the check, which Entypo might imitate well enough?).  The CSS and WOFF2 files are inter-dependent though; not sure how to allow our users to add more icons cleanly. It'd be a shame to have our private icons and the users might have the same in theirs.</li>
 					</ul>
 				</section>
 			</section>
@@ -119,13 +115,13 @@ html {
 				<section>
 					<h3>Typography</h3>
 					<dl>
-						<dt><code>.vp-mono</code></dt>
+						<dt><code>.mono</code></dt>
 						<dd>System and user-preferred monospace font families (automatically applied to <code class="html-tag">code</code>, <code class="html-tag">kbd</code>, <code class="html-tag">pre</code>, <code class="html-tag">samp</code>)</dd>
 
-						<dt><code>.vp-sans</code></dt>
+						<dt><code>.sans</code></dt>
 						<dd>System and user-preferred sans-serif font families (automatically applied to buttons and inputs)</dd>
 
-						<dt><code>.vp-serif</code></dt>
+						<dt><code>.serif</code></dt>
 						<dd>System and user-preferred serif font families</dd>
 					</dl>
 				</section>
@@ -134,73 +130,140 @@ html {
 					<p>
 					Three classes are recognized by various modules (i.e. grid) as indicative of spacing to use between items.  The closest parent or self has priority.
 					</p>
-					<div class="seamless" vp-grid="12">
-						<div vp-cell="4"><code class="box">.seamless</code></div>
-						<div vp-cell="4"><code class="box">.seamless</code></div>
-						<div vp-cell="4"><code class="box">.seamless</code></div>
+					<div class="tight" _grid="12">
+						<div _cols="4"><code class="box">.tight</code></div>
+						<div _cols="4"><code class="box">.tight</code></div>
+						<div _cols="4"><code class="box">.tight</code></div>
 					</div>
-					<div class="spaced" vp-grid="12">
-						<div vp-cell="4"><code class="box">.spaced</code></div>
-						<div vp-cell="4"><code class="box">.spaced</code></div>
-						<div vp-cell="4"><code class="box">.spaced</code></div>
+					<div class="spaced" _grid="12">
+						<div _cols="4"><code class="box">.spaced</code></div>
+						<div _cols="4"><code class="box">.spaced</code></div>
+						<div _cols="4"><code class="box">.spaced</code></div>
 					</div>
-					<div class="relaxed" vp-grid="12">
-						<div vp-cell="4"><code class="box">.relaxed</code></div>
-						<div vp-cell="4"><code class="box">.relaxed</code></div>
-						<div vp-cell="4"><code class="box">.relaxed</code></div>
+					<div class="relaxed" _grid="12">
+						<div _cols="4"><code class="box">.relaxed</code></div>
+						<div _cols="4"><code class="box">.relaxed</code></div>
+						<div _cols="4"><code class="box">.relaxed</code></div>
 					</div>
 				</section>
 				<section>
 					<h3>Responsive</h3>
 					<p>
-					Certain classes restrict which devices can see an element, by viewport width or display type.  Note that the names "mobile", "tablet" and "desktop" are used as nicknames for the three responsive size ranges, not as true device identification.  CSS media queries also use a "device pixel ratio" to define their own meaning for "px", so those are not actual pixels.
+					Certain classes restrict which devices can see an element, by viewport width or display type.  Note that the names "mobile", "tablet" and "desktop" are used as nicknames for the three responsive size ranges, not as true device identification.  CSS media queries use a "device pixel ratio" to define their own meaning for "px", so those are not actual pixels but industry standard values.
 					</p>
 					<dl>
 						<dt>Mobile:</dt>
-						<dd>Up to 767px, <code>.vp-mobile-only</code>, <code>.vp-tablet-down</code></dd>
+						<dd>Less than 768px, <code>.mobile-only</code>, <code>.tablet-down</code></dd>
 
 						<dt>Tablet:</dt>
-						<dd>From 768px to 991px, <code>.vp-tablet-only</code>, <code>.vp-tablet-up</code>, <code>.vp-tablet-down</code></dd>
+						<dd>From 768px to less than 992px, <code>.tablet-only</code>, <code>.tablet-up</code>, <code>.tablet-down</code></dd>
 
 						<dt>Desktop:</dt>
-						<dd>From 992px up, <code>.vp-tablet-up</code>, <code>.vp-desktop-only</code></dd>
+						<dd>From 992px up, <code>.tablet-up</code>, <code>.desktop-only</code></dd>
+
+						<dt>Large Desktop:</dt>
+						<dd>From 1200px up, <code>.largedesktop-only</code> may occasionally be useful.</dd>
 
 						<dt>Pointer:</td>
-						<dd>With at least one fine pointer, <code>.vp-touch-only</code> is hidden. With no fine pointer, <code>.vp-mouse-only</code> is hidden</dd>
+						<dd>With no fine pointer, <code>.mouse-only</code> is hidden. When no pointer can hover, <code>.hover-only</code> is hidden.</dd>
 
 						<dt>Print:</dt>
-						<dd><code>.vp-print-only</code>, <code>.vp-screen-only</code> (non-screen is considered "print")</dd>
+						<dd>On a screen, <code>.print-only</code> is hidden, while on any other device, <code>.screen-only</code> is hidden.</dd>
 					</dl>
 				</section>
 				<section>
-					<h3>Block <code>.vp-block</code></h3>
+					<h3>Block <code>.block</code></h3>
 					<p>
 					Makes any element (including buttons) a block and full width.
 					</p>
 				</section>
 				<section>
-					<h3>Generic Container <code>.vp-container</code></h3>
+					<h3>Generic Container <code>.container</code></h3>
 					<p>
-					The <code>.vp-container</code> class has side margins dictated by density (self or immediate parent) and limited width on large viewports.
+					Adds side margins dictated by density (self or immediate parent) and limits width on large viewports.
 					</p>
 				</section>
 				<section>
-					<h3>Flex Layouts <code>.vp-stack, .vp-shelf</code></h3>
+					<h3>Helper classes</h3>
+					<dl>
+
+						<dt><code>.none</code></dt>
+						<dd>Sets <code>display: none</code></dd>
+
+						<dt><code>.sticky</code></dt>
+						<dd>Sets <code>position: sticky</code></dd>
+
+						<dt><code>.center</code></dt>
+						<dd>Sets <code>text-align: center</code></dd>
+
+						<dt><code>.right</code></dt>
+						<dd>Sets <code>text-align: right</code></dd>
+
+					</dl>
+				</section>
+				<section>
+					<h3>Flex Layouts <code>.stack, .shelf</code></h3>
 					<p>
 					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density.
+					<B>FIXME</B>: maybe no padding/margin/borders and let users use <code>content</code> if they want current density padding inside it?
 					</p>
 					<dl>
 
-						<dt><code>.vp-stack</code></dt>
+						<dt><code>.stack</code></dt>
 						<dd>
-						2 or 3 children, stacked vertically. The second child expands as necessary to make sure that the optional third child is always no higher than the bottom of the viewport.
+						2 or 3 immediate children are stacked vertically. The second child expands as necessary to make sure that the optional third child is always no higher than the bottom of the viewport.
 						</dd>
-						<dt><code>.vp-shelf</code></dt>
+						<dt><code>.shelf</code></dt>
 						<dd>
-						Same behavior, but horizontal from left to right.  Set width using <code>min-width</code> to help with responsiveness.  <b>Responsive:</b> On tablets down, the third child goes below the other two and on mobile all three children become vertically stacked.
+						Same behavior, but horizontal from left to right.  Set width using <code>min-width</code> to help with responsiveness.  Two-column shelves have a Fibonacci-derived default ratio of (38.2%,61.8%), three-column shelves have (23.6%,52.8%,23.6%).  <b>Responsive:</b> On tablets down, the third child goes below the other two and on mobile all three children become vertically stacked.
 						</dd>
 
 					</dl>
+					<p>Examples:</p>
+					<div _grid="8">
+						<div _cols="2" class="stack" style="width: 12em; height: 8em; overflow-y: scroll;">
+							<div class="box">header</div>
+							<div class="shelf">
+								<div class="box">left</div>
+								<div class="box">
+									<p>main</p>
+								</div>
+							</div>
+							<div class="box">footer</div>
+						</div>
+						<div _cols="2" class="stack" style="width: 12em; height: 8em; overflow-y: scroll;">
+							<div class="box">header</div>
+							<div class="shelf">
+								<div class="box">left</div>
+								<div class="box">
+									<p>main</p>
+									<p>...</p>
+									<p>...</p>
+									<p>...</p>
+									<p>...</p>
+									<p>...</p>
+								</div>
+								<div class="box">right</div>
+							</div>
+							<div class="box">footer</div>
+						</div>
+						<div _cols="2" class="stack" style="width: 12em; height: 8em; overflow-y: scroll;">
+							<div class="sticky box" style="background:#fff; top:0; left:0;">header (sticky)</div>
+							<div class="shelf">
+								<div class="box">left</div>
+								<div class="box">
+									<p>main</p>
+									<p>...</p>
+									<p>...</p>
+									<p>...</p>
+									<p>...</p>
+									<p>...</p>
+								</div>
+								<div class="box">right</div>
+							</div>
+							<div class="sticky box" style="background:#fff; bottom:0; left:0;">footer (sticky)</div>
+						</div>
+					</div>
 				</section>
 			</section>
 
@@ -208,50 +271,26 @@ html {
 			<section>
 				<h2>Grid <code>grid.css</code></h2>
 				<p>
-				Three bases (8, 10, 12) were chosen for their versatility: areas can be divided by 2, 3, 4, 5, 6, 8, 10 and 12.
-				</p>
-				<p>
-				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>8</code>, <code>10</code> or <code>12</code>.  Cells inside grids are elements with attribute <code>vp-cell="x"</code> where <code>x</code> is a number between <code>1</code> and <code>12</code>.  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
+				Grids are defined by adding attribute <code>_grid="x"</code> to an element, where <code>x</code> is one of: <code>8</code>, <code>10</code>, <code>12</code>, <code>15</code> or <code>16</code>.  Cells inside grids are elements with attribute <code>_cols="x"</code> where <code>x</code> is a number between <code>1</code> and <code>16</code>.  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
 				</p>
 				<p>
 				</p>
 				<p>
-				An <code>&lt;img&gt;</code> directly inside a <code>[vp-grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
+				An <code>&lt;img&gt;</code> directly inside a <code>[_grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
 				</p>
 				<p>
-				<strong>Caution:</strong> while spacing is sensitive to density, it also causes a small negative margin on the left and right ends of rows.  Therefore, using a page-wide grid with non-seamless density will cause horizontal scrolling.  As long as a grid's container has at least as much spacing, it is not an issue.  (i.e. A seamless or spaced row fits inside a page-wide relaxed or spaced container.)
+				<strong>Caution:</strong> while spacing is sensitive to density, it also causes a small negative margin on the left and right ends of rows.  Therefore, using a page-wide grid with non-tight density will cause horizontal scrolling.  As long as a grid's container has at least as much spacing, it is not an issue.  (i.e. A tight or spaced row fits inside a page-wide relaxed or spaced container.)
 				</p>
 				<section>
-					<h3>Grid of 8<sup>ths</sup> <code>vp-grid="8"</code></h3>
-					<div class="grid-demo seamless vp-mono" vp-grid="8">
-						<div vp-cell="1"><div>vp-cell="1"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
-						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
-						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="5"><div>vp-cell="5"</div></div>
-						<div vp-cell="4"><div>vp-cell="4"</div></div> <div vp-cell="4"><div>vp-cell="4"</div></div>
-						<div vp-cell="8"><div>vp-cell="8"</div></div>
-					</div>
-				</section>
-				<section>
-					<h3>Grid of 10<sup>ths</sup> <code>vp-grid="10"</code></h3>
-					<div class="grid-demo seamless vp-mono" vp-grid="10">
-						<div vp-cell="1"><div>1</div></div> <div vp-cell="9"><div>vp-cell="9"</div></div>
-						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="8"><div>vp-cell="8"</div></div>
-						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
-						<div vp-cell="4"><div>vp-cell="4"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
-						<div vp-cell="5"><div>vp-cell="5"</div></div> <div vp-cell="5"><div>vp-cell="5"</div></div>
-						<div vp-cell="10"><div>vp-cell="10"</div></div>
-					</div>
-				</section>
-				<section>
-					<h3>Grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h3>
-					<div class="grid-demo seamless vp-mono" vp-grid="12">
-						<div vp-cell="1"><div>1</div></div> <div vp-cell="11"><div>vp-cell="11"</div></div>
-						<div vp-cell="2"><div>vp-cell="2"</div></div> <div vp-cell="10"><div>vp-cell="10"</div></div>
-						<div vp-cell="3"><div>vp-cell="3"</div></div> <div vp-cell="9"><div>vp-cell="9"</div></div>
-						<div vp-cell="4"><div>vp-cell="4"</div></div> <div vp-cell="8"><div>vp-cell="8"</div></div>
-						<div vp-cell="5"><div>vp-cell="5"</div></div> <div vp-cell="7"><div>vp-cell="7"</div></div>
-						<div vp-cell="6"><div>vp-cell="6"</div></div> <div vp-cell="6"><div>vp-cell="6"</div></div>
-						<div vp-cell="12"><div>vp-cell="12"</div></div>
+					<h3>Example: grid of 12<sup>ths</sup> <code>_grid="12"</code></h3>
+					<div class="grid-demo tight mono" _grid="12">
+						<div><div>1</div></div> <div _cols="11"><div>_cols="11"</div></div>
+						<div _cols="2"><div>_cols="2"</div></div> <div _cols="10"><div>_cols="10"</div></div>
+						<div _cols="3"><div>_cols="3"</div></div> <div _cols="9"><div>_cols="9"</div></div>
+						<div _cols="4"><div>_cols="4"</div></div> <div _cols="8"><div>_cols="8"</div></div>
+						<div _cols="5"><div>_cols="5"</div></div> <div _cols="7"><div>_cols="7"</div></div>
+						<div _cols="6"><div>_cols="6"</div></div> <div _cols="6"><div>_cols="6"</div></div>
+						<div _cols="12"><div>_cols="12"</div></div>
 					</div>
 				</section>
 
@@ -259,14 +298,14 @@ html {
 				<section>
 					<h3>Responsive</h3>
 					<dl>
-						<dt><code>.doubling [vp-cell]</code></dt>
+						<dt><code>[_grid].doubling</code></dt>
 						<dd>
 						Makes grid cells double in relative width when stepping down from "desktop" to "tablet" size, and double again down to "mobile" size. (i.e. A 1/12<sup>th</sup> cell would become 1/6<sup>th</sup> wide in "tablet" viewports and 1/3<sup>rd</sup> wide in "mobile" viewports.)
 						</dd>
 
-						<dt><code>.stacking [vp-cell]</code></dt>
+						<dt><code>[_grid].stacking</code></dt>
 						<dd>
-						Makes grid cells go full-width for "tablet" and "mobile" sizes.
+						Makes grid cells immediately go full-width for "tablet" and "mobile" sizes.
 						</dd>
 					</dl>
 				</section>
@@ -279,90 +318,82 @@ html {
 				Note that buttons and input widgets with <code>:focus</code> get a <code>z-index</code> of 1000 or 1001 in addition to the halo.  Note also that margins between some elements is affected by the form's density.
 				</p>
 				<section>
-					<h3>Fields <code>label.vp-field .vp-label + input|select|textarea</code></h3>
+					<h3>Fields <code>label[vp-field] > input|select|textarea</code></h3>
 					<p>
-					In addition to text areas, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity.
+					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
 					</p>
-					<form vp-grid="10" class="spaced doubling">
-						<div vp-cell="3">
-							<label class="vp-field">
-								<span class="vp-label">Normal</span>
-								<input type="text" name="it001" value="User Input Here">
-							</label>
-						</div>
-						<div vp-cell="5">
-							<label class="vp-field">
-								<span class="vp-label">Disabled</span>
-								<input type="text" name="it002" disabled value="User Input Here">
-							</label>
-						</div>
-						<div vp-cell="2">
-							<label class="vp-field">
-								<span class="vp-label">TODO:icon</span>
-								<input type="text" name="it003" value="User Input Here">
-							</label>
-						</div>
-						<div vp-cell="3">
-							<label class="vp-field">
-								<span class="vp-label">Textarea</span>
+					<p>An optional <code>.lead</code> or <code>.follow</code> sibling of the input may precede it to provide icons.  They are centered in a 1.5em wide area.  Note that a <code>.follow</code> sibling must still come before the input and would not make sense for <code class="html-tag">select</code> or <code class="html-tag">textarea</code>.</p>
+					<p>TODO: is title the best we can do semantically? even if we used some JS? We need some ARIA shenanigans maybe.</p>
+					<form>
+					<fieldset _grid="12" class="spaced doubling">
+						<legend>Fieldset of fields</legend>
+						<label vp-field title="Normal" _cols="3">
+							<input type="text" name="it001" value="User Input Here">
+						</label>
+						<label vp-field title="Normal" _cols="3">
+							<input type="text" name="it001" value="User Input Here">
+						</label>
+						<label vp-field title="Disabled" _cols="5">
+							<input type="text" name="it002" disabled value="User Input Here">
+						</label>
+						<label vp-field title="Icons" _cols="2">
+							<span class="lead"><a href="#">☎</a></span>
+							<span class="follow">&#x27a4;</span>
+							<input type="text" name="it003" value="User Input Here">
+						</label>
+						<label vp-field title="Textarea" _cols="3">
 <textarea name="ta">123, Main St.
 Test City, ZZ
 H0H 0H0</textarea>
-							</label>
-						</div>
-						<div vp-cell="3">
-							<label class="vp-field">
-								<span class="vp-label">Select</span>
-								<select name="sel1">
-									<optgroup label="Group One">
-										<option value="1">Option 1</option>
-										<option value="2">Option 2</option>
-										<option value="3">Option 3</option>
-									</optgroup>
-									<optgroup label="Group Two">
-										<option value="4">Option 4</option>
-										<option value="5">Option 5</option>
-										<option value="6">Option 6</option>
-									</optgroup>
-								</select>
-							</label>
-						</div>
-						<div vp-cell="3">
-							<label class="vp-field">
-								<span class="vp-label">Combobox</span>
-								<datalist id="dl1">
-									<option value="user001@example.com" label="User One"></option>
-									<option value="user002@example.com" label="User Two"></option>
-									<option value="user003@example.com" label="User Three"></option>
-									<option value="user004@example.com" label="User Four"></option>
-									<option value="user005@example.com" label="User Five"></option>
-									<option value="user006@example.com" label="User Six"></option>
-								</datalist>
-								<input type="text" name="cbx1" list="dl1">
-							</label>
-						</div>
+						</label>
+						<label vp-field title="Select" _cols="3">
+							<select name="sel1">
+								<optgroup label="Group One">
+									<option value="1">Option 1</option>
+									<option value="2">Option 2</option>
+									<option value="3">Option 3</option>
+								</optgroup>
+								<optgroup label="Group Two">
+									<option value="4">Option 4</option>
+									<option value="5">Option 5</option>
+									<option value="6">Option 6</option>
+								</optgroup>
+							</select>
+						</label>
+						<label vp-field title="Combobox" _cols="3">
+							<datalist id="dl1">
+								<option value="user001@example.com" label="User One"></option>
+								<option value="user002@example.com" label="User Two"></option>
+								<option value="user003@example.com" label="User Three"></option>
+								<option value="user004@example.com" label="User Four"></option>
+								<option value="user005@example.com" label="User Five"></option>
+								<option value="user006@example.com" label="User Six"></option>
+							</datalist>
+							<input type="text" name="cbx1" list="dl1">
+						</label>
+					</fieldset>
 					</form>
-				</section>
-				<section>
-					<h3>Field sets</h3>
-					<p>TODO</p>
+					<p>FIXME: Why the heck does this very line display half-within the fieldset?</p>
+					<p>TODO: See Claude example: the submit button has text and an icon, which needs much more than 1.5em wide.  We might need to create a way to have arbitrary assemblies of leaders, an input and followers.</p>
+					<p>Actually, instead of putting things inside inputs, we should have an alternative to the one-input-per-label scheme where several inputs fill a single grid cell which has the label-like border.</p>
+					<p>Instead, we should do like button groups but which includes inputs.</p>
 				</section>
 				<section>
 					<h3>Checkboxes <code>label input[type=checkbox] + .vp-label</code></h3>
-					<form vp-grid="12" class="doubling spaced">
-						<label vp-cell="3">
+					<form _grid="12" class="doubling spaced">
+						<label _cols="3">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Something long wraps on label's width</span>
 						</label>
-						<label vp-cell="3">
+						<label _cols="3">
 							<input type="checkbox" name="cb" value="1" disabled checked>
 							<span class="vp-label">Disabled</span>
 						</label>
-						<label vp-cell="3" style="font-size:75%">
+						<label _cols="3" style="font-size:75%">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Adapts to label's font size</span>
 						</label>
-						<label vp-cell="3" style="background-color:orange;color:white;">
+						<label _cols="3" style="background-color:orange;color:white;">
 							<input type="checkbox" name="cb" value="1" checked>
 							<span class="vp-label">Ignores label colors</span>
 						</label>
@@ -373,20 +404,20 @@ H0H 0H0</textarea>
 					<p>
 					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than 5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when presenting a form's initial state.
 					</p>
-					<form vp-grid="12" class="doubling spaced">
-						<label vp-cell="2">
+					<form _grid="12" class="doubling spaced">
+						<label _cols="2">
 							<input type="radio" name="rd" value="1" checked>
 							<span class="vp-label">First choice</span>
 						</label>
-						<label vp-cell="2">
+						<label _cols="2">
 							<input type="radio" name="rd" value="2">
 							<span class="vp-label">Second choice</span>
 						</label>
-						<label vp-cell="2">
+						<label _cols="2">
 							<input type="radio" name="rd" value="3" disabled>
 							<span class="vp-label">Disabled</span>
 						</label>
-						<label vp-cell="2" style="background-color:orange;color:white;font-size:75%;">
+						<label _cols="2" style="background-color:orange;color:white;font-size:75%;">
 							<input type="radio" name="rd" value="2">
 							<span class="vp-label">Ignores label colors</span>
 						</label>
@@ -412,14 +443,22 @@ H0H 0H0</textarea>
 							<button onclick="return false;" class="vp-icon-button priority" title=".priority">M</button>
 						</dl>
 					</form>
-					<h3>Button groups <code>.vp-group button, .vp-group .vp-button</code></h3>
+					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
+					<p>TODO: When a group includes an input, make its width 100% with the input being the buffer, somehow.</p>
+					<P>TODO: Group input border is too dark, also left/right need to disappear when they have neighbors.</p>
+					<p>TODO: icons in inputs also need to be supported in group inputs.</p>
 					<form>
 						<div class="vp-group">
 							<button onclick="return false;">First</button>
 							<button onclick="return false;">Middle</button>
+							<input type="text" name="foo" value="foo">
 							<button onclick="return false;" disabled>Disabled</button>
 							<button onclick="return false;" class="active">Active</button>
 							<button onclick="return false;">Last</button>
+						</div>
+						<div class="vp-group">
+							<input type="text" name="chat" placeholder="Ask our AI bot...">
+							<button onclick="return false;">Send &#x27a4;</button>
 						</div>
 					</form>
 					<h3>Theming</h3>
@@ -454,32 +493,32 @@ H0H 0H0</textarea>
 				<p>
 				Tables respond to density with padding and font size.
 				</p>
-				<div vp-grid="10" class="doubling">
-					<div vp-cell="5">
+				<div _grid="10" class="doubling">
+					<div _cols="5">
 						<table class="spaced horizontal striped">
 							<thead>
 								<tr><th>First</th><th>Second</th><th>Third</th><th>Fourth</th></tr>
 							</thead>
-							<tbody class="vp-center-3">
-								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><td>First</td><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+							<tbody class="mono-2 center-3">
+								<tr><td>First</td><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><td>First</td><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
 							</tbody>
 						</table>
 					</div>
-					<div vp-cell="5">
+					<div _cols="5">
 						<table class="vp-table spaced gridded vp-2d">
 							<thead>
 								<tr><th></th><th>Second</th><th>Third</th><th>Fourth</th></tr>
 							</thead>
-							<tbody class="vp-center-3">
-								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
-								<tr><th>First</th><td class="numeric">2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+							<tbody>
+								<tr><th>First</th><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
+								<tr><th>First</th><td>2.22%</td><td>X</td><td>Fourth is longer as a test</td></tr>
 							</tbody>
 						</table>
 					</div>
@@ -524,14 +563,22 @@ H0H 0H0</textarea>
 						Left-most column (a <code class="html-tag">th</code>) is considered a header and remains in viewport while the table is.
 						</dd>
 
-						<dt>tbody.vp-center-*</dt>
+						<dt>.center-N</dt>
 						<dd>
-						Center text in all rows, column <code>*</code>, maximum: 12.  (i.e. <code>.vp-center-2</code> centers cells in column 2.)
+						Center text in all N<sup>th</sup> child (1..9) of direct children of <code>.center-N</code>.
+						Apply to <code class="html-tag">tbody</code> typically.
 						</dd>
 
-						<dt>th.numeric, td.numeric</dt>
+						<dt>.right-N</dt>
 						<dd>
-						Right-justified cell.
+						Right-align text in all N<sup>th</sup> child (1..9) of direct children of <code>.center-N</code>.
+						Apply to <code class="html-tag">tbody</code> typically.
+						</dd>
+
+						<dt>.mono-N</dt>
+						<dd>
+						Use monospace font in all N<sup>th</sup> child (1..9) of direct children of <code>.center-N</code>.
+						Apply to <code class="html-tag">tbody</code> typically.
 						</dd>
 
 					</dl>
@@ -543,19 +590,19 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Messages <code>messages.css</code></h2>
 				<section>
-					<h3>Notice <code class="html-tag">vp-notice</code></h3>
+					<h3>Notice <code>.notice</code></h3>
 					<p>A notice with a state automatically gets a color and a dot. No need to insert a dot manually.</p>
-					<vp-notice class="vp-error">This notice has <code>.vp-error</code>.</vp-notice>
-					<vp-notice class="vp-warning">This notice has <code>.vp-warning</code>.</vp-notice>
-					<vp-notice class="vp-ok">This notice has <code>.vp-ok</code>.</vp-notice>
-					<vp-notice _char="?">This notice has no state, but it does have <code>_char="?"</code> to override the default "i".</vp-notice>
+					<div class="notice error">This notice has <code>.error</code>.</div>
+					<div class="notice warning">This notice has <code>.warning</code>.</div>
+					<div class="notice ok">This notice has <code>.ok</code>.</div>
+					<div _char="?">This notice has no state, but it does have <code>_char="?"</code> to override the default "i".</div>
 				</section>
 				<section>
-					<h3>Message <code class="html-tag">vp-message</code></h3>
-					<vp-message class="vp-error">This message has class <code>.vp-error</code>.</vp-message>
-					<vp-message class="vp-warning">This message has class <code>.vp-warning</code>.</vp-message>
-					<vp-message class="vp-ok">This message has class <code>.vp-ok</code>.</vp-message>
-					<vp-message _char="?">This message has no state, but it does have <code>_char="?"</code>. This text is long for the purpose of seeing wrapping in action. Wrapping requires a lot of text on wide screen desktop monitors. ;-)</vp-message>
+					<h3>Message <code>.message</code></h3>
+					<div class="message error">This message has class <code>.error</code>.</div>
+					<div class="message warning">This message has class <code>.warning</code>.</div>
+					<div class="message ok">This message has class <code>.ok</code>.</div>
+					<div _char="?">This message has no state, but it does have <code>_char="?"</code>. This text is long for the purpose of seeing wrapping in action. Wrapping requires a lot of text on wide screen desktop monitors. ;-)</div>
 				</section>
 			</section>
 
@@ -608,7 +655,7 @@ H0H 0H0</textarea>
 
 
 			<section>
-				<h2>Tooltips <code>tooltips.scss</code></h2>
+				<h2>Tooltips <code>tooltips.css</code></h2>
 				<p>
 				For uniformity with touch devices, our tooltips are touch/click activated.  This requires adding the <code>ontouchstart</code> attribute to <code class="html-tag">body</code> and adding <code>tabindex="0"</code> to non-clickable elements like <code class="html-tag">span</code>.
 				</p>
@@ -641,6 +688,7 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Transitions <code>transitions.css</code></h2>
 				<p>
+				<B>FIXME:</B> do the onload thing in our JS bundle.
 				To guarantee that no browsers "flash" transitions on load, some rules depend on a parent having the "loaded" class.  To use them, add the <code>loaded</code> class to <code class="html-tag">body</code> after the first paint is likely over. In some browsers, a simple "onload" is insufficient, thus:
 				</p>
 				<blockquote><code>
@@ -655,7 +703,7 @@ H0H 0H0</textarea>
 						Subtle fade for <code>color</code>, <code>background-color</code> and <code>opacity</code>.
 						</dd>
 
-						<dt><code>.vp-go-hidden</code>, <code>.vp-go-visible</code></dt>
+						<dt><code>.go-hidden</code>, <code>.go-visible</code></dt>
 						<dd>
 						Fade in/out of <code>opacity</code>.  Only useful in scripts because they are mutually exclusive.
 						</dd>

@@ -4,20 +4,36 @@
 import * as $ from './browser.js';
 
 // Not interfering with touch devices as a precaution.
-// TODO: is there ANY way to cancel the browser's second click?
 
 /**
- * Manually make an element trigger clicks on mousedown events.  Click event is
- * fired twice, so be careful when adding this behavior to new elements.
+ * Manually make an element trigger clicks on mousedown events.
+ * Prevents double-firing by tracking mousedown state.
  *
  * @param {HTMLElement} el Element to monitor
  */
 function preclick(el) {
-	const fire = ev => (ev.button === 0 ? ev.target.click() : null);
-	$.on(el, 'mousedown', fire, null, { mute: 1000 });
+	let blockNextClick = false;
+
+	const handleMouseDown = ev => {
+		if (ev.button === 0) {
+			ev.target.click();
+			blockNextClick = true;
+		}
+	};
+
+	const handleClick = ev => {
+		if (blockNextClick) {
+			ev.preventDefault();
+			ev.stopImmediatePropagation();
+			blockNextClick = false;
+		}
+	};
+
+	$.on(el, 'mousedown', handleMouseDown, null, { mute: 1000 });
+	$.on(el, 'click', handleClick, { capture: true });
 }
 $.forever(
-	'[vp-fast] a[href], a[href][vp-fast], form[vp-fast] [type=submit], form [type=submit][vp-fast]',
+	'[vp-fast] a, a[vp-fast], form[vp-fast] button, form[vp-fast] input[type=submit], button[vp-fast], input[type=submit][vp-fast]',
 	preclick
 );
 

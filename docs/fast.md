@@ -1,6 +1,6 @@
 # Fast Clicks
 
-Activate clicks on `mousedown` to save at least ~100ms in response times.
+Activate clicks on `mousedown` to save at least ~100ms in response times. This being a pointer trick, it does not apply to touch devices.
 
 ```js
 // Option 1 (recommended): include in your build.
@@ -13,19 +13,18 @@ import 'vpweb/fast';
 <script src="dist/fast.min.js"></script>
 ```
 
-* Anchors in a block with the `vp-fast` attribute or with the attribute directly are triggered on `mousedown` instead of the browser's `mouseup`.  Limited to anchors with `href` to avoid side effects from the `click` event triggering twice.
+* Any anchor (`<a>`) in a block with the `vp-fast` attribute or with the attribute directly will trigger early on `mousedown`.
 
-* Submit inputs/buttons with `vp-fast` attribute, or in forms with `vp-fast`, trigger on `mousedown`.  Limited to `[type=submit]` because of the double `click` triggering.
+* Any button or submit input element with `vp-fast` attribute, or in a form with `vp-fast`, will trigger early on `mousedown`.
 
 <!-- BEGIN DOC-COMMENT H2 js/fast.js -->
 
 ## `function preclick(el)`
 
-Manually make an element trigger clicks on mousedown events.  Click event is fired twice, so be careful when adding this behavior to new elements.
+Manually make an element trigger clicks on mousedown events. Prevents double-firing by tracking mousedown state.
 
 **Parameters:**
 
 * `el` — `HTMLElement` — Element to monitor
 
 <!-- END DOC-COMMENT -->
-

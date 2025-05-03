@@ -1,4 +1,7 @@
-@import '_lib.scss';
+/* TODO
+ * Update HTML for the other SCSS files, then come back to this one
+ * and refactor with new approach.
+ */
 
 :root {
 	--vp-btn-bg: linear-gradient(
@@ -17,23 +20,75 @@
 	--vp-btn-sha: var(--vp-btn-sh), inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
 }
 
+.vp label {
+	position: relative;
+}
+
+.vp :is([type='text'], [type='email'], [type='search'], [type='password']) {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.vp :is(button, input, optgroup, select, textarea) {
+	font-size: 100%;
+}
+.vp :is(button, select) {
+	text-transform: none;
+}
+.vp :is(button, [type='button'], [type='reset'], [type='submit']) {
+	-webkit-appearance: button;
+}
+.vp :is(button, [type='button'], [type='reset'], [type='submit'])::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+.vp :is(button, [type='button'], [type='reset'], [type='submit']):-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+.vp progress {
+	vertical-align: baseline;
+}
+.vp [type='number']::-webkit-inner-spin-button,
+.vp [type='number']::-webkit-outer-spin-button {
+	height: auto;
+}
+.vp [type='search'] {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+.vp [type='search']::-webkit-search-cancel-button,
+.vp [type='search']::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+.vp ::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+.vp fieldset {
+	border: 0.5px solid rgba(128, 128, 128, 0.33);
+	/* FIXME: why is this not affected by density choice? */
+	/* padding: 0.35em 0.75em 0.625em; */
+	padding: var(--vp-pad);
+	margin: 0;
+}
+.vp legend {
+	font-weight: bold;
+	padding: 0 1em;
+	margin-left: 1em;
+	margin-bottom: 0;
+}
+
 /* Focus */
 
-.vp button:focus,
-.vp button.secondary:focus,
+.vp :is(button, button.secondary, textarea, select):focus,
 .vp label input:focus,
-.vp textarea:focus,
-.vp select:focus,
+.vp-group > input:focus,
 .vp-button:focus,
 .vp-button.secondary:focus,
 .vp-icon-button.vp-icon-button:focus,
 .vp label :focus + .vp-label::before {
 	box-shadow: var(--vp-btn-sh), 0 0 0.33em 1px rgba(8, 112, 240, 0.5);
 	z-index: 1000;
-}
-
-.vp label :focus + .vp-label::after {
-	z-index: 1001;
 }
 
 /* Default margin */
@@ -63,11 +118,13 @@
 	background-color: rgba(var(--vp-dim), 0.125);
 }
 
+/* FIXME: tight list of buttons with whitespace are spaced */
+
 .vp button,
 .vp-button {
 	padding: 0.5em 1em;
 	margin: 0 0.33em var(--vp-pad) 0;
-	border-radius: $small-radius;
+	border-radius: var(--vp-corner);
 	background-image: var(--vp-btn-bg);
 	box-shadow: var(--vp-btn-sh);
 }
@@ -97,6 +154,11 @@
 	box-shadow: var(--vp-btn-sha);
 }
 
+/* FIXME: maybe...
+ * :is(.vp button, .vp-button):is(.active, :active)
+ * ?
+ */
+
 .vp button.secondary:active,
 .vp button.secondary.active,
 .vp-button.secondary:active,
@@ -109,34 +171,43 @@
 .vp-icon-button:disabled {
 	color: #888;
 	cursor: not-allowed;
-	cursor: no-drop;
 	background-image: none;
 }
 
-/* Button groups */
+/* Button/input groups */
 
 .vp-group {
 	white-space: nowrap;
 	display: flex;
 }
-
-.vp-group.vp-group > button,
-.vp-group.vp-group > .vp-button {
-	margin-right: 0;
+.vp-group > input {
+	margin: 0 0.5em var(--vp-pad) 0;
+	outline: none;
+	/* border: 1px solid rgba(var(--vp-dim), 0.75); */
+	border-radius: var(--vp-corner);
+	padding: 0.5em;
+	background-color: rgba(var(--vp-dim), 0.02);
+	/* box-shadow: var(--vp-btn-sh); */
 }
-
-.vp-group > button,
-.vp-group > .vp-button {
+.vp-group > :is(button, .vp-button, input) {
+	margin-right: 0 !important;
 	border-radius: 0;
 }
-.vp-group > button:first-child,
-.vp-group > .vp-button:first-child {
-	border-radius: $small-radius 0 0 $small-radius;
+.vp-group > input {
+	border-left-width: 0 !important;
+	border-right-width: 0 !important;
 }
-
-.vp-group > button:last-child,
-.vp-group > .vp-button:last-child {
-	border-radius: 0 $small-radius $small-radius 0;
+.vp-group > input:first-child {
+	border-left-width: 1px !important;
+}
+.vp-group > input:last-child {
+	border-right-width: 1px !important;
+}
+.vp-group > :is(button, .vp-button, input):first-child {
+	border-radius: var(--vp-corner) 0 0 var(--vp-corner);
+}
+.vp-group > :is(button, .vp-button, input):last-child {
+	border-radius: 0 var(--vp-corner) var(--vp-corner) 0;
 }
 
 /* Icon buttons */
@@ -177,24 +248,31 @@
 /* Keyboard input field */
 /* Typically: textarea, select, input type=email|number|password|search|tel|text|url */
 /* TODO: centralize/uniformize colors with rest of widgets */
-label.vp-field input,
-label.vp-field select,
-label.vp-field textarea {
-	display: block;
-	width: 100%;
+
+/* If we had :has(), would it be wise to do label:has(input, select, textarea) ?
+ * Or do we want to be explicit?
+ */
+
+label[vp-field] :is(input, select, textarea), .vp-group > input {
 	outline: none;
 	border: 1px solid rgba(var(--vp-dim), 0.75);
-	border-radius: 0.2em;
-	padding: 1.75em 0.5em 0.5em 0.5em;
+	border-radius: var(--vp-corner);
+	padding: 0.5em;
 	background-color: rgba(var(--vp-dim), 0.02);
 }
-label.vp-field :disabled {
+
+label[vp-field] :is(input, select, textarea) {
+	display: block;
+	width: 100%;
+	padding: 1.75em 0.5em 0.5em 0.5em;
+}
+label[vp-field] :disabled, .vp-group > input:disabled {
 	color: rgba(var(--vp-dim), 0.75);
 	cursor: not-allowed;
-	cursor: no-drop;
 	background-color: rgba(var(--vp-dim), 0.125);
 }
-label.vp-field .vp-label {
+label[vp-field]:before {
+	content: attr(title);
 	display: block;
 	font-size: 80%;
 	color: rgba(0, 0, 0, 0.67);
@@ -204,11 +282,30 @@ label.vp-field .vp-label {
 	padding: 0.625em;
 	border: 1px solid transparent;
 }
-label.vp-field textarea {
+label[vp-field] textarea {
 	height: 6em;
 }
+label[vp-field] :is(.lead, .follow) {
+	position: absolute;
+	text-align: center;
+	width: 1.5em;
+}
+label[vp-field] .lead {
+	top: 1.75em;
+	left: 0.5em;
+}
+label[vp-field] .follow {
+	top: 1.75em;
+	right: 0.5em;
+}
+label[vp-field] .lead ~ :is(input, select, textarea) {
+	padding-left: 2.5em;
+}
+label[vp-field] .follow ~ :is(input, select, textarea) {
+	padding-right: 2.5em;
+}
 
-[vp-cell] > .vp-field {
+[vp-cell] > [vp-field] {
 	width: 100%;
 }
 
@@ -231,6 +328,9 @@ label.vp-field textarea {
 	left: -9999px;
 }
 
+/* TODO: eliminate .vp-label child, use ::after instead. */
+/* FIXME: we cannot know checkbox vs radio that way! attribute name? */
+
 .vp label [type='checkbox'] + .vp-label,
 .vp label [type='radio'] + .vp-label {
 	display: block;
@@ -239,8 +339,7 @@ label.vp-field textarea {
 }
 
 .vp label [type='checkbox'] + .vp-label::before,
-.vp label [type='radio'] + .vp-label::before,
-.vp label [type='radio']:checked + .vp-label::after {
+.vp label [type='radio'] + .vp-label::before {
 	user-select: none;
 	display: block;
 	position: absolute;
@@ -254,15 +353,10 @@ label.vp-field textarea {
 	border: 1px solid #333;
 	background-color: #fff;
 }
-.vp label [type='radio'] + .vp-label::after {
-	top: 0;
-	border-radius: 100rem;
-	background-color: #333;
-	transform: scale(0.45);
-}
 
-.vp label [type='checkbox'] + .vp-label::before {
-	border-radius: $tiny-radius;
+.vp label [type='checkbox'] + .vp-label::before,
+.vp label [type='radio'] + .vp-label::before {
+	border-radius: 0.125em;
 	background-size: cover;
 	padding: 0.1em;
 }
@@ -274,6 +368,11 @@ label.vp-field textarea {
 	background-color: #333;
 	background-image: inline('icons/check-white.svg');
 }
+.vp label [type='radio']:checked + .vp-label::before {
+	/* FIXME: not perfectly centered */
+	background-color: #333;
+	background-image: inline('icons/dot-white.svg');
+}
 
 .vp label :disabled + .vp-label {
 	color: #888;
@@ -284,7 +383,6 @@ label.vp-field textarea {
 .vp label :disabled + .vp-label::before {
 	border-color: #888;
 	cursor: not-allowed;
-	cursor: no-drop;
 }
 
 /*
@@ -307,7 +405,8 @@ label.vp-field textarea {
 
 /* Responsive */
 
-@include media-nomouse {
+/* No fine pointer: finger target sizes */
+@media not (only screen and (any-pointer: fine)) {
 	.vp-icon-button.vp-icon-button {
 		font-size: calc(15mm / 1.75);
 	}
@@ -325,8 +424,7 @@ label.vp-field textarea {
 	.vp [type='reset'],
 	.vp [type='button'],
 	.vp label [type='checkbox'] + .vp-label::before,
-	.vp label [type='radio'] + .vp-label::before,
-	.vp label [type='radio']:checked + .vp-label::after {
+	.vp label [type='radio'] + .vp-label::before {
 		min-width: 15mm;
 		min-height: 15mm;
 	}
@@ -354,8 +452,7 @@ label.vp-field textarea {
 	}
 
 	.vp label [type='checkbox'] + .vp-label::before,
-	.vp label [type='radio'] + .vp-label::before,
-	.vp label [type='radio']:checked + .vp-label::after {
+	.vp label [type='radio'] + .vp-label::before {
 		border-width: 2px;
 		left: calc(-15mm - 1mm);
 	}

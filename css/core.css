@@ -1,0 +1,347 @@
+/* Inspired by: Semantic UI v2 and Normalize.css without opinions nor obsolete
+ * browser support. */
+
+:root {
+	/* System UI font stacks
+	 *
+	 * Inspiration:
+	 *   https://systemfontstack.com/
+	 *   Bootstrap 4 Reboot
+	 *   GitHub
+	 *   Medium
+	 *
+	 * Non-system fonts which are clearly user installed are listed early in the
+	 * list (i.e. Fira Code) as they usually indicate an implicit user
+	 * preference.
+	 */
+	--vp-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+		'Noto Color Emoji';
+	--vp-mono: 'Fira Code', 'Hack', 'Hasklig', 'Monoid', 'Source Code Pro',
+		'JetBrains Mono', 'Cascadia Code', 'SFMono-Regular', 'SF Mono', Menlo,
+		Monaco, Inconsolata, 'Fira Mono', 'Roboto Mono', 'Droid Sans Mono',
+		Consolas, 'Liberation Mono', 'Lucida Console', 'Courier New', monospace,
+		var(--vp-emoji);
+	--vp-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
+		Helvetica, sans-serif, var(--vp-emoji);
+	--vp-serif: 'Iowan Old Style', 'Apple Garamond', 'Baskerville',
+		'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif,
+		var(--vp-emoji);
+
+	/* Padding */
+	--vp-pad: 0rem;
+	--vp-p-margin: 0.75em;
+
+	/* Sizes */
+	--vp-min-width: 320px;
+	--vp-width-text-max: 66rem;
+
+	/* Colors */
+	--vp-red: 187, 17, 17; /* #b11 */
+	--vp-orange: 187, 102, 17; /* #b61 */
+	--vp-green: 51, 136, 17; /* #381 */
+	--vp-dim: 127, 127, 127; /* #7f7f7f */
+}
+
+/* Non-prefixed classes which only set/change prefixed variables: */
+
+.tight {
+	--vp-pad: 0rem;
+}
+.spaced {
+	--vp-pad: 0.5rem;
+}
+.relaxed {
+	--vp-pad: 1rem;
+}
+.tight,
+.spaced,
+.relaxed {
+	--vp-corner: calc(var(--vp-pad) / 2);
+}
+
+/* Main wrapper */
+
+.vp:not(.xvp):not(.vp *) {
+	box-sizing: border-box;
+	line-height: 1.33;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	font-size: 12pt;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.vp:not(.xvp):not(.vp *) {
+		/* TODO: try tab animation again with this */
+		interpolate-size: allow-keywords;
+	}
+}
+
+html.vp:not(.xvp),
+body.vp:not(.xvp),
+.vp:not(.xvp) body {
+	height: 100%;
+}
+
+.vp:not(.xvp) body:not(.xvp),
+body.vp:not(.xvp) {
+	min-width: var(--vp-min-width);
+}
+
+:where(
+	.vp:not(.xvp),
+	.vp:not(.xvp) *,
+	.vp:not(.xvp)::before,
+	.vp:not(.xvp) *::before,
+	.vp:not(.xvp)::after,
+	.vp:not(.xvp) *::after
+) {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+/* General */
+
+.vp hr:not(.xvp, .xvp *) {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+}
+.vp :is(details, menu):not(.xvp, .xvp *) {
+	display: block;
+}
+.vp summary:not(.xvp, .xvp *) {
+	display: list-item;
+}
+.vp :is(ul, ol):not(.xvp, .xvp *) {
+	margin-left: 2em;
+}
+
+.vp p:not(.xvp, .xvp *) {
+	text-wrap: pretty;
+	/* hyphens: auto; ...only on narrow columns! */
+}
+
+.vp :is(h1, h2, h3, h4, h5, h6):not(.xvp, .xvp *) {
+	text-wrap: balance;
+}
+
+.vp :is(p, h1, h2, h3, h4, h5, h6):not(.xvp, .xvp *) {
+	overflow-wrap: break-word;
+}
+
+.vp :where(input, button, textarea, select):not(.xvp, .xvp *) {
+	font-size: 1rem;
+}
+
+/* Typography */
+
+/* TODO changed:
+ * .xvp now exists
+ * .button, .sans, .serif, .mono, .numeric, .notice, .message
+ */
+.vp h1:not(.xvp, .xvp *) {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+.vp :is(button, .button, input, textarea, select, .sans):not(.xvp, .xvp *),
+.vp:not(.xvp).sans {
+	font-family: var(--vp-sans);
+}
+.vp .serif:not(.xvp, .xvp *) {
+	font-family: var(--vp-serif);
+}
+.vp :is(code, kbd, pre, samp):not(.xvp, .xvp *) {
+	font-family: var(--vp-mono);
+	font-size: 1em;
+}
+.vp :is(.mono, .numeric):not(.xvp, .xvp *),
+.vp :is(.notice, .message):not(.xvp, .xvp *)::before {
+	font-family: var(--vp-mono);
+}
+.vp :is(b, strong):not(.xvp, .xvp *) {
+	font-weight: bolder;
+}
+.vp small:not(.xvp, .xvp *) {
+	font-size: 80%;
+}
+.vp :is(sub, sup):not(.xvp, .xvp *) {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+.vp sub:not(.xvp, .xvp *) {
+	bottom: -0.25em;
+}
+.vp sup:not(.xvp, .xvp *) {
+	top: -0.5em;
+}
+.vp abbr[title]:not(.xvp, .xvp *) {
+	border-bottom: none;
+	text-decoration: underline;
+	-webkit-text-decoration: underline dotted;
+	text-decoration: underline dotted;
+}
+
+.vp :is(p, blockquote):not(.xvp, .xvp *) {
+	margin-bottom: var(--vp-p-margin);
+}
+
+/* Helpers */
+/* NOTE: Classes referred twice for specificity. */
+
+.vp .none.none:not(.xvp, .xvp *) {
+	display: none;
+}
+
+.vp .sticky.sticky:not(.xvp, .xvp *) {
+	position: sticky;
+}
+
+.vp .center.center:not(.xvp, .xvp *) {
+	text-align: center;
+}
+
+.vp .right.right:not(.xvp, .xvp *) {
+	text-align: right;
+}
+
+/* Horizontal and vertical 2-3 element layouts. */
+
+/* FIXME: borders seem to screw up sticky, scrolls by border thickness? */
+
+:is(.vp .stack, .vp.stack, .vp .shelf, .vp.shelf):not(.xvp, .xvp *) {
+	display: flex;
+}
+/* prettier-ignore */
+:is(.vp .stack, .vp.stack, .vp .shelf, .vp.shelf):not(.xvp, .xvp *) > :nth-child(2) {
+	flex: 1;
+}
+:is(.vp .stack, .vp.stack):not(.xvp, .xvp *) {
+	flex-flow: column;
+}
+:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *) {
+	flex-flow: row wrap;
+}
+:is(.vp .stack, .vp.stack):not(.xvp, .xvp *) > :not(:first-child) {
+	margin-top: var(--vp-pad);
+}
+:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *) > :not(:first-child) {
+	margin-left: var(--vp-pad);
+}
+
+@media only screen and (min-width: 768px) {
+	/* Tablet-up */
+	/* prettier-ignore */
+	:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *) > :first-child:nth-last-child(2) {
+		/* First of a duo */
+		min-width: 38.2%;
+	}
+}
+
+@media only screen and (min-width: 768px) and (not (min-width: 992px)) {
+	/* Tablet */
+	/* prettier-ignore */
+	:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *) > :first-child:nth-last-child(3) {
+		/* First of a trio */
+		min-width: 38.2%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	/* Desktop */
+	:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *)
+		> :is(:first-child:nth-last-child(3), :nth-child(3)) {
+		/* First and third of at least three */
+		min-width: 23.6%;
+	}
+}
+
+@media only screen and (not (min-width: 992px)) {
+	/* Tablet-down */
+	:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *) > :nth-child(3) {
+		flex-basis: 100%;
+		height: fit-content;
+	}
+}
+@media only screen and (not (min-width: 768px)) {
+	/* Mobile */
+	:is(.vp .shelf, .vp.shelf):not(.xvp, .xvp *) {
+		display: block;
+	}
+}
+
+.vp .container:not(.xvp, .xvp *) {
+	width: 100%;
+	max-width: 100%;
+	padding-left: var(--vp-pad);
+	padding-right: var(--vp-pad);
+}
+
+.vp .block:not(.xvp, .xvp *) {
+	display: block;
+	width: 100%;
+}
+
+/* Media queries */
+
+/* .mouse-only: display requires fine pointer */
+@media not (only screen and (any-pointer: fine)) {
+	.vp .mouse-only:not(.xvp, .xvp *) {
+		display: none;
+	}
+}
+
+/* .hover-only: display requires hovering pointer */
+@media not (only screen and (any-hover: hover)) {
+	.vp .hover-only:not(.xvp, .xvp *) {
+		display: none;
+	}
+}
+
+/* Mobile */
+@media only screen and (not (min-width: 768px)) {
+	.vp :is(.tablet-up, .tablet-only, .desktop-only):not(.xvp, .xvp *) {
+		display: none;
+	}
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (not (min-width: 992px)) {
+	.vp :is(.mobile-only, .desktop-only):not(.xvp, .xvp *) {
+		display: none;
+	}
+}
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+	.vp :is(.mobile-only, .tablet-only, .tablet-down):not(.xvp, .xvp *) {
+		display: none;
+	}
+}
+
+/* Desktop (large) */
+@media only screen and (min-width: 1200px) {
+	/* prettier-ignore */
+	.vp :is(.mobile-only, .tablet-only, .tablet-down, .desktop-only):not(.xvp, .xvp *) {
+		display: none;
+	}
+	.vp .container:not(.xvp, .xvp *) {
+		max-width: var(--vp-width-text-max);
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@media only screen {
+	.vp .print-only:not(.xvp, .xvp *) {
+		display: none;
+	}
+}
+@media not screen {
+	.vp .screen-only:not(.xvp, .xvp *) {
+		display: none;
+	}
+}

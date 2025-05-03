@@ -9,13 +9,13 @@ Vanilla+ is a minimalistic web interface development library.  It adds no abstra
 * A JS library
 * A collection of web components
 
-The components make use of the JS library and aim to be otherwise stand-alone.  They don't even depend on the CSS library, which only serves to theme them.  When possible, components are meant to be progressive enhancements.
+The components utilize the JS library while maintaining independence. They operate without relying on the CSS library, which serves solely for theming purposes. Whenever feasible, these components are designed as progressive enhancements.
 
 ### Status
 
 **WORKING PROTOTYPE** "It works for me." The APIs may still change significantly, bugs and browser incompatibilities may still abound.
 
-A stable version 1.0 is expected by the end of 2024.
+Development has resumed and a stable version 1.0 is expected by July 2025.
 
 See [TODO](TODO.md) for details of what's coming up.
 
@@ -25,17 +25,19 @@ See [TODO](TODO.md) for details of what's coming up.
 npm install vpweb
 ```
 
+…or simply download the files you need from this repository.
+
 ## CSS FRAMEWORK
 
 Main objectives:
 
 - Responsive, but with **desktop as a first-class citizen**
-- Nearly pure CSS, using JS only where it helps significantly
-- Usable as a package or as a set of SCSS include files
+- Nearly pure CSS, relying on JS only when CSS falls short
+- Usable as a package or as a set of stand-alone files
 - Unique selectors to minimize conflicts with other frameworks
 - Forego advanced concepts in favor of small size and high performance
 
-Documentation: `docs/css.html`
+Documentation: [CSS](docs/css.html)
 
 ## JS LIBRARY
 
@@ -83,7 +85,7 @@ Graph X Design Inc. https://www.gxd.ca/ sponsored this project.
 
 ## LICENSE AND COPYRIGHT
 
-Copyright (c) 2019-2024 Stéphane Lavergne <https://github.com/vphantom>
+Copyright (c) 2019-2025 Stéphane Lavergne <https://github.com/vphantom>
 
 Distributed under the MIT (X11) License:
 http://www.opensource.org/licenses/mit-license.php

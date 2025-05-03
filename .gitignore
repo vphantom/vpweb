@@ -1,8 +1,10 @@
-*~
-.tags
+*.bak
 *.br
 *.gz
 *.map
+*~
+.tags
 dist/
 docs/css.css
 node_modules
+package-lock.json

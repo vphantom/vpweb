@@ -1,17 +1,47 @@
+## CSS
+
+### Clean up
+
+Full refactor before going any further.  It's too heavy, the SVG-in-CSS choice has unpleasant drawbacks to re-evaluate, and relying on bits of JS for the more interactive components is now perfectly acceptable.
+
+- [ ] We dropped MSIE 11 support. We can refactor to save space and use:
+	* mix-blend-mode
+	* filter()
+- [ ] Labels inside inputs is battle-tested, but is it still the best mechanism for lists of identical inputs?  Do they happen enough that we should study this case?
+
+### Tables
+
+- [ ] Easy to use mechanism so that `<thead>`/`<tfoot>` stay in the parent viewport while `<tbody>` scrolls vertically if height is constrained.  All 3 scroll horizontally if width is constrained (perhaps keep column 1 sticky on the left?)
+- [ ] Explore non-repetitive means to transform tables into zebra cards on phone widths via JS.
+
+### Forms
+
+- [ ] SVG/icons for the toggle switch design as an alternative to the checkbox. Contrasted/right ON, greyscale subdued left OFF.
+- [ ] I think auto-expanding inputs are now possible in pure CSS?
+- [ ] Refactor `<form action="json-post">` so that XHR loading is independent of JSON feature.
+- [ ] Grab titles in addition to body.
+- [ ] Document how to nest objects in JSON output.
+- [ ] `formaction` attribute on submit buttons.
+
 ## Components
+
+### Forms
+
+- [ ] Support the `formaction` attribute of clicked elements.
+- [ ] Add an attribute which will make the initial load save an input's value, then on submit compare so that the variable is not sent unchanged. A numeric specialization could send the difference instead of the new value. (Helps multiple users editing the same thing without conflict and moves the burden of identifying changes to the client side. Delta should use a suffix or something so that non-JS users submitting the form won't distort data.)
+
+### Browser
+
+- [ ] WebSocket helper (as we already have XHR helper)
+- [ ] Server-Sent Events (SSE) helper
 
 ### Editeur
 
 - [ ] Add a 4th type "Bool" mapping to JSON boolean for Y/N fields
-
 - [ ] Repeatable: add entries/rows via additional disabled entry until clicked
-
 - [ ] Repeatable: remove existing entries/rows (mark for deletion with `null`)
-
 - [ ] For select and select multiple, we'll wait until we have Selecteur and then revisit "combo" for something more general.  (One or multiple, allow arbitrary or not.)  Single selects up to X items should be radio buttons, above should be a select, and multiple should be a `<vp-select>`.
-
 - [ ] When CSS table will be (re-)done, consider using it here.
-
 - [ ] Add an alternate "send changes only" edit mode.
 
 ### Selecteur
@@ -23,33 +53,3 @@ Evaluate if we can be an order of magnitude smaller than existing stand-alone op
 ### DateRange
 
 More or less a port/cleanup of the old Merino jQuery widget, which had some serious usability issues.
-
-### Fast Click
-
-- [ ] Figure out a way to avoid `click` triggering twice, so we could make it available to anything clickable.
-
-- [ ] Scroll to top upon receipt if we swap the entire `<body>`
-
-### Forms
-
-- [ ] Support the `formaction` attribute of clicked elements.
-- [ ] Add an attribute which will make the initial load save an input's value, then on submit compare so that the variable is not sent unchanged. A numeric specialization could send the difference instead of the new value. (Helps multiple users editing the same thing without conflict and moves the burden of identifying changes to the client side. Delta should use a suffix or something so that non-JS users submitting the form won't distort data.)
-
-## CSS
-
-### Clean up
-
-Full refactor before going any further.  It's too heavy, the SVG-in-CSS choice has unpleasant drawbacks to re-evaluate, and relying on bits of JS for the more interactive components is now perfectly acceptable.
-
-- [ ] We dropped MSIE 11 support. We can refactor to save space and use:
-	* mix-blend-mode
-	* filter()
-
-- [ ] Labels inside inputs is battle-tested, but is it still the best mechanism for lists of identical inputs?  Do they happen enough that we should study this case?
-
-### Tables
-
-- [ ] Easy to use mechanism so that `<thead>`/`<tfoot>` stay in the parent viewport while `<tbody>` scrolls vertically if height is constrained.  All 3 scroll horizontally if width is constrained (perhaps keep column 1 sticky on the left?)
-
-- [ ] Explore non-repetitive means to transform tables into zebra cards on phone widths via JS.
-

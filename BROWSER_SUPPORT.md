@@ -73,7 +73,7 @@ Smartphones would match `hover:none` and `pointer:coarse`.
 
 ### Functions
 
-* `calc()` — from C125 FF118 S15.4
+* `calc()` keywords
 * `round()`, `mod()`, `rem()`
 
 ### Pseudo-classes

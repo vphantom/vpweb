@@ -1,9 +1,9 @@
-:is(.notice, .message):is(.vp, .vp *):not(.xvp, .xvp *) {
+[vp-note], [vp-msg] {
 	--vp-col: var(--vp-dim);
 	margin-bottom: var(--vp-p-margin);
 }
 
-:is(.notice, .message):is(.vp, .vp *):not(.xvp, .xvp *)::before {
+:is([vp-note], [vp-msg])::before {
 	font-style: normal;
 	font-weight: bold;
 	text-transform: none;
@@ -21,42 +21,48 @@
 	border-radius: 100rem;
 	content: 'i';
 }
-:is(.notice, .message)[_char]:is(.vp, .vp *):not(.xvp, .xvp *)::before {
-	content: attr(_char);
+:is([vp-note], [vp-msg])[vp-icon]::before {
+	content: attr(vp-icon);
 }
-:is(.notice, .message):is(.warning, .error):is(.vp, .vp *):not(.xvp, .xvp *)::before {
+
+[vp-note='warning']::before,
+[vp-note='error']::before,
+[vp-msg='warning']::before,
+[vp-msg='error']::before {
 	content: '!';
 }
 
-.error:is(.vp, .vp *):not(.xvp, .xvp *) {
+[vp-note='error'], [vp-msg='error'] {
 	--vp-col: var(--vp-red);
 	color: rgb(var(--vp-col));
 }
 
-.warning:is(.vp, .vp *):not(.xvp, .xvp *) {
+[vp-note='warning'], [vp-msg='warning'] {
 	--vp-col: var(--vp-orange);
 	color: rgb(var(--vp-col));
 }
-.warning:is(.notice, .message):is(.vp, .vp *):not(.xvp, .xvp *)::before {
+[vp-note='warning']::before,
+[vp-msg='warning']::before {
 	border-radius: 0.5em;
 }
 
-.ok:is(.vp, .vp *):not(.xvp, .xvp *) {
+[vp-note='ok'], [vp-msg='ok'] {
 	--vp-col: var(--vp-green);
 	color: rgb(var(--vp-col));
 }
-.ok:is(.notice, .message):is(.vp, .vp *):not(.xvp, .xvp *)::before {
+[vp-note='ok']::before,
+[vp-msg='ok']::before {
 	border-radius: 0.1em;
 }
 
-.message:is(.vp, .vp *):not(.xvp, .xvp *) {
+[vp-msg] {
 	position: relative;
 	border: 1px solid rgba(var(--vp-col), 0.2);
 	background-color: rgba(var(--vp-col), 0.05);
 	border-radius: var(--vp-corner);
 	padding: 1em 1em 1em 3.75em;
 }
-.message:is(.vp, .vp *):not(.xvp, .xvp *)::before {
+[vp-msg]::before {
 	position: absolute;
 	top: 1em;
 	left: 1em;

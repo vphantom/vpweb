@@ -2,13 +2,13 @@
 	--vp-span: 1;
 }
 
-[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) {
+[vp-grid] {
 	display: flex;
 	flex-flow: row wrap;
 	margin: calc(-1 * var(--vp-pad));
 }
 
-[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > * {
+[vp-grid] > * {
 	vertical-align: top;
 	/* flex-grow: 1; */
 	/* FIXME: WTF did I do this calc() for? */
@@ -17,103 +17,101 @@
 	margin: var(--vp-pad);
 }
 
-[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > img,
-[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > a > img {
+[vp-grid]:is(.vp, .vp *):not(.xvp, .xvp *) > img,
+[vp-grid]:is(.vp, .vp *):not(.xvp, .xvp *) > a > img {
 	width: 100%;
 }
 
 /* Graceful work around lack of calc(attr()) support as of 2024. */
 
-[_grid='8'] {
+[vp-grid='8'] {
 	--vp-grid: 8;
 }
-[_grid='10'] {
+[vp-grid='10'] {
 	--vp-grid: 10;
 }
-[_grid='12'] {
+[vp-grid='12'] {
 	--vp-grid: 12;
 }
-[_grid='15'] {
+[vp-grid='15'] {
 	--vp-grid: 15;
 }
-[_grid='16'] {
+[vp-grid='16'] {
 	--vp-grid: 16;
 }
 
-[_cols='1'] {
+[vp-cols='1'] {
 	--vp-span: 1;
 }
-[_cols='2'] {
+[vp-cols='2'] {
 	--vp-span: 2;
 }
-[_cols='3'] {
+[vp-cols='3'] {
 	--vp-span: 3;
 }
-[_cols='4'] {
+[vp-cols='4'] {
 	--vp-span: 4;
 }
-[_cols='5'] {
+[vp-cols='5'] {
 	--vp-span: 5;
 }
-[_cols='6'] {
+[vp-cols='6'] {
 	--vp-span: 6;
 }
-[_cols='7'] {
+[vp-cols='7'] {
 	--vp-span: 7;
 }
-[_cols='8'] {
+[vp-cols='8'] {
 	--vp-span: 8;
 }
-[_cols='9'] {
+[vp-cols='9'] {
 	--vp-span: 9;
 }
-[_cols='10'] {
+[vp-cols='10'] {
 	--vp-span: 10;
 }
-[_cols='11'] {
+[vp-cols='11'] {
 	--vp-span: 11;
 }
-[_cols='12'] {
+[vp-cols='12'] {
 	--vp-span: 12;
 }
-[_cols='13'] {
+[vp-cols='13'] {
 	--vp-span: 13;
 }
-[_cols='14'] {
+[vp-cols='14'] {
 	--vp-span: 14;
 }
-[_cols='15'] {
+[vp-cols='15'] {
 	--vp-span: 15;
 }
-[_cols='16'] {
+[vp-cols='16'] {
 	--vp-span: 16;
 }
 
-[_grid]:is(.vp, .vp *):not(.xvp, .xvp *) > *:not(legend) {
+[vp-grid] > *:not(legend) {
+	/* Variable: we use it in media queries as well */
 	--vp-width: calc(
 		(var(--vp-span) * 100% / var(--vp-grid)) - (2 * var(--vp-pad))
 	);
 	width: var(--vp-width);
 }
 
-/* FIXME: perhaps retire .stacking/.doubling and always double for tablet,
- * quadruple for phone? That's highly opinionated though! */
-
 @media only screen and (not (min-width: 992px)) {
 	/* Tablet-down */
-	[_grid].stacking:is(.vp, .vp *):not(.xvp, .xvp *) > * {
+	[vp-grid].stacking > * {
 		width: 100%;
 	}
 }
 @media only screen and (min-width: 768px) and (not (min-width: 992px)) {
 	/* Tablet */
-	[_grid].doubling:is(.vp, .vp *):not(.xvp, .xvp *) > * {
+	[vp-grid].doubling > * {
 		min-width: min(100%, (2 * var(--vp-width)));
 	}
 }
 @media only screen and (not (min-width: 768px)) {
 	/* Mobile */
-	[_grid].doubling:is(.vp, .vp *):not(.xvp, .xvp *) > * {
+	[vp-grid].doubling > * {
 		min-width: min(100%, (4 * var(--vp-width)));
 	}
 }

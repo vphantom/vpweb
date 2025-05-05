@@ -24,23 +24,27 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) {
 	position: relative;
 }
 
+/* prettier-ignore */
 :is([type='text'], [type='email'], [type='search'], [type='password']):is(.vp, .vp *):not(.xvp, .xvp *) {
-	-webkit-appearance: none;
-	-moz-appearance: none;
+	appearance: none;
 }
+/* prettier-ignore */
 :is(button, input, optgroup, select, textarea):is(.vp, .vp *):not(.xvp, .xvp *) {
 	font-size: 100%;
 }
 :is(button, select):is(.vp, .vp *):not(.xvp, .xvp *) {
 	text-transform: none;
 }
+/* prettier-ignore */
 :is(button, [type='button'], [type='reset'], [type='submit']):is(.vp, .vp *):not(.xvp, .xvp *) {
-	-webkit-appearance: button;
+	appearance: button;
 }
+/* prettier-ignore */
 :is(button, [type='button'], [type='reset'], [type='submit']):is(.vp, .vp *):not(.xvp, .xvp *)::-moz-focus-inner {
 	border-style: none;
 	padding: 0;
 }
+/* prettier-ignore */
 :is(button, [type='button'], [type='reset'], [type='submit']):is(.vp, .vp *):not(.xvp, .xvp *):-moz-focusring {
 	outline: 1px dotted ButtonText;
 }
@@ -52,15 +56,15 @@ progress:is(.vp, .vp *):not(.xvp, .xvp *) {
 	height: auto;
 }
 [type='search']:is(.vp, .vp *):not(.xvp, .xvp *) {
-	-webkit-appearance: textfield;
+	appearance: textfield;
 	outline-offset: -2px;
 }
 [type='search']:is(.vp, .vp *):not(.xvp, .xvp *)::-webkit-search-cancel-button,
 [type='search']:is(.vp, .vp *):not(.xvp, .xvp *)::-webkit-search-decoration {
-	-webkit-appearance: none;
+	appearance: none;
 }
 :is(.vp, .vp *):not(.xvp, .xvp *)::-webkit-file-upload-button {
-	-webkit-appearance: button;
+	appearance: button;
 	font: inherit;
 }
 
@@ -80,15 +84,25 @@ legend:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 /* Focus */
 
-:is(button, button.secondary, textarea, select):is(.vp, .vp *):not(.xvp, .xvp *):focus,
-label:is(.vp, .vp *):not(.xvp, .xvp *) input:focus,
-.vp-group > input:focus,
-.vp-button:focus,
-.vp-button.secondary:focus,
-.vp-icon-button.vp-icon-button:focus,
-label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
-	box-shadow: var(--vp-btn-sh), 0 0 0.33em 1px rgba(8, 112, 240, 0.5);
-	z-index: 1000;
+/* prettier-ignore */
+:is(button, .vp-button, button.secondary, .vp-button.secondary):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+input:not([type='checkbox'], [type='radio']):not([vp-field] *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+:is(textarea, select):not([vp-field] *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+.vp-group > input:focus {
+	/* box-shadow: var(--vp-btn-sh), 0 0 0.33em 1px rgba(var(--vp-blue), 0.5); */
+	/* z-index: 1000; */
+	box-shadow: 0 0 0 1px rgba(var(--vp-blue), 0.75);
+	border-color: rgba(var(--vp-blue), 0.75);
+}
+/* prettier-ignore */
+input:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):focus {
+	outline-color: rgba(var(--vp-blue), 0.75);
+}
+label[vp-field]:focus-within {
+	color: rgba(var(--vp-blue), 0.75);
+	font-weight: bold;
+	box-shadow: 0 0 0 1px rgba(var(--vp-blue), 0.75);
+	border-color: rgba(var(--vp-blue), 0.75);
 }
 
 /* Default margin */
@@ -100,8 +114,7 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 
 /* Typically: button, input type=button|submit|reset, a */
 
-:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *),
-.vp-icon-button {
+:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *) {
 	display: inline-block;
 	text-align: center;
 	text-decoration: none;
@@ -145,11 +158,13 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 	box-shadow: var(--vp-btn-sha);
 }
 
+/* prettier-ignore */
 :is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *).secondary:is(:active, .active) {
 	background: rgba(0, 0, 0, 0.02);
 }
 
-:is(button, .vp-button, .vp-icon-button):is(.vp, .vp *):not(.xvp, .xvp *):is(:disabled, .disabled) {
+/* prettier-ignore */
+:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *):is(:disabled, .disabled) {
 	color: #888;
 	cursor: not-allowed;
 	background-image: none;
@@ -172,7 +187,7 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 }
 .vp-group > :is(button, .vp-button, input) {
 	margin-right: 0 !important;
-	border-radius: 0;
+	border-radius: 0 !important;
 }
 .vp-group > input {
 	border-left-width: 0 !important;
@@ -185,56 +200,38 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) :focus + .vp-label::before {
 	border-right-width: 1px !important;
 }
 .vp-group > :is(button, .vp-button, input):first-child {
-	border-radius: var(--vp-corner) 0 0 var(--vp-corner);
+	border-radius: var(--vp-corner) 0 0 var(--vp-corner) !important;
 }
 .vp-group > :is(button, .vp-button, input):last-child {
-	border-radius: 0 var(--vp-corner) var(--vp-corner) 0;
-}
-
-/* Icon buttons */
-
-/* NOTE: Class is referred twice for specificity. */
-
-.vp-icon-button.vp-icon-button {
-	border-radius: 4em;
-	padding: 0.35em;
-	margin: 0 0.5em var(--vp-pad) 0;
-	width: 1.75em;
-	height: 1.75em;
-	background-image: none;
-	box-shadow: none;
-	font-size: calc(11mm / 1.75);
-}
-.vp-icon-button.vp-icon-button.secondary {
-	background-color: rgba(var(--vp-dim), 0.125);
-	box-shadow: none;
-	font-size: calc(8.5mm / 1.75);
-}
-.vp-icon-button.vp-icon-button.priority {
-	font-size: calc(13.5mm / 1.75);
-}
-.vp-icon-button.vp-icon-button:hover {
-	background-image: none;
-}
-.vp-icon-button.vp-icon-button:active,
-.vp-icon-button.vp-icon-button.secondary:active {
-	background-image: none;
-	box-shadow: var(--vp-btn-sha);
-}
-.vp-icon-button.vp-icon-button:disabled {
-	background-image: none;
-	box-shadow: none;
+	border-radius: 0 var(--vp-corner) var(--vp-corner) 0 !important;
 }
 
 /* Keyboard input field */
 /* Typically: textarea, select, input type=email|number|password|search|tel|text|url */
-/* TODO: centralize/uniformize colors with rest of widgets */
 
-/* If we had :has(), would it be wise to do label:has(input, select, textarea) ?
- * Or do we want to be explicit?
- */
+label[vp-field] {
+	display: block;
+	height: fit-content;
+	font-size: 80%;
+	color: rgba(0, 0, 0, 0.67);
+	padding: 0.625em;
+	border: 1px solid rgba(var(--vp-dim), 0.75);
+	border-radius: var(--vp-corner);
+	background-color: rgba(var(--vp-dim), 0.02);
+}
+label[vp-field] :is(input, select, textarea) {
+	outline: none;
+	font-size: 125% !important;
+	color: #000;
+	background-color: transparent;
+	font-weight: normal;
+	display: block;
+	width: 100%;
+	border: none;
+	padding-top: 0.2em;
+}
 
-label[vp-field] :is(input, select, textarea), .vp-group > input {
+.vp-group > input {
 	outline: none;
 	border: 1px solid rgba(var(--vp-dim), 0.75);
 	border-radius: var(--vp-corner);
@@ -242,41 +239,25 @@ label[vp-field] :is(input, select, textarea), .vp-group > input {
 	background-color: rgba(var(--vp-dim), 0.02);
 }
 
-label[vp-field] :is(input, select, textarea) {
-	display: block;
-	width: 100%;
-	padding: 1.75em 0.5em 0.5em 0.5em;
-}
-label[vp-field] :disabled, .vp-group > input:disabled {
+label[vp-field] :disabled,
+.vp-group > input:disabled {
 	color: rgba(var(--vp-dim), 0.75);
 	cursor: not-allowed;
-	background-color: rgba(var(--vp-dim), 0.125);
-}
-label[vp-field]:before {
-	content: attr(title);
-	display: block;
-	font-size: 80%;
-	color: rgba(0, 0, 0, 0.67);
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 0.625em;
-	border: 1px solid transparent;
 }
 label[vp-field] textarea {
 	height: 6em;
 }
 label[vp-field] :is(.lead, .follow) {
 	position: absolute;
+	font-size: 125%;
 	text-align: center;
 	width: 1.5em;
+	top: 1.75em;
 }
 label[vp-field] .lead {
-	top: 1.75em;
 	left: 0.5em;
 }
 label[vp-field] .follow {
-	top: 1.75em;
 	right: 0.5em;
 }
 label[vp-field] .lead ~ :is(input, select, textarea) {
@@ -284,10 +265,6 @@ label[vp-field] .lead ~ :is(input, select, textarea) {
 }
 label[vp-field] .follow ~ :is(input, select, textarea) {
 	padding-right: 2.5em;
-}
-
-[vp-cell] > [vp-field] {
-	width: 100%;
 }
 
 label:is(.vp, .vp *):not(.xvp, .xvp *) {
@@ -302,57 +279,20 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 /* Checkbox, Radio */
 
+.vp:not(.xvp, .xvp *) {
+	accent-color: #888;
+}
+
 label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) {
-	position: absolute;
-	left: -9999px;
-}
-
-/* TODO: eliminate .vp-label child, use ::after instead. */
-/* FIXME: we cannot know checkbox vs radio that way! attribute name? */
-
-label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) + .vp-label {
-	display: block;
-	position: relative;
-	margin-left: 2em;
-}
-
-label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) + .vp-label::before {
 	user-select: none;
-	display: block;
-	position: absolute;
-	left: -2em;
 	width: 1.33em;
 	height: 1.33em;
-	content: '';
-	border: 1px solid #333;
-	background-color: #fff;
-	border-radius: 0.125em;
-	background-size: cover;
-	padding: 0.1em;
-}
-label:is(.vp, .vp *):not(.xvp, .xvp *) [type='radio'] + .vp-label::before {
-	border-radius: 100rem;
+	vertical-align: top;
 }
 
-label:is(.vp, .vp *):not(.xvp, .xvp *) [type='checkbox']:checked + .vp-label::before {
-	background-color: #333;
-	background-image: inline('icons/check-white.svg');
-}
-label:is(.vp, .vp *):not(.xvp, .xvp *) [type='radio']:checked + .vp-label::before {
-	/* FIXME: not perfectly centered */
-	background-color: #333;
-	background-image: inline('icons/dot-white.svg');
-}
-
-label:is(.vp, .vp *):not(.xvp, .xvp *) :disabled + .vp-label {
-	color: #888;
-}
-label:is(.vp, .vp *):not(.xvp, .xvp *) :disabled + .vp-label::before {
-	border-color: #888;
+label:is(.vp, .vp *):not(.xvp, .xvp *)
+	:is([type='checkbox'], [type='radio']):disabled {
 	cursor: not-allowed;
-}
-label:is(.vp, .vp *):not(.xvp, .xvp *) [type='checkbox']:disabled + .vp-label::before {
-	background-color: #888;
 }
 
 /*
@@ -376,20 +316,10 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) [type='checkbox']:disabled + .vp-label::b
 /* Responsive */
 
 /* No fine pointer: finger target sizes */
-@media not (only screen and (any-pointer: fine)) {
-	.vp-icon-button.vp-icon-button {
-		font-size: calc(15mm / 1.75);
-	}
-	.vp-icon-button.vp-icon-button.secondary {
-		font-size: calc(11mm / 1.75);
-	}
-	.vp-icon-button.vp-icon-button.priority {
-		font-size: calc(19mm / 1.75);
-	}
-
+@media not screen, only screen and (not (any-pointer: fine)) {
+	/* prettier-ignore */
 	:is(.vp-label, button, .vp-button, [type='submit'], [type='reset'], [type='button']):is(.vp, .vp *):not(.xvp, .xvp *),
-	label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) + .vp-label::before
-	{
+	label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) + .vp-label::before {
 		min-width: 15mm;
 		min-height: 15mm;
 	}
@@ -397,22 +327,26 @@ label:is(.vp, .vp *):not(.xvp, .xvp *) [type='checkbox']:disabled + .vp-label::b
 		line-height: calc(15mm - 1em);
 	}
 
+	/* prettier-ignore */
 	:is(button, .vp-button, label, input).secondary:is(.vp, .vp *):not(.xvp, .xvp *) {
 		min-width: 11mm;
 		min-height: 11mm;
 		line-height: calc(11mm - 1em);
 	}
 
+	/* prettier-ignore */
 	:is(button, .vp-button, label, input).priority:is(.vp, .vp *):not(.xvp, .xvp *) {
 		min-width: 19mm;
 		min-height: 19mm;
 		line-height: calc(19mm - 1em);
 	}
 
+	/* prettier-ignore */
 	label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) + .vp-label::before {
 		border-width: 2px;
 		left: calc(-15mm - 1mm);
 	}
+	/* prettier-ignore */
 	label:is(.vp, .vp *):not(.xvp, .xvp *) :is([type='checkbox'], [type='radio']) + .vp-label {
 		margin-left: calc(15mm + 1mm);
 	}

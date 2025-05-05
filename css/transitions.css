@@ -9,10 +9,8 @@
  */
 .loaded:is(.vp, .vp *):not(.xvp, .xvp *) * {
 	transition:
-		color var(--vp-trans),
 		background-color var(--vp-trans),
-		padding var(--vp-trans),
-		font-weight var(--vp-trans);
+		padding var(--vp-trans);
 }
 
 .loaded:is(.vp, .vp *):not(.xvp, .xvp *) [class*='go-'] {

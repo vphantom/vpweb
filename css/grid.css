@@ -1,11 +1,8 @@
-:root {
-	--vp-span: 1;
-}
-
 [vp-grid] {
 	display: flex;
 	flex-flow: row wrap;
 	margin: calc(-1 * var(--vp-pad));
+	--vp-span: 1;
 }
 
 [vp-grid] > * {
@@ -17,8 +14,8 @@
 	margin: var(--vp-pad);
 }
 
-[vp-grid]:is(.vp, .vp *):not(.xvp, .xvp *) > img,
-[vp-grid]:is(.vp, .vp *):not(.xvp, .xvp *) > a > img {
+[vp-grid]:not(.xvp, .xvp *) > img,
+[vp-grid]:not(.xvp, .xvp *) > a > img {
 	width: 100%;
 }
 
@@ -40,9 +37,6 @@
 	--vp-grid: 16;
 }
 
-[vp-cols='1'] {
-	--vp-span: 1;
-}
 [vp-cols='2'] {
 	--vp-span: 2;
 }

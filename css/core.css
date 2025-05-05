@@ -40,6 +40,7 @@
 	--vp-red: 187, 17, 17; /* #b11 */
 	--vp-orange: 187, 102, 17; /* #b61 */
 	--vp-green: 51, 136, 17; /* #381 */
+	--vp-blue: 8, 112, 240; /* #0870f0 */
 	--vp-dim: 127, 127, 127; /* #7f7f7f */
 }
 
@@ -141,6 +142,7 @@ h1:is(.vp, .vp *):not(.xvp, .xvp *) {
 	font-size: 2em;
 	margin: 0.67em 0;
 }
+/* prettier-ignore */
 :is(button, .button, input, textarea, select, .sans):is(.vp, .vp *):not(.xvp, .xvp *),
 .sans:is(.vp, .vp *):not(.xvp, .xvp *) {
 	font-family: var(--vp-sans);
@@ -208,7 +210,8 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 /* FIXME: borders seem to screw up sticky, scrolls by border thickness? */
 
-.vp-stack, .vp-shelf {
+.vp-stack,
+.vp-shelf {
 	display: flex;
 }
 /* prettier-ignore */
@@ -299,6 +302,7 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 /* Mobile */
 @media only screen and (not (min-width: 768px)) {
+	/* prettier-ignore */
 	:is(.tablet-up, .tablet-only, .desktop-only):is(.vp, .vp *):not(.xvp, .xvp *) {
 		display: none;
 	}
@@ -313,6 +317,7 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 
 /* Desktop */
 @media only screen and (min-width: 992px) {
+	/* prettier-ignore */
 	:is(.mobile-only, .tablet-only, .tablet-down):is(.vp, .vp *):not(.xvp, .xvp *) {
 		display: none;
 	}

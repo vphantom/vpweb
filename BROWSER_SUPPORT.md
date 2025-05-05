@@ -1,12 +1,11 @@
 # BROWSER SUPPORT
 
-Interesting modern CSS features according to <https://web.dev/baseline> as of 2024-12-14.
+Interesting modern CSS features according to <https://web.dev/baseline> as of 2024-12-14 which we're not yet utilizing fully here.
 
 ## Widely Available
 
 ### At-Rules
 
-* `@import` — rule
 * `@layer` — cascade layers
 * `@media` — rule
 * `@supports` — feature query
@@ -23,14 +22,10 @@ Interesting modern CSS features according to <https://web.dev/baseline> as of 20
 * `:empty`
 * `:focus-visible`
 * `:focus-within`
-* `:is()`
 * `:lang()` — functional
 * `:link`, `:visited`, `:any-link`
-* `:not()`
 * `:placeholder-shown`
-* `:root` — usually `<html>`
 * `:target`
-* `:where()`
 
 ### Properties
 
@@ -38,7 +33,6 @@ Interesting modern CSS features according to <https://web.dev/baseline> as of 20
 * User action: `:active`, `:focus` and `:hover`
 * `appearance`
 * `aspect-ratio`
-* `calc()`
 * `clamp()`, `min()`, `max()`
 * `color-scheme`
 * `column-fill` — multi-column layout
@@ -52,7 +46,6 @@ Interesting modern CSS features according to <https://web.dev/baseline> as of 20
 * `pointer-events`
 * `sticky` — position keyword
 * `text-indent`
-* `var()` — access properties starting with `--`
 * `vh, vw` — units relative to viewport
 * `will-change`
 * `word-break`
@@ -78,7 +71,7 @@ Smartphones would match `hover:none` and `pointer:coarse`.
 
 ### Pseudo-classes
 
-* `:has()` — from C105 FF121 S15.4
+* `:has()` — from C105 FF121 S15.4, will graduate in June 2026
 * `:use-valid`, `:user-invalid` — from C119 FF88 S16.5
 
 ```css

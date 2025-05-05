@@ -41,15 +41,15 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>21.4KB</td><td>5.2KB</td><td>4.4KB</td></tr>
+<tr><th>vpweb.css</th><td>19.1KB</td><td>4.6KB</td><td>3.9KB</td></tr>
 <tr><th>core.css</th><td>5.1KB</td><td>1.6KB</td><td>1.4KB</td></tr>
-<tr><th>forms.css</th><td>8.6KB</td><td>2.2KB</td><td>1.8KB</td></tr>
-<tr><th>grid.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>forms.css</th><td>6.5KB</td><td>1.5KB</td><td>1.3KB</td></tr>
+<tr><th>grid.css</th><td>1.2KB</td><td>0.4KB</td><td>0.4KB</td></tr>
 <tr><th>messages.css</th><td>1.2KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>tables.css</th><td>2.4KB</td><td>0.7KB</td><td>0.5KB</td></tr>
 <tr><th>tabs.css</th><td>1.3KB</td><td>0.5KB</td><td>0.3KB</td></tr>
 <tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>transitions.css</th><td>0.7KB</td><td>0.3KB</td><td>0.3KB</td></tr>
+<tr><th>transitions.css</th><td>0.6KB</td><td>0.3KB</td><td>0.2KB</td></tr>
 <!-- END SIZES -->
 <!-- BEGIN JSIZES -->
 <tr><th>dist/vpweb.min.js</th><td>8.4KB</td><td>3.6KB</td><td>3.2KB</td></tr>
@@ -89,15 +89,14 @@
 					This is an early work-in-progress framework. Below are my ramblings so I don't forget anything. ;-)
 					</p>
 					<ul>
-						<li>Refactor currently in progress to drop <code>vp-</code> prefix everywhere and to add <code>.xvp</code> support, while dropping SCSS dependency.</li>
 						<li>Forms/Tables: error/warning/highlight/disabled states with messages</li>
 						<li>Fieldsets: image our corpo edit page on mobile… a nightmare! Should every row become a section? How do you make those 50+ inputs manageable vertically? Fieldsets might suffice, each a full-width doubling grid. The border and title need improvement.  Maybe groups of fieldsets should be accordions with JS help (including closing current, opening next on TAB)? What about forms where it would make sense to have 2 or 3 fieldsets horizontally, each with columns inside? In a 12-world, that'd mean 2×6 or 3×4, then inside we make a 12-grid again but limit ourselves to multiples of 2 or 3 respectively. Should that be facilitated by the framework?</li>
 						<li>Tables: horizontal without outside borders, maybe not even TH grey, "simple"</li>
 						<li>Tables: make a no-wrap column type, with and without truncation</li>
 						<li>Tables: guaranteed smallest cell: width:1px no-wrap</li>
-						<li>Tabs: redo in JS, make it possible to load content on demand</li>
+						<li>Tabs: redo accordion, make it possible to load content on demand</li>
 						<li>Make entire blocks collapsible tablet-down or mobile-only (i.e. the left column of a shelf with search criteria) — More speficially, perhaps a class could trigger the collapsing (manual open/close, default closed) when they become stacked, always open (no close widget) when wide enough. — That said since the vertical design might require a different layout, we might have two versions entirely…</li>
-						<li>Tooltips: hover option, still?</li>
+						<li>Tooltips: triggered by a clear help button, not by subject focus</li>
 						<li>Figure out responsive main menu a-la SAP, intranet vs public. Maybe have the same top bar on all resolutions: logo left, name middle, hamburger + cart + user menus right. Maybe no hamburger on tablet-up, instead a second line, but it's tricky to make all those items fit on a single horizontal line. Also leave the footer part of the stack intact instead of bringing it in the hamburger on tablet-down.</li>
 						<li>For user menu and such, upper-right dot overlay perhaps with counter.</li>
 						<li>Anything from our product and cart pages which isn't already covered?</li>
@@ -271,7 +270,7 @@
 			<section>
 				<h2>Grid <code>grid.css</code></h2>
 				<p>
-				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>8</code>, <code>10</code>, <code>12</code>, <code>15</code> or <code>16</code>.  Cells inside grids are elements with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>1</code> and <code>16</code>.  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
+				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>8</code>, <code>10</code>, <code>12</code>, <code>15</code> or <code>16</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>16</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
 				</p>
 				<p>
 				</p>
@@ -315,7 +314,7 @@
 			<section>
 				<h2>Forms <code>forms.css</code></h2>
 				<p>
-				Note that buttons and input widgets with <code>:focus</code> get a <code>z-index</code> of 1000 or 1001 in addition to the halo.  Note also that margins between some elements is affected by the form's density.
+				Note also that margins between some elements is affected by the form's density.
 				</p>
 				<section>
 					<h3>Fields <code>label[vp-field] > input|select|textarea</code></h3>
@@ -323,30 +322,35 @@
 					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
 					</p>
 					<p>An optional <code>.lead</code> or <code>.follow</code> sibling of the input may precede it to provide icons.  They are centered in a 1.5em wide area.  Note that a <code>.follow</code> sibling must still come before the input and would not make sense for <code class="html-tag">select</code> or <code class="html-tag">textarea</code>.</p>
-					<p>TODO: is title the best we can do semantically? even if we used some JS? We need some ARIA shenanigans maybe.</p>
 					<form>
 					<fieldset vp-grid="12" class="spaced doubling">
 						<legend>Fieldset of fields</legend>
-						<label vp-field title="Normal" vp-cols="3">
+						<label vp-field vp-cols="3">
+							Normal
 							<input type="text" name="it001" value="User Input Here">
 						</label>
-						<label vp-field title="Normal" vp-cols="3">
+						<label vp-field vp-cols="3">
+							Normal
 							<input type="text" name="it001" value="User Input Here">
 						</label>
-						<label vp-field title="Disabled" vp-cols="5">
+						<label vp-field vp-cols="6">
+							Disabled
 							<input type="text" name="it002" disabled value="User Input Here">
 						</label>
-						<label vp-field title="Icons" vp-cols="2">
-							<span class="lead"><a href="#">☎</a></span>
+						<label vp-field vp-cols="2">
+							Icons
+							<span class="lead"><a href="#" onclick="return false;">☎</a></span>
 							<span class="follow">&#x27a4;</span>
 							<input type="text" name="it003" value="User Input Here">
 						</label>
-						<label vp-field title="Textarea" vp-cols="3">
+						<label vp-field vp-cols="3">
+							Textarea
 <textarea name="ta">123, Main St.
 Test City, ZZ
 H0H 0H0</textarea>
 						</label>
-						<label vp-field title="Select" vp-cols="3">
+						<label vp-field vp-cols="3">
+							Select
 							<select name="sel1">
 								<optgroup label="Group One">
 									<option value="1">Option 1</option>
@@ -360,7 +364,8 @@ H0H 0H0</textarea>
 								</optgroup>
 							</select>
 						</label>
-						<label vp-field title="Combobox" vp-cols="3">
+						<label vp-field vp-cols="3">
+							Combobox
 							<datalist id="dl1">
 								<option value="user001@example.com" label="User One"></option>
 								<option value="user002@example.com" label="User Two"></option>
@@ -373,75 +378,64 @@ H0H 0H0</textarea>
 						</label>
 					</fieldset>
 					</form>
-					<p>FIXME: Why the heck does this very line display half-within the fieldset?</p>
 					<p>TODO: See Claude example: the submit button has text and an icon, which needs much more than 1.5em wide.  We might need to create a way to have arbitrary assemblies of leaders, an input and followers.</p>
 					<p>Actually, instead of putting things inside inputs, we should have an alternative to the one-input-per-label scheme where several inputs fill a single grid cell which has the label-like border.</p>
 					<p>Instead, we should do like button groups but which includes inputs.</p>
 				</section>
 				<section>
-					<h3>Checkboxes <code>label input[type=checkbox] + .vp-label</code></h3>
+					<h3>Checkboxes <code>label input[type=checkbox]</code></h3>
 					<form vp-grid="12" class="doubling spaced">
 						<label vp-cols="3">
 							<input type="checkbox" name="cb" value="1" checked>
-							<span class="vp-label">Something long wraps on label's width</span>
+							Something long wraps on label's width for sure
 						</label>
 						<label vp-cols="3">
 							<input type="checkbox" name="cb" value="1" disabled checked>
-							<span class="vp-label">Disabled</span>
+							Disabled
 						</label>
 						<label vp-cols="3" style="font-size:75%">
 							<input type="checkbox" name="cb" value="1" checked>
-							<span class="vp-label">Adapts to label's font size</span>
+							Adapts to label's font size
 						</label>
 						<label vp-cols="3" style="background-color:orange;color:white;">
 							<input type="checkbox" name="cb" value="1" checked>
-							<span class="vp-label">Ignores label colors</span>
+							Ignores label colors
 						</label>
 					</form>
 				</section>
 				<section>
-					<h3>Radio selections <code>label input[type=radio] + .vp-label</code></h3>
+					<h3>Radio selections <code>label input[type=radio]</code></h3>
 					<p>
 					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than 5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when presenting a form's initial state.
 					</p>
 					<form vp-grid="12" class="doubling spaced">
 						<label vp-cols="2">
 							<input type="radio" name="rd" value="1" checked>
-							<span class="vp-label">First choice</span>
+							First choice
 						</label>
 						<label vp-cols="2">
 							<input type="radio" name="rd" value="2">
-							<span class="vp-label">Second choice</span>
+							Second choice
 						</label>
 						<label vp-cols="2">
 							<input type="radio" name="rd" value="3" disabled>
-							<span class="vp-label">Disabled</span>
+							Disabled
 						</label>
 						<label vp-cols="2" style="background-color:orange;color:white;font-size:75%;">
 							<input type="radio" name="rd" value="2">
-							<span class="vp-label">Ignores label colors</span>
+							Ignores label colors
 						</label>
 					</form>
 				</section>
 				<section>
 					<h3>Buttons <code>button, .vp-button</code></h3>
+					<p>Note that button-looking anchors among actual buttons need <code>tabindex="0"</code> to be keyboard accessible.</p>
 					<form>
 						<button onclick="return false;">Normal</button>
-						<a class="vp-button" onclick="return false;">Anchor</a>
+						<a class="vp-button" tabindex="0" onclick="return false;">Anchor</a>
 						<button onclick="return false;" class="active">:active, .active</button>
 						<button onclick="return false;" disabled>:disabled</button>
 						<button onclick="return false;" class="secondary">.secondary</button>
-					</form>
-					<h3>Icon Buttons <code>.vp-icon-button</code></h3>
-					<p>
-					Unlike other form styles, icon buttons have fixed sizes based on touch display ability and their priority.  Normal by default, they may have <code>.secondary</code> or <code>.priority</code>.  On touch devices, these three sizes are 11mm, 15mm and 19mm.
-					</p>
-					<form>
-							<button onclick="return false;" class="vp-icon-button" title="Normal">M</button>
-							<button onclick="return false;" class="vp-icon-button" disabled title=":disabled">M</button>
-							<button onclick="return false;" class="vp-icon-button secondary" title=".secondary">M</button>
-							<button onclick="return false;" class="vp-icon-button priority" title=".priority">M</button>
-						</dl>
 					</form>
 					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
 					<p>TODO: When a group includes an input, make its width 100% with the input being the buffer, somehow.</p>
@@ -472,10 +466,6 @@ H0H 0H0</textarea>
 						<span style="display: inline-block; background-color: orange; padding: 0.1em;">
 							<button onclick="return false;">Normal</button>
 							<button onclick="return false;" class="secondary">.secondary</button>
-							<button onclick="return false;" class="vp-icon-button" title="Normal">M</button>
-							<a href="#" onclick="return false;" class="vp-icon-button active" title=":active, .active">M</a>
-							<button onclick="return false;" class="vp-icon-button" disabled style="font-size: 16pt;" title=":disabled, 16pt">M</button>
-							<button onclick="return false;" class="vp-icon-button secondary" style="font-size: 9pt;" title=".secondary, 9pt">M</button>
 						</span>
 					</form>
 				</section>
@@ -590,15 +580,15 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Messages <code>messages.css</code></h2>
 				<section>
-					<h3>Note <code>[vp-note="..."]</code></h3>
-					<p>A note with a state automatically gets a color, an icon, and a dot. No need to insert a dot manually.</p>
+					<h3>Note <code>[vp-note="<i>state</i>"]</code></h3>
+					<p>A note with a state automatically gets a color and an icon.</p>
 					<div vp-note="error">This note has state <code>error</code>.</div>
 					<div vp-note="warning">This note has state <code>warning</code>.</div>
 					<div vp-note="ok">This note has state <code>ok</code>.</div>
 					<div vp-note="foo" vp-icon="?">This note has another state and <code>vp-icon="?"</code> to override the default "i".</div>
 				</section>
 				<section>
-					<h3>Message <code>[vp-msg="..."]</code></h3>
+					<h3>Message <code>[vp-msg="<i>state</i>"]</code></h3>
 					<div vp-msg="error">This message has state <code>error</code>.</div>
 					<div vp-msg="warning">This message has state <code>warning</code>.</div>
 					<div vp-msg="ok">This message has state <code>ok</code>.</div>

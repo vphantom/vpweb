@@ -6,10 +6,10 @@
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
 	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp sans spaced">
-		<header class="container">
+		<header class="vp-box">
 			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
 		</header>
-		<main class="container">
+		<main class="vp-box">
 
 
 			<section>
@@ -41,10 +41,11 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>19.1KB</td><td>4.6KB</td><td>3.9KB</td></tr>
-<tr><th>core.css</th><td>5.1KB</td><td>1.6KB</td><td>1.4KB</td></tr>
-<tr><th>forms.css</th><td>6.5KB</td><td>1.5KB</td><td>1.3KB</td></tr>
-<tr><th>grid.css</th><td>1.2KB</td><td>0.4KB</td><td>0.4KB</td></tr>
+<tr><th>vpweb.css</th><td>19.6KB</td><td>4.7KB</td><td>4.1KB</td></tr>
+<tr><th>core.css</th><td>4.5KB</td><td>1.4KB</td><td>1.3KB</td></tr>
+<tr><th>forms.css</th><td>7.1KB</td><td>1.7KB</td><td>1.4KB</td></tr>
+<tr><th>grid.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
+<tr><th>layouts.css</th><td>0.7KB</td><td>0.3KB</td><td>0.3KB</td></tr>
 <tr><th>messages.css</th><td>1.2KB</td><td>0.5KB</td><td>0.4KB</td></tr>
 <tr><th>tables.css</th><td>2.4KB</td><td>0.7KB</td><td>0.5KB</td></tr>
 <tr><th>tabs.css</th><td>1.3KB</td><td>0.5KB</td><td>0.3KB</td></tr>
@@ -171,20 +172,11 @@
 					</dl>
 				</section>
 				<section>
-					<h3>Block <code>.vp-block</code></h3>
-					<p>
-					Makes any element (including buttons) a block and full width.
-					</p>
-				</section>
-				<section>
-					<h3>Generic Container <code>.vp-container</code></h3>
-					<p>
-					Adds side margins dictated by density (self or immediate parent) and limits width on large viewports.
-					</p>
-				</section>
-				<section>
 					<h3>Helper classes</h3>
 					<dl>
+
+						<dt><code>.vp-box</code></dt>
+						<dd>Adds side margins dictated by density (self or immediate parent) and limits width on large viewports.</dd>
 
 						<dt><code>.none</code></dt>
 						<dd>Sets <code>display: none</code></dd>
@@ -200,11 +192,11 @@
 
 					</dl>
 				</section>
+
 				<section>
-					<h3>Flex Layouts <code>.vp-stack, .vp-shelf</code></h3>
+					<h2>Layouts <code>layouts.css</code></h2>
 					<p>
 					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density.
-					<B>FIXME</B>: maybe no padding/margin/borders and let users use <code>content</code> if they want current density padding inside it?
 					</p>
 					<dl>
 
@@ -270,13 +262,13 @@
 			<section>
 				<h2>Grid <code>grid.css</code></h2>
 				<p>
-				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>10</code>, <code>12</code>, <code>15</code> or <code>16</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>16</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
+				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>5</code>, <code>8</code>, <code>10</code> or <code>12</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>12</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
 				</p>
 				<p>
 				An <code>&lt;img&gt;</code> directly inside a <code>[vp-grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
 				</p>
 				<p>
-				<strong>Responsive:</strong> On tablets, bases are stepped down by about a third, to respectively <code>6</code>, <code>8</code>, <code>10</code> and <code>11</code> columns.  On mobile, they are further reduced to <code>4</code>, <code>5</code>, <code>6</code> and <code>7</code>.  This elegantly accounts for the reduced widths, making column counts function as minimum absolute widths rather than as a percentage of the viewport.
+				<strong>Responsive:</strong> On tablets, bases are divided by <code>1.5</code> (i.e. a 12-wide becomes 8-wide) and on mobile, by <code>3</code> (i.e. 12-wide becomes 4-wide)  This elegantly accounts for the reduced widths, making column counts function as minimum absolute widths rather than as a percentage of the viewport.
 				</p>
 				<section>
 					<h3>Example: grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h3>

@@ -207,82 +207,13 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 	text-align: right;
 }
 
-/* Horizontal and vertical 2-3 element layouts. */
-
-/* FIXME: borders seem to screw up sticky, scrolls by border thickness? */
-
-.vp-stack,
-.vp-shelf {
-	display: flex;
-}
-/* prettier-ignore */
-:is(.vp-stack, .vp-shelf) > :nth-child(2) {
-	flex: 1;
-}
-:is(.vp-stack, .vp-shelf) {
-	flex-flow: column;
-}
-.vp-shelf {
-	flex-flow: row wrap;
-}
-.vp-stack > :not(:first-child) {
-	margin-top: var(--vp-pad);
-}
-.vp-shelf > :not(:first-child) {
-	margin-left: var(--vp-pad);
-}
-
-@media only screen and (min-width: 768px) {
-	/* Tablet-up */
-	/* prettier-ignore */
-	.vp-shelf > :first-child:nth-last-child(2) {
-		/* First of a duo */
-		min-width: 38.2%;
-	}
-}
-
-@media only screen and (min-width: 768px) and (not (min-width: 992px)) {
-	/* Tablet */
-	/* prettier-ignore */
-	.vp-shelf > :first-child:nth-last-child(3) {
-		/* First of a trio */
-		min-width: 38.2%;
-	}
-}
-
-@media only screen and (min-width: 992px) {
-	/* Desktop */
-	/* prettier-ignore */
-	.vp-shelf > :is(:first-child:nth-last-child(3), :nth-child(3)) {
-		/* First and third of at least three */
-		min-width: 23.6%;
-	}
-}
-
-@media only screen and (not (min-width: 992px)) {
-	/* Tablet-down */
-	.vp-shelf > :nth-child(3) {
-		flex-basis: 100%;
-		height: fit-content;
-	}
-}
-@media only screen and (not (min-width: 768px)) {
-	/* Mobile */
-	.vp-shelf {
-		display: block;
-	}
-}
-
-.vp-container {
+.vp-box {
 	width: 100%;
-	max-width: 100%;
+	max-width: var(--vp-width-text-max);
+	margin-left: auto;
+	margin-right: auto;
 	padding-left: var(--vp-pad);
 	padding-right: var(--vp-pad);
-}
-
-.vp-block {
-	display: block;
-	width: 100%;
 }
 
 /* Media queries */
@@ -329,11 +260,6 @@ sup:is(.vp, .vp *):not(.xvp, .xvp *) {
 	/* prettier-ignore */
 	:is(.mobile-only, .tablet-only, .tablet-down, .desktop-only):is(.vp, .vp *):not(.xvp, .xvp *) {
 		display: none;
-	}
-	.container:is(.vp, .vp *):not(.xvp, .xvp *) {
-		max-width: var(--vp-width-text-max);
-		margin-left: auto;
-		margin-right: auto;
 	}
 }
 

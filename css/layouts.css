@@ -1,0 +1,55 @@
+/* Horizontal and vertical 2-3 element layouts. */
+
+.vp-stack,
+.vp-shelf {
+	display: flex;
+	gap: var(--vp-pad);
+}
+:is(.vp-stack, .vp-shelf) > :nth-child(2) {
+	flex: 1;
+}
+.vp-stack,
+.vp-shelf {
+	flex-flow: column;
+}
+.vp-shelf {
+	flex-flow: row wrap;
+}
+
+@media only screen and (min-width: 768px) {
+	/* Tablet-up */
+	.vp-shelf > :first-child:nth-last-child(2) {
+		/* First of a duo */
+		min-width: 38.2%;
+	}
+}
+
+@media only screen and (min-width: 768px) and (not (min-width: 992px)) {
+	/* Tablet */
+	.vp-shelf > :first-child:nth-last-child(3) {
+		/* First of a trio */
+		min-width: 38.2%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	/* Desktop */
+	.vp-shelf > :is(:first-child:nth-last-child(3), :nth-child(3)) {
+		/* First and third of at least three */
+		min-width: 23.6%;
+	}
+}
+
+@media only screen and (not (min-width: 992px)) {
+	/* Tablet-down */
+	.vp-shelf > :nth-child(3) {
+		flex-basis: 100%;
+		height: fit-content;
+	}
+}
+@media only screen and (not (min-width: 768px)) {
+	/* Mobile */
+	.vp-shelf {
+		display: block;
+	}
+}

@@ -6,6 +6,7 @@
 	margin-top: var(--vp-pad);
 	margin-bottom: var(--vp-pad);
 	--vp-span: 1;
+	--vp-grid: var(--vp-grid-base);
 }
 
 [vp-grid].justified {
@@ -32,17 +33,17 @@
 
 /* Graceful work around lack of calc(attr()) support as of 2024. */
 
+[vp-grid='5'] {
+	--vp-grid-base: 5;
+}
+[vp-grid='8'] {
+	--vp-grid-base: 8;
+}
 [vp-grid='10'] {
-	--vp-grid: 10;
+	--vp-grid-base: 10;
 }
 [vp-grid='12'] {
-	--vp-grid: 12;
-}
-[vp-grid='15'] {
-	--vp-grid: 15;
-}
-[vp-grid='16'] {
-	--vp-grid: 16;
+	--vp-grid-base: 12;
 }
 
 [vp-cols='2'] {
@@ -78,18 +79,6 @@
 [vp-cols='12'] {
 	--vp-span: 12;
 }
-[vp-cols='13'] {
-	--vp-span: 13;
-}
-[vp-cols='14'] {
-	--vp-span: 14;
-}
-[vp-cols='15'] {
-	--vp-span: 15;
-}
-[vp-cols='16'] {
-	--vp-span: 16;
-}
 
 [vp-grid] > *:not(legend) {
 	/* Variable: we use it in media queries as well */
@@ -110,31 +99,13 @@
 }
 @media only screen and (min-width: 768px) and (not (min-width: 992px)) {
 	/* Tablet */
-	[vp-grid='10'] {
-		--vp-grid: 6;
-	}
-	[vp-grid='12'] {
-		--vp-grid: 8;
-	}
-	[vp-grid='15'] {
-		--vp-grid: 10;
-	}
-	[vp-grid='16'] {
-		--vp-grid: 11;
+	[vp-grid] {
+		--vp-grid: calc(var(--vp-grid-base) / 1.5);
 	}
 }
 @media only screen and (not (min-width: 768px)) {
 	/* Mobile */
-	[vp-grid='10'] {
-		--vp-grid: 3;
-	}
-	[vp-grid='12'] {
-		--vp-grid: 4;
-	}
-	[vp-grid='15'] {
-		--vp-grid: 5;
-	}
-	[vp-grid='16'] {
-		--vp-grid: 6;
+	[vp-grid] {
+		--vp-grid: calc(var(--vp-grid-base) / 3);
 	}
 }

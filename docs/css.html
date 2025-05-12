@@ -64,7 +64,7 @@
 				<section>
 					<h3>Browser Support</h3>
 					<p>
-					Currently compatible with <a href="https://webstatus.dev/?q=baseline_status%3Awidely">Baseline's "Widely available"</a> browser versions (30 months) which includes long term support versions as of 2025-01-01.  Some features from "Newly available" may be used, but only when they degrade gracefully (i.e. <code>content-visibility</code>).
+					Currently compatible with <a href="https://webstatus.dev/?q=baseline_status%3Awidely">Baseline's "Widely available"</a> browser versions (30 months) which includes long term support versions as of 2025-01-01.  Some features from "Newly available" may be used, but only when they degrade gracefully (i.e. <code>content-visibility</code>).  This means we're refraining from using cutting-edge features like <code>:has()</code> and <code>round()</code>.
 					</p>
 					<dl>
 						<dt>Chrome/Edge/Opera</dt><dd>103 (2022-04-26)</dd>
@@ -82,6 +82,9 @@
 					<h3>Build Process</h3>
 					<p>
 					On the CSS side, you may reference the pre-built <code>vpweb.css</code> alone or <code>@import 'vpweb.css';</code> from your CSS sources.  You might even want to import only the bits you want such as <code>core.css</code> and <code>grid.css</code> to use our grid.
+					</p>
+					<p>
+					If you use <code>@layers</code>, just set our pre-defined <code>vp</code> layer where you want in your stack.  All our components are namespaced within this single global layer.
 					</p>
 				</section>
 				<section>

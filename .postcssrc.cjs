@@ -7,12 +7,15 @@ module.exports = {
 		require('postcss-import')({
 			path: ['./css/'],
 		}),
-		require('cssnano')({
-			preset: 'default',
-		}),
-		require('postcss-combine-media-query')({}),
-		require('postcss-assets')({
-			loadPaths: ['./css/'],
+		require('postcss-lightningcss')({
+			minify: true,
+			drafts: {
+				nesting: true,
+				custommedia: true,
+			},
+			minifyOptions: {
+				restructure: true,
+			},
 		}),
 	],
 };

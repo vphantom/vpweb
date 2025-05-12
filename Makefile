@@ -1,4 +1,6 @@
 export PATH := ./node_modules/.bin/:$(PATH)
+NODE_PATH := $(shell npm root --quiet):$(shell npm root --quiet -g)
+export NODE_PATH
 
 BROTLI  := brotli -f -k -n -Z
 DOCBLOX2MD := docblox2md

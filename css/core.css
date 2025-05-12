@@ -35,6 +35,7 @@
 	/* Sizes */
 	--vp-min-width: 320px;
 	--vp-width-text-max: 66rem;
+	--vp-corner: 0;
 
 	/* Colors */
 	--vp-red: 187, 17, 17; /* #b11 */
@@ -50,15 +51,15 @@
 	--vp-pad: 0rem;
 }
 .spaced {
-	--vp-pad: 0.5rem;
+	--vp-pad: 0.75rem;
 }
 .relaxed {
-	--vp-pad: 1rem;
+	--vp-pad: 1.5rem;
 }
 .tight,
 .spaced,
 .relaxed {
-	--vp-corner: calc(var(--vp-pad) / 2);
+	--vp-corner: calc(var(--vp-pad) / 4);
 }
 
 /* Main wrapper */

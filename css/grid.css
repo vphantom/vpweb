@@ -1,17 +1,28 @@
 [vp-grid] {
 	display: flex;
 	flex-flow: row wrap;
-	margin: calc(-1 * var(--vp-pad));
+	align-items: flex-start;
+	gap: var(--vp-pad);
+	margin-top: var(--vp-pad);
+	margin-bottom: var(--vp-pad);
 	--vp-span: 1;
+}
+
+[vp-grid].justified {
+	justify-content: space-between;
+}
+
+[vp-grid].centered {
+	justify-content: space-evenly;
+}
+
+[vp-grid].growing > * {
+	flex-grow: 1;
 }
 
 [vp-grid] > * {
 	vertical-align: top;
-	/* flex-grow: 1; */
-	/* FIXME: WTF did I do this calc() for? */
-	/* flex-basis: calc((40rem - 100%) * 999); */
 	flex-basis: auto;
-	margin: var(--vp-pad);
 }
 
 [vp-grid]:not(.xvp, .xvp *) > img,
@@ -21,9 +32,6 @@
 
 /* Graceful work around lack of calc(attr()) support as of 2024. */
 
-[vp-grid='8'] {
-	--vp-grid: 8;
-}
 [vp-grid='10'] {
 	--vp-grid: 10;
 }
@@ -93,19 +101,40 @@
 
 @media only screen and (not (min-width: 992px)) {
 	/* Tablet-down */
+	[vp-grid] > * {
+		flex-grow: 1;
+	}
 	[vp-grid].stacking > * {
 		width: 100%;
 	}
 }
 @media only screen and (min-width: 768px) and (not (min-width: 992px)) {
 	/* Tablet */
-	[vp-grid].doubling > * {
-		min-width: min(100%, (2 * var(--vp-width)));
+	[vp-grid='10'] {
+		--vp-grid: 6;
+	}
+	[vp-grid='12'] {
+		--vp-grid: 8;
+	}
+	[vp-grid='15'] {
+		--vp-grid: 10;
+	}
+	[vp-grid='16'] {
+		--vp-grid: 11;
 	}
 }
 @media only screen and (not (min-width: 768px)) {
 	/* Mobile */
-	[vp-grid].doubling > * {
-		min-width: min(100%, (4 * var(--vp-width)));
+	[vp-grid='10'] {
+		--vp-grid: 3;
+	}
+	[vp-grid='12'] {
+		--vp-grid: 4;
+	}
+	[vp-grid='15'] {
+		--vp-grid: 5;
+	}
+	[vp-grid='16'] {
+		--vp-grid: 6;
 	}
 }

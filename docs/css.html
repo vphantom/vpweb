@@ -270,15 +270,13 @@
 			<section>
 				<h2>Grid <code>grid.css</code></h2>
 				<p>
-				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>8</code>, <code>10</code>, <code>12</code>, <code>15</code> or <code>16</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>16</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
-				</p>
-				<p>
+				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>10</code>, <code>12</code>, <code>15</code> or <code>16</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>16</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
 				</p>
 				<p>
 				An <code>&lt;img&gt;</code> directly inside a <code>[vp-grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
 				</p>
 				<p>
-				<strong>Caution:</strong> while spacing is sensitive to density, it also causes a small negative margin on the left and right ends of rows.  Therefore, using a page-wide grid with non-tight density will cause horizontal scrolling.  As long as a grid's container has at least as much spacing, it is not an issue.  (i.e. A tight or spaced row fits inside a page-wide relaxed or spaced container.)
+				<strong>Responsive:</strong> On tablets, bases are stepped down by about a third, to respectively <code>6</code>, <code>8</code>, <code>10</code> and <code>11</code> columns.  On mobile, they are further reduced to <code>4</code>, <code>5</code>, <code>6</code> and <code>7</code>.  This elegantly accounts for the reduced widths, making column counts function as minimum absolute widths rather than as a percentage of the viewport.
 				</p>
 				<section>
 					<h3>Example: grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h3>
@@ -286,25 +284,37 @@
 						<div><div>1</div></div> <div vp-cols="11"><div>vp-cols="11"</div></div>
 						<div vp-cols="2"><div>vp-cols="2"</div></div> <div vp-cols="10"><div>vp-cols="10"</div></div>
 						<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="9"><div>vp-cols="9"</div></div>
+						<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div>
 						<div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="8"><div>vp-cols="8"</div></div>
+						<div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="4"><div>vp-cols="4"</div></div>
 						<div vp-cols="5"><div>vp-cols="5"</div></div> <div vp-cols="7"><div>vp-cols="7"</div></div>
 						<div vp-cols="6"><div>vp-cols="6"</div></div> <div vp-cols="6"><div>vp-cols="6"</div></div>
 						<div vp-cols="12"><div>vp-cols="12"</div></div>
+					</div>
+					<div class="grid-demo tight mono" vp-grid="12">
+						<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="5"><div>vp-cols="5"</div></div>
 					</div>
 				</section>
 
 
 				<section>
-					<h3>Responsive</h3>
+				<h3>Options</h3>
 					<dl>
-						<dt><code>[vp-grid].doubling</code></dt>
-						<dd>
-						Makes grid cells double in relative width when stepping down from "desktop" to "tablet" size, and double again down to "mobile" size. (i.e. A 1/12<sup>th</sup> cell would become 1/6<sup>th</sup> wide in "tablet" viewports and 1/3<sup>rd</sup> wide in "mobile" viewports.)
-						</dd>
-
 						<dt><code>[vp-grid].stacking</code></dt>
 						<dd>
 						Makes grid cells immediately go full-width for "tablet" and "mobile" sizes.
+						</dd>
+						<dt><code>[vp-grid].growing</code></dt>
+						<dd>
+							On desktop, fills incomplete rows by expanding each element in proportion to each other.  On tablet-down, this is always the case.
+						</dd>
+						<dt><code>[vp-grid].justified</code></dt>
+						<dd>
+							On desktop, adds white space <em>between</em> elements in incomplete rows, to left and right align.  On tablet-down, elements grow instead.
+						</dd>
+						<dt><code>[vp-grid].centered</code></dt>
+						<dd>
+							On desktop, adds white space left, right and between elements evenly in incomplete rows.  On tablet-down, elements grow instead.
 						</dd>
 					</dl>
 				</section>
@@ -323,7 +333,7 @@
 					</p>
 					<p>An optional <code>.lead</code> or <code>.follow</code> sibling of the input may precede it to provide icons.  They are centered in a 1.5em wide area.  Note that a <code>.follow</code> sibling must still come before the input and would not make sense for <code class="html-tag">select</code> or <code class="html-tag">textarea</code>.</p>
 					<form>
-					<fieldset vp-grid="12" class="spaced doubling">
+					<fieldset vp-grid="12" class="spaced growing">
 						<legend>Fieldset of fields</legend>
 						<label vp-field vp-cols="3">
 							Normal
@@ -384,7 +394,7 @@ H0H 0H0</textarea>
 				</section>
 				<section>
 					<h3>Checkboxes <code>label input[type=checkbox]</code></h3>
-					<form vp-grid="12" class="doubling spaced">
+					<form vp-grid="12" class="spaced">
 						<label vp-cols="3">
 							<input type="checkbox" name="cb" value="1" checked>
 							Something long wraps on label's width for sure
@@ -408,7 +418,7 @@ H0H 0H0</textarea>
 					<p>
 					General rules of thumb: if there are between 3 and 5-7 options, a radio is probably the best input.  Stack vertically if possible; space generously if horizontal.  For 2 options, a checkbox is clearer.  For more than 5-7 options, a select drop-down keeps the form cleaner.  Remember to always check a default option when presenting a form's initial state.
 					</p>
-					<form vp-grid="12" class="doubling spaced">
+					<form vp-grid="12" class="spaced">
 						<label vp-cols="2">
 							<input type="radio" name="rd" value="1" checked>
 							First choice
@@ -483,7 +493,7 @@ H0H 0H0</textarea>
 				<p>
 				Tables respond to density with padding and font size.
 				</p>
-				<div vp-grid="10" class="doubling">
+				<div vp-grid="10">
 					<div vp-cols="5">
 						<table class="spaced horizontal striped">
 							<thead>

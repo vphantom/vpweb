@@ -19,18 +19,16 @@
 		 * list (i.e. Fira Code) as they usually indicate an implicit user
 		 * preference.
 		 */
-		--vp-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-			'Noto Color Emoji';
-		--vp-mono: 'Fira Code', 'Hack', 'Hasklig', 'Monoid', 'Source Code Pro',
-			'JetBrains Mono', 'Cascadia Code', 'SFMono-Regular', 'SF Mono',
-			Menlo, Monaco, Inconsolata, 'Fira Mono', 'Roboto Mono',
-			'Droid Sans Mono', Consolas, 'Liberation Mono', 'Lucida Console',
-			'Courier New', monospace, var(--vp-emoji);
-		--vp-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-			Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+		--vp-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+		--vp-mono:
+			'Fira Code', 'Hack', 'Hasklig', 'Monoid', 'Source Code Pro', 'JetBrains Mono', 'Cascadia Code', 'SFMono-Regular',
+			'SF Mono', Menlo, Monaco, Inconsolata, 'Fira Mono', 'Roboto Mono', 'Droid Sans Mono', Consolas, 'Liberation Mono',
+			'Lucida Console', 'Courier New', monospace, var(--vp-emoji);
+		--vp-sans:
+			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
 			'Helvetica Neue', Arial, Helvetica, sans-serif, var(--vp-emoji);
-		--vp-serif: 'Iowan Old Style', 'Apple Garamond', 'Baskerville',
-			'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif,
+		--vp-serif:
+			'Iowan Old Style', 'Apple Garamond', 'Baskerville', 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif,
 			var(--vp-emoji);
 
 		/* Padding */
@@ -148,7 +146,6 @@
 		font-size: 2em;
 		margin: 0.67em 0;
 	}
-	/* prettier-ignore */
 	:is(button, .button, input, textarea, select, .sans):is(.vp, .vp *):not(.xvp, .xvp *),
 	.sans:is(.vp, .vp *):not(.xvp, .xvp *) {
 		font-family: var(--vp-sans);
@@ -240,10 +237,9 @@
 
 	/* Mobile */
 	@media only screen and (not (min-width: 768px)) {
-		/* prettier-ignore */
 		:is(.tablet-up, .tablet-only, .desktop-only):is(.vp, .vp *):not(.xvp, .xvp *) {
-		display: none;
-	}
+			display: none;
+		}
 	}
 
 	/* Tablet */
@@ -255,18 +251,16 @@
 
 	/* Desktop */
 	@media only screen and (min-width: 992px) {
-		/* prettier-ignore */
 		:is(.mobile-only, .tablet-only, .tablet-down):is(.vp, .vp *):not(.xvp, .xvp *) {
-		display: none;
-	}
+			display: none;
+		}
 	}
 
 	/* Desktop (large) */
 	@media only screen and (min-width: 1200px) {
-		/* prettier-ignore */
 		:is(.mobile-only, .tablet-only, .tablet-down, .desktop-only):is(.vp, .vp *):not(.xvp, .xvp *) {
-		display: none;
-	}
+			display: none;
+		}
 	}
 
 	@media only screen {

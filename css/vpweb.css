@@ -1,7 +1,4 @@
 @import 'core.css';
-
-/* Layouts */
-@import 'grid.css';
 @import 'layouts.css';
 
 /* Components */

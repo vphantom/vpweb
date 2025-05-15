@@ -18,7 +18,7 @@ import 'vpweb/fast';
 * Any button or submit input element with `vp-fast` attribute, or in a form with `vp-fast`, will trigger early on `mousedown`.
 
 <!-- BEGIN DOC-COMMENT H2 js/fast.js -->
-
+<!-- AUTOMATICALLY GENERATED, DO NOT EDIT -->
 ## `function preclick(el)`
 
 Manually make an element trigger clicks on mousedown events. Prevents double-firing by tracking mousedown state.

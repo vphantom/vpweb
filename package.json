@@ -8,6 +8,7 @@
     "./editeur": "./js/editeur.js",
     "./fast": "./js/fast.js",
     "./forms": "./js/forms.js",
+    "./tabs": "./js/tabs.js",
     "./stdlib": "./js/stdlib.js",
     "./vpweb": "./js/vpweb.js"
   },

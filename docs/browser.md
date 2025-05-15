@@ -10,7 +10,7 @@ const H = $.H('input', 'label', 'div', 'span');
 ```
 
 <!-- BEGIN DOC-COMMENT H2 js/browser.js -->
-
+<!-- AUTOMATICALLY GENERATED, DO NOT EDIT -->
 ## `const get`
 
 Alias of `HTMLElement.prototype.getAttribute()`
@@ -44,6 +44,52 @@ Set multiple style properties at once. Wraps `CSSStyleDeclaration.setProperty()`
 
 * `el` — `HTMLElement` — Element
 * `attrs` — `Object` — All attributes to set
+
+## `const add_class`
+
+Add one or more classes to an element.
+**Parameters:**
+
+* `el` — `HTMLElement` — Element to modify
+* `classes` — `...string` — One or more class names to add
+
+## `const del_class`
+
+Remove one or more classes from an element.
+**Parameters:**
+
+* `el` — `HTMLElement` — Element to modify
+* `classes` — `...string` — One or more class names to remove
+
+## `const has_class`
+
+Check if an element has a class.
+**Parameters:**
+
+* `el` — `HTMLElement` — Element to check
+* `cls` — `string` — Class name to check for
+
+**Returns:** `boolean` — True if element has the class
+
+## `const swap_class`
+
+Replace a class in an element.
+**Parameters:**
+
+* `el` — `HTMLElement` — Element to modify
+* `oldCls` — `string` — Class name to replace
+* `newCls` — `string` — New class name
+
+## `const toggle_class`
+
+Toggle a class in an element.
+**Parameters:**
+
+* `el` — `HTMLElement` — Element to modify
+* `cls` — `string` — Class name to toggle
+* `[force]` — `boolean` — Optional force parameter
+
+**Returns:** `boolean` — Whether class is now present
 
 ## `const text`
 

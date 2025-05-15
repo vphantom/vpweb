@@ -5,7 +5,7 @@ Add-on conveniences to make writing Vanilla JavaScript more expressive.
 Usage: `import { ... } from 'vpweb/stdlib';`
 
 <!-- BEGIN DOC-COMMENT H2 js/stdlib.js -->
-
+<!-- AUTOMATICALLY GENERATED, DO NOT EDIT -->
 ## `function iter(list, f)`
 
 Iterator of anything indexable with a length.  Skips undefined items.

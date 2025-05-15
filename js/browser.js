@@ -60,6 +60,45 @@ const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
 const style = (e, o) => iter_obj(o, (k, v) => e.style.setProperty(k, v));
 
 /**
+ * Add one or more classes to an element.
+ * @param {HTMLElement} el - Element to modify
+ * @param {...string} classes - One or more class names to add
+ */
+const add_class = (el, ...classes) => el.classList.add(...classes);
+
+/**
+ * Remove one or more classes from an element.
+ * @param {HTMLElement} el - Element to modify
+ * @param {...string} classes - One or more class names to remove
+ */
+const del_class = (el, ...classes) => el.classList.remove(...classes);
+
+/**
+ * Check if an element has a class.
+ * @param {HTMLElement} el - Element to check
+ * @param {string} cls - Class name to check for
+ * @returns {boolean} True if element has the class
+ */
+const has_class = (el, cls) => el.classList.contains(cls);
+
+/**
+ * Replace a class in an element.
+ * @param {HTMLElement} el - Element to modify
+ * @param {string} oldCls - Class name to replace
+ * @param {string} newCls - New class name
+ */
+const swap_class = (el, oldCls, newCls) => el.classList.replace(oldCls, newCls);
+
+/**
+ * Toggle a class in an element.
+ * @param {HTMLElement} el - Element to modify
+ * @param {string} cls - Class name to toggle
+ * @param {boolean} [force] - Optional force parameter
+ * @returns {boolean} Whether class is now present
+ */
+const toggle_class = (el, cls, force) => el.classList.toggle(cls, force);
+
+/**
  * Create text node
  *
  * @param {string} str String
@@ -411,8 +450,10 @@ function jsonscript(el, args, ok, err) {
 
 export {
 	H,
+	add_class,
 	all,
 	append,
+	del_class,
 	empty,
 	fetch,
 	find,
@@ -420,6 +461,7 @@ export {
 	forever,
 	get,
 	h,
+	has_class,
 	jsonscript,
 	next,
 	on,
@@ -432,7 +474,9 @@ export {
 	replace,
 	set,
 	style,
+	swap_class,
 	text,
+	toggle_class,
 	trigger,
 	unset,
 };

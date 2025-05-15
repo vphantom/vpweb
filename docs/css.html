@@ -4,8 +4,9 @@
 		<title>Vanilla+ CSS Framework</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css.css">
+		<script src="vpweb.min.js"></script>
 	</head>
-	<body ontouchstart onload="setTimeout(function(){document.body.classList.add('loaded')})" class="vp sans spaced">
+	<body ontouchstart class="vp sans spaced">
 		<header class="vp-box">
 			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
 		</header>
@@ -178,9 +179,6 @@
 					<h3>Helper classes</h3>
 					<dl>
 
-						<dt><code>.vp-box</code></dt>
-						<dd>Adds side margins dictated by density (self or immediate parent) and limits width on large viewports.</dd>
-
 						<dt><code>.none</code></dt>
 						<dd>Sets <code>display: none</code></dd>
 
@@ -195,14 +193,50 @@
 
 					</dl>
 				</section>
+			</section>
 
+
+			<section>
+				<h2>Layouts <code>layouts.css</code></h2>
 				<section>
-					<h2>Layouts <code>layouts.css</code></h2>
+					<h3>Boxes <code>.vp-box</code></h3>
+					<p>Adds a width limit and side margins dictated by density (self or immediate parent).</p>
+				</section>
+				<section>
+					<h3>Grids <code>[vp-grid="N"]</code></h3>
+					<p>
+					Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>5</code>, <code>8</code>, <code>10</code> or <code>12</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>12</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
+					</p>
+					<p>
+					An <code>&lt;img&gt;</code> directly inside a <code>[vp-grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
+					</p>
+					<p>
+					<strong>Responsive:</strong> On tablets, bases are divided by <code>1.5</code> (i.e. a 12-wide becomes 8-wide) and on mobile, by <code>3</code> (i.e. 12-wide becomes 4-wide)  This elegantly accounts for the reduced widths, making column counts function as minimum absolute widths rather than as a percentage of the viewport.
+					</p>
+					<section>
+						<h4>Example: grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h4>
+						<div class="grid-demo tight mono" vp-grid="12">
+							<div><div>1</div></div> <div vp-cols="11"><div>vp-cols="11"</div></div>
+							<div vp-cols="2"><div>vp-cols="2"</div></div> <div vp-cols="10"><div>vp-cols="10"</div></div>
+							<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="9"><div>vp-cols="9"</div></div>
+							<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div>
+							<div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="8"><div>vp-cols="8"</div></div>
+							<div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="4"><div>vp-cols="4"</div></div>
+							<div vp-cols="5"><div>vp-cols="5"</div></div> <div vp-cols="7"><div>vp-cols="7"</div></div>
+							<div vp-cols="6"><div>vp-cols="6"</div></div> <div vp-cols="6"><div>vp-cols="6"</div></div>
+							<div vp-cols="12"><div>vp-cols="12"</div></div>
+						</div>
+						<div class="grid-demo tight mono" vp-grid="12">
+							<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="5"><div>vp-cols="5"</div></div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<h3>Stacks &amp; Shelves <code>.vp-stack, .vp-shelf</code></h3>
 					<p>
 					Applicable to any container block, including <code class="html-tag">body</code>.  Sensitive to density.
 					</p>
 					<dl>
-
 						<dt><code>.vp-stack</code></dt>
 						<dd>
 						2 or 3 immediate children are stacked vertically. The second child expands as necessary to make sure that the optional third child is always no higher than the bottom of the viewport.
@@ -211,7 +245,6 @@
 						<dd>
 						Same behavior, but horizontal from left to right.  Set width using <code>min-width</code> to help with responsiveness.  Two-column shelves have a Fibonacci-derived default ratio of (38.2%,61.8%), three-column shelves have (23.6%,52.8%,23.6%).  <b>Responsive:</b> On tablets down, the third child goes below the other two and on mobile all three children become vertically stacked.
 						</dd>
-
 					</dl>
 					<p>Examples:</p>
 					<div vp-grid="8">
@@ -259,41 +292,8 @@
 						</div>
 					</div>
 				</section>
-			</section>
-
-
-			<section>
-				<h2>Grid <code>grid.css</code></h2>
-				<p>
-				Grids are defined by adding attribute <code>vp-grid="x"</code> to an element, where <code>x</code> is one of: <code>5</code>, <code>8</code>, <code>10</code> or <code>12</code>.  Cells in grids are immediate child elements, optionally with attribute <code>vp-cols="x"</code> where <code>x</code> is a number between <code>2</code> and <code>12</code> (<code>1</code> being implicit).  Rows wrap, so you only need to use multiple grid blocks for splitting incomplete lines or changing bases.
-				</p>
-				<p>
-				An <code>&lt;img&gt;</code> directly inside a <code>[vp-grid]</code> or wrapped in just an <code class="html-tag">a</code> automatically gets full width.
-				</p>
-				<p>
-				<strong>Responsive:</strong> On tablets, bases are divided by <code>1.5</code> (i.e. a 12-wide becomes 8-wide) and on mobile, by <code>3</code> (i.e. 12-wide becomes 4-wide)  This elegantly accounts for the reduced widths, making column counts function as minimum absolute widths rather than as a percentage of the viewport.
-				</p>
 				<section>
-					<h3>Example: grid of 12<sup>ths</sup> <code>vp-grid="12"</code></h3>
-					<div class="grid-demo tight mono" vp-grid="12">
-						<div><div>1</div></div> <div vp-cols="11"><div>vp-cols="11"</div></div>
-						<div vp-cols="2"><div>vp-cols="2"</div></div> <div vp-cols="10"><div>vp-cols="10"</div></div>
-						<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="9"><div>vp-cols="9"</div></div>
-						<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="3"><div>vp-cols="3"</div></div>
-						<div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="8"><div>vp-cols="8"</div></div>
-						<div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="4"><div>vp-cols="4"</div></div> <div vp-cols="4"><div>vp-cols="4"</div></div>
-						<div vp-cols="5"><div>vp-cols="5"</div></div> <div vp-cols="7"><div>vp-cols="7"</div></div>
-						<div vp-cols="6"><div>vp-cols="6"</div></div> <div vp-cols="6"><div>vp-cols="6"</div></div>
-						<div vp-cols="12"><div>vp-cols="12"</div></div>
-					</div>
-					<div class="grid-demo tight mono" vp-grid="12">
-						<div vp-cols="3"><div>vp-cols="3"</div></div> <div vp-cols="5"><div>vp-cols="5"</div></div>
-					</div>
-				</section>
-
-
-				<section>
-				<h3>Options</h3>
+					<h3>Options</h3>
 					<dl>
 						<dt><code>[vp-grid].stacking</code></dt>
 						<dd>
@@ -327,13 +327,20 @@
 					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
 					</p>
 					<p>An optional <code>.lead</code> or <code>.follow</code> sibling of the input may precede it to provide icons.  They are centered in a 1.5em wide area.  Note that a <code>.follow</code> sibling must still come before the input and would not make sense for <code class="html-tag">select</code> or <code class="html-tag">textarea</code>.</p>
+					<p>TODO: warning state cleanup</p>
+					<p>TODO: buttons with fields should be as tall</p>
+					<p>TODO: cleanup normal vs .primary vs .secondary</p>
 					<form>
-					<fieldset vp-grid="12" class="spaced growing">
-						<legend>Fieldset of fields</legend>
-						<label vp-field vp-cols="3">
-							Normal
+					<fieldset class="spaced">
+						<legend>Fieldset of fields and buttons</legend>
+						<div vp-grid="12" class="growing">
+						<div vp-cols="3">
+						<label vp-field class="has-warning">
+							Normal <b>*required</b>
 							<input type="text" name="it001" value="User Input Here">
 						</label>
+						<span vp-note="warning">This is a multi-line warning explaining why this form field is inadequate in its current state.</span>
+						</div>
 						<label vp-field vp-cols="3">
 							Normal
 							<input type="text" name="it001" value="User Input Here">
@@ -381,6 +388,11 @@ H0H 0H0</textarea>
 							</datalist>
 							<input type="text" name="cbx1" list="dl1">
 						</label>
+						</div>
+						<div vp-grid="12" class="centered">
+							<button vp-cols="3" onclick="return false;">Do Thing 1</button>
+							<button vp-cols="3" onclick="return false;">Do Other Thing</button>
+						</div>
 					</fieldset>
 					</form>
 					<p>TODO: See Claude example: the submit button has text and an icon, which needs much more than 1.5em wide.  We might need to create a way to have arbitrary assemblies of leaders, an input and followers.</p>
@@ -441,10 +453,9 @@ H0H 0H0</textarea>
 						<button onclick="return false;" class="active">:active, .active</button>
 						<button onclick="return false;" disabled>:disabled</button>
 						<button onclick="return false;" class="secondary">.secondary</button>
+						<button onclick="return false;" class="primary">.primary</button>
 					</form>
 					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
-					<p>TODO: When a group includes an input, make its width 100% with the input being the buffer, somehow.</p>
-					<P>TODO: Group input border is too dark, also left/right need to disappear when they have neighbors.</p>
 					<p>TODO: icons in inputs also need to be supported in group inputs.</p>
 					<form>
 						<div class="vp-group">
@@ -471,13 +482,14 @@ H0H 0H0</textarea>
 						<span style="display: inline-block; background-color: orange; padding: 0.1em;">
 							<button onclick="return false;">Normal</button>
 							<button onclick="return false;" class="secondary">.secondary</button>
+							<button onclick="return false;" class="primary">.primary</button>
 						</span>
 					</form>
 				</section>
 				<section>
 					<h3>Responsive</h3>
 					<p>
-					For touch devices, all buttons have a minimum width and height of 11mm regardless of font size.
+					For touch devices, all buttons have a minimum width and height of 16mm regardless of font size.
 					</p>
 				</section>
 			</section>
@@ -603,46 +615,32 @@ H0H 0H0</textarea>
 
 
 			<section>
-				<h2>Tabs <code>tabs.css</code></h2>
+				<h2>Tabs <code>tabs.css</code> <code>tabs.js</code></h2>
 				<section>
-					<h3>Accordion <code>.vp-accordion</code></h3>
-					<p>
-					A block which contains a series of the sequence: radio or checkbox, label, <code class="html-tag">div</code>.  Spacing between labels, and between labels and their content is dictated by optional density classes on the main block.
-					</p>
-					<div class="vp-accordion spaced">
-						<input type="radio" name="_acc1" id="_acc1_1"><label for="_acc1_1">First expandable item. Click here to test.</label>
-						<div>
-							<p>This is the content of the first expandable item.</p>
-						</div>
-						<input type="radio" name="_acc1" id="_acc1_2"><label for="_acc1_2">Second expandable item. Click here to test.</label>
-						<div>
-							<p>This is the content of the Second expandable item.</p>
-							<p>The content area expands as necessary.</p>
-						</div>
-						<input type="radio" name="_acc1" id="_acc1_3"><label for="_acc1_3">Third expandable item. Click here to test.</label>
-						<div>
-							<p>This is the content of the Third expandable item.</p>
-						</div>
-					</div>
+					<h3>Accordions</h3>
+					<p>A series of <code>details</code> elements, each with a <code>summary</code> child before the rest of their content, can perform as an accordion if each <code>details</code> is given an identical <code>name="..."</code> attribute.</p>
+					<p>This framework doesn't yet include styles for this basic HTML5 construct, but it is planned for the future.</p>
 				</section>
 				<section>
-					<h3>Tabs <code>.vp-tabs</code></h3>
-					<p>
-					A block which contains a series of radio inputs followed by their respective labels, then exactly as many <code class="html-tag">div</code> as there were labels.  Spacing between tabs and their content is dictated by optional density classes on the main block.
-					</p>
-					<div class="vp-tabs spaced">
-						<input type="radio" id="_tabs1_1" name="_tabs1" checked><label for="_tabs1_1">Tab 1</label>
-						<input type="radio" id="_tabs1_2" name="_tabs1"><label for="_tabs1_2">Tab 2</label>
-						<input type="radio" id="_tabs1_3" name="_tabs1"><label for="_tabs1_3">Tab 3</label>
+					<h3>Tabs <code>.vp-tabbed</code></h3>
+					<p>A block which contains two children: a list of tab handles (<code>inline-block</code>), and a list of tab panels (<code>block</code>).  A little bit of JS adds the necessary ARIA attributes and behavior.</p>
+					<div class="vp-tabbed spaced">
 						<div>
-							<p>This is tab 1.</p>
+							<span>Tab 1</span>
+							<span>Tab 2</span>
+							<span>Tab 3</span>
 						</div>
 						<div>
-							<p>This is tab 2.</p>
-							<p>It is taller than the others to demonstrate how height is dynamic.</p>
-						</div>
-						<div>
-							<p>This is tab 3.</p>
+							<div>
+								<p>This is tab 1.</p>
+							</div>
+							<div>
+								<p>This is tab 2.</p>
+								<p>It is taller than the others to demonstrate how height is dynamic.</p>
+							</div>
+							<div>
+								<p>This is tab 3.</p>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -683,19 +681,15 @@ H0H 0H0</textarea>
 			<section>
 				<h2>Transitions <code>transitions.css</code></h2>
 				<p>
-				<B>FIXME:</B> do the onload thing in our JS bundle.
-				To guarantee that no browsers "flash" transitions on load, some rules depend on a parent having the "loaded" class.  To use them, add the <code>loaded</code> class to <code class="html-tag">body</code> after the first paint is likely over. In some browsers, a simple "onload" is insufficient, thus:
+					To avoid "flashing", transitions only apply inside a <code>.vp-loaded</code>, which is applied automatically when the document is fully loaded by our main JS bundle.
 				</p>
-				<blockquote><code>
-&lt;body onload="setTimeout(function(){document.body.classList.add('loaded')})"&gt;
-				</code></blockquote>
 				<section>
 					<h3>Generic</h3>
 					<dl>
 
 						<dt><code>.loaded, .loaded *</code></dt>
 						<dd>
-						Subtle fade for <code>color</code>, <code>background-color</code> and <code>opacity</code>.
+						Subtle fade for <code>background-color</code> and <code>padding</code>.
 						</dd>
 
 						<dt><code>.go-hidden</code>, <code>.go-visible</code></dt>

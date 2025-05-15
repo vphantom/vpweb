@@ -22,7 +22,7 @@ CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(sort $(wildcard js/*.js))
 
-JS_ASSETS := dist/vpweb.min.js dist/editeur.min.js dist/fast.min.js dist/forms.min.js
+JS_ASSETS := dist/vpweb.min.js dist/editeur.min.js dist/fast.min.js dist/forms.min.js dist/tabs.min.js
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS) $(JS_ASSETS))
 
@@ -64,6 +64,9 @@ dist/fast.min.js:	js/fast.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 dist/forms.min.js:	js/forms.js js/browser.js js/stdlib.js
+	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
+
+dist/tabs.min.js:	js/tabs.js js/browser.js js/stdlib.js
 	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
 
 sizes:	$(CSS_ASSETS) $(JS_ASSETS) $(GZIP_ASSETS) $(BROTLI_ASSETS)

@@ -26,6 +26,9 @@
 	:is([vp-note], [vp-msg])[vp-icon]::before {
 		content: attr(vp-icon);
 	}
+	[vp-note]::before {
+		font-size: 75%;
+	}
 
 	[vp-note='warning']::before,
 	[vp-note='error']::before,
@@ -45,19 +48,11 @@
 		--vp-col: var(--vp-orange);
 		color: rgb(var(--vp-col));
 	}
-	[vp-note='warning']::before,
-	[vp-msg='warning']::before {
-		border-radius: 0.5em;
-	}
 
 	[vp-note='ok'],
 	[vp-msg='ok'] {
 		--vp-col: var(--vp-green);
 		color: rgb(var(--vp-col));
-	}
-	[vp-note='ok']::before,
-	[vp-msg='ok']::before {
-		border-radius: 0.1em;
 	}
 
 	[vp-msg] {

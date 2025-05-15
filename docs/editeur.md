@@ -72,5 +72,6 @@ Example:
 ```
 
 <!-- BEGIN DOC-COMMENT H2 js/editeur.js -->
+<!-- AUTOMATICALLY GENERATED, DO NOT EDIT -->
 <!-- END DOC-COMMENT -->
 

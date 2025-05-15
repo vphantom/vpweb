@@ -225,7 +225,7 @@ function launch(conf) {
 	if (!table || table.length < 1) return;
 	content.push(table);
 	if (conf.e) {
-		table.classList.add('edit');
+		table.add_class('edit');
 		$.set(conf.w, { 'vp-widget': true });
 		conf.w.vpName = conf.n;
 		conf.w.vpValue = conf.d;

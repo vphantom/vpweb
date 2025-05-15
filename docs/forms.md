@@ -74,7 +74,7 @@ Activated with attribute `vp-name` or `forms.ghost(element)`
 Valid for `<input>`, `<select>` and `<textarea>` elements, creates an actual `name` attribute from `vp-name` when the value is changed.  Thus, using `vp-name` instead of `name` has the effect of only including modified fields in form submissions, keeping request sizes down.
 
 <!-- BEGIN DOC-COMMENT H2 js/forms.js -->
-
+<!-- AUTOMATICALLY GENERATED, DO NOT EDIT -->
 ## `function enhance(form)`
 
 Take over a form for either XHR loading or JSON submission

@@ -3,24 +3,30 @@
 
 	/* Tabs */
 
-	.vp-tabbed > :first-child > * {
-		display: inline-block;
+	.vp-tabs > :first-child {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.vp-tabs > :first-child > * {
 		cursor: pointer;
 		user-select: none;
 		padding: var(--vp-pad) calc(2 * var(--vp-pad));
 		border-bottom: 0.25em solid rgba(var(--vp-dim), 0.15);
 	}
-	.vp-tabbed > :first-child > .active {
+	.vp-tabs > :first-child > [aria-selected="true"] {
 		font-weight: bold;
 		padding: var(--vp-pad) calc(4 * var(--vp-pad));
 		background-color: rgba(var(--vp-dim), 0.15);
 		border-bottom-color: rgba(var(--vp-dim), 0.33);
 	}
 
-	.vp-tabbed > :last-child > * {
+	.vp-tabs > :last-child {
+		margin-top: var(--vp-pad);
+	}
+	.vp-tabs > :last-child > * {
 		display: none;
 	}
-	.vp-tabbed > :last-child > .active {
+	.vp-tabs > :last-child > [aria-selected="true"] {
 		display: block;
 	}
 }

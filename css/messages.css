@@ -6,35 +6,22 @@
 	}
 
 	:is([vp-note], [vp-msg])::before {
+		content: '\24d8';
 		font-style: normal;
 		font-weight: bold;
 		text-transform: none;
-		speak: none;
 		display: inline-block;
 		text-decoration: none;
-		width: 1.4275em;
-		line-height: 1.33em;
-		padding-top: 0.125em;
-		margin-left: 0.2em;
-		margin-right: 0.5em;
 		text-align: center;
-		background-color: rgb(var(--vp-col));
-		color: white;
-		border-radius: 100rem;
-		content: 'i';
-	}
-	:is([vp-note], [vp-msg])[vp-icon]::before {
-		content: attr(vp-icon);
-	}
-	[vp-note]::before {
-		font-size: 75%;
+		color: rgb(var(--vp-col));
+		width: 1.5em;
 	}
 
 	[vp-note='warning']::before,
 	[vp-note='error']::before,
 	[vp-msg='warning']::before,
 	[vp-msg='error']::before {
-		content: '!';
+		content: '\26a0';
 	}
 
 	[vp-note='error'],
@@ -55,16 +42,20 @@
 		color: rgb(var(--vp-col));
 	}
 
+	[vp-note]::before {
+		margin-right: calc(var(--vp-pad) / 2);
+	}
+
 	[vp-msg] {
 		position: relative;
 		border: 1px solid rgba(var(--vp-col), 0.2);
 		background-color: rgba(var(--vp-col), 0.05);
 		border-radius: var(--vp-corner);
-		padding: 1em 1em 1em 3.75em;
+		padding: var(--vp-pad) var(--vp-pad) var(--vp-pad) calc(var(--vp-pad) + var(--vp-pad) + 1.5em);
 	}
 	[vp-msg]::before {
 		position: absolute;
-		top: 1em;
-		left: 1em;
+		top: var(--vp-pad);
+		left: var(--vp-pad);
 	}
 }

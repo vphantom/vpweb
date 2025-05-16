@@ -20,7 +20,13 @@
 		border-bottom-color: rgba(var(--vp-dim), 0.33);
 	}
 
-	.vp-tabs > :last-child {
+	.vp-tabs.boxed > :last-child {
+		border: 0.5px solid rgba(128, 128, 128, 0.33);
+	}
+	.vp-tabs.boxed > :last-child > * {
+		margin: var(--vp-pad);
+	}
+	.vp-tabs:not(.boxed) > :last-child {
 		margin-top: var(--vp-pad);
 	}
 	.vp-tabs > :last-child > * {

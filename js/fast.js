@@ -32,8 +32,7 @@ function preclick(el) {
 	$.on(el, 'mousedown', handleMouseDown, null, { mute: 1000 });
 	$.on(el, 'click', handleClick, { capture: true });
 }
-$.forever(
-	'[vp-fast] a, a[vp-fast], form[vp-fast] button, form[vp-fast] input[type=submit], button[vp-fast], input[type=submit][vp-fast]',
+$.forever(':is(a, button, input[type=submit])[vp-fast], form[vp-fast] :is(button, input[type=submit])',
 	preclick
 );
 

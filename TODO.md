@@ -1,14 +1,5 @@
 ## CSS
 
-### Clean up
-
-Full refactor before going any further.  It's too heavy, the SVG-in-CSS choice has unpleasant drawbacks to re-evaluate, and relying on bits of JS for the more interactive components is now perfectly acceptable.
-
-- [ ] We dropped MSIE 11 support. We can refactor to save space and use:
-	* mix-blend-mode
-	* filter()
-- [ ] Labels inside inputs is battle-tested, but is it still the best mechanism for lists of identical inputs?  Do they happen enough that we should study this case?
-
 ### Tables
 
 - [ ] Easy to use mechanism so that `<thead>`/`<tfoot>` stay in the parent viewport while `<tbody>` scrolls vertically if height is constrained.  All 3 scroll horizontally if width is constrained (perhaps keep column 1 sticky on the left?)
@@ -16,8 +7,8 @@ Full refactor before going any further.  It's too heavy, the SVG-in-CSS choice h
 
 ### Forms
 
-- [ ] SVG/icons for the toggle switch design as an alternative to the checkbox. Contrasted/right ON, greyscale subdued left OFF.
-- [ ] I think auto-expanding inputs are now possible in pure CSS?
+- [ ] Labels inside inputs is battle-tested, but is it still the best mechanism for lists of identical inputs?  Do they happen enough that we should study this case?
+- [ ] Pure CSS mobile-style toggle switches (later)
 - [ ] Refactor `<form action="json-post">` so that XHR loading is independent of JSON feature.
 - [ ] Grab titles in addition to body.
 - [ ] Document how to nest objects in JSON output.

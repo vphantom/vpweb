@@ -13,9 +13,9 @@ import 'vpweb/fast';
 <script src="dist/fast.min.js"></script>
 ```
 
-* Any anchor (`<a>`) in a block with the `vp-fast` attribute or with the attribute directly will trigger early on `mousedown`.
+* Any anchor (`<a>`) in a block with the `.vp-fast` class or with the class directly will trigger early on `mousedown`.
 
-* Any button or submit input element with `vp-fast` attribute, or in a form with `vp-fast`, will trigger early on `mousedown`.
+* Any button or submit input element with the `.vp-fast` class, or in a form with the `.vp-fast` class, will trigger early on `mousedown`.
 
 <!-- BEGIN DOC-COMMENT H2 js/fast.js -->
 <!-- AUTOMATICALLY GENERATED, DO NOT EDIT -->

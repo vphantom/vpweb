@@ -61,11 +61,17 @@ You can combine both features:
 - `method="json-post" vp-target="selector"`: Submits as JSON and updates the specified element
 - `vp-target="selector"` alone: Submits normally via XHR and updates the specified element
 
-### Shrinking/expanding inputs
+### Growing/shrinking inputs
 
-Activated with `<input vp-expanding>` or `forms.expanding(element)`
+Activated with `<input class="vp-growing">` or `forms.auto_width(element)`
 
-Inputs of type `email`, `number`, `password`, `search`, `text` and `url` with this attribute shrink to a small minimum size (about 16px for regular fields and 32px for number fields).  As text is added/removed, their width is adjusted interactively.
+Inputs with this class will shrink to `3em`.  As characters are added/removed, their width adapts.
+
+### Growing/shrinking textareas
+
+Activated with `<textarea class="vp-growing">` or `forms.auto_height(element)`
+
+Textareas with this class will expand vertically as new lines are added, but will not shrink to less than their original height.
 
 ### Ghost fields
 
@@ -83,14 +89,6 @@ Take over a form for either XHR loading or JSON submission
 
 * `form` — `HTMLFormElement` — The form to take over
 
-## `function expanding(input)`
-
-Manually make auto-expanding inputs.  Types `email`, `number`, `password`, `search`, `text`, `url` are supported.
-
-**Parameters:**
-
-* `input` — `HTMLInputElement` — The input to squeeze
-
 ## `function ghost(input, name)`
 
 Manually make a field be included form data only once it will be modified.
@@ -99,5 +97,21 @@ Manually make a field be included form data only once it will be modified.
 
 * `input` — `HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement` — Field
 * `[name]` — `string` — Name to use (overrides `vp-name`)
+
+## `function auto_width(input)`
+
+Make an input grow and shrink with its contents.
+
+**Parameters:**
+
+* `input` — `HTMLInputElement` — The input to grow
+
+## `function auto_height(textarea)`
+
+Make a textarea grow and shrink with its contents.
+
+**Parameters:**
+
+* `textarea` — `HTMLTextAreaElement` — The textarea to grow
 
 <!-- END DOC-COMMENT -->

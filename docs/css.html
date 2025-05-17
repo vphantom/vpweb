@@ -105,7 +105,6 @@
 						<li>Figure out responsive main menu a-la SAP, intranet vs public. Maybe have the same top bar on all resolutions: logo left, name middle, hamburger + cart + user menus right. Maybe no hamburger on tablet-up, instead a second line, but it's tricky to make all those items fit on a single horizontal line. Also leave the footer part of the stack intact instead of bringing it in the hamburger on tablet-down.</li>
 						<li>For user menu and such, upper-right dot overlay perhaps with counter.</li>
 						<li>Anything from our product and cart pages which isn't already covered?</li>
-						<li>Integrate Fontello to remove the hard-coded SVG images.  They are from Fontello anyway (except the check, which Entypo might imitate well enough?).  The CSS and WOFF2 files are inter-dependent though; not sure how to allow our users to add more icons cleanly. It'd be a shame to have our private icons and the users might have the same in theirs.</li>
 					</ul>
 				</section>
 			</section>
@@ -327,8 +326,13 @@
 					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
 					</p>
 					<p>An optional <code>.lead</code> or <code>.follow</code> sibling of the input may precede it to provide icons.  They are centered in a 1.5em wide area.  Note that a <code>.follow</code> sibling must still come before the input and would not make sense for <code class="html-tag">select</code> or <code class="html-tag">textarea</code>.</p>
+					<p>
+						With JS enabled, an <code class="html-tag">input</code> without a forced width may grow/shrink with its content with the <code>.vp-growing</code> class.
+						For <code class="html-tag">textarea</code>, height changes instead.
+						<br><label vp-field>Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
+					</p>
 					<p>TODO: warning state cleanup</p>
-					<p>TODO: buttons with fields should be as tall</p>
+					<p>TODO: buttons with fields should be as tall <code>[vp-field], [vp-field] + button { min-height: 16mm; }</code></p>
 					<p>TODO: cleanup normal vs .primary vs .secondary</p>
 					<form>
 					<fieldset class="spaced">
@@ -356,8 +360,8 @@
 							<input type="text" name="it003" value="User Input Here">
 						</label>
 						<label vp-field vp-cols="3">
-							Textarea
-<textarea name="ta">123, Main St.
+							Textarea (growing)
+<textarea name="ta" class="vp-growing">123, Main St.
 Test City, ZZ
 H0H 0H0</textarea>
 						</label>
@@ -395,9 +399,8 @@ H0H 0H0</textarea>
 						</div>
 					</fieldset>
 					</form>
-					<p>TODO: See Claude example: the submit button has text and an icon, which needs much more than 1.5em wide.  We might need to create a way to have arbitrary assemblies of leaders, an input and followers.</p>
 					<p>Actually, instead of putting things inside inputs, we should have an alternative to the one-input-per-label scheme where several inputs fill a single grid cell which has the label-like border.</p>
-					<p>Instead, we should do like button groups but which includes inputs.</p>
+					<p>Instead, we should do like button groups .growing!</p>
 				</section>
 				<section>
 					<h3>Checkboxes <code>label input[type=checkbox]</code></h3>
@@ -456,19 +459,27 @@ H0H 0H0</textarea>
 						<button onclick="return false;" class="primary">.primary</button>
 					</form>
 					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
-					<p>TODO: icons in inputs also need to be supported in group inputs.</p>
+					<p>Optional <code>.vp-group.growing</code> makes any <code>input</code> grow proportionally to fill the container space.</p>
+					<p><b>TODO:</b> paddings aren't tight/spaced/relaxed sensitive</p>
+					<p>TODO: we probably want ITAL here too as an option (i.e. a [vp-label] instead of a direct input, making the whole row min 16mm tall)</p>
 					<form>
 						<div class="vp-group">
 							<button onclick="return false;">First</button>
 							<button onclick="return false;">Middle</button>
 							<input type="text" name="foo" value="foo">
 							<button onclick="return false;" disabled>Disabled</button>
+							<input type="text" name="bar" value="bar">
 							<button onclick="return false;" class="active">Active</button>
 							<button onclick="return false;">Last</button>
 						</div>
-						<div class="vp-group">
-							<input type="text" name="chat" placeholder="Ask our AI bot...">
-							<button onclick="return false;">Send &#x27a4;</button>
+						<div class="vp-group growing">
+							<button onclick="return false;">First</button>
+							<button onclick="return false;">Middle</button>
+							<input type="text" name="foo" value="foo">
+							<button onclick="return false;" disabled>Disabled</button>
+							<input type="text" name="bar" value="bar">
+							<button onclick="return false;" class="active">Active</button>
+							<button onclick="return false;">Last</button>
 						</div>
 					</form>
 					<h3>Theming</h3>

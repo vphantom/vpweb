@@ -36,12 +36,13 @@ Interesting modern CSS features according to <https://web.dev/baseline> as of 20
 * `clamp()`, `min()`, `max()`
 * `color-scheme`
 * `column-fill` — multi-column layout
-* `filter()`
+* `filter`
 * `fit-content` — keyword
 * `font-optical-sizing`
 * `grid` — how is it vs flex?
 * `isolation`
 * `min-content`, `max-content` — keywords
+* `mix-blend-mode`
 * `overflow-wrap` — (word-wrap?)
 * `pointer-events`
 * `sticky` — position keyword

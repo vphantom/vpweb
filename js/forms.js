@@ -100,23 +100,6 @@ function enhance(form) {
 }
 
 /**
- * Manually make auto-expanding inputs.  Types `email`, `number`, `password`,
- * `search`, `text`, `url` are supported.
- *
- * @param {HTMLInputElement} input The input to squeeze
- */
-function expanding(input) {
-    if (/^(email|number|password|search|text|url)$/.test(input.type)) {
-        const small = input.type === 'number' ? '32px' : '16px';
-        $.style(input, { width: small });
-        $.on(input, ['blur', 'change', 'input', 'keydown'], () => {
-            input.style.width = small;
-            input.style.width = `${input.scrollWidth + 10}px`;
-        });
-    }
-}
-
-/**
  * Manually make a field be included form data only once it will be modified.
  *
  * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} input Field
@@ -127,8 +110,37 @@ function ghost(input, name) {
     return $.on(input, 'change', () => $.set(input, { name: name }));
 }
 
-$.forever('form[method="json-post"], form[vp-target]', enhance);
-$.forever('input[vp-expanding]', expanding);
-$.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
+/**
+ * Make an input grow and shrink with its contents.
+ *
+ * @param {HTMLInputElement} input The input to grow
+ */
+function auto_width(input) {
+    const initialWidth = input.scrollWidth;
+    $.on(input, ['change', 'input'], () => {
+        input.style.width = `${initialWidth + 4}px`;  // Don't shrink all the way to zero
+        input.style.width = `${input.scrollWidth + 4}px`;  // Pad variations
+    });
+}
 
-export { expanding, ghost, enhance };
+/**
+ * Make a textarea grow and shrink with its contents.
+ *
+ * @param {HTMLTextAreaElement} textarea The textarea to grow
+ */
+function auto_height(textarea) {
+    const initialHeight = textarea.scrollHeight;
+    $.on(textarea, ['change', 'input'], () => {
+        textarea.style.height = `${initialHeight}px`; // Reset to initial height
+        textarea.style.height = `${textarea.scrollHeight}px`; // Expand to content
+    });
+    // Set initial height
+    textarea.style.height = `${initialHeight}px`;
+}
+
+$.forever('form[method="json-post"], form[vp-target]', enhance);
+$.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
+$.forever('input.vp-growing', auto_width);
+$.forever('textarea.vp-growing', auto_height);
+
+export { auto_height, auto_width, enhance, ghost };

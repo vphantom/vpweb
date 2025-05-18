@@ -1,16 +1,11 @@
 {
   "name": "vpweb",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.2",
   "description": "Vanilla+: minimalistic web interface development library",
   "type": "module",
   "exports": {
-    "./browser": "./js/browser.js",
-    "./editeur": "./js/editeur.js",
-    "./fast": "./js/fast.js",
-    "./forms": "./js/forms.js",
-    "./tabs": "./js/tabs.js",
-    "./stdlib": "./js/stdlib.js",
-    "./vpweb": "./js/vpweb.js"
+    ".": "./js/vpweb.js",
+    "./*": "./js/*.js"
   },
   "author": "Stéphane Lavergne <lis@imars.com> (https://github.com/vphantom)",
   "license": "MIT",
@@ -21,15 +16,14 @@
   "bugs": "https://github.com/vphantom/vpweb/issues",
   "homepage": "https://github.com/vphantom/vpweb",
   "files": [
+    "BROWSER_SUPPORT.md",
     "LICENSE.txt",
     "Makefile",
     "README.md",
-    "dist/*",
-    "docs/*.html",
-    "docs/*.css",
+    "dist/*.{css,js,map}",
+    "docs/*.{css,html,md}",
     "js/*.js",
-    "css/*.css",
-    "css/icons/check-white.svg"
+    "css/*.css"
   ],
   "devDependencies": {
     "docblox2md": "^0.7.5",

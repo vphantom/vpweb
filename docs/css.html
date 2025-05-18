@@ -4,7 +4,7 @@
 		<title>Vanilla+ CSS Framework</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css.css">
-		<script src="vpweb.min.js"></script>
+		<script src="vpweb.js"></script>
 	</head>
 	<body ontouchstart class="vp sans spaced">
 		<header class="vp-box">
@@ -20,7 +20,7 @@
 					There are already plenty of CSS frameworks, with varying levels of complexity.  This one attempts to be a progressive enhancement on plain HTML5, with CSS based improvements with occasional JS components where necessary.  It strays from the extreme simplicity of the flat layered "paper" trend in favor of more obvious classic visual cues enhanced for modern browsers.
 					</p>
 					<p>
-					All overrides, classes and custom styling on elements not prefixed with <code>vp-</code> only take effect inside <code>.vp</code> blocks to help reduce collisions with other frameworks. (See <em>Co&ouml;peration</em> below.)
+					All styling on elements, attributes or classes not prefixed with <code>vp-</code> only take effect inside <code>.vp</code> blocks to help reduce collisions with other frameworks.  You can further disable part or all of a <code>.vp</code> block with the exclusion class <code>.xvp</code>.
 					</p>
 					<p>
 					Compiled CSS files are located in <code>dist/</code>.  You may use <code>vpweb.css</code> to get the entire framework at once, or just some of the individual files described below.  Be sure to import <code>core.css</code> first in order to avoid priority side-effects.
@@ -29,7 +29,7 @@
 				<section>
 					<h3>Efficient</h3>
 					<p>
-					The entire framework is smaller than a typical company logo image.  See <code>vpweb.css</code> and <code>vpweb.min.js</code> with perhaps <code>forms.min.js</code>:
+					The entire framework, all components included, is smaller than a typical company logo image:
 					</p>
 					<table id="vp-sizes" class="vp-2d horizontal relaxed">
 						<thead>
@@ -42,23 +42,9 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>19.6KB</td><td>4.7KB</td><td>4.1KB</td></tr>
-<tr><th>core.css</th><td>4.5KB</td><td>1.4KB</td><td>1.3KB</td></tr>
-<tr><th>forms.css</th><td>7.1KB</td><td>1.7KB</td><td>1.4KB</td></tr>
-<tr><th>grid.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>layouts.css</th><td>0.7KB</td><td>0.3KB</td><td>0.3KB</td></tr>
-<tr><th>messages.css</th><td>1.2KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>tables.css</th><td>2.4KB</td><td>0.7KB</td><td>0.5KB</td></tr>
-<tr><th>tabs.css</th><td>1.3KB</td><td>0.5KB</td><td>0.3KB</td></tr>
-<tr><th>tooltips.css</th><td>1.3KB</td><td>0.5KB</td><td>0.4KB</td></tr>
-<tr><th>transitions.css</th><td>0.6KB</td><td>0.3KB</td><td>0.2KB</td></tr>
+<tr><th>vpweb.css</th><td>18.9KB</td><td>4.5KB</td><td>3.9KB</td></tr>
+<tr><th>vpweb.js</th><td>9.2KB</td><td>4.0KB</td><td>3.5KB</td></tr>
 <!-- END SIZES -->
-<!-- BEGIN JSIZES -->
-<tr><th>dist/vpweb.min.js</th><td>8.4KB</td><td>3.6KB</td><td>3.2KB</td></tr>
-<tr><th>dist/editeur.min.js</th><td>6.1KB</td><td>2.8KB</td><td>2.4KB</td></tr>
-<tr><th>dist/fast.min.js</th><td>1.4KB</td><td>0.8KB</td><td>0.6KB</td></tr>
-<tr><th>dist/forms.min.js</th><td>3.9KB</td><td>1.8KB</td><td>1.6KB</td></tr>
-<!-- END JSIZES -->
 						</tbody>
 					</table>
 				</section>
@@ -74,37 +60,25 @@
 					</dl>
 				</section>
 				<section>
-					<h3>Co&ouml;peration</h3>
-					<p>
-					No special behavior on standard elements should leak outside of <code>.vp</code> blocks (which may be <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code> or just small fragments of your pages).  You may also disable any section or single standard elements with <code>.xvp</code>.  We achieve this flexibility with: <code>selector:is(.vp, .vp *):not(.xvp, .xvp *)</code>.  Note that elements and classes with an explicit <code>vp-</code> prefix may retain their functionality despite <code>.xvp</code> because they are implicitly unique.
-					</p>
-				</section>
-				<section>
 					<h3>Build Process</h3>
 					<p>
 					On the CSS side, you may reference the pre-built <code>vpweb.css</code> alone or <code>@import 'vpweb.css';</code> from your CSS sources.  You might even want to import only the bits you want such as <code>core.css</code> and <code>grid.css</code> to use our grid.
 					</p>
 					<p>
-					If you use <code>@layers</code>, just set our pre-defined <code>vp</code> layer where you want in your stack.  All our components are namespaced within this single global layer.
+					If you use <code>@layers</code>, just set our pre-defined <code>vp</code> layer where you want in your stack.  All our internal layers are namespaced within this single global layer.
 					</p>
 				</section>
 				<section>
 					<h3>TODO</h3>
 					<p>
-					This is an early work-in-progress framework. Below are my ramblings so I don't forget anything. ;-)
+					This is a work-in-progress. Below are my ramblings so I don't forget anything. ;-)
 					</p>
 					<ul>
 						<li>Forms/Tables: error/warning/highlight/disabled states with messages</li>
-						<li>Fieldsets: image our corpo edit page on mobile… a nightmare! Should every row become a section? How do you make those 50+ inputs manageable vertically? Fieldsets might suffice, each a full-width doubling grid. The border and title need improvement.  Maybe groups of fieldsets should be accordions with JS help (including closing current, opening next on TAB)? What about forms where it would make sense to have 2 or 3 fieldsets horizontally, each with columns inside? In a 12-world, that'd mean 2×6 or 3×4, then inside we make a 12-grid again but limit ourselves to multiples of 2 or 3 respectively. Should that be facilitated by the framework?</li>
+						<li>Tooltips: remove the distinct files, just keep what we need in forms.css</li>
 						<li>Tables: horizontal without outside borders, maybe not even TH grey, "simple"</li>
 						<li>Tables: make a no-wrap column type, with and without truncation</li>
 						<li>Tables: guaranteed smallest cell: width:1px no-wrap</li>
-						<li>Tabs: redo accordion, make it possible to load content on demand</li>
-						<li>Make entire blocks collapsible tablet-down or mobile-only (i.e. the left column of a shelf with search criteria) — More speficially, perhaps a class could trigger the collapsing (manual open/close, default closed) when they become stacked, always open (no close widget) when wide enough. — That said since the vertical design might require a different layout, we might have two versions entirely…</li>
-						<li>Tooltips: triggered by a clear help button, not by subject focus</li>
-						<li>Figure out responsive main menu a-la SAP, intranet vs public. Maybe have the same top bar on all resolutions: logo left, name middle, hamburger + cart + user menus right. Maybe no hamburger on tablet-up, instead a second line, but it's tricky to make all those items fit on a single horizontal line. Also leave the footer part of the stack intact instead of bringing it in the hamburger on tablet-down.</li>
-						<li>For user menu and such, upper-right dot overlay perhaps with counter.</li>
-						<li>Anything from our product and cart pages which isn't already covered?</li>
 					</ul>
 				</section>
 			</section>
@@ -332,7 +306,7 @@
 						<br><label vp-field>Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
 					</p>
 					<p>TODO: warning state cleanup</p>
-					<p>TODO: buttons with fields should be as tall <code>[vp-field], [vp-field] + button { min-height: 16mm; }</code></p>
+					<p>TODO: finalize optional help, tooltip or what?</p>
 					<p>TODO: cleanup normal vs .primary vs .secondary</p>
 					<form>
 					<fieldset class="spaced">
@@ -460,8 +434,6 @@ H0H 0H0</textarea>
 					</form>
 					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
 					<p>Optional <code>.vp-group.growing</code> makes any <code>input</code> grow proportionally to fill the container space.</p>
-					<p><b>TODO:</b> paddings aren't tight/spaced/relaxed sensitive</p>
-					<p>TODO: we probably want ITAL here too as an option (i.e. a [vp-label] instead of a direct input, making the whole row min 16mm tall)</p>
 					<form>
 						<div class="vp-group">
 							<button onclick="return false;">First</button>
@@ -663,37 +635,6 @@ H0H 0H0</textarea>
 							Adds a box (similar to a <code class="html-tag">fieldset</code>) around the panel area.
 						</dd>
 					</dl>
-				</section>
-			</section>
-
-
-			<section>
-				<h2>Tooltips <code>tooltips.css</code></h2>
-				<p>
-				For uniformity with touch devices, our tooltips are touch/click activated.  This requires adding the <code>ontouchstart</code> attribute to <code class="html-tag">body</code> and adding <code>tabindex="0"</code> to non-clickable elements like <code class="html-tag">span</code>.
-				</p>
-				<p>
-				To evade their trigger or parent element's width, tooltips don't break on white space.  Keep this in mind for placement to avoid overflowing the viewport.  For element tooltips, you may insert manual breaks as desired.
-				</p>
-				<section>
-					<h3>Attribute <code>[vp-tooltip]</code></h3>
-					<p>
-					To give any element (except inputs) a clickable tooltip, the plain text content of the tooltip need simply be supplied in a <code>vp-tooltip=""</code> attribute.  Optional accompanying boolean attributes <code>vp-tooltip-below</code> and <code>vp-tooltip-right</code> affect alignment and position.
-					</p>
-					<p><span tabindex="0" vp-tooltip="This is an example tooltip.">Click this sentence for example.</span></p>
-				</section>
-				<section>
-					<h3>Element <code class="html-tag">vp-tooltip</code></h3>
-					<p>
-					To deal with inputs and to use inline HTML in a tooltip, use <code class="html-tag">vp-tooltip</code> which must immediately follow a focusable element such as <code class="html-tag">input</code>, and both need to be inside a <code>position:relative</code> block.  For our forms, this is easily achieved with a field (an input inside its label).  Optional boolean attributes <code>_below</code> and <code>_right</code> affect alignment and position.
-					</p>
-					<form>
-						<label class="vp-field">
-							<span class="vp-label">Activate this field to see help</span>
-							<input type="text" name="tt1">
-							<vp-tooltip _below>Tooltips are a great mobile-friendly way to include<br>additional help with form fields.</vp-tooltip>
-						</label>
-					</form>
 				</section>
 			</section>
 

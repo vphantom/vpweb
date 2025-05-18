@@ -16,6 +16,10 @@
 
 ## Components
 
+### Tabs
+
+- [ ] Load content on demand
+
 ### Forms
 
 - [ ] Support the `formaction` attribute of clicked elements.

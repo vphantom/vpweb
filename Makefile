@@ -16,13 +16,20 @@ DOCS := $(wildcard docs/*.md)
 
 CSS_SRC := $(sort $(wildcard css/*.css))
 
-CSS_SIZABLE := $(addsuffix .css,vpweb $(filter-out vpweb,$(filter-out _lib,$(basename $(notdir $(CSS_SRC))))))
+#CSS_SIZABLE := $(addsuffix .css,vpweb $(filter-out vpweb,$(filter-out _lib,$(basename $(notdir $(CSS_SRC))))))
+CSS_SIZABLE := vpweb.css
 
 CSS_ASSETS := $(addprefix dist/,$(CSS_SIZABLE)) docs/css.css
 
 JS_SRC := $(sort $(wildcard js/*.js))
 
-JS_ASSETS := dist/vpweb.min.js dist/editeur.min.js dist/fast.min.js dist/forms.min.js dist/tabs.min.js
+#JS_SIZABLE := $(addsuffix .js,vpweb $(filter-out vpweb,$(filter-out _lib,$(basename $(notdir $(JS_SRC))))))
+JS_SIZABLE := vpweb.js
+
+JS_ASSETS := $(patsubst js/%.js,dist/%.js,$(wildcard js/*.js))
+
+tmptest:
+	@echo "JS ASSETS: $(JS_ASSETS)"
 
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS) $(JS_ASSETS))
 
@@ -51,62 +58,33 @@ watch:	dist
 dist/%.css:	css/%.css $(CSS_SRC)
 	$(POSTCSS) $< -o $@
 
+dist/%.js:	js/%.js $(JS_SRC)
+	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
+
 docs/css.css:	docs/style.css $(CSS_SRC)
 	$(POSTCSS) $< -o $@
 
-dist/vpweb.min.js:	js/vpweb.js $(JS_SRC)
-	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
-
-dist/editeur.min.js:	js/editeur.js js/browser.js js/stdlib.js
-	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
-
-dist/fast.min.js:	js/fast.js js/browser.js js/stdlib.js
-	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
-
-dist/forms.min.js:	js/forms.js js/browser.js js/stdlib.js
-	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
-
-dist/tabs.min.js:	js/tabs.js js/browser.js js/stdlib.js
-	$(ROLLUP) $< --file $@ $(ROLLUP_OPTS)
-
 sizes:	$(CSS_ASSETS) $(JS_ASSETS) $(GZIP_ASSETS) $(BROTLI_ASSETS)
 	@if [ -e docs/css.html~ -o -e docs/css.html~~ ]; then echo "HTML backup files already exist."; exit 1; fi
-	@echo -n >docs/css_sizes.html
-	@for F in $(CSS_SIZABLE); do \
-		echo -n "<tr><th>$$F</th><td>" >>docs/css_sizes.html ; \
-		printf '%.1f' $$((1000 * `stat --printf='%s' "dist/$$F"` / 1024))e-3 >>docs/css_sizes.html ; \
-		echo -n "KB</td><td>" >>docs/css_sizes.html ; \
-		printf '%.1f' $$((1000 * `stat --printf='%s' "dist/$$F.gz"` / 1024))e-3 >>docs/css_sizes.html ; \
-		echo -n "KB</td><td>" >>docs/css_sizes.html ; \
-		printf '%.1f' $$((1000 * `stat --printf='%s' "dist/$$F.br"` / 1024))e-3 >>docs/css_sizes.html ; \
-		echo "KB</td></tr>" >>docs/css_sizes.html ; \
+	@echo -n >docs/tmp_sizes.html
+	@for F in $(CSS_SIZABLE) $(JS_SIZABLE); do \
+		echo "Sizing $$F..." ; \
+		echo -n "<tr><th>$$F</th><td>" >>docs/tmp_sizes.html ; \
+		printf '%.1f' $$((1000 * `stat --printf='%s' "dist/$$F"` / 1024))e-3 >>docs/tmp_sizes.html ; \
+		echo -n "KB</td><td>" >>docs/tmp_sizes.html ; \
+		printf '%.1f' $$((1000 * `stat --printf='%s' "dist/$$F.gz"` / 1024))e-3 >>docs/tmp_sizes.html ; \
+		echo -n "KB</td><td>" >>docs/tmp_sizes.html ; \
+		printf '%.1f' $$((1000 * `stat --printf='%s' "dist/$$F.br"` / 1024))e-3 >>docs/tmp_sizes.html ; \
+		echo "KB</td></tr>" >>docs/tmp_sizes.html ; \
 	done
 	@mv -b docs/css.html docs/css.html~
 	@cat docs/css.html~ \
 		|tr "\n" '~' \
 		|sed -re 's/<!-- BEGIN SIZES -->.*<!-- END SIZES -->/<!-- BEGIN SIZES -->~<!-- END SIZES -->/' \
 		|tr '~' "\n" \
-		|sed -e '/<!-- BEGIN SIZES -->/{0,//rdocs/css_sizes.html' -e '}' \
+		|sed -e '/<!-- BEGIN SIZES -->/{0,//rdocs/tmp_sizes.html' -e '}' \
 		>docs/css.html
-	@rm -f docs/css_sizes.html
-	@echo -n >docs/js_sizes.html
-	@for F in $(JS_ASSETS); do \
-		echo -n "<tr><th>$$F</th><td>" >>docs/js_sizes.html ; \
-		printf '%.1f' $$((1000 * `stat --printf='%s' "$$F"` / 1024))e-3 >>docs/js_sizes.html ; \
-		echo -n "KB</td><td>" >>docs/js_sizes.html ; \
-		printf '%.1f' $$((1000 * `stat --printf='%s' "$$F.gz"` / 1024))e-3 >>docs/js_sizes.html ; \
-		echo -n "KB</td><td>" >>docs/js_sizes.html ; \
-		printf '%.1f' $$((1000 * `stat --printf='%s' "$$F.br"` / 1024))e-3 >>docs/js_sizes.html ; \
-		echo "KB</td></tr>" >>docs/js_sizes.html ; \
-	done
-	@mv -b docs/css.html docs/css.html~~
-	@cat docs/css.html~~ \
-		|tr "\n" '~' \
-		|sed -re 's/<!-- BEGIN JSIZES -->.*<!-- END JSIZES -->/<!-- BEGIN JSIZES -->~<!-- END JSIZES -->/' \
-		|tr '~' "\n" \
-		|sed -e '/<!-- BEGIN JSIZES -->/{0,//rdocs/js_sizes.html' -e '}' \
-		>docs/css.html
-	@rm -f docs/js_sizes.html
+	@rm -f docs/tmp_sizes.html
 
 %.gz:	%
 	$(GZIP) $<

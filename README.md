@@ -49,7 +49,7 @@ The minimalistic library aims to make "Vanilla JS" development more expressive w
 - Compatibility down to Chrome/Edge/Opera 79, Safari 12, Firefox 78
 - Abstract away boilerplate, alias frequently used long-named symbols
 - Cooperate with tree-shaking bundlers
-- Tiny: stay **under 4KB minified** (not compressed)
+- Tiny: **under 5KB minified** (not compressed)
 
 Specifically avoided are:
 
@@ -65,7 +65,6 @@ If you want to use the whole thing in one line without need to activate manually
 
 ```js
 // Option 1 (recommended): include in your build.
-// No configuration options
 import 'vpweb/vpweb';
 ```
 

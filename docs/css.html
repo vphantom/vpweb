@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>18.9KB</td><td>4.5KB</td><td>3.9KB</td></tr>
+<tr><th>vpweb.css</th><td>20.6KB</td><td>5.0KB</td><td>4.3KB</td></tr>
 <tr><th>vpweb.js</th><td>9.2KB</td><td>4.0KB</td><td>3.5KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
@@ -75,7 +75,6 @@
 					</p>
 					<ul>
 						<li>Forms/Tables: error/warning/highlight/disabled states with messages</li>
-						<li>Tooltips: remove the distinct files, just keep what we need in forms.css</li>
 						<li>Tables: horizontal without outside borders, maybe not even TH grey, "simple"</li>
 						<li>Tables: make a no-wrap column type, with and without truncation</li>
 						<li>Tables: guaranteed smallest cell: width:1px no-wrap</li>
@@ -173,7 +172,7 @@
 				<h2>Layouts <code>layouts.css</code></h2>
 				<section>
 					<h3>Boxes <code>.vp-box</code></h3>
-					<p>Adds a width limit and side margins dictated by density (self or immediate parent).</p>
+					<p>Adds a <code>max-width</code> and side margins dictated by density (self or immediate parent).</p>
 				</section>
 				<section>
 					<h3>Grids <code>[vp-grid="N"]</code></h3>
@@ -299,25 +298,23 @@
 					<p>
 					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
 					</p>
-					<p>An optional <code>.lead</code> or <code>.follow</code> sibling of the input may precede it to provide icons.  They are centered in a 1.5em wide area.  Note that a <code>.follow</code> sibling must still come before the input and would not make sense for <code class="html-tag">select</code> or <code class="html-tag">textarea</code>.</p>
 					<p>
 						With JS enabled, an <code class="html-tag">input</code> without a forced width may grow/shrink with its content with the <code>.vp-growing</code> class.
 						For <code class="html-tag">textarea</code>, height changes instead.
 						<br><label vp-field>Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
 					</p>
 					<p>TODO: warning state cleanup</p>
-					<p>TODO: finalize optional help, tooltip or what?</p>
 					<p>TODO: cleanup normal vs .primary vs .secondary</p>
 					<form>
 					<fieldset class="spaced">
 						<legend>Fieldset of fields and buttons</legend>
 						<div vp-grid="12" class="growing">
 						<div vp-cols="3">
-						<label vp-field class="has-warning">
-							Normal <b>*required</b>
-							<input type="text" name="it001" value="User Input Here">
-						</label>
-						<span vp-note="warning">This is a multi-line warning explaining why this form field is inadequate in its current state.</span>
+							<label vp-field class="has-warning">
+								Normal <b>(required)</b>
+								<input type="text" name="it001" value="User Input Here">
+							</label>
+							<div vp-msg="warning" vp-point="top-left" class="secondary">This is a multi-line warning explaining why this form field is inadequate in its current state.</div>
 						</div>
 						<label vp-field vp-cols="3">
 							Normal
@@ -328,16 +325,16 @@
 							<input type="text" name="it002" disabled value="User Input Here">
 						</label>
 						<label vp-field vp-cols="2">
-							Icons
-							<span class="lead"><a href="#" onclick="return false;">☎</a></span>
-							<span class="follow">&#x27a4;</span>
-							<input type="text" name="it003" value="User Input Here">
+							Subdivided
+							<div>
+								<span>☎</span>
+								<input type="text" name="it003b" value="Other Input">
+							</div>
 						</label>
 						<label vp-field vp-cols="3">
 							Textarea (growing)
 <textarea name="ta" class="vp-growing">123, Main St.
-Test City, ZZ
-H0H 0H0</textarea>
+Test City, ZZ</textarea>
 						</label>
 						<label vp-field vp-cols="3">
 							Select
@@ -373,8 +370,6 @@ H0H 0H0</textarea>
 						</div>
 					</fieldset>
 					</form>
-					<p>Actually, instead of putting things inside inputs, we should have an alternative to the one-input-per-label scheme where several inputs fill a single grid cell which has the label-like border.</p>
-					<p>Instead, we should do like button groups .growing!</p>
 				</section>
 				<section>
 					<h3>Checkboxes <code>label input[type=checkbox]</code></h3>
@@ -592,7 +587,17 @@ H0H 0H0</textarea>
 					<div vp-msg="error">This message has state <code>error</code>.</div>
 					<div vp-msg="warning">This message has state <code>warning</code>.</div>
 					<div vp-msg="ok">This message has state <code>ok</code>.</div>
-					<div vp-msg="foo">This message has another state.</div>
+					<div vp-msg="ok" class="secondary">This message has state <code>ok</code> and a <code>.secondary</code> class.</div>
+					<div vp-msg="foo" vp-point="bottom-left">This message has another state and a <code>bottom-left</code> pointer.</div>
+				</section>
+				<section>
+					<h3>Options</h3>
+					<dl>
+						<dt>[vp-msg].secondary</dt>
+						<dd>Omits the background color and brings the icon inline.</dd>
+						<dt>[vp-point="..."]</dt>
+						<dd>Adds a pointer triangle to any block, but designed to work with <code>[vp-msg]</code>.  The value is a string composed of two words separated by a hyphen, e.g. <code>top-left</code>.  The first word specifies which border it applies to, one of: <code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>.  The second word specifies where on the border, either one of <code>left</code>, <code>center</code>, <code>right</code> or <code>top</code>, <code>middle</code>, <code>bottom</code>.</dd>
+					</dl>
 				</section>
 			</section>
 
@@ -607,22 +612,43 @@ H0H 0H0</textarea>
 				<section>
 					<h3>Tabs <code>.vp-tabs</code></h3>
 					<p>A block which contains two children: a list of tab handles (<code>inline-block</code>), and a list of tab panels (<code>block</code>).  A little bit of JS adds the necessary ARIA attributes and behavior, such as arrows, home/end and proper tab support.</p>
-					<div class="vp-tabs spaced">
-						<div>
-							<span>Tab 1</span>
-							<span>Tab 2</span>
-							<span>Tab 3</span>
+					<div vp-grid="8">
+						<div vp-cols="4" class="vp-tabs spaced">
+							<div>
+								<span>Tab 1</span>
+								<span>Tab 2</span>
+								<span>Tab 3</span>
+							</div>
+							<div>
+								<div>
+									<p>This is tab 1.</p>
+								</div>
+								<div>
+									<p>This is tab 2.</p>
+									<p>It is taller than the others to demonstrate how height is dynamic.</p>
+								</div>
+								<div>
+									<p>This is tab 3.</p>
+								</div>
+							</div>
 						</div>
-						<div>
+						<div vp-cols="4" class="vp-tabs boxed spaced">
 							<div>
-								<p>This is tab 1.</p>
+								<span>Tab 1</span>
+								<span>Tab 2</span>
+								<span>Tab 3</span>
 							</div>
 							<div>
-								<p>This is tab 2.</p>
-								<p>It is taller than the others to demonstrate how height is dynamic.</p>
-							</div>
-							<div>
-								<p>This is tab 3.</p>
+								<div>
+									<p>This is tab 1.</p>
+								</div>
+								<div>
+									<p>This is tab 2.</p>
+									<p>It is taller than the others to demonstrate how height is dynamic.</p>
+								</div>
+								<div>
+									<p>This is tab 3.</p>
+								</div>
 							</div>
 						</div>
 					</div>

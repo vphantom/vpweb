@@ -33,12 +33,21 @@
 
 		/* Padding */
 		--vp-pad: 0rem;
+		--vp-tab-pad: 0.5rem 0.67rem;
+		--vp-tabact-pad: 0.5rem 1rem;
 		--vp-p-margin: 0.75em;
 
 		/* Sizes */
+		--vp-font-size: 12pt;
+		--vp-thin: 1px;
+		--vp-thick: 0.25em;
 		--vp-min-width: 320px;
 		--vp-width-text-max: 66rem;
 		--vp-corner: 0;
+		--vp-line: 1.33em;
+		--vp-touch-min: 11mm;
+		--vp-touch: 16mm;
+		--vp-touch-max: 19mm;
 
 		/* Colors */
 		--vp-red: 187, 17, 17; /* #b11 */
@@ -46,6 +55,17 @@
 		--vp-green: 51, 136, 17; /* #381 */
 		--vp-blue: 8, 112, 240; /* #0870f0 */
 		--vp-dim: 127, 127, 127; /* #7f7f7f */
+		--vp-dim0: rgba(var(--vp-dim), 0.04);
+		--vp-dim1: rgba(var(--vp-dim), 0.15);
+		--vp-dim2: rgba(var(--vp-dim), 0.33);
+		--vp-dim3: rgba(var(--vp-dim), 0.7);
+
+		/* Opaque color equivalents (alpha 0.05 over white) */
+		--vp-red-05: #fcf3f3;
+		--vp-orange-05: #faf6f3;
+		--vp-green-05: #f5f9f3;
+		--vp-blue-05: #f2f8fe;
+		--vp-dim-05: #f8f8f8;
 	}
 
 	/* Non-prefixed classes which only set/change prefixed variables: */
@@ -63,16 +83,18 @@
 	.spaced,
 	.relaxed {
 		--vp-corner: calc(var(--vp-pad) / 4);
+		--vp-tab-pad: calc(max(var(--vp-pad) / 1.5, 0.5rem)) calc(max(var(--vp-pad), 0.5rem));
+		--vp-tabact-pad: calc(max(var(--vp-pad) / 1.5, 0.5rem)) calc(max(var(--vp-pad) * 2, 1rem));
 	}
 
 	/* Main wrapper */
 
 	.vp:not(.xvp):not(.vp *) {
 		box-sizing: border-box;
-		line-height: 1.33;
+		line-height: var(--vp-line);
 		-webkit-font-smoothing: antialiased;
 		-webkit-text-size-adjust: 100%;
-		font-size: 12pt;
+		font-size: var(--vp-font-size);
 	}
 
 	@media (prefers-reduced-motion: no-preference) {

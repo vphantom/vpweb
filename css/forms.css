@@ -41,13 +41,13 @@
 	}
 
 	@media (any-pointer: coarse) {
-		:is(button, .vp-button, label, input, [vp-field]):not([type=checkbox], [type=radio]).secondary:is(.vp, .vp *):not(.xvp, .xvp *) {
+		:is(button, .vp-button, label, input, .vp-field):not([type='checkbox'], [type='radio']).secondary:is(.vp, .vp *):not(.xvp, .xvp *) {
 			min-width: var(--vp-touch-min);
 			min-height: var(--vp-touch-min);
 			line-height: calc(var(--vp-touch-min) - 1em);
 		}
 
-		:is(button, .vp-button, label, input, [vp-field]):not([type=checkbox], [type=radio]).priority:is(.vp, .vp *):not(.xvp, .xvp *) {
+		:is(button, .vp-button, label, input, .vp-field):not([type='checkbox'], [type='radio']).priority:is(.vp, .vp *):not(.xvp, .xvp *) {
 			min-width: var(--vp-touch-max);
 			min-height: var(--vp-touch-max);
 			line-height: calc(var(--vp-touch-max) - 1em);
@@ -121,10 +121,10 @@
 	/* Focus */
 
 	:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *):focus,
-	input:not([type='checkbox'], [type='radio']):not([vp-field] *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
-	:is(textarea, select):not([vp-field] *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+	input:not([type='checkbox'], [type='radio']):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+	:is(textarea, select):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
 	.vp-group > input:focus,
-	label[vp-field]:focus-within {
+	.vp-field:focus-within {
 		box-shadow: 0 0 0 var(--vp-thin) rgba(var(--vp-blue), 0.75);
 		border-color: rgba(var(--vp-blue), 0.75);
 	}
@@ -132,7 +132,7 @@
 	.vp-tabs > :first-child > :focus {
 		outline-color: rgba(var(--vp-blue), 0.75);
 	}
-	label[vp-field]:focus-within {
+	.vp-field:focus-within {
 		color: rgba(var(--vp-blue), 0.75);
 		font-weight: bold;
 	}
@@ -201,11 +201,12 @@
 	/* Keyboard input field */
 	/* Typically: textarea, select, input type=email|number|password|search|tel|text|url */
 
-	[vp-field], [vp-field] + :is(button, .vp-button, [type='submit'], [type='reset'], [type='button']) {
+	.vp-field,
+	.vp-field + :is(button, .vp-button, [type='submit'], [type='reset'], [type='button']) {
 		min-width: var(--vp-touch);
 		min-height: var(--vp-touch);
 	}
-	label[vp-field] {
+	.vp-field {
 		position: relative;
 		display: block;
 		height: fit-content;
@@ -215,11 +216,11 @@
 		border: 1px solid var(--vp-dim3);
 		border-radius: var(--vp-corner);
 	}
-	label[vp-field] *:not(optgroup, option, b) {
+	.vp-field *:not(optgroup, option, b) {
 		color: rgba(0, 0, 0, 0.5);
 		font-weight: normal;
 	}
-	label[vp-field] :is(input, select, textarea) {
+	.vp-field :is(input, select, textarea) {
 		outline: none;
 		color: #000;
 		background-color: transparent;
@@ -229,62 +230,36 @@
 		border: none;
 		/* padding-top: 0.2em; */
 	}
-	[vp-grid] > * > [vp-field] {
+	[vp-grid] > * > .vp-field {
 		width: 100%;
 	}
-	label[vp-field] > * {
+	.vp-field > * {
 		margin-top: calc(var(--vp-pad) / 2);
 	}
-	label[vp-field] > div {
+	.vp-field > div {
 		white-space: nowrap;
 		display: flex;
 	}
-	label[vp-field] > div > * + * {
+	.vp-field > div > * + * {
 		margin-left: calc(var(--vp-pad) / 2);
 	}
-	label[vp-field] > div > :not(input, select, textarea) {
+	.vp-field > div > :not(input, select, textarea) {
 		font-size: 125%;
 	}
-	label[vp-field] > div > :is(input, select, textarea) {
+	.vp-field > div > :is(input, select, textarea) {
 		flex-grow: 1;
 	}
 
-	label[vp-field].has-warning:focus-within {
-	}
-	label[vp-field].has-warning:focus-within::after {
-		content: attr(vp-warning);
-		position: absolute;
-		top: 100%;
-		left: 0;
-		width: 100%;
-		color: var(--vp-orange);
-		padding: 0.5em 0.625em;
-		background-color: rgba(var(--vp-orange), 0.98);
-		border: var(--vp-thin) solid var(--vp-dim3);
-		border-top: none;
-		border-radius: 0 0 var(--vp-corner) var(--vp-corner);
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		z-index: 10;
-		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-	}
-	.xvp-warning {
-		display: none;
-		width: 100%;
-		color: var(--vp-orange);
-		padding: 0.2em 0.625em;
-		margin-top: 0.2em;
-		margin-bottom: var(--vp-pad);
-	}
-	xlabel[vp-field].has-warning:focus-within + .vp-warning {
-		display: block;
+	.vp-field.has-warning {
+		/* FIXME */
 	}
 
-	label[vp-field] :disabled,
+	.vp-field :disabled,
 	.vp-group > input:disabled {
 		color: var(--vp-dim3);
 		cursor: not-allowed;
 	}
-	label[vp-field] textarea {
+	.vp-field textarea {
 		height: calc(var(--vp-line) * 2);
 	}
 
@@ -334,7 +309,7 @@
  */
 
 	@media (any-pointer: coarse) {
-		:is(button, .vp-button, input, select, textarea):not([type=checkbox], [type=radio], label *):is(.vp, .vp *):not(.xvp, .xvp *),
+		:is(button, .vp-button, input, select, textarea):not([type='checkbox'], [type='radio'], label *):is(.vp, .vp *):not(.xvp, .xvp *),
 		label:is(.vp, .vp *):not(.xvp, .xvp *) {
 			min-width: var(--vp-touch);
 			min-height: var(--vp-touch);

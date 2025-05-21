@@ -8,10 +8,7 @@
 		background-color: rgba(var(--vp-dim), 0.2);
 	}
 
-	table.stick-vertical:is(.vp, .vp *):not(.xvp, .xvp *)
-		:is(thead, tfoot)
-		tr
-		> th {
+	table.stick-vertical:is(.vp, .vp *):not(.xvp, .xvp *) :is(thead, tfoot) tr > th {
 		background-color: #ddd; /* sticky -> no alpha */
 		position: sticky;
 		top: -1px; /* Compensate vanishing border */
@@ -23,9 +20,7 @@
 		bottom: -1px; /* Compensate vanishing border */
 	}
 
-	table.stick-horizontal:is(.vp, .vp *):not(.xvp, .xvp *)
-		tr
-		> th:first-child {
+	table.stick-horizontal:is(.vp, .vp *):not(.xvp, .xvp *) tr > th:first-child {
 		background-color: #ddd; /* sticky -> no alpha */
 		position: sticky;
 		left: 0;
@@ -33,18 +28,15 @@
 		transition: none;
 	}
 
-	/* prettier-ignore */
 	table.stick-horizontal:is(.vp, .vp *):not(.xvp, .xvp *) :is(thead, tfoot) tr > th:first-child {
-	z-index: 12;
-}
+		z-index: 12;
+	}
 
-	table.striped:is(.vp, .vp *):not(.xvp, .xvp *)
-		tbody
-		tr:nth-child(even)
-		> td {
+	table.striped:is(.vp, .vp *):not(.xvp, .xvp *) tbody tr:nth-child(even) > td {
 		background-color: rgba(var(--vp-dim), 0.05);
 	}
 
+	/* Lower specificity: default values */
 	table:where(.vp, .vp *):not(.xvp, .xvp *) tr > * {
 		text-align: left;
 		vertical-align: top;

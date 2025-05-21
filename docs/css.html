@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>20.6KB</td><td>5.0KB</td><td>4.3KB</td></tr>
+<tr><th>vpweb.css</th><td>19.3KB</td><td>4.6KB</td><td>4.0KB</td></tr>
 <tr><th>vpweb.js</th><td>9.2KB</td><td>4.0KB</td><td>3.5KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
@@ -294,14 +294,14 @@
 				Note also that margins between some elements is affected by the form's density.
 				</p>
 				<section>
-					<h3>Fields <code>label[vp-field] > input|select|textarea</code></h3>
+					<h3>Fields <code>label.vp-field > input|select|textarea</code></h3>
 					<p>
 					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
 					</p>
 					<p>
 						With JS enabled, an <code class="html-tag">input</code> without a forced width may grow/shrink with its content with the <code>.vp-growing</code> class.
 						For <code class="html-tag">textarea</code>, height changes instead.
-						<br><label vp-field>Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
+						<br><label class="vp-field">Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
 					</p>
 					<p>TODO: warning state cleanup</p>
 					<p>TODO: cleanup normal vs .primary vs .secondary</p>
@@ -310,33 +310,33 @@
 						<legend>Fieldset of fields and buttons</legend>
 						<div vp-grid="12" class="growing">
 						<div vp-cols="3">
-							<label vp-field class="has-warning">
+							<label class="vp-field has-warning">
 								Normal <b>(required)</b>
 								<input type="text" name="it001" value="User Input Here">
 							</label>
 							<div vp-msg="warning" vp-point="top-left" class="secondary">This is a multi-line warning explaining why this form field is inadequate in its current state.</div>
 						</div>
-						<label vp-field vp-cols="3">
+						<label class="vp-field" vp-cols="3">
 							Normal
 							<input type="text" name="it001" value="User Input Here">
 						</label>
-						<label vp-field vp-cols="6">
+						<label class="vp-field" vp-cols="6">
 							Disabled
 							<input type="text" name="it002" disabled value="User Input Here">
 						</label>
-						<label vp-field vp-cols="2">
+						<label class="vp-field" vp-cols="2">
 							Subdivided
 							<div>
 								<span>☎</span>
 								<input type="text" name="it003b" value="Other Input">
 							</div>
 						</label>
-						<label vp-field vp-cols="3">
+						<label class="vp-field" vp-cols="3">
 							Textarea (growing)
 <textarea name="ta" class="vp-growing">123, Main St.
 Test City, ZZ</textarea>
 						</label>
-						<label vp-field vp-cols="3">
+						<label class="vp-field" vp-cols="3">
 							Select
 							<select name="sel1">
 								<optgroup label="Group One">
@@ -351,7 +351,7 @@ Test City, ZZ</textarea>
 								</optgroup>
 							</select>
 						</label>
-						<label vp-field vp-cols="3">
+						<label class="vp-field" vp-cols="3">
 							Combobox
 							<datalist id="dl1">
 								<option value="user001@example.com" label="User One"></option>

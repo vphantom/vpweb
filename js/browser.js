@@ -29,17 +29,17 @@ const get = alias(ep.getAttribute);
 /**
  * Alias of `Node.nextElementSibling`
  */
-const next = n => n.nextElementSibling;
+const next = (n) => n.nextElementSibling;
 
 /**
  * Alias of `Node.parentElement`
  */
-const parent = n => n.parentElement;
+const parent = (n) => n.parentElement;
 
 /**
  * Alias of `Node.previousElementSibling`
  */
-const prev = n => n.previousElementSibling;
+const prev = (n) => n.previousElementSibling;
 
 /**
  * Set multiple element attributes at once.  Wraps
@@ -105,7 +105,7 @@ const toggle_class = (el, cls, force) => el.classList.toggle(cls, force);
  *
  * @return {Text} Text node
  */
-const text = t => document.createTextNode(String(t));
+const text = (t) => document.createTextNode(String(t));
 
 /**
  * Alias of `HTMLElement.removeAttribute()`
@@ -123,11 +123,11 @@ function empty(node) {
 
 function flatlist(l, acc) {
 	acc = acc || [];
-	const is_iter = i =>
+	const is_iter = (i) =>
 		Array.isArray(i) ||
 		i instanceof NodeList ||
 		i instanceof HTMLCollection;
-	iter(is_iter(l) ? l : [l], i => {
+	iter(is_iter(l) ? l : [l], (i) => {
 		if (is_iter(i)) return flatlist(i, acc);
 		acc.push(typeof i === 'object' ? i : text(i));
 	});
@@ -142,7 +142,7 @@ function flatlist(l, acc) {
  * @param {Node|Node[]|NodeList|HTMLCollection} add New node(s) to insert
  */
 function precede(orig, add) {
-	iter(flatlist(add), n => orig.parentElement.insertBefore(n, orig));
+	iter(flatlist(add), (n) => orig.parentElement.insertBefore(n, orig));
 }
 
 /**
@@ -224,7 +224,7 @@ function h() {
  */
 function H() {
 	const dict = {};
-	iter(arguments, tag => (dict[tag] = h.bind(null, tag)));
+	iter(arguments, (tag) => (dict[tag] = h.bind(null, tag)));
 	return dict;
 }
 
@@ -301,7 +301,7 @@ function on(node, name, f, opts, vpo) {
 		}
 		f(ev);
 	}
-	iter(Array.isArray(name) ? name : [name], tt =>
+	iter(Array.isArray(name) ? name : [name], (tt) =>
 		node.addEventListener(tt, handler, opts)
 	);
 }
@@ -345,8 +345,8 @@ function forever(base, sel, f) {
 	iter(all(base, sel), f);
 
 	const mo = new MutationObserver(
-		iter_f(m => {
-			iter(m.addedNodes, n => {
+		iter_f((m) => {
+			iter(m.addedNodes, (n) => {
 				if (n.nodeType === Node.ELEMENT_NODE && n.matches(sel)) f(n);
 			});
 		})
@@ -383,7 +383,7 @@ function ajax(method, url, body, ctype, rtype, args, ok, err) {
 	iter_obj(h, (k, v) => req.setRequestHeader(k, v));
 	req.send(body);
 
-	req.onreadystatechange = function() {
+	req.onreadystatechange = function () {
 		if (req.readyState === 4 && !done) {
 			// NOTE: Some browsers fire twice
 			done = true;
@@ -444,7 +444,7 @@ function post(url, body, rtype, args, ok, err) {
  * @param {function(XMLHttpRequest):void} [err] Callback on failure
  */
 function jsonscript(el, args, ok, err) {
-	if (el.src) fetch(el.src, 'json', args, xhr => ok(xhr.response), err);
+	if (el.src) fetch(el.src, 'json', args, (xhr) => ok(xhr.response), err);
 	else ok(JSON.parse(el.textContent));
 }
 

@@ -3,7 +3,7 @@
 
 const ap = Array.prototype;
 
-const alias = f => Function.prototype.call.bind(f);
+const alias = (f) => Function.prototype.call.bind(f);
 
 /**
  * Iterator of anything indexable with a length.  Skips undefined items.
@@ -25,7 +25,7 @@ function iter(list, f) {
  *
  * @return {function(*):void} Function which will iterate over its argument
  */
-const iter_f = f => list => iter(list, f);
+const iter_f = (f) => (list) => iter(list, f);
 
 /**
  * Iterate over all keys of an object.  Does not filter.
@@ -33,7 +33,7 @@ const iter_f = f => list => iter(list, f);
  * @param {Object} obj What to iterate over
  * @param {function(string,*):void} f(key,value) Operation to perform on each key
  */
-const iter_obj = (obj, f) => iter(Object.keys(obj), k => f(k, obj[k]));
+const iter_obj = (obj, f) => iter(Object.keys(obj), (k) => f(k, obj[k]));
 
 /**
  * Filtering mapper of anything indexable with a length, skipping undefined
@@ -63,7 +63,7 @@ function map(list, f) {
  *
  * @return {Array} All results of f()
  */
-const map_obj = (obj, f) => map(Object.keys(obj), k => f(k, obj[k]));
+const map_obj = (obj, f) => map(Object.keys(obj), (k) => f(k, obj[k]));
 
 /**
  * Fold anything indexable with a length.
@@ -93,7 +93,7 @@ const shift = alias(ap.shift);
  *
  * @return {function():*} Function which will shift list at each call
  */
-const shifter = l => Function.prototype.call.bind(ap.shift, l);
+const shifter = (l) => Function.prototype.call.bind(ap.shift, l);
 
 /**
  * Compare two scalars, returning 1, 0 or -1 depending on whether A is greater

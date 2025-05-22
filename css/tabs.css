@@ -13,7 +13,7 @@
 		padding: var(--vp-tab-pad);
 		border-bottom: var(--vp-thick) solid var(--vp-dim1);
 	}
-	.vp-tabs > :first-child > [aria-selected="true"] {
+	.vp-tabs > :first-child > [aria-selected='true'] {
 		font-weight: bold;
 		padding: var(--vp-tabact-pad);
 		background-color: var(--vp-dim1);
@@ -40,7 +40,7 @@
 	.vp-tabs > :last-child > * {
 		display: none;
 	}
-	.vp-tabs > :last-child > [aria-selected="true"] {
+	.vp-tabs > :last-child > [aria-selected='true'] {
 		display: block;
 	}
 

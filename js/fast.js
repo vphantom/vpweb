@@ -14,14 +14,14 @@ import * as $ from './browser.js';
 function preclick(el) {
 	let blockNextClick = false;
 
-	const handleMouseDown = ev => {
+	const handleMouseDown = (ev) => {
 		if (ev.button === 0) {
 			ev.target.click();
 			blockNextClick = true;
 		}
 	};
 
-	const handleClick = ev => {
+	const handleClick = (ev) => {
 		if (blockNextClick) {
 			ev.preventDefault();
 			ev.stopImmediatePropagation();
@@ -32,7 +32,8 @@ function preclick(el) {
 	$.on(el, 'mousedown', handleMouseDown, null, { mute: 1000 });
 	$.on(el, 'click', handleClick, { capture: true });
 }
-$.forever(':is(a, button, input[type=submit])[vp-fast], form[vp-fast] :is(button, input[type=submit])',
+$.forever(
+	':is(a, button, input[type=submit])[vp-fast], form[vp-fast] :is(button, input[type=submit])',
 	preclick
 );
 

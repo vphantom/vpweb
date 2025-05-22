@@ -69,7 +69,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 	const get_type = (k, s) => (s || sch || {})[k] || {};
 	const get_type_val = (n, k, s) => get_type(k, s)[n];
 
-	const sort_keys = d => (a, b) => {
+	const sort_keys = (d) => (a, b) => {
 		const sa = sch && sch[a] && sch[a].sort;
 		const sb = sch && sch[b] && sch[b].sort;
 		return (
@@ -84,7 +84,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 		if (idx && !d) ref[idx] = d = {};
 		if (keys) {
 			return H.tr(
-				map(keys, k => {
+				map(keys, (k) => {
 					const inner =
 						(sch || {})[k] || d[k] !== undefined
 							? convert(d, k, conf, sch)
@@ -107,7 +107,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 				});
 			}
 			if (is_checklist) {
-				return map(Object.keys(sch || d).sort(sort_keys(d)), k => [
+				return map(Object.keys(sch || d).sort(sort_keys(d)), (k) => [
 					H.label([
 						convert(d, k, conf, sch, k),
 						' ' + (get_type_val('label', k) || k),
@@ -116,7 +116,7 @@ function convert(ref, idx, conf, sch, label, keys) {
 				]);
 			} else {
 				return H.table(
-					map(Object.keys(sch || d).sort(sort_keys(d)), k => {
+					map(Object.keys(sch || d).sort(sort_keys(d)), (k) => {
 						if (/^__/.test(k)) return;
 						const type = get_type(k);
 						return H.tr([
@@ -140,12 +140,12 @@ function convert(ref, idx, conf, sch, label, keys) {
 
 			// Collect keys from schema and all rows, to be safe
 			const keymap = {};
-			const setk = k => (keymap[k] = true);
+			const setk = (k) => (keymap[k] = true);
 			iter(Object.keys(sch || {}), setk);
-			iter(d, dd => iter_obj(dd, setk));
+			iter(d, (dd) => iter_obj(dd, setk));
 			keys = Object.keys(keymap).sort(sort_keys(d));
 			$.append(table, [
-				H.tr(map(keys, k => H.th(get_type_val('label', k) || k))),
+				H.tr(map(keys, (k) => H.th(get_type_val('label', k) || k))),
 				map(d, (x, i) => convert(d, i, conf, sch, null, keys)),
 			]);
 			return table;
@@ -257,13 +257,13 @@ function register(type, data, el) {
 }
 
 // Async load schemas
-$.forever('script[type$="/json"][vp-editeur-schema]', el =>
-	$.jsonscript(el, null, s => register(1, s, el))
+$.forever('script[type$="/json"][vp-editeur-schema]', (el) =>
+	$.jsonscript(el, null, (s) => register(1, s, el))
 );
 
 // Async load datas (sic)
-$.forever('script[type$="/json"][vp-editeur-data]', el =>
-	$.jsonscript(el, null, s => register(0, s, el))
+$.forever('script[type$="/json"][vp-editeur-data]', (el) =>
+	$.jsonscript(el, null, (s) => register(0, s, el))
 );
 
 // Queue up editors

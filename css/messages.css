@@ -53,7 +53,8 @@
 		color: rgb(var(--vp-col));
 	}
 
-	[vp-note='alt'], [vp-msg='alt'] {
+	[vp-note='alt'],
+	[vp-msg='alt'] {
 		--vp-col: var(--vp-blue);
 		--vp-msg-bgcol-opaque: var(--vp-blue-05);
 		color: rgb(var(--vp-col));

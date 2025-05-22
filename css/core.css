@@ -21,15 +21,14 @@
 		 */
 		--vp-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 		--vp-mono:
-			'Fira Code', 'Hack', 'Hasklig', 'Monoid', 'Source Code Pro', 'JetBrains Mono', 'Cascadia Code', 'SFMono-Regular',
-			'SF Mono', Menlo, Monaco, Inconsolata, 'Fira Mono', 'Roboto Mono', 'Droid Sans Mono', Consolas, 'Liberation Mono',
-			'Lucida Console', 'Courier New', monospace, var(--vp-emoji);
+			'Fira Code', 'Hack', 'Hasklig', 'Monoid', 'Source Code Pro', 'JetBrains Mono', 'Cascadia Code', 'SFMono-Regular', 'SF Mono', Menlo,
+			Monaco, Inconsolata, 'Fira Mono', 'Roboto Mono', 'Droid Sans Mono', Consolas, 'Liberation Mono', 'Lucida Console', 'Courier New',
+			monospace, var(--vp-emoji);
 		--vp-sans:
-			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
-			'Helvetica Neue', Arial, Helvetica, sans-serif, var(--vp-emoji);
+			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
+			Helvetica, sans-serif, var(--vp-emoji);
 		--vp-serif:
-			'Iowan Old Style', 'Apple Garamond', 'Baskerville', 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif,
-			var(--vp-emoji);
+			'Iowan Old Style', 'Apple Garamond', 'Baskerville', 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif, var(--vp-emoji);
 
 		/* Padding */
 		--vp-pad: 0rem;
@@ -121,14 +120,7 @@
 	}
 
 	/* Using where() to facilitate overrides */
-	:where(
-		.vp:not(.xvp),
-		.vp:not(.xvp) *,
-		.vp:not(.xvp)::before,
-		.vp:not(.xvp) *::before,
-		.vp:not(.xvp)::after,
-		.vp:not(.xvp) *::after
-	) {
+	:where(.vp:not(.xvp), .vp:not(.xvp) *, .vp:not(.xvp)::before, .vp:not(.xvp) *::before, .vp:not(.xvp)::after, .vp:not(.xvp) *::after) {
 		box-sizing: inherit;
 		margin: 0;
 		padding: 0;

@@ -96,3 +96,13 @@ dt {
 	display: block;
 	border: 1px solid #333;
 }
+
+.color {
+	display: inline-block;
+  border: var(--vp-thin) solid rgba(var(--color), 0.5);
+	background-color: rgba(var(--color), 0.05);
+	color: rgb(var(--color));
+	padding: var(--vp-pad);
+	min-width: 5em;
+	text-align: center;
+}

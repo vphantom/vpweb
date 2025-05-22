@@ -50,11 +50,14 @@
 		--vp-touch-max: 19mm;
 
 		/* Colors */
-		--vp-red: 187, 17, 17; /* #b11 */
-		--vp-orange: 160, 80, 16; /* #a51 */
-		--vp-green: 51, 136, 17; /* #381 */
-		--vp-blue: 8, 112, 240; /* #0870f0 */
-		--vp-dim: 127, 127, 127; /* #7f7f7f */
+		--vp-red: 187, 17, 17;
+		--vp-orange: 190, 85, 5;
+		--vp-green: 51, 136, 17;
+		--vp-blue: 5, 80, 170;
+		--vp-violet: 100, 50, 150;
+		--vp-cyan: 0, 130, 155;
+		--vp-yellow: 160, 140, 0;
+		--vp-dim: 127, 127, 127;
 		--vp-dim0: rgba(var(--vp-dim), 0.04);
 		--vp-dim1: rgba(var(--vp-dim), 0.15);
 		--vp-dim2: rgba(var(--vp-dim), 0.33);
@@ -62,9 +65,12 @@
 
 		/* Opaque color equivalents (alpha 0.05 over white) */
 		--vp-red-05: #fcf3f3;
-		--vp-orange-05: #faf6f3;
+		--vp-orange-05: #fcf7f3;
 		--vp-green-05: #f5f9f3;
-		--vp-blue-05: #f2f8fe;
+		--vp-blue-05: #f3f6fb;
+		--vp-violet-05: #f6f4fa;
+		--vp-cyan-05: #f2f8fa;
+		--vp-yellow-05: #faf9f2;
 		--vp-dim-05: #f8f8f8;
 	}
 

@@ -138,9 +138,33 @@ function auto_height(textarea) {
     textarea.style.height = `${initialHeight}px`;
 }
 
+/**
+ * Update parent container's validation state based on input validity.
+ *
+ * @param {HTMLElement} container Parent container
+ * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} input Form field
+ */
+function update_validity(container, input) {
+	if (input.validity.valid) {
+		container.classList.remove('has-invalid');
+	} else {
+		container.classList.add('has-invalid');
+	}
+}
+
 $.forever('form[method="json-post"], form[vp-target]', enhance);
 $.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
 $.forever('input.vp-growing', auto_width);
 $.forever('textarea.vp-growing', auto_height);
+$.forever(
+	'input[required], input[pattern], input[min], input[max], input[type="email"], input[type="url"], select[required], textarea[required]',
+	(input) => {
+		const container = input.closest('label, .vp-field');
+		if (!container) return;
+		$.on(input, ['invalid', 'blur', 'change'], () =>
+			update_validity(container, input)
+		);
+	}
+);
 
-export { auto_height, auto_width, enhance, ghost };
+export { auto_height, auto_width, enhance, ghost, update_validity };

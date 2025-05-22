@@ -73,6 +73,10 @@ Activated with `<textarea class="vp-growing">` or `forms.auto_height(element)`
 
 Textareas with this class will expand vertically as new lines are added, but will not shrink to less than their original height.
 
+### Field validity
+
+Adds/removes the `.has-invalid` class to `.vp-field` or `label` immediate parents of `<input>`, `<select>` and `<textarea>` elements based on their changing validity state.
+
 ### Ghost fields
 
 Activated with attribute `vp-name` or `forms.ghost(element)`
@@ -113,5 +117,14 @@ Make a textarea grow and shrink with its contents.
 **Parameters:**
 
 * `textarea` — `HTMLTextAreaElement` — The textarea to grow
+
+## `function update_validity(container, input)`
+
+Update parent container's validation state based on input validity.
+
+**Parameters:**
+
+* `container` — `HTMLElement` — Parent container
+* `input` — `HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement` — Form field
 
 <!-- END DOC-COMMENT -->

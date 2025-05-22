@@ -128,9 +128,19 @@
 		box-shadow: 0 0 0 var(--vp-thin) rgba(var(--vp-blue), 0.75);
 		border-color: rgba(var(--vp-blue), 0.75);
 	}
+	input:is(.has-invalid, .has-warning):not([type='checkbox'], [type='radio']):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+	:is(textarea, select):is(.has-invalid > *, .has-warning > *):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+	.vp-group > input:invalid:focus,
+	.vp-field:is(.has-invalid, .has-warning):focus-within {
+		box-shadow: 0 0 0 calc(var(--vp-thin) * 2) rgba(var(--vp-orange), 0.75);
+		border-color: rgba(var(--vp-orange), 0.75);
+	}
 	input:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):focus,
 	.vp-tabs > :first-child > :focus {
 		outline-color: rgba(var(--vp-blue), 0.75);
+	}
+	input:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):invalid:focus {
+		outline-color: rgba(var(--vp-orange), 0.75);
 	}
 	.vp-field:focus-within {
 		color: rgba(var(--vp-blue), 0.75);
@@ -213,7 +223,7 @@
 		font-size: 80%;
 		color: rgba(0, 0, 0, 0.67);
 		padding: 0.625em;
-		border: 1px solid var(--vp-dim3);
+		border: var(--vp-thin) solid var(--vp-dim3);
 		border-radius: var(--vp-corner);
 	}
 	.vp-field *:not(optgroup, option, b) {
@@ -228,7 +238,6 @@
 		display: block;
 		width: 100%;
 		border: none;
-		/* padding-top: 0.2em; */
 	}
 	[vp-grid] > * > .vp-field {
 		width: 100%;
@@ -250,8 +259,9 @@
 		flex-grow: 1;
 	}
 
-	.vp-field.has-warning {
-		/* FIXME */
+	.vp-field:is(.has-warning, .has-invalid) {
+		border: calc(var(--vp-thin) * 2) solid rgb(var(--vp-orange));
+		color: rgba(var(--vp-orange), 0.75);
 	}
 
 	.vp-field :disabled,

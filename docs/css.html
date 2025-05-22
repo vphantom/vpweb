@@ -303,7 +303,6 @@
 						For <code class="html-tag">textarea</code>, height changes instead.
 						<br><label class="vp-field">Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
 					</p>
-					<p>TODO: warning state cleanup</p>
 					<p>TODO: cleanup normal vs .primary vs .secondary</p>
 					<form>
 					<fieldset class="spaced">
@@ -318,7 +317,7 @@
 						</div>
 						<label class="vp-field" vp-cols="3">
 							Normal
-							<input type="text" name="it001" value="User Input Here">
+							<input type="text" name="it001" value="" required>
 						</label>
 						<label class="vp-field" vp-cols="6">
 							Disabled
@@ -588,7 +587,7 @@ Test City, ZZ</textarea>
 					<div vp-msg="warning">This message has state <code>warning</code>.</div>
 					<div vp-msg="ok">This message has state <code>ok</code>.</div>
 					<div vp-msg="ok" class="secondary">This message has state <code>ok</code> and a <code>.secondary</code> class.</div>
-					<div vp-msg="foo" vp-point="bottom-left">This message has another state and a <code>bottom-left</code> pointer.</div>
+					<div vp-msg="foo" vp-point="top-left">This message has another state and a <code>top-left</code> pointer.</div>
 				</section>
 				<section>
 					<h3>Options</h3>

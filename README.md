@@ -1,7 +1,7 @@
 # Vanilla+
 
 [![license](https://img.shields.io/github/license/vphantom/vpweb.svg?style=plastic)]()
-<!-- [![GitHub release](https://img.shields.io/github/release/vphantom/vpweb.svg?style=plastic)]() -->
+[![GitHub release](https://img.shields.io/github/release/vphantom/vpweb.svg?style=plastic)]()
 
 Vanilla+ is a minimalistic web interface development library.  It adds no abstraction layers and thus allows you to use only the portions you need without bloat from the rest.  It is divided in 3 main parts:
 

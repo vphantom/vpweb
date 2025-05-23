@@ -294,3 +294,46 @@
 		}
 	}
 }
+
+@layer vp.util {
+	/* Colors */
+
+	.vp-red,
+	.vp-orange,
+	.vp-green,
+	.vp-blue,
+	.vp-violet,
+	.vp-cyan,
+	.vp-yellow,
+	.vp-dim {
+		border: var(--vp-thin) solid rgba(var(--vp-color), 0.5);
+		color: rgb(var(--vp-color));
+	}
+	.vp-back {
+		background-color: rgba(var(--vp-color), 0.05);
+	}
+	.vp-red {
+		--vp-color: var(--vp-red);
+	}
+	.vp-orange {
+		--vp-color: var(--vp-orange);
+	}
+	.vp-green {
+		--vp-color: var(--vp-green);
+	}
+	.vp-blue {
+		--vp-color: var(--vp-blue);
+	}
+	.vp-violet {
+		--vp-color: var(--vp-violet);
+	}
+	.vp-cyan {
+		--vp-color: var(--vp-cyan);
+	}
+	.vp-yellow {
+		--vp-color: var(--vp-yellow);
+	}
+	.vp-dim {
+		--vp-color: var(--vp-dim);
+	}
+}

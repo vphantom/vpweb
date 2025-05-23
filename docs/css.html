@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>20.3KB</td><td>4.8KB</td><td>4.2KB</td></tr>
+<tr><th>vpweb.css</th><td>20.7KB</td><td>4.9KB</td><td>4.3KB</td></tr>
 <tr><th>vpweb.js</th><td>9.6KB</td><td>4.1KB</td><td>3.6KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
@@ -90,17 +90,17 @@
 				</p>
 				<section>
 					<h3>Colors</h3>
-					<p>CSS variables for the followig colors are available in two variants: saturated RGB triplets as <code>--vp-X</code> and 5% white-dimmed hex as <code>--vp-X-05</code> (e.g. <code>--vp-red-05</code>).</p>
+					<p>CSS variables for the followig colors are available in two variants: saturated RGB triplets as <code>--vp-X</code> and 5% white-dimmed hex as <code>--vp-X-05</code> (e.g. <code>--vp-red-05</code>). Helper classes also set these colors for the current text and border.  Optional <code>.vp-back</code> class sets a background color in the same hue at 5%.</p>
 					<p>In some uses like messages, semantic terms are used instead of direct color names, like <code>error</code> implying <code>red</code>, etc.
 					<p>
-						<span class="color" style="--color: var(--vp-cyan)">cyan</span>
-						<span class="color" style="--color: var(--vp-blue)">blue</span>
-						<span class="color" style="--color: var(--vp-violet)">violet</span>
-						<span class="color" style="--color: var(--vp-red)">red</span>
-						<span class="color" style="--color: var(--vp-orange)">orange</span>
-						<span class="color" style="--color: var(--vp-yellow)">yellow</span>
-						<span class="color" style="--color: var(--vp-green)">green</span>
-						<span class="color" style="--color: var(--vp-dim)">dim</span>
+						<span class="color vp-back vp-cyan">.vp-cyan</span>
+						<span class="color vp-back vp-blue">.vp-blue</span>
+						<span class="color vp-back vp-violet">.vp-violet</span>
+						<span class="color vp-back vp-red">.vp-red</span>
+						<span class="color vp-back vp-orange">.vp-orange</span>
+						<span class="color vp-back vp-yellow">.vp-yellow</span>
+						<span class="color vp-back vp-green">.vp-green</span>
+						<span class="color vp-back vp-dim">.vp-dim</span>
 					</p>
 				</section>
 				<section>
@@ -594,7 +594,6 @@ Test City, ZZ</textarea>
 					<div vp-note="error">This note has state <code>error</code>.</div>
 					<div vp-note="warning">This note has state <code>warning</code>.</div>
 					<div vp-note="ok">This note has state <code>ok</code>.</div>
-					<div vp-note="alt">This note has state <code>alt</code>.</div>
 					<div vp-note="foo">This note has another state.</div>
 				</section>
 				<section>
@@ -603,7 +602,6 @@ Test City, ZZ</textarea>
 					<div vp-msg="warning">This message has state <code>warning</code>.</div>
 					<div vp-msg="ok">This message has state <code>ok</code>.</div>
 					<div vp-msg="ok" class="secondary">This message has state <code>ok</code> and a <code>.secondary</code> class.</div>
-					<div vp-msg="alt">This message has state <code>alt</code>.</div>
 					<div vp-msg="foo" vp-point="top-left">This message has any other state and a <code>top-left</code> pointer.</div>
 				</section>
 				<section>

@@ -53,13 +53,6 @@
 		color: rgb(var(--vp-col));
 	}
 
-	[vp-note='alt'],
-	[vp-msg='alt'] {
-		--vp-col: var(--vp-blue);
-		--vp-msg-bgcol-opaque: var(--vp-blue-05);
-		color: rgb(var(--vp-col));
-	}
-
 	[vp-note]::before {
 		margin-right: calc(var(--vp-pad) / 2);
 	}

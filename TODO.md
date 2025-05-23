@@ -2,6 +2,9 @@
 
 ### Tables
 
+- [ ] Horizontal without outside borders, maybe not even TH grey, "simple"
+- [ ] Make a no-wrap column type, with and without truncation
+- [ ] Guaranteed smallest cell: width:1px no-wrap
 - [ ] Easy to use mechanism so that `<thead>`/`<tfoot>` stay in the parent viewport while `<tbody>` scrolls vertically if height is constrained.  All 3 scroll horizontally if width is constrained (perhaps keep column 1 sticky on the left?)
 - [ ] Explore non-repetitive means to transform tables into zebra cards on phone widths via JS.
 

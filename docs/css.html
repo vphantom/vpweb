@@ -68,18 +68,6 @@
 					If you use <code>@layers</code>, just set our pre-defined <code>vp</code> layer where you want in your stack.  All our internal layers are namespaced within this single global layer.
 					</p>
 				</section>
-				<section>
-					<h3>TODO</h3>
-					<p>
-					This is a work-in-progress. Below are my ramblings so I don't forget anything. ;-)
-					</p>
-					<ul>
-						<li>Forms/Tables: error/warning/highlight/disabled states with messages</li>
-						<li>Tables: horizontal without outside borders, maybe not even TH grey, "simple"</li>
-						<li>Tables: make a no-wrap column type, with and without truncation</li>
-						<li>Tables: guaranteed smallest cell: width:1px no-wrap</li>
-					</ul>
-				</section>
 			</section>
 
 
@@ -318,7 +306,6 @@
 						For <code class="html-tag">textarea</code>, height changes instead.
 						<br><label class="vp-field">Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
 					</p>
-					<p>TODO: cleanup normal vs .primary vs .secondary</p>
 					<form>
 					<fieldset class="spaced">
 						<legend>Fieldset of fields and buttons</legend>
@@ -439,7 +426,6 @@ Test City, ZZ</textarea>
 						<button onclick="return false;" class="active">:active, .active</button>
 						<button onclick="return false;" disabled>:disabled</button>
 						<button onclick="return false;" class="secondary">.secondary</button>
-						<button onclick="return false;" class="primary">.primary</button>
 					</form>
 					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
 					<p>Optional <code>.vp-group.growing</code> makes any <code>input</code> grow proportionally to fill the container space.</p>
@@ -474,7 +460,6 @@ Test City, ZZ</textarea>
 						<span style="display: inline-block; background-color: orange; padding: 0.1em;">
 							<button onclick="return false;">Normal</button>
 							<button onclick="return false;" class="secondary">.secondary</button>
-							<button onclick="return false;" class="primary">.primary</button>
 						</span>
 					</form>
 				</section>

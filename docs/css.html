@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>20.7KB</td><td>4.9KB</td><td>4.3KB</td></tr>
+<tr><th>vpweb.css</th><td>20.5KB</td><td>4.9KB</td><td>4.3KB</td></tr>
 <tr><th>vpweb.js</th><td>9.6KB</td><td>4.1KB</td><td>3.6KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
@@ -315,7 +315,7 @@
 								Normal <b>(required)</b>
 								<input type="text" name="it001" value="User Input Here">
 							</label>
-							<div vp-msg="warning" vp-point="top-left" class="secondary">This is a multi-line warning explaining why this form field is inadequate in its current state.</div>
+							<vp-note vp-point="top-left" class="boxed secondary warning">This is a multi-line warning explaining why this form field is inadequate in its current state.</vp-note>
 						</div>
 						<label class="vp-field" vp-cols="3">
 							Normal
@@ -574,28 +574,28 @@ Test City, ZZ</textarea>
 			<section>
 				<h2>Messages <code>messages.css</code></h2>
 				<section>
-					<h3>Note <code>[vp-note="<i>state</i>"]</code></h3>
+					<h3>Plain <code class="html-tag">vp-note</code></h3>
 					<p>A note with a state automatically gets a color and an icon.</p>
-					<div vp-note="error">This note has state <code>error</code>.</div>
-					<div vp-note="warning">This note has state <code>warning</code>.</div>
-					<div vp-note="ok">This note has state <code>ok</code>.</div>
-					<div vp-note="foo">This note has another state.</div>
+					<vp-note class="error">This note has <code>.error</code>.</vp-note>
+					<vp-note class="warning">This note has <code>.warning</code>.</vp-note>
+					<vp-note class="ok">This note has <code>.ok</code>.</vp-note>
+					<vp-note>This note has no semantic status class.</vp-note>
 				</section>
 				<section>
-					<h3>Message <code>[vp-msg="<i>state</i>"]</code></h3>
-					<div vp-msg="error">This message has state <code>error</code>.</div>
-					<div vp-msg="warning">This message has state <code>warning</code>.</div>
-					<div vp-msg="ok">This message has state <code>ok</code>.</div>
-					<div vp-msg="ok" class="secondary">This message has state <code>ok</code> and a <code>.secondary</code> class.</div>
-					<div vp-msg="foo" vp-point="top-left">This message has any other state and a <code>top-left</code> pointer.</div>
+					<h3>Boxed <code class="html-tag">vp-note class="boxed"</code></h3>
+					<vp-note class="boxed error">This message has <code>.error</code>.</vp-note>
+					<vp-note class="boxed warning">This message has <code>.warning</code>.</vp-note>
+					<vp-note class="boxed ok">This message has <code>.ok</code>.</vp-note>
+					<vp-note class="boxed secondary ok">This message has <code>.ok</code> and <code>.secondary</code> classes.</vp-note>
+					<vp-note class="boxed" vp-point="top-left">This message has no semantic status class and a <code>top-left</code> point.</vp-note>
 				</section>
 				<section>
 					<h3>Options</h3>
 					<dl>
-						<dt>[vp-msg].secondary</dt>
+						<dt>vp-note.boxed.secondary</dt>
 						<dd>Omits the background color and brings the icon inline.</dd>
 						<dt>[vp-point="..."]</dt>
-						<dd>Adds a pointer triangle to any block, but designed to work with <code>[vp-msg]</code>.  The value is a string composed of two words separated by a hyphen, e.g. <code>top-left</code>.  The first word specifies which border it applies to, one of: <code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>.  The second word specifies where on the border, either one of <code>left</code>, <code>center</code>, <code>right</code> or <code>top</code>, <code>middle</code>, <code>bottom</code>.</dd>
+						<dd>Adds a pointer triangle to any block, but designed to work with <code class="html-tag">vp-note</code>.  The value is a string composed of two words separated by a hyphen, e.g. <code>top-left</code>.  The first word specifies which border it applies to, one of: <code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>.  The second word specifies where on the border, either one of <code>left</code>, <code>center</code>, <code>right</code> or <code>top</code>, <code>middle</code>, <code>bottom</code>.</dd>
 					</dl>
 				</section>
 			</section>

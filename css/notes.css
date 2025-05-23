@@ -1,14 +1,20 @@
-/* FIXME: review color handling, not like other files */
 @layer vp.components {
-	[vp-note],
-	[vp-msg] {
+	vp-note {
 		--vp-col: var(--vp-dim);
-		--vp-msg-bgcol: rgba(var(--vp-col), 0.05);
-		--vp-msg-bgcol-opaque: var(--vp-dim-05);
+		--vp-bgcol: rgba(var(--vp-col), 0.05);
+		--vp-bgcolo: var(--vp-dim-05);
+		display: block;
 		margin-bottom: var(--vp-p-margin);
 	}
+	vp-note.boxed {
+		position: relative;
+		border: var(--vp-thin) solid rgba(var(--vp-col), 0.33);
+		background-color: var(--vp-bgcol);
+		border-radius: var(--vp-corner);
+		padding: var(--vp-pad) var(--vp-pad) var(--vp-pad) calc(var(--vp-pad) + var(--vp-pad) + 1.5em);
+	}
 
-	:is([vp-note], [vp-msg])::before {
+	vp-note::before {
 		content: '\24d8';
 		font-style: normal;
 		font-weight: bold;
@@ -20,54 +26,41 @@
 		width: 1.5em;
 	}
 
-	[vp-note='warning']::before,
-	[vp-note='error']::before,
-	[vp-msg='warning']::before,
-	[vp-msg='error']::before {
+	vp-note:is(.error, .warning)::before {
 		content: '\26a0';
 	}
 
-	[vp-note='error'],
-	[vp-msg='error'] {
+	vp-note.error {
 		--vp-col: var(--vp-red);
-		--vp-msg-bgcol-opaque: var(--vp-red-05);
+		--vp-bgcolo: var(--vp-red-05);
 		color: rgb(var(--vp-col));
 	}
 
-	[vp-note='warning'],
-	[vp-msg='warning'] {
+	vp-note.warning {
 		--vp-col: var(--vp-orange);
-		--vp-msg-bgcol-opaque: var(--vp-orange-05);
+		--vp-bgcolo: var(--vp-orange-05);
 		color: rgb(var(--vp-col));
 	}
 
-	[vp-msg].secondary {
-		--vp-msg-bgcol: #fff;
-		--vp-msg-bgcol-opaque: #fff;
+	vp-note.secondary {
+		--vp-bgcol: #fff;
+		--vp-bgcolo: #fff;
 	}
 
-	[vp-note='ok'],
-	[vp-msg='ok'] {
+	vp-note.ok {
 		--vp-col: var(--vp-green);
-		--vp-msg-bgcol-opaque: var(--vp-green-05);
+		--vp-bgcolo: var(--vp-green-05);
 		color: rgb(var(--vp-col));
 	}
 
-	[vp-note]::before {
+	vp-note:not(.boxed)::before {
 		margin-right: calc(var(--vp-pad) / 2);
 	}
 
-	[vp-msg] {
-		position: relative;
-		border: var(--vp-thin) solid rgba(var(--vp-col), 0.33);
-		background-color: var(--vp-msg-bgcol);
-		border-radius: var(--vp-corner);
-		padding: var(--vp-pad) var(--vp-pad) var(--vp-pad) calc(var(--vp-pad) + var(--vp-pad) + 1.5em);
-	}
-	[vp-msg].secondary {
+	vp-note.boxed.secondary {
 		padding: var(--vp-pad);
 	}
-	[vp-msg]:not(.secondary)::before {
+	vp-note.boxed:not(.secondary)::before {
 		position: absolute;
 		top: var(--vp-pad);
 		left: var(--vp-pad);
@@ -76,7 +69,7 @@
 	/* Optional triangle */
 
 	[vp-point] {
-		background-color: var(--vp-msg-bgcol-opaque, #fff);
+		background-color: var(--vp-bgcolo, #fff);
 	}
 	[vp-point^='top-'] {
 		margin-top: 0.6em;
@@ -95,7 +88,7 @@
 		display: block;
 		position: absolute;
 		content: '';
-		background-color: var(--vp-msg-bgcol-opaque, #fff);
+		background-color: var(--vp-bgcolo, #fff);
 		width: 0.8em;
 		height: 0.8em;
 		border: var(--vp-thin) solid rgba(var(--vp-col), 0.33);

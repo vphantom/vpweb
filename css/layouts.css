@@ -165,3 +165,14 @@
 		}
 	}
 }
+
+@layer vp.util {
+	.vp-wrap {
+		width: 100%;
+		max-width: var(--vp-width-text-max);
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: var(--vp-pad);
+		padding-right: var(--vp-pad);
+	}
+}

@@ -88,6 +88,6 @@ function tabs(el) {
 	);
 	activate(handles[initial], initial);
 }
-$.forever('.vp-tabs', tabs);
+$.forever('vp-tabs', tabs);
 
 export { tabs };

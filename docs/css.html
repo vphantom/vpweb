@@ -7,10 +7,10 @@
 		<script src="vpweb.js"></script>
 	</head>
 	<body ontouchstart class="vp sans spaced">
-		<header class="vp-box">
+		<header class="vp-wrap">
 			<h1 style="display:inline-block">Vanilla+ CSS Framework</h1>
 		</header>
-		<main class="vp-box">
+		<main class="vp-wrap">
 
 
 			<section>
@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>20.5KB</td><td>4.9KB</td><td>4.3KB</td></tr>
+<tr><th>vpweb.css</th><td>20.6KB</td><td>4.9KB</td><td>4.3KB</td></tr>
 <tr><th>vpweb.js</th><td>9.6KB</td><td>4.1KB</td><td>3.6KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
@@ -78,17 +78,17 @@
 				</p>
 				<section>
 					<h3>Colors</h3>
-					<p>CSS variables for the followig colors are available in two variants: saturated RGB triplets as <code>--vp-X</code> and 5% white-dimmed hex as <code>--vp-X-05</code> (e.g. <code>--vp-red-05</code>). Helper classes also set these colors for the current text and border.  Optional <code>.vp-back</code> class sets a background color in the same hue at 5%.</p>
+					<p>CSS variables for the followig colors are available in two variants: saturated RGB triplets as <code>--vp-X</code> and 5% white-dimmed hex as <code>--vp-X-05</code> (e.g. <code>--vp-red-05</code>). Helper classes also set these colors for the current text and border.  Optional <code>.back</code> class sets a background color in the same hue at 5%.</p>
 					<p>In some uses like notes, semantic terms are used instead of direct color names, like <code>error</code> implying <code>red</code>, etc.
 					<p>
-						<span class="color vp-back vp-cyan">.vp-cyan</span>
-						<span class="color vp-back vp-blue">.vp-blue</span>
-						<span class="color vp-back vp-violet">.vp-violet</span>
-						<span class="color vp-back vp-red">.vp-red</span>
-						<span class="color vp-back vp-orange">.vp-orange</span>
-						<span class="color vp-back vp-yellow">.vp-yellow</span>
-						<span class="color vp-back vp-green">.vp-green</span>
-						<span class="color vp-back vp-dim">.vp-dim</span>
+						<span class="color back cyan">.cyan</span>
+						<span class="color back blue">.blue</span>
+						<span class="color back violet">.violet</span>
+						<span class="color back red">.red</span>
+						<span class="color back orange">.orange</span>
+						<span class="color back yellow">.yellow</span>
+						<span class="color back green">.green</span>
+						<span class="color back dim">.dim</span>
 					</p>
 				</section>
 				<section>
@@ -154,7 +154,7 @@
 					<h3>Helper classes</h3>
 					<dl>
 
-						<dt><code>.none</code></dt>
+						<dt><code>.gone</code></dt>
 						<dd>Sets <code>display: none</code></dd>
 
 						<dt><code>.sticky</code></dt>
@@ -174,7 +174,7 @@
 			<section>
 				<h2>Layouts <code>layouts.css</code></h2>
 				<section>
-					<h3>Boxes <code>.vp-box</code></h3>
+					<h3>Wrap <code>.vp-wrap</code></h3>
 					<p>Adds a <code>max-width</code> and side margins dictated by density (self or immediate parent).</p>
 				</section>
 				<section>
@@ -609,10 +609,10 @@ Test City, ZZ</textarea>
 					<p>This framework doesn't yet include styles for this basic HTML5 construct, but it is planned for the future.</p>
 				</section>
 				<section>
-					<h3>Tabs <code>.vp-tabs</code></h3>
+					<h3>Tabs <code class="html-tag">vp-tabs</code></h3>
 					<p>A block which contains two children: a list of tab handles (<code>inline-block</code>), and a list of tab panels (<code>block</code>).  A little bit of JS adds the necessary ARIA attributes and behavior, such as arrows, home/end and proper tab support.</p>
 					<div vp-grid="8">
-						<div vp-cols="4" class="vp-tabs spaced">
+						<vp-tabs vp-cols="4" class="spaced">
 							<div>
 								<span>Tab 1</span>
 								<span>Tab 2</span>
@@ -630,8 +630,8 @@ Test City, ZZ</textarea>
 									<p>This is tab 3.</p>
 								</div>
 							</div>
-						</div>
-						<div vp-cols="4" class="vp-tabs boxed spaced">
+						</vp-tabs>
+						<vp-tabs vp-cols="4" class="boxed spaced">
 							<div>
 								<span>Tab 1</span>
 								<span>Tab 2</span>
@@ -649,13 +649,13 @@ Test City, ZZ</textarea>
 									<p>This is tab 3.</p>
 								</div>
 							</div>
-						</div>
+						</vp-tabs>
 					</div>
 				</section>
 				<section>
 					<h3>Options</h3>
 					<dl>
-						<dt><code>.vp-tabs.boxed</code></dt>
+						<dt><code>vp-tabs.boxed</code></dt>
 						<dd>
 							Adds a box (similar to a <code class="html-tag">fieldset</code>) around the panel area.
 						</dd>

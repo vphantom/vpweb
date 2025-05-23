@@ -136,7 +136,7 @@
 		border-color: rgba(var(--vp-orange), 0.75);
 	}
 	input:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):focus,
-	.vp-tabs > :first-child > :focus {
+	vp-tabs > :first-child > :focus {
 		outline-color: rgba(var(--vp-blue), 0.75);
 	}
 	input:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):invalid:focus {

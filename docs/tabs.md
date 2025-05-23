@@ -15,7 +15,7 @@ import 'vpweb/tabs';
 
 ### Usage
 
-By default, tabs are activated for `.vp-tabbed` elements, but you can also
+By default, tabs are activated for `<vp-tabs>` elements, but you can also
 activate them manually:
 
 ```js
@@ -27,7 +27,7 @@ Regardless, the element must contain two children, each with a matching number o
 If you want a specific tab to be active by default instead of the first one, add the `vp-current="n"` attribute to your wrapper element, where `n` is the index of the tab you want to be active starting from 0.
 
 ```html
-<div class="vp-tabbed" vp-current="1">
+<vp-tabs vp-current="1">
 	<div>
 		<span>Tab 1 (inactive)</span>
 		<span>Tab 2 (active)</span>
@@ -36,7 +36,7 @@ If you want a specific tab to be active by default instead of the first one, add
 		<div>Panel 1 (hidden)</div>
 		<div>Panel 2 (visible)</div>
 	</div>
-</div>
+</vp-tabs>
 ```
 
 <!-- BEGIN DOC-COMMENT H2 js/tabs.js -->

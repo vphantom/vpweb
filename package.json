@@ -1,6 +1,6 @@
 {
   "name": "vpweb",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Vanilla+: minimalistic web interface development library",
   "type": "module",
   "exports": {
@@ -17,16 +17,17 @@
   "homepage": "https://github.com/vphantom/vpweb",
   "files": [
     "BROWSER_SUPPORT.md",
+    "CONTRIBUTING.md",
     "LICENSE.txt",
     "Makefile",
     "README.md",
+    "css/*.css",
     "dist/*.{css,js,map}",
-    "docs/*.{css,html,md}",
-    "js/*.js",
-    "css/*.css"
+    "docs/*.{html,md}",
+    "js/*.js"
   ],
   "devDependencies": {
-    "docblox2md": "^0.7.5",
+    "docblox2md": "^0.8.1",
     "postcss-cli": "^9.1.0",
     "postcss-import": "^14.1.0",
     "postcss-lightningcss": "^1.0.1",

@@ -5,7 +5,7 @@
 
 Vanilla+ is a minimalistic web interface development library.  It adds no abstraction layers and thus allows you to use only the portions you need without bloat from the rest.  It is divided in 3 main parts:
 
-* A basic CSS library
+* A basic CSS library (almost pure, but not quite)
 * A JS library
 * A collection of web components
 
@@ -13,11 +13,11 @@ The components utilize the JS library while maintaining independence. They opera
 
 ### Status
 
-**WORKING PROTOTYPE** "It works for me." The APIs may still change significantly, bugs and browser incompatibilities may still abound.
+The core CSS and JS components are stable but not yet production-tested.
 
-Development has resumed and a stable version 1.0 is expected by July 2025.
+The advanced JS components are still in development.
 
-See [TODO](TODO.md) for details of what's coming up.
+See [TODO](TODO.md) for details of what's planned.
 
 ### Installation
 

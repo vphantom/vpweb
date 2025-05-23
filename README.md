@@ -13,9 +13,9 @@ The components utilize the JS library while maintaining independence. They opera
 
 ### Status
 
-The core CSS and JS components are stable but not yet production-tested.
+The core CSS and JS components are stable but not yet production-tested.  Some names may still change a bit as I settle into my first production use.
 
-The advanced JS components are still in development.
+The advanced JS components are still in development.  CSS tables are still subject to change.
 
 See [TODO](TODO.md) for details of what's planned.
 

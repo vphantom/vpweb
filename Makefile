@@ -48,7 +48,7 @@ dist:	$(CSS_ASSETS) $(JS_ASSETS)
 	@$(DOCBLOX2MD) $(DOCS)
 
 clean:
-	rm -fv dist/* docs/dist.css docs/*.map docs/*.gz docs/*.br
+	rm -fv dist/* docs/dist.css docs/*~ docs/*.map docs/*.gz docs/*.br
 
 watch:	dist
 	@echo "Watching for changes..."

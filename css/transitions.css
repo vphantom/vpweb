@@ -9,9 +9,7 @@
 	 * appearing one's pre-transition delay (second argument)?
 	 */
 	.vp-loaded:is(.vp, .vp *):not(.xvp, .xvp *) * {
-		transition:
-			background-color var(--vp-trans),
-			padding var(--vp-trans);
+		transition: background-color var(--vp-trans), padding var(--vp-trans);
 	}
 
 	.vp-loaded:is(.vp, .vp *):not(.xvp, .xvp *) [class*='go-'] {

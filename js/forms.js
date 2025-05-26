@@ -167,7 +167,7 @@ function update_validity(container, input) {
 
 $.forever('form[method="json-post"], form[vp-target]', enhance);
 $.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
-$.forever('input[type="email"]', email_pattern);
+$.forever('input[type="email"]:is(.vp, .vp *):not(.xvp, .xvp *)', email_pattern);
 $.forever('input.vp-growing', auto_width);
 $.forever('textarea.vp-growing', auto_height);
 $.forever(

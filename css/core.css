@@ -224,45 +224,41 @@
 
 	/* Colors */
 
-	/* Color names being explicit, they are not namespaced despite being bare. */
-
-	.red,
-	.orange,
-	.green,
-	.blue,
-	.violet,
-	.cyan,
-	.yellow,
-	.dim:is(.vp, .vp *):not(.xvp, .xvp *) {
-		border: var(--vp-thin) solid rgba(var(--vp-color), 0.5);
-		color: rgb(var(--vp-color));
+	:is(.red, .orange, .green, .blue, .violet, .cyan, .yellow, .dim):is(.vp, .vp *):not(.xvp, .xvp *) {
+		color: rgb(var(--vp-col));
+		border-color: rgba(var(--vp-col), 0.4);
 	}
-	.back {
-		background-color: rgba(var(--vp-color), 0.05);
+	.boxed:is(.vp, .vp *):not(.xvp, .xvp *, vp-tabs) {
+		border-width: var(--vp-thin);
+		border-style: solid;
+		border-color: rgba(var(--vp-col, var(--vp-dim)), 0.4);
+	}
+	.bg:is(.vp, .vp *):not(.xvp, .xvp *) {
+		background-color: rgba(var(--vp-col, var(--vp-dim)), 0.05);
 	}
 	.red {
-		--vp-color: var(--vp-red);
+		--vp-col: var(--vp-red);
 	}
 	.orange {
-		--vp-color: var(--vp-orange);
+		--vp-col: var(--vp-orange);
 	}
 	.green {
-		--vp-color: var(--vp-green);
+		--vp-col: var(--vp-green);
 	}
 	.blue {
-		--vp-color: var(--vp-blue);
+		--vp-col: var(--vp-blue);
 	}
 	.violet {
-		--vp-color: var(--vp-violet);
+		--vp-col: var(--vp-violet);
 	}
 	.cyan {
-		--vp-color: var(--vp-cyan);
+		--vp-col: var(--vp-cyan);
 	}
 	.yellow {
-		--vp-color: var(--vp-yellow);
+		--vp-col: var(--vp-yellow);
 	}
-	.dim:is(.vp, .vp *):not(.xvp, .xvp *) {
-		--vp-color: var(--vp-dim);
+	.dim {
+		--vp-col: var(--vp-dim);
 	}
 
 	/* Media queries */

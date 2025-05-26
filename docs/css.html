@@ -78,17 +78,17 @@
 				</p>
 				<section>
 					<h3>Colors</h3>
-					<p>CSS variables for the followig colors are available in two variants: saturated RGB triplets as <code>--vp-X</code> and 5% white-dimmed hex as <code>--vp-X-05</code> (e.g. <code>--vp-red-05</code>). Helper classes also set these colors for the current text and border.  Optional <code>.back</code> class sets a background color in the same hue at 5%.</p>
-					<p>In some uses like notes, semantic terms are used instead of direct color names, like <code>error</code> implying <code>red</code>, etc.
+					<p>CSS variables for the followig colors are available in two variants: saturated RGB triplets as <code>--vp-X</code> and 5% white-dimmed hex as <code>--vp-X-05</code> (e.g. <code>--vp-red-05</code>). Helper classes also set these colors for the current text and border if any.  Optional <code>.bg</code> class sets a background color in the same hue at 5% opacity.  Optional <code>.boxed</code> class sets a thin border at 40% opacity.</p>
+					<p>In some uses like notes, semantic terms are used instead of direct color names, like <code>error</code> implying <code>red</code>, etc.</p>
 					<p>
-						<span class="color back cyan">.cyan</span>
-						<span class="color back blue">.blue</span>
-						<span class="color back violet">.violet</span>
-						<span class="color back red">.red</span>
-						<span class="color back orange">.orange</span>
-						<span class="color back yellow">.yellow</span>
-						<span class="color back green">.green</span>
-						<span class="color back dim">.dim</span>
+						<span class="color boxed bg cyan">.cyan</span>
+						<span class="color boxed bg blue">.blue</span>
+						<span class="color boxed bg violet">.violet</span>
+						<span class="color boxed bg red">.red</span>
+						<span class="color boxed bg orange">.orange</span>
+						<span class="color boxed bg yellow">.yellow</span>
+						<span class="color boxed bg green">.green</span>
+						<span class="color boxed bg dim">.dim</span>
 					</p>
 				</section>
 				<section>
@@ -315,7 +315,7 @@
 								Normal <b>(required)</b>
 								<input type="text" name="it001" value="User Input Here">
 							</label>
-							<vp-note vp-point="top-left" class="boxed secondary warning">This is a multi-line warning explaining why this form field is inadequate in its current state.</vp-note>
+							<vp-note vp-point="top-left" class="boxed warning">This is a multi-line warning explaining why this form field is inadequate in its current state.</vp-note>
 						</div>
 						<label class="vp-field" vp-cols="3">
 							Normal
@@ -574,26 +574,23 @@ Test City, ZZ</textarea>
 			<section>
 				<h2>Notes <code>notes.css</code></h2>
 				<section>
-					<h3>Plain <code class="html-tag">vp-note</code></h3>
-					<p>A note with a state automatically gets a color and an icon.</p>
-					<vp-note class="error">This note has <code>.error</code>.</vp-note>
-					<vp-note class="warning">This note has <code>.warning</code>.</vp-note>
-					<vp-note class="ok">This note has <code>.ok</code>.</vp-note>
+					<h3>Element <code class="html-tag">vp-note</code></h3>
+					<vp-note class="error">This note has <code>class="error"</code>.</vp-note>
+					<vp-note class="warning">This note has <code>class="warning"</code>.</vp-note>
+					<vp-note class="ok">This note has <code>class="ok"</code>.</vp-note>
 					<vp-note>This note has no semantic status class.</vp-note>
-				</section>
-				<section>
-					<h3>Boxed <code class="html-tag">vp-note class="boxed"</code></h3>
-					<vp-note class="boxed error">This message has <code>.error</code>.</vp-note>
-					<vp-note class="boxed warning">This message has <code>.warning</code>.</vp-note>
-					<vp-note class="boxed ok">This message has <code>.ok</code>.</vp-note>
-					<vp-note class="boxed secondary ok">This message has <code>.ok</code> and <code>.secondary</code> classes.</vp-note>
-					<vp-note class="boxed" vp-point="top-left">This message has no semantic status class and a <code>top-left</code> point.</vp-note>
+					<vp-note class="boxed error">This note has <code>class="boxed error"</code>.</vp-note>
+					<vp-note class="boxed bg warning">This note has <code>class="boxed bg warning"</code>.</vp-note>
+					<vp-note class="boxed bg ok">This note has <code>class="boxed bg ok"</code>.</vp-note>
+					<vp-note class="boxed" vp-point="top-left">This note has <code>class="boxed"</code> and <code>vp-point="top-left"</code>.</vp-note>
 				</section>
 				<section>
 					<h3>Options</h3>
 					<dl>
-						<dt>vp-note.boxed.secondary</dt>
-						<dd>Omits the background color and brings the icon inline.</dd>
+						<dt>.boxed</dt>
+						<dd>Not only adds a thin border, but also expands padding.</dd>
+						<dt>.bg</dt>
+						<dd>Adds a background at 5% opacity.</dd>
 						<dt>[vp-point="..."]</dt>
 						<dd>Adds a pointer triangle to any block, but designed to work with <code class="html-tag">vp-note</code>.  The value is a string composed of two words separated by a hyphen, e.g. <code>top-left</code>.  The first word specifies which border it applies to, one of: <code>top</code>, <code>bottom</code>, <code>left</code> or <code>right</code>.  The second word specifies where on the border, either one of <code>left</code>, <code>center</code>, <code>right</code> or <code>top</code>, <code>middle</code>, <code>bottom</code>.</dd>
 					</dl>

@@ -1,17 +1,18 @@
 @layer vp.components {
 	vp-note {
 		--vp-col: var(--vp-dim);
-		--vp-bgcol: rgba(var(--vp-col), 0.05);
-		--vp-bgcolo: var(--vp-dim-05);
+		--vp-bgcol: #fff;
+		--vp-bgcolo: #fff;
 		display: block;
 		margin-bottom: var(--vp-p-margin);
 	}
 	vp-note.boxed {
 		position: relative;
-		border: var(--vp-thin) solid rgba(var(--vp-col), 0.33);
-		background-color: var(--vp-bgcol);
 		border-radius: var(--vp-corner);
 		padding: var(--vp-pad) var(--vp-pad) var(--vp-pad) calc(var(--vp-pad) + var(--vp-pad) + 1.5em);
+	}
+	vp-note.bg {
+		background-color: var(--vp-bgcol);
 	}
 
 	vp-note::before {
@@ -30,37 +31,39 @@
 		content: '\26a0';
 	}
 
+	vp-note.bg:not(.error, .warning, .ok) {
+		--vp-bgcol: rgba(var(--vp-dim), 0.05);
+		--vp-bgcolo: var(--vp-dim-05);
+	}
 	vp-note.error {
 		--vp-col: var(--vp-red);
-		--vp-bgcolo: var(--vp-red-05);
 		color: rgb(var(--vp-col));
+	}
+	vp-note.error.bg {
+		--vp-bgcolo: var(--vp-red-05);
 	}
 
 	vp-note.warning {
 		--vp-col: var(--vp-orange);
-		--vp-bgcolo: var(--vp-orange-05);
 		color: rgb(var(--vp-col));
 	}
-
-	vp-note.secondary {
-		--vp-bgcol: #fff;
-		--vp-bgcolo: #fff;
+	vp-note.warning.bg {
+		--vp-bgcolo: var(--vp-orange-05);
 	}
 
 	vp-note.ok {
 		--vp-col: var(--vp-green);
-		--vp-bgcolo: var(--vp-green-05);
 		color: rgb(var(--vp-col));
+	}
+	vp-note.ok.bg {
+		--vp-bgcolo: var(--vp-green-05);
 	}
 
 	vp-note:not(.boxed)::before {
 		margin-right: calc(var(--vp-pad) / 2);
 	}
 
-	vp-note.boxed.secondary {
-		padding: var(--vp-pad);
-	}
-	vp-note.boxed:not(.secondary)::before {
+	vp-note.boxed::before {
 		position: absolute;
 		top: var(--vp-pad);
 		left: var(--vp-pad);
@@ -69,7 +72,7 @@
 	/* Optional triangle */
 
 	[vp-point] {
-		background-color: var(--vp-bgcolo, #fff);
+		background-color: var(--vp-bgcolo);
 	}
 	[vp-point^='top-'] {
 		margin-top: 0.6em;
@@ -88,7 +91,7 @@
 		display: block;
 		position: absolute;
 		content: '';
-		background-color: var(--vp-bgcolo, #fff);
+		background-color: var(--vp-bgcolo);
 		width: 0.8em;
 		height: 0.8em;
 		border: var(--vp-thin) solid rgba(var(--vp-col), 0.33);

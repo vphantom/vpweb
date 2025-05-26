@@ -103,6 +103,15 @@ function enhance(form) {
 }
 
 /**
+ * Add a pattern attribute to validate email addresses
+ *
+ * @param {HTMLInputElement} input The input to validate
+ */
+function email_pattern(input) {
+	$.set(input, { pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$' });
+}
+
+/**
  * Manually make a field be included form data only once it will be modified.
  *
  * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} input Field
@@ -157,6 +166,7 @@ function update_validity(container, input) {
 
 $.forever('form[method="json-post"], form[vp-target]', enhance);
 $.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
+$.forever('input[type="email"]', email_pattern);
 $.forever('input.vp-growing', auto_width);
 $.forever('textarea.vp-growing', auto_height);
 $.forever(
@@ -170,4 +180,11 @@ $.forever(
 	}
 );
 
-export { auto_height, auto_width, enhance, ghost, update_validity };
+export {
+	auto_height,
+	auto_width,
+	email_pattern,
+	enhance,
+	ghost,
+	update_validity,
+};

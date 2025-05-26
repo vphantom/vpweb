@@ -77,6 +77,12 @@ Textareas with this class will expand vertically as new lines are added, but wil
 
 Adds/removes the `.has-invalid` class to `.vp-field` or `label` immediate parents of `<input>`, `<select>` and `<textarea>` elements based on their changing validity state.
 
+### Email validation
+
+Activated with `<input type="email">` or `forms.email_pattern(element)`
+
+Validates email addresses using a simple regex pattern to at least forbid whitespace and require some characters, `@`, some characters, at least one `.` and at least two characters after the last `.`.
+
 ### Ghost fields
 
 Activated with attribute `vp-name` or `forms.ghost(element)`
@@ -92,6 +98,14 @@ Take over a form for either XHR loading or JSON submission
 **Parameters:**
 
 * `form` — `HTMLFormElement` — The form to take over
+
+## `function email_pattern(input)`
+
+Add a pattern attribute to validate email addresses
+
+**Parameters:**
+
+* `input` — `HTMLInputElement` — The input to validate
 
 ## `function ghost(input, name)`
 

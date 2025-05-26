@@ -51,6 +51,18 @@ const prev = (n) => n.previousElementSibling;
 const set = (n, a) => iter_obj(a, (k, v) => n.setAttribute(k, v));
 
 /**
+ * Set multiple element attributes only if they don't already exist.
+ * Non-destructive version of `set()`.
+ *
+ * @param {HTMLElement} el    Element
+ * @param {Object}      attrs Default attributes to set
+ */
+const set_def = (n, a) =>
+	iter_obj(a, (k, v) => {
+		if (!n.hasAttribute(k)) n.setAttribute(k, v);
+	});
+
+/**
  * Set multiple style properties at once. Wraps
  * `CSSStyleDeclaration.setProperty()`.
  *
@@ -472,6 +484,7 @@ export {
 	prev,
 	ready,
 	replace,
+	set_def,
 	set,
 	style,
 	swap_class,

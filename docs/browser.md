@@ -36,6 +36,15 @@ Set multiple element attributes at once.  Wraps `HTMLElement.setAttribute()`.
 * `el` — `HTMLElement` — Element
 * `attrs` — `Object` — All attributes to set
 
+## `const set_def`
+
+Set multiple element attributes only if they don't already exist. Non-destructive version of `set()`.
+
+**Parameters:**
+
+* `el` — `HTMLElement` — Element
+* `attrs` — `Object` — Default attributes to set
+
 ## `const style`
 
 Set multiple style properties at once. Wraps `CSSStyleDeclaration.setProperty()`.

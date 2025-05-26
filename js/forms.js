@@ -104,11 +104,12 @@ function enhance(form) {
 
 /**
  * Add a pattern attribute to validate email addresses
+ * Only sets the pattern if one is not already defined
  *
  * @param {HTMLInputElement} input The input to validate
  */
 function email_pattern(input) {
-	$.set(input, { pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$' });
+	$.set_def(input, { pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$' });
 }
 
 /**

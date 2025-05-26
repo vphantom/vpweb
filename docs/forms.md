@@ -101,7 +101,7 @@ Take over a form for either XHR loading or JSON submission
 
 ## `function email_pattern(input)`
 
-Add a pattern attribute to validate email addresses
+Add a pattern attribute to validate email addresses Only sets the pattern if one is not already defined
 
 **Parameters:**
 

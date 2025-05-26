@@ -28,9 +28,6 @@ JS_SIZABLE := vpweb.js
 
 JS_ASSETS := $(patsubst js/%.js,dist/%.js,$(wildcard js/*.js))
 
-tmptest:
-	@echo "JS ASSETS: $(JS_ASSETS)"
-
 GZIP_ASSETS := $(addsuffix .gz,$(CSS_ASSETS) $(JS_ASSETS))
 
 BROTLI_ASSETS := $(addsuffix .br,$(CSS_ASSETS) $(JS_ASSETS))

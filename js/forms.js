@@ -134,8 +134,8 @@ function auto_width(input) {
 function auto_height(textarea) {
 	const initialHeight = textarea.scrollHeight;
 	$.on(textarea, ['change', 'input'], () => {
-		textarea.style.height = `${initialHeight}px`; // Reset to initial height
-		textarea.style.height = `${textarea.scrollHeight}px`; // Expand to content
+		textarea.style.height = `${initialHeight + 4}px`; // Reset to initial height
+		textarea.style.height = `${textarea.scrollHeight + 4}px`; // Expand to content
 	});
 	// Set initial height
 	textarea.style.height = `${initialHeight}px`;

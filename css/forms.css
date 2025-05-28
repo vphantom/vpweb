@@ -15,7 +15,7 @@
 		flex-grow: 1;
 	}
 	.vp-group > :is(input, select, textarea) {
-		margin: 0 0.5em var(--vp-pad) 0;
+		margin: 0 0 var(--vp-pad) 0;
 		outline: none;
 		border: var(--vp-thin) solid var(--vp-dim3);
 		border-left-width: 0;
@@ -23,20 +23,23 @@
 		border-radius: var(--vp-corner);
 		padding: 0.5em;
 	}
-	.vp-group > :is(button, .vp-button, input) {
+	.vp-group > :is(input, select, textarea) + :is(input, select, textarea) {
+		border-left-width: var(--vp-thin);
+	}
+	.vp-group > :is(button, .vp-button, input, select, textarea) {
 		margin-right: 0;
 		border-radius: 0;
 	}
-	.vp-group > input:first-child {
+	.vp-group > :is(input, select, textarea):first-child {
 		border-left-width: var(--vp-thin);
 	}
-	.vp-group > input:last-child {
+	.vp-group > :is(input, select, textarea):last-child {
 		border-right-width: var(--vp-thin);
 	}
-	.vp-group > :is(button, .vp-button, input):first-child {
+	.vp-group > :is(button, .vp-button, input, select, textarea):first-child {
 		border-radius: var(--vp-corner) 0 0 var(--vp-corner);
 	}
-	.vp-group > :is(button, .vp-button, input):last-child {
+	.vp-group > :is(button, .vp-button, input, select, textarea):last-child {
 		border-radius: 0 var(--vp-corner) var(--vp-corner) 0;
 	}
 

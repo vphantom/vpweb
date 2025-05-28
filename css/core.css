@@ -152,6 +152,10 @@
 		font-size: 1rem;
 	}
 
+	select:is(.vp, .vp *):not(.xvp, .xvp *) {
+		background-color: field;
+	}
+
 	/* Typography */
 
 	h1:is(.vp, .vp *):not(.xvp, .xvp *) {

@@ -134,6 +134,7 @@ function auto_width(input) {
 		input.style.width = `${initialWidth + 4}px`; // Don't shrink all the way to zero
 		input.style.width = `${input.scrollWidth + 4}px`; // Pad variations
 	});
+	input.style.width = `${initialWidth + 4}px`;
 }
 
 /**
@@ -147,8 +148,7 @@ function auto_height(textarea) {
 		textarea.style.height = `${initialHeight + 4}px`; // Reset to initial height
 		textarea.style.height = `${textarea.scrollHeight + 4}px`; // Expand to content
 	});
-	// Set initial height
-	textarea.style.height = `${initialHeight}px`;
+	textarea.style.height = `${initialHeight + 4}px`;
 }
 
 /**

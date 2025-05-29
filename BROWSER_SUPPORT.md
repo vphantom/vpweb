@@ -59,7 +59,7 @@ Interesting modern CSS features according to <https://web.dev/baseline> as of 20
 
 ## Newly Available
 
-This is slightly risky but acceptable for non-essential features.
+This is slightly risky but acceptable for non-essential features, as long as they degrade gracefully.
 
 ### Media Queries
 

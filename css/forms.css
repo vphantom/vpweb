@@ -215,17 +215,18 @@
 	/* Typically: textarea, select, input type=email|number|password|search|tel|text|url */
 
 	.vp-field,
+	.vp-field + .vp-group > *,
 	.vp-field + :is(button, .vp-button, [type='submit'], [type='reset'], [type='button']) {
-		min-width: var(--vp-touch);
-		min-height: var(--vp-touch);
+		min-width: var(--vp-touch-min);
+		min-height: var(--vp-touch-min);
 	}
 	.vp-field {
 		position: relative;
 		display: block;
 		height: fit-content;
-		font-size: 80%;
+		font-size: 75%;
 		color: rgba(0, 0, 0, 0.67);
-		padding: 0.625em;
+		padding: 0 calc(var(--vp-pad) / 2) var(--vp-pad-min) calc(var(--vp-pad) / 2);
 		border: var(--vp-thin) solid var(--vp-dim3);
 		border-radius: var(--vp-corner);
 	}
@@ -244,9 +245,6 @@
 	}
 	[vp-grid] > * > .vp-field {
 		width: 100%;
-	}
-	.vp-field > * {
-		margin-top: calc(var(--vp-pad) / 2);
 	}
 	.vp-field > div {
 		white-space: nowrap;
@@ -267,10 +265,14 @@
 		color: rgba(var(--vp-orange), 0.75);
 	}
 
+	.vp-field:has(:disabled),
 	.vp-field :disabled,
 	.vp-group > input:disabled {
 		color: var(--vp-dim3);
 		cursor: not-allowed;
+	}
+	.vp-field:has(:disabled) {
+		background-color: var(--vp-dim1);
 	}
 	.vp-field textarea {
 		height: calc(var(--vp-line) * 2);
@@ -322,10 +324,15 @@
  */
 
 	@media (any-pointer: coarse) {
-		:is(button, .vp-button, input, select, textarea):not([type='checkbox'], [type='radio'], label *):is(.vp, .vp *):not(.xvp, .xvp *),
-		label:is(.vp, .vp *):not(.xvp, .xvp *) {
+		:is(.vp-field, button, .vp-button, input, select, textarea):not([type='checkbox'], [type='radio'], label *):is(.vp, .vp *):not(.xvp, .xvp *),
+		label:is(.vp, .vp *):not(.xvp, .xvp *),
+		.vp-field + .vp-group > *,
+		.vp-field + :is(button, .vp-button, [type='submit'], [type='reset'], [type='button']) {
 			min-width: var(--vp-touch);
 			min-height: var(--vp-touch);
+		}
+		.vp-field {
+			padding: 0.625em;
 		}
 		:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *) {
 			line-height: calc(var(--vp-touch) - 1em);

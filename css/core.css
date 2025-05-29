@@ -32,11 +32,12 @@
 		--vp-font-size: 12pt;
 		--vp-thin: 1px;
 		--vp-thick: 0.25em;
+		--vp-pad-min: 2px;
 		--vp-min-width: 320px;
 		--vp-width-text-max: 66rem;
 		--vp-corner: 0;
 		--vp-line: 1.33em;
-		--vp-touch-min: 11mm;
+		--vp-touch-min: 12mm;
 		--vp-touch: 16mm;
 		--vp-touch-max: 19mm;
 

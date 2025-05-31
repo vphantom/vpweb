@@ -10,12 +10,9 @@
 
 ### Forms
 
-- [ ] Labels inside inputs is battle-tested, but is it still the best mechanism for lists of identical inputs?  Do they happen enough that we should study this case?
-- [ ] Pure CSS mobile-style toggle switches (later)
 - [ ] Refactor `<form action="json-post">` so that XHR loading is independent of JSON feature.
 - [ ] Grab titles in addition to body.
 - [ ] Document how to nest objects in JSON output.
-- [ ] `formaction` attribute on submit buttons.
 
 ## Components
 

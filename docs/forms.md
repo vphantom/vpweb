@@ -141,4 +141,14 @@ Update parent container's validation state based on input validity.
 * `container` — `HTMLElement` — Parent container
 * `input` — `HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement` — Form field
 
+## `function delegate_dropdown_clicks(dropdown)`
+
+Delegate .vp-field clicks to its inner dropdown element.
+
+Support as of 2025 is spotty, so consider this a graceful improvement only.
+
+**Parameters:**
+
+* `dropdown` — `HTMLElement` — The select or input[list] element
+
 <!-- END DOC-COMMENT -->

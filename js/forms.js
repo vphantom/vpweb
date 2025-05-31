@@ -165,11 +165,42 @@ function update_validity(container, input) {
 	}
 }
 
+/**
+ * Delegate .vp-field clicks to its inner dropdown element.
+ *
+ * Support as of 2025 is spotty, so consider this a graceful improvement only.
+ *
+ * @param {HTMLElement} dropdown The select or input[list] element
+ */
+function delegate_dropdown_clicks(dropdown) {
+	const field = dropdown.closest('.vp-field');
+	if (!field) return;
+
+	$.on(field, 'click', (ev) => {
+		if (ev.target !== dropdown) {
+			if (
+				dropdown instanceof HTMLSelectElement &&
+				typeof dropdown.showPicker === 'function'
+			) {
+				dropdown.showPicker();
+			} else {
+				// Shot in the dark, in case it helps anybody...
+				dropdown.focus();
+				dropdown.click();
+			}
+		}
+	});
+}
+
 $.forever('form[method="json-post"], form[vp-target]', enhance);
 $.forever('input[vp-name], select[vp-name], textarea[vp-name]', ghost);
-$.forever('input[type="email"]:is(.vp, .vp *):not(.xvp, .xvp *)', email_pattern);
+$.forever(
+	'input[type="email"]:is(.vp, .vp *):not(.xvp, .xvp *)',
+	email_pattern
+);
 $.forever('input.vp-growing', auto_width);
 $.forever('textarea.vp-growing', auto_height);
+$.forever('.vp-field :is(select, input[list])', delegate_dropdown_clicks);
 $.forever(
 	'input[required], input[pattern], input[min], input[max], input[type="email"], input[type="url"], select[required], textarea[required]',
 	(input) => {
@@ -184,6 +215,7 @@ $.forever(
 export {
 	auto_height,
 	auto_width,
+	delegate_dropdown_clicks,
 	email_pattern,
 	enhance,
 	ghost,

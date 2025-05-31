@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>21.1KB</td><td>4.9KB</td><td>4.4KB</td></tr>
+<tr><th>vpweb.css</th><td>21.3KB</td><td>5.0KB</td><td>4.4KB</td></tr>
 <tr><th>vpweb.js</th><td>9.8KB</td><td>4.2KB</td><td>3.7KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
@@ -325,8 +325,8 @@
 							Disabled
 							<input type="text" name="it002" disabled value="User Input Here">
 						</label>
-						<label class="vp-field" vp-cols="2">
-							Subdivided
+						<label class="vp-field split" vp-cols="2">
+							Split
 							<div>
 								<span>☎</span>
 								<input type="email" name="it003b" value="">
@@ -427,25 +427,42 @@ Test City, ZZ</textarea>
 						<button onclick="return false;" disabled>:disabled</button>
 						<button onclick="return false;" class="secondary">.secondary</button>
 					</form>
-					<h3>Button and input groups <code>.vp-group &gt; :is(button, .vp-button, input)</code></h3>
-					<p>Optional <code>.vp-group.growing</code> makes any <code>input</code> grow proportionally to fill the container space.</p>
+					<h3>Button and field groups <code>.vp-group &gt; :is(button, .vp-button, input, select, textarea, .vp-field)</code></h3>
+					<p>
+						Optional <code>.vp-group.growing</code> makes any <code>input</code> grow proportionally to fill the container space.
+						Note that hidden members on either edge will make the corners on that edge sharp instead of rounded, so prefer disabling when possible.
+						When including a <code>.vp-field</code> which is split (i.e. with prefix/postfix elements), add class <code>.bare</code> if it is unlabeled, to keep it thin like regular inputs/selects.
+					</p>
 					<form>
 						<div class="vp-group">
 							<button onclick="return false;">First</button>
 							<button onclick="return false;">Middle</button>
-							<input type="text" name="foo" value="foo">
+							<label class="vp-field">
+								Field Label
+								<input type="text" name="foo" value="foo">
+							</label>
 							<button onclick="return false;" disabled>Disabled</button>
-							<select name="foos"><option>One</option><option>Two</option></select>
+							<label class="vp-field">
+								Labeled split
+								<div>
+									<span>☛</span>
+									<select name="foos"><option>One</option><option>Twooooooo</option></select>
+								</div>
+							</label>
 							<button onclick="return false;" class="active">Active</button>
 							<button onclick="return false;">Last</button>
 						</div>
 						<div class="vp-group growing">
 							<button onclick="return false;">First</button>
 							<button onclick="return false;">Middle</button>
-							<input type="text" name="foo" value="foo">
+							<label class="vp-field bare">
+								<div>
+									<span>☎</span>
+									<input type="text" name="foo" value="bare split">
+								</div>
+							</label>
 							<button onclick="return false;" disabled>Disabled</button>
 							<input type="text" name="bar" value="bar">
-							<button onclick="return false;" class="active">Active</button>
 							<button onclick="return false;">Last</button>
 						</div>
 					</form>

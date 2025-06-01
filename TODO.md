@@ -10,6 +10,8 @@
 
 ### Forms
 
+- [ ] `.vp-group.stacking` would be handy for wider fields
+- [ ] Thoroughly review CSS, which seems bloated by now
 - [ ] Refactor `<form action="json-post">` so that XHR loading is independent of JSON feature.
 - [ ] Grab titles in addition to body.
 - [ ] Document how to nest objects in JSON output.

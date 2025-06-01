@@ -152,17 +152,39 @@ function auto_height(textarea) {
 }
 
 /**
- * Update parent container's validation state based on input validity.
+ * Update field validity hints.
  *
- * @param {HTMLElement} container Parent container
+ * If the field has a parent label or .vp-field, it gets .invalid when its
+ * child field is invalid.
+ *
+ * Fields themselves get .touched after an initial interaction.
+ *
  * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} input Form field
  */
-function update_validity(container, input) {
-	if (input.validity.valid) {
-		container.classList.remove('has-invalid');
-	} else {
-		container.classList.add('has-invalid');
+function update_validity(input) {
+	function update_class(container, input, force = false) {
+		if (!force && !input._vpInteracted) return;
+		if (input.validity.valid) {
+			$.del_class(container, 'invalid');
+		} else {
+			$.add_class(container, 'invalid');
+		}
 	}
+
+	const container = input.closest('label, .vp-field');
+	input._vpInteracted = false;
+	$.on(input, 'blur', () => {
+		input._vpInteracted = true;
+		$.add_class(input, 'touched');
+		if (container) {
+			$.add_class(container, 'touched');
+			update_class(container, input);
+		}
+	});
+
+	if (!container) return;
+	$.on(input, 'invalid', () => update_class(container, input, true));
+	$.on(input, ['change', 'input'], () => update_class(container, input));
 }
 
 /**
@@ -200,17 +222,11 @@ $.forever(
 );
 $.forever('input.vp-growing', auto_width);
 $.forever('textarea.vp-growing', auto_height);
-$.forever('.vp-field :is(select, input[list])', delegate_dropdown_clicks);
 $.forever(
 	'input[required], input[pattern], input[min], input[max], input[type="email"], input[type="url"], select[required], textarea[required]',
-	(input) => {
-		const container = input.closest('label, .vp-field');
-		if (!container) return;
-		$.on(input, ['invalid', 'blur', 'change'], () =>
-			update_validity(container, input)
-		);
-	}
+	update_validity
 );
+$.forever('.vp-field :is(select, input[list])', delegate_dropdown_clicks);
 
 export {
 	auto_height,

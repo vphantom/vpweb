@@ -132,13 +132,16 @@ Make a textarea grow and shrink with its contents.
 
 * `textarea` — `HTMLTextAreaElement` — The textarea to grow
 
-## `function update_validity(container, input)`
+## `function update_validity(input)`
 
-Update parent container's validation state based on input validity.
+Update field validity hints.
+
+If the field has a parent label or .vp-field, it gets .invalid when its child field is invalid.
+
+Fields themselves get .touched after an initial interaction.
 
 **Parameters:**
 
-* `container` — `HTMLElement` — Parent container
 * `input` — `HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement` — Form field
 
 ## `function delegate_dropdown_clicks(dropdown)`

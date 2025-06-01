@@ -15,12 +15,16 @@
 		flex-grow: 1;
 	}
 	.vp-group > :is(input, select, textarea, .vp-field) {
-		margin: 0 0 var(--vp-pad) 0;
+		margin: 0;
 		outline: none;
 		border: var(--vp-thin) solid var(--vp-dim3);
 		border-left-width: 0;
 		border-right-width: 0;
 		border-radius: var(--vp-corner);
+	}
+	.vp-group > :is(input, select, textarea):is(.touched:invalid, .invalid),
+	.vp-group > .vp-field:is(.invalid, .has-warning) {
+		border: var(--vp-thin) solid rgb(var(--vp-orange));
 	}
 	.vp-group > :is(input, select, textarea, .vp-field.bare) {
 		padding: 0.5em;
@@ -133,10 +137,11 @@
 		box-shadow: 0 0 0 var(--vp-thin) rgba(var(--vp-blue), 0.75);
 		border-color: rgba(var(--vp-blue), 0.75);
 	}
-	input:is(.has-invalid, .has-warning):not([type='checkbox'], [type='radio']):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
-	:is(textarea, select):is(.has-invalid > *, .has-warning > *):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
-	.vp-group > input:invalid:focus,
-	.vp-field:is(.has-invalid, .has-warning):focus-within {
+	input:is(.touched:invalid, .invalid > *, .has-warning > *):not([type='checkbox'], [type='radio']):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+	:is(textarea, select):is(.touched:invalid, .invalid > *, .has-warning > *):not(.vp-field *):is(.vp, .vp *):not(.xvp, .xvp *):focus,
+	.vp-group > input.touched:invalid:focus,
+	.vp-group > :is(.invalid, .has-warning):focus-within,
+	.vp-field:is(.invalid, .has-warning):focus-within {
 		box-shadow: 0 0 0 calc(var(--vp-thin) * 2) rgba(var(--vp-orange), 0.75);
 		border-color: rgba(var(--vp-orange), 0.75);
 	}
@@ -144,7 +149,7 @@
 	vp-tabs > :first-child > :focus {
 		outline-color: rgba(var(--vp-blue), 0.75);
 	}
-	input:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):invalid:focus {
+	input.touched:is([type='checkbox'], [type='radio']):is(.vp, .vp *):not(.xvp, .xvp *):invalid:focus {
 		outline-color: rgba(var(--vp-orange), 0.75);
 	}
 	.vp-field:focus-within {
@@ -178,10 +183,13 @@
 
 	:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *) {
 		padding: 0.5em 1em;
-		margin: 0 0.33em var(--vp-pad) 0;
+		margin: 0 0.33em 0 0;
 		border-radius: var(--vp-corner);
 		background-image: var(--vp-btn-bg);
 		box-shadow: var(--vp-btn-sh);
+	}
+	:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *):not(.vp-group *) {
+		margin-bottom: var(--vp-pad);
 	}
 
 	:is(button, .vp-button):is(.vp, .vp *):not(.xvp, .xvp *).secondary {
@@ -247,6 +255,22 @@
 		width: 100%;
 		border: none;
 	}
+	.vp-field input[type='file'] {
+		cursor: pointer;
+	}
+	.vp-field input[type='file']::file-selector-button,
+	.vp-field input[type='file']::-webkit-file-upload-button {
+		color: transparent;
+		background: transparent;
+		border: none;
+		padding: 0;
+		margin: 0;
+		opacity: 0;
+		width: 0.1px;
+		height: 0.1px;
+		pointer-events: none;
+		position: absolute;
+	}
 	[vp-grid] > * > .vp-field {
 		width: 100%;
 	}
@@ -264,9 +288,14 @@
 		flex-grow: 1;
 	}
 
-	.vp-field:is(.has-warning, .has-invalid) {
+	.vp-field:is(.has-warning, .invalid) {
 		border: calc(var(--vp-thin) * 2) solid rgb(var(--vp-orange));
 		color: rgba(var(--vp-orange), 0.75);
+	}
+	:is(input, select, textarea):is(.touched:invalid, .invalid):is(.vp, .vp *):not(.vp-field *, .xvp, .xvp *) {
+		border-color: rgb(var(--vp-orange));
+		border-style: solid;
+		outline-color: rgb(var(--vp-orange));
 	}
 
 	.vp-field:has(:disabled),

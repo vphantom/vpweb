@@ -42,8 +42,8 @@
 						</thead>
 						<tbody>
 <!-- BEGIN SIZES -->
-<tr><th>vpweb.css</th><td>21.4KB</td><td>5.0KB</td><td>4.4KB</td></tr>
-<tr><th>vpweb.js</th><td>10.0KB</td><td>4.2KB</td><td>3.7KB</td></tr>
+<tr><th>vpweb.css</th><td>22.4KB</td><td>5.1KB</td><td>4.5KB</td></tr>
+<tr><th>vpweb.js</th><td>10.2KB</td><td>4.3KB</td><td>3.8KB</td></tr>
 <!-- END SIZES -->
 						</tbody>
 					</table>
@@ -299,11 +299,12 @@
 				<section>
 					<h3>Fields <code>label.vp-field > input|select|textarea</code></h3>
 					<p>
-					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a> for their clarity with the contents of the <code>title</code> attribute, for accessibility.
+					In addition to text, typical input types compatible with this class are: <code>email</code>, <code>number</code>, <code>password</code>, <code>tel</code>, <code>text</code>, <code>url</code> and possibly <code>search</code>.  Fields expand to fill their container's width, which is handy in grids.  We implement <a href="https://uxmovement.com/forms/infield-top-aligned-labels-floating-labels/">infield top aligned labels</a>.
 					</p>
 					<p>
 						With JS enabled, an <code class="html-tag">input</code> without a forced width may grow/shrink with its content with the <code>.vp-growing</code> class.
 						For <code class="html-tag">textarea</code>, height changes instead.
+						Add <code>.has-warning</code> to a <code>.vp-field</code> or <code>.invalid</code> to a field or input/select/textarea for a permanent invalid indicator. (Though if JS is enabled, <code>.invalid</code> will be removed upon an edit which passes the browser's validity check.)
 						<br><label class="vp-field">Fancy<input type="text" name="grower" class="vp-growing"></label> or plain: <input type="number" name="grower2" class="vp-growing">
 					</p>
 					<form>
@@ -320,6 +321,13 @@
 						<label class="vp-field" vp-cols="3">
 							Normal
 							<input type="text" name="it001" value="" required>
+						</label>
+						<label class="vp-field" vp-cols="3">
+							File Selector
+							<div>
+								<span>📎</span>
+								<input type="file" name="fi001">
+							</div>
 						</label>
 						<label class="vp-field" vp-cols="6">
 							Disabled

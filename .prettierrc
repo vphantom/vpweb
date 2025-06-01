@@ -7,7 +7,7 @@
     {
       "files": "*.css",
       "options": {
-        "printWidth": 150
+        "printWidth": 160
       }
     }
   ]
